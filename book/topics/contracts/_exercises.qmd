@@ -1,0 +1,24 @@
+:::: {#exr-clamp target="prairielearn" project="/projects/clamp"}
+## Ограничение диапазона
+
+Реализуйте `Clamp.clamp(value, lower, upper)`. При `lower > upper` выбросьте `IllegalArgumentException`. Проверьте обе границы диапазона.
+::::
+
+:::: {#exr-service target="cloud"}
+## Состояние службы
+
+### Запись состояния {.cloud-step key="configure"}
+
+Создайте `/home/ubuntu/service-state.txt` с единственной строкой `ready`.
+
+```{.sh .cloud-action phase="check" vm="host" file="/projects/service/check.sh"}
+```
+
+### Доступ клиента {.cloud-step key="client"}
+
+Создайте такой же файл на клиенте.
+
+```{.sh .cloud-action phase="check" vm="client"}
+test "$(cat /home/ubuntu/service-state.txt)" = ready
+```
+::::

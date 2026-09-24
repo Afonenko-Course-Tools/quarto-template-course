@@ -1,0 +1,21 @@
+---
+assessment:
+  kind: lab
+cloud:
+  virtual-machines:
+    host:
+      template: ubuntu-host
+    client:
+      template: ubuntu-client
+---
+
+# Лабораторная 1 {#sec-lab-01}
+
+Изучите @sec-contracts перед началом занятия.
+
+::: {.assessment-items}
+1. @exr-clamp
+2. @exr-service
+:::
+
+Разбор на практике: @practice:sec-clamp.

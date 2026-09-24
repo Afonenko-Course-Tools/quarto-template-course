@@ -1,0 +1,10 @@
+{
+  "name": "cloud",
+  "version": "1.0.0",
+  "requires_core": "1.0",
+  "quarto": ">=1.10.0",
+  "rules": "spec/cloud.cue",
+  "extension": ".",
+  "compiler_family": "CourseCompiler",
+  "export_implemented": false
+}

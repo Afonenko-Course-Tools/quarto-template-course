@@ -1,0 +1,23 @@
+project:
+  type: book
+  output-dir: _book
+  resources:
+    - "!projects/**"
+book:
+  title: Программирование
+  chapters:
+    - index.qmd
+    - topics/contracts/index.qmd
+    - labs/01.qmd
+format:
+  html:
+    theme: cosmo
+lang: ru
+course:
+  schema: "1.0"
+  id: programming
+  validate: true
+filters:
+  - course-core
+  - course-cloud
+  - course-prairielearn

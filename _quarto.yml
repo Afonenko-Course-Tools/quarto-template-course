@@ -1,0 +1,13 @@
+project:
+  type: website
+  output-dir: _site
+  render: []
+filters:
+  - reference-catalog
+reference-catalog:
+  namespace: site
+  home: book
+  projects:
+    book: {path: book, format: html}
+    lectures: {path: lectures, format: revealjs}
+    practice: {path: practice, format: revealjs}

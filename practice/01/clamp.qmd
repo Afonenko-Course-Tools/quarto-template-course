@@ -1,0 +1,15 @@
+---
+title: Ограничение диапазона
+---
+
+## Реализация clamp {#sec-clamp}
+
+Условие: @book:exr-clamp. Теория: @lectures:sec-contracts.
+
+Сначала сформулируйте контракт, затем напишите реализацию и проверьте границы.
+
+## Обсуждение {#sec-discussion}
+
+Что возвращать, если границы совпадают? Что делать при `lower > upper`?
+
+Сверьтесь с @book:sec-contracts и @lectures:sec-boundaries.
