@@ -4,7 +4,7 @@ const quarto=Deno.env.get("QUARTO")||"quarto";
 function assert(value:unknown,message:string):asserts value{if(!value)throw new Error(message);}
 async function files(directory:string):Promise<string[]>{const result:string[]=[];for await(const entry of Deno.readDir(directory)){const path=join(directory,entry.name);if(entry.isDirectory)result.push(...await files(path));else if(entry.isFile)result.push(path);}return result;}
 if(!Deno.args.includes("--skip-render"))for(const profile of ["full","student"]){
- const result=await new Deno.Command(quarto,{args:["render","--profile",profile],cwd:root,stdout:"inherit",stderr:"inherit"}).output();assert(result.success,`Failed ${profile} build`);
+ const result=await new Deno.Command(quarto,{args:["render","--profile",profile,"--fail-if-warnings"],cwd:root,stdout:"inherit",stderr:"inherit"}).output();assert(result.success,`Failed ${profile} build`);
 }
 function zipNames(bytes:Uint8Array):string[]{
  const view=new DataView(bytes.buffer,bytes.byteOffset,bytes.byteLength),names:string[]=[];let offset=0;
