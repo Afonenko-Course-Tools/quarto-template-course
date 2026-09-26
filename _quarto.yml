@@ -11,3 +11,7 @@ reference-catalog:
     book: {path: book, format: html}
     lectures: {path: lectures, format: revealjs}
     practice: {path: practice, format: revealjs}
+
+profile:
+  default: student
+  group: [[student, full]]

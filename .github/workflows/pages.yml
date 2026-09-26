@@ -19,10 +19,10 @@ jobs:
       - uses: cue-lang/setup-cue@v1.0.0
         with:
           version: latest
-      - run: quarto render
+      - run: quarto render --profile student
       - uses: actions/upload-pages-artifact@v3
         with:
-          path: _site
+          path: _site-student
   deploy:
     needs: build
     runs-on: ubuntu-latest

@@ -2,12 +2,15 @@ project:
   type: book
   output-dir: _book
   resources:
-    - "!projects/**"
+    - "!**/projects/**"
+    - "!**/_control.qmd"
+    - "!_generated/**"
 book:
   title: Программирование
   chapters:
     - index.qmd
     - topics/contracts/index.qmd
+    - topics/contracts/demonstration.qmd
     - labs/01.qmd
 format:
   html:
@@ -21,3 +24,7 @@ filters:
   - course-core
   - course-cloud
   - course-prairielearn
+
+profile:
+  default: student
+  group: [[student, full]]

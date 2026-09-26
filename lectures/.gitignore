@@ -15,3 +15,13 @@
 **/*_cache/
 
 .DS_Store
+
+# Profile publications and compiled starter projects.
+**/_site-student/
+**/_site-full/
+**/_downloads/
+**/.gradle/
+**/build/
+**/target/
+**/out/
+**/*.class

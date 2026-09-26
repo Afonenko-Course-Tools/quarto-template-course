@@ -9,3 +9,13 @@ format:
     slide-number: true
 lang: ru
 number-sections: false
+
+profile:
+  default: student
+  group: [[student, full]]
+
+course:
+  schema: "1.0"
+  id: programming-practice
+  validate: true
+filters: [course-core]
