@@ -1,4 +1,10 @@
 project:
+  pre-render:
+    - _extensions/Afonenko-Course-Tools/course-core/entrypoints/pre.ts
+    - _extensions/Afonenko-Course-Tools/project-download/entrypoints/pre.ts
+  post-render:
+    - _extensions/Afonenko-Course-Tools/course-core/entrypoints/post.ts
+    - _extensions/Afonenko-Course-Tools/project-download/entrypoints/post.ts
   type: book
   output-dir: _book/student
   resources:
@@ -9,20 +15,13 @@ profile:
   default: student
   group: [[student, full]]
 course:
-  id: programming-essays
+  id: course-essays
   validate: true
   view: student
 course-pedagogy:
   document-defaults: true
 work-mode: individual
-prairielearn:
-  assessment-defaults:
-    attempts: 3
-    pass:
-      at-least: 2
-    assignment:
-      mode: assessment-id
-filters: [course-core, course-prairielearn, course-presentation]
+filters: [project-download, course-core, course-presentation]
 course-presentation:
   mode: study
 book:
@@ -42,3 +41,15 @@ format:
     number-depth: 1
     code-copy: true
 lang: ru
+
+project-download:
+  resources:
+    exr-utf8-experiment:
+      path: text/decoding/projects/experiment/student
+      profiles: [full]
+    exr-utf8-implementation:
+      path: text/decoding/projects/implementation/student
+      profiles: [full]
+    exr-utf8-test-design:
+      path: text/decoding/projects/test-design/student
+      profiles: [full]

@@ -1,0 +1,26 @@
+project:
+  type: default
+  output-dir: _output
+  render: [index.qmd]
+  resources: ["!project/**", "!_generated/**"]
+  pre-render: _extensions/Afonenko-Course-Tools/course-core/entrypoints/pre.ts
+  post-render: _extensions/Afonenko-Course-Tools/course-core/entrypoints/post.ts
+format: html
+lang: ru
+profile:
+  default: student
+  group: [[student, full]]
+course:
+  adapters: [prairielearn]
+  id: example-prairielearn
+  validate: true
+  view: student
+filters: [course-core, course-prairielearn, course-presentation]
+course-pedagogy:
+  document-defaults: true
+work-mode: individual
+prairielearn:
+  assessment-defaults:
+    attempts: 3
+    pass: {at-least: 1}
+    assignment: {mode: assessment-id}

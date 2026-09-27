@@ -1,7 +1,0 @@
-{
-  "name": "cloud",
-  "rules": "spec/cloud.cue",
-  "extension": ".",
-  "compiler_family": "CourseCompiler",
-  "export_implemented": false
-}

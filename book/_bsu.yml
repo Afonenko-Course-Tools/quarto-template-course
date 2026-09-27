@@ -1,9 +1,9 @@
 # Необязательное оформление. Удалите подключение metadata-files, чтобы использовать Cosmo.
 project:
-  brand: _extensions/bsu-theme/_brand.yml
+  brand: _extensions/BSU-RFCT-Afonenko-Courses/bsu-theme/_brand.yml
 format:
   html:
     theme:
       - brand
-      - _extensions/bsu-theme/styles/common.scss
-      - _extensions/bsu-theme/styles/book.scss
+      - _extensions/BSU-RFCT-Afonenko-Courses/bsu-theme/styles/common.scss
+      - _extensions/BSU-RFCT-Afonenko-Courses/bsu-theme/styles/book.scss

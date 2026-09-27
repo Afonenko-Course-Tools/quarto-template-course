@@ -1,0 +1,4 @@
+# Необязательная замена движка при наличии полной установки LuaLaTeX.
+format:
+  pdf:
+    pdf-engine: lualatex
