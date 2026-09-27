@@ -1,0 +1,44 @@
+project:
+  type: book
+  output-dir: _book/student
+  resources:
+    - "!**/projects/**"
+    - "!**/_control.qmd"
+    - "!_generated/**"
+profile:
+  default: student
+  group: [[student, full]]
+course:
+  id: programming-essays
+  validate: true
+  view: student
+course-pedagogy:
+  document-defaults: true
+work-mode: individual
+prairielearn:
+  assessment-defaults:
+    attempts: 3
+    pass:
+      at-least: 2
+    assignment:
+      mode: assessment-id
+filters: [course-core, course-prairielearn, course-presentation]
+course-presentation:
+  mode: study
+book:
+  title: Исследования программных контрактов
+  chapters:
+    - index.qmd
+    - part: text/index.qmd
+      chapters:
+        - text/representation/index.qmd
+        - text/decoding/index.qmd
+        - text/immutability/index.qmd
+format:
+  html:
+    theme: cosmo
+    toc: true
+    number-sections: true
+    number-depth: 1
+    code-copy: true
+lang: ru

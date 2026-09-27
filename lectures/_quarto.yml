@@ -23,7 +23,6 @@ profile:
   group: [[student, full]]
 
 course:
-  schema: "1.1"
   id: programming-lectures
   validate: true
 filters: [course-core, course-presentation]

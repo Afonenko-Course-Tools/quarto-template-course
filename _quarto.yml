@@ -7,10 +7,22 @@ filters:
 reference-catalog:
   namespace: site
   home: book
+  publication:
+    title: Учебный курс программирования
+  exports:
+    book: [sec-contracts, sec-contract-demo]
+    essay: [sec-essays, sec-utf8-policies]
+  imports:
+    os:
+      source: fixtures/external-reference.json
+      namespace: book
+      base-url: https://example.edu/os/
+      style: external
   projects:
     book: {path: book, format: html}
     lectures: {path: lectures, format: revealjs}
     practice: {path: practice, format: revealjs}
+    essay: {path: essay, format: html}
 
 profile:
   default: student

@@ -1,4 +1,4 @@
-# Optional appearance only. Navigation and pedagogic behavior are independent.
+# Необязательное оформление; навигация и учебные элементы подключаются отдельно.
 project:
   brand: _extensions/bsu-theme/_brand.yml
 format:

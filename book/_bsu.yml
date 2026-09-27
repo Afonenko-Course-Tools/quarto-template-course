@@ -1,4 +1,4 @@
-# Optional appearance only. Remove this metadata-files entry to use Cosmo.
+# Необязательное оформление. Удалите подключение metadata-files, чтобы использовать Cosmo.
 project:
   brand: _extensions/bsu-theme/_brand.yml
 format:

@@ -1,0 +1,19 @@
+project:
+  type: default
+  output-dir: _output
+  render: [contracts.qmd]
+lang: ru
+format:
+  pdf:
+    pdf-engine: lualatex
+    papersize: a4
+    fontsize: 11pt
+    mainfont: CMU Serif
+    sansfont: CMU Sans Serif
+    monofont: CMU Typewriter Text
+    colorlinks: true
+    code-block-bg: true
+crossref:
+  exr-title: Задание
+  exr-prefix: задание
+  chapters: false

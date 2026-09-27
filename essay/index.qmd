@@ -1,0 +1,58 @@
+---
+listing:
+  - id: introductory-topics
+    contents: "*/*/index.qmd"
+    type: table
+    fields: [title, categories]
+    field-display-names: {title: Тема исследования, categories: Ключевые слова}
+    sort: title
+    filter-ui: false
+    sort-ui: false
+    include: {difficulty: introductory, semester: 1}
+  - id: intermediate-topics
+    contents: "*/*/index.qmd"
+    type: table
+    fields: [title, categories]
+    field-display-names: {title: Тема исследования, categories: Ключевые слова}
+    sort: title
+    filter-ui: false
+    sort-ui: false
+    include: {difficulty: intermediate, semester: 1}
+  - id: advanced-topics
+    contents: "*/*/index.qmd"
+    type: table
+    fields: [title, categories]
+    field-display-names: {title: Тема исследования, categories: Ключевые слова}
+    sort: title
+    filter-ui: false
+    sort-ui: false
+    include: {difficulty: advanced, semester: 2}
+---
+
+# Исследовательские работы {#sec-essays .unnumbered}
+
+Выберите вопрос, сформулируйте проверяемый контракт и обоснуйте ответ
+воспроизводимыми примерами. Подготовка: @book:sec-contracts.
+
+::: {course-role="criteria"}
+На защите оцениваются три независимых задания. Для зачёта необходимо выполнить
+не менее {{< meta prairielearn.assessment-defaults.pass.at-least >}} заданий.
+На каждое предусмотрено {{< meta prairielearn.assessment-defaults.attempts >}} попытки.
+:::
+
+## Начальный уровень · семестр 1 {.unnumbered}
+
+Открытая демонстрация показывает формат исследования и объяснения.
+
+::: {#introductory-topics}
+:::
+
+## Углублённый уровень · семестр 1 {.unnumbered}
+
+::: {#intermediate-topics}
+:::
+
+## Исследовательский уровень · семестр 2 {.unnumbered}
+
+::: {#advanced-topics}
+:::

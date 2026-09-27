@@ -1,10 +1,10 @@
-# Quarto local state. Keep the exact entries Quarto adds automatically.
+# Локальное состояние Quarto. Сохраняйте записи, которые Quarto добавляет автоматически.
 /.quarto/
 **/.quarto/
 **/*.quarto_ipynb
 /_*.local
 
-# Rendered output, generated course models and caches at any depth.
+# Результаты сборки, учебные модели и кэши на любой глубине.
 **/.qrc/
 **/_generated/
 **/_site/
@@ -16,7 +16,7 @@
 
 .DS_Store
 
-# Profile publications and compiled starter projects.
+# Публикации профилей и результаты компиляции стартовых проектов.
 **/_site-student/
 **/_site-full/
 **/_downloads/

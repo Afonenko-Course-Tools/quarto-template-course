@@ -1,0 +1,22 @@
+{
+  "schema": "quarto-reference-catalog",
+  "generator": {
+    "quarto": "учебный пример"
+  },
+  "publication": {
+    "title": "Операционные системы"
+  },
+  "targets": {
+    "book:sec-memory": {
+      "namespace": "book",
+      "id": "sec-memory",
+      "page": "memory.html",
+      "fragment": "sec-memory",
+      "labelHtml": "Глава 1",
+      "numberHtml": "1",
+      "label": "Глава 1",
+      "number": "1",
+      "title": "Управление памятью"
+    }
+  }
+}

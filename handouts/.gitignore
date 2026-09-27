@@ -1,0 +1,8 @@
+/.quarto/
+/_output/
+*.log
+*.aux
+*.out
+*.tex
+
+**/*.quarto_ipynb
