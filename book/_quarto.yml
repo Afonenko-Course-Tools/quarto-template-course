@@ -14,16 +14,20 @@ book:
     - labs/01.qmd
 format:
   html:
-    theme: cosmo
+    theme: [cosmo]
+metadata-files: [_bsu.yml]
+course-presentation:
+  mode: study
 lang: ru
 course:
-  schema: "1.0"
+  schema: "1.1"
   id: programming
   validate: true
 filters:
   - course-core
   - course-cloud
   - course-prairielearn
+  - course-presentation
 
 profile:
   default: student

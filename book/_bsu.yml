@@ -1,0 +1,9 @@
+# Optional appearance only. Remove this metadata-files entry to use Cosmo.
+project:
+  brand: _extensions/bsu-theme/_brand.yml
+format:
+  html:
+    theme:
+      - brand
+      - _extensions/bsu-theme/styles/common.scss
+      - _extensions/bsu-theme/styles/book.scss

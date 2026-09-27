@@ -1,7 +1,20 @@
-:::: {#exr-clamp target="prairielearn" project="/projects/clamp"}
+:::: {#exr-clamp target="prairielearn" project="/projects/clamp" difficulty="introductory" work-mode="individual"}
 ## Ограничение диапазона
 
+::: {course-role="prerequisites"}
+- Предусловия и постусловия: @sec-contracts.
+- Граничные значения: @lectures:sec-boundaries.
+:::
+
 Реализуйте `Clamp.clamp(value, lower, upper)`. При `lower > upper` выбросьте `IllegalArgumentException`. Проверьте обе границы диапазона.
+
+::: {course-role="deliverables"}
+Реализация метода и объяснение выбора граничных случаев.
+:::
+
+::: {course-role="criteria"}
+Объяснение должно различать допустимый вход и нарушение предусловия.
+:::
 ::::
 
 :::: {#exr-service target="cloud"}

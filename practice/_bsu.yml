@@ -1,0 +1,9 @@
+# Optional appearance only. Navigation and pedagogic behavior are independent.
+project:
+  brand: _extensions/bsu-theme/_brand.yml
+format:
+  revealjs:
+    theme:
+      - brand
+      - _extensions/bsu-theme/styles/common.scss
+      - _extensions/bsu-theme/styles/slides.scss

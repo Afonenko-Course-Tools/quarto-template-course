@@ -26,6 +26,14 @@ for(const profile of ["student","full"]){
  }
  const catalog=JSON.parse(await Deno.readTextFile(join(output,"reference-catalog.json")));
  assert(Boolean(catalog.targets["book:exr-clamp-instructor"])===(profile==="full"),"Private catalog target projection");
+ for(const id of ["book:sol-clamp-demo","lectures:exr-clamp-prediction","lectures:sol-clamp-prediction","practice:sol-clamp-self-check"])
+  assert(Boolean(catalog.targets[id]),`Native pedagogic target absent: ${id}`);
+ const lecture=await Deno.readTextFile(join(output,"lectures/01/contracts.html"));
+ const practice=await Deno.readTextFile(join(output,"practice/01/clamp.html"));
+ const demonstration=await Deno.readTextFile(join(output,"topics/contracts/demonstration.html"));
+ assert(lecture.includes('course-answer-solution fragment')&&lecture.includes('data-course-role="prediction"'),"Lecture semantics or native Next disclosure lost");
+ assert(practice.includes('<details><summary>')&&!practice.includes('course-answer-solution fragment'),"Self-study disclosure mode lost");
+ assert(demonstration.includes('course-answer-solution callout')&&demonstration.includes('data-course-role="demonstration"'),"Book study mode or activity role lost");
  for(const path of paths){
   assert(!/\.(qmd|java|gradle)$/.test(path)&&!path.includes("/_extensions/"),`Published source file ${path}`);
   if(!path.endsWith(".html")&&!path.endsWith("search.json"))continue;
