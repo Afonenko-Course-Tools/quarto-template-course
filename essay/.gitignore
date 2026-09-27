@@ -1,0 +1,10 @@
+/.quarto/
+/_book/
+/_generated/
+/_downloads/
+**/build/
+**/.gradle/
+**/*.class
+*.log
+
+**/*.quarto_ipynb

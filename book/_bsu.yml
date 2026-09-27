@@ -1,0 +1,9 @@
+# Необязательное оформление. Удалите подключение metadata-files, чтобы использовать Cosmo.
+project:
+  brand: _extensions/bsu-theme/_brand.yml
+format:
+  html:
+    theme:
+      - brand
+      - _extensions/bsu-theme/styles/common.scss
+      - _extensions/bsu-theme/styles/book.scss

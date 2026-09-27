@@ -1,0 +1,9 @@
+# Необязательное оформление; навигация и учебные элементы подключаются отдельно.
+project:
+  brand: _extensions/bsu-theme/_brand.yml
+format:
+  revealjs:
+    theme:
+      - brand
+      - _extensions/bsu-theme/styles/common.scss
+      - _extensions/bsu-theme/styles/slides.scss

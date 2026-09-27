@@ -4,9 +4,17 @@ project:
   render: ["**/*.qmd"]
 format:
   revealjs:
-    theme: simple
+    theme: [default]
     hash: true
     slide-number: true
+    menu: false
+    pdf-separate-fragments: false
+    revealjs-plugins: [course-navigation]
+    course-nav:
+      sidebar: false
+metadata-files: [_bsu.yml]
+course-presentation:
+  mode: study
 lang: ru
 number-sections: false
 
@@ -15,7 +23,6 @@ profile:
   group: [[student, full]]
 
 course:
-  schema: "1.0"
   id: programming-practice
   validate: true
-filters: [course-core]
+filters: [course-core, course-presentation]

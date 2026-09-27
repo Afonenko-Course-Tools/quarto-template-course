@@ -1,0 +1,23 @@
+---
+listing:
+  id: text-topics
+  contents: "*/index.qmd"
+  type: table
+  fields: [title, semester, categories]
+  field-display-names:
+    title: Тема исследования
+    semester: Семестр
+    categories: Ключевые слова
+  page-size: 10
+  sort: title
+  filter-ui: false
+  sort-ui: false
+---
+
+# Текст как данные {.unnumbered}
+
+В темах последовательно рассматриваются представление текста, декодирование
+и передача данных между компонентами. Сложность обозначена в описании задания.
+
+::: {#text-topics}
+:::
