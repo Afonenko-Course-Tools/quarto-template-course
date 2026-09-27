@@ -36,8 +36,7 @@ listing:
 
 ::: {course-role="criteria"}
 На защите оцениваются три независимых задания. Для зачёта необходимо выполнить
-не менее {{< meta prairielearn.assessment-defaults.pass.at-least >}} заданий.
-На каждое предусмотрено {{< meta prairielearn.assessment-defaults.attempts >}} попытки.
+не менее двух заданий. Условия повторной сдачи определяет преподаватель.
 :::
 
 ## Начальный уровень · семестр 1 {.unnumbered}

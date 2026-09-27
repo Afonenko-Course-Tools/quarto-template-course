@@ -1,7 +1,0 @@
-{
-  "name": "prairielearn",
-  "rules": "spec/prairielearn.cue",
-  "extension": ".",
-  "compiler_family": "PrairieLearn course compiler",
-  "export_implemented": false
-}

@@ -1,7 +1,0 @@
-title: Облачные задания курса
-version: 1.0.0
-quarto-required: ">=1.10.0"
-contributes:
-  filters:
-    - at: pre-ast
-      path: filter.lua

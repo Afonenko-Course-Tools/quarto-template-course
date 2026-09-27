@@ -34,6 +34,10 @@ jobs:
       - uses: cue-lang/setup-cue@b0e30e540a2dae47304ebf16586a5b2db023b61c # v2.0.0
         with:
           version: latest
+      - name: Средства сборки PDF и шрифты
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends texlive-xetex texlive-latex-extra texlive-lang-cyrillic texlive-fonts-recommended fonts-lmodern fonts-dejavu
       - name: Версии инструментов
         run: |
           quarto --version

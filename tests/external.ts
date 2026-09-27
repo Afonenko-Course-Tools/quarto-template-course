@@ -1,6 +1,6 @@
 import { dirname, fromFileUrl, join } from "stdlib/path";
-import { parseImports } from "../_extensions/reference-catalog/infrastructure/import-config.ts";
-import { importTargets } from "../_extensions/reference-catalog/infrastructure/imports.ts";
+import { parseImports } from "../_extensions/Afonenko-Course-Tools/reference-catalog/infrastructure/import-config.ts";
+import { importTargets } from "../_extensions/Afonenko-Course-Tools/reference-catalog/infrastructure/imports.ts";
 const root = dirname(dirname(fromFileUrl(import.meta.url)));
 const fixture = await Deno.readTextFile(
   join(root, "fixtures/external-reference.json"),

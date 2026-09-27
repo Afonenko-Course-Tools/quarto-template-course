@@ -2,13 +2,19 @@ project:
   type: website
   output-dir: _site
   render: []
+  pre-render: _extensions/Afonenko-Course-Tools/project-publish/entrypoints/pre.ts
+  post-render: _extensions/Afonenko-Course-Tools/project-publish/entrypoints/post.ts
+  preview:
+    watch-inputs: false
+    serve:
+      cmd: "quarto run ../.project-publish/preview.ts --port {port} --host {host}"
+      ready: "Публикация предпросмотр готов"
 filters:
   - reference-catalog
 reference-catalog:
   namespace: site
-  home: book
   publication:
-    title: Учебный курс программирования
+    title: Учебный курс
   exports:
     book: [sec-contracts, sec-contract-demo]
     essay: [sec-essays, sec-utf8-policies]
@@ -18,12 +24,18 @@ reference-catalog:
       namespace: book
       base-url: https://example.edu/os/
       style: external
+
+profile:
+  default: student
+  group: [[student, full]]
+
+project-publish:
+  home: book
   projects:
     book: {path: book, format: html}
     lectures: {path: lectures, format: revealjs}
     practice: {path: practice, format: revealjs}
     essay: {path: essay, format: html}
-
-profile:
-  default: student
-  group: [[student, full]]
+    handouts: {path: handouts, format: pdf, mount: handouts}
+  integrations:
+    - _extensions/Afonenko-Course-Tools/reference-catalog/entrypoints/publication.ts

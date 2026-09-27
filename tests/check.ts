@@ -26,6 +26,15 @@ if (!Deno.args.includes("--skip-render")) {
       stderr: "inherit",
     }).output();
     assert(result.success, `Не удалось собрать профиль ${profile}`);
+    for (const example of ["cloud", "prairielearn"]) {
+      const optional = await new Deno.Command(quarto, {
+        args: ["render", `examples/${example}`, "--profile", profile, "--fail-if-warnings"],
+        cwd: root,
+        stdout: "inherit",
+        stderr: "inherit",
+      }).output();
+      assert(optional.success, `Не удалось собрать самостоятельный пример ${example}/${profile}`);
+    }
   }
 }
 function zipNames(bytes: Uint8Array): string[] {
@@ -51,12 +60,20 @@ let links = 0;
 for (const profile of ["student", "full"]) {
   const output = join(root, `_site-${profile}`), paths = await files(output);
   const archives = paths.filter((path) => path.endsWith(".zip"));
+  const pdf = await Deno.readFile(join(output, "handouts/contracts.pdf"));
+  assert(new TextDecoder().decode(pdf.subarray(0, 5)) === "%PDF-", "Раздатка не собрана в PDF");
+  assert(!paths.some((path) => /handouts\/.*\.html$/.test(path)), "PDF-раздатка дополнительно отрендерилась в HTML");
   assert(
-    archives.length === (profile === "full" ? 5 : 1),
+    archives.length === (profile === "full" ? 6 : 2),
     `${profile}: неверное число архивов (${archives.length})`,
   );
   for (const archive of archives) {
     const names = zipNames(await Deno.readFile(archive));
+    if (archive.endsWith("observations.zip")) {
+      assert(names.includes("observations.csv") && names.includes("README.md"),
+        `Не собран ресурс, независимый от задания: ${archive}`);
+      continue;
+    }
     assert(
       names.includes("build.gradle") && names.includes("settings.gradle") &&
         names.some((name) => name.endsWith(".java")),
@@ -131,7 +148,7 @@ for (const profile of ["student", "full"]) {
   );
   for (const path of paths) {
     assert(
-      !/\.(qmd|java|gradle|tsv)$/.test(path) && !path.includes("/_extensions/"),
+      !/\.(qmd|java|gradle|tsv|csv)$/.test(path) && !path.includes("/_extensions/"),
       `Опубликован исходный или служебный файл: ${path}`,
     );
     if (!path.endsWith(".html") && !path.endsWith("search.json")) continue;
@@ -173,5 +190,5 @@ for (const profile of ["student", "full"]) {
   }
 }
 console.log(
-  `Проверка пройдена: оба профиля, четыре подпроекта, внешний импорт и явный экспорт, архивы, изоляция контроля; ${links} локальных ссылок, ${features.size} демонстрируемых возможностей`,
+  `Проверка пройдена: оба профиля, пять подпроектов и отдельные адаптеры, внешний импорт и явный экспорт, архивы, изоляция контроля; ${links} локальных ссылок, ${features.size} демонстрируемых возможностей`,
 );

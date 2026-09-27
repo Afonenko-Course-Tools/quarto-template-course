@@ -1,21 +1,15 @@
 ---
 assessment:
   kind: lab
-cloud:
-  virtual-machines:
-    host:
-      template: ubuntu-host
-    client:
-      template: ubuntu-client
 ---
 
-# Лабораторная 1 {#sec-lab-01}
+# Практическое занятие {#sec-lab-01}
 
 Изучите @sec-contracts перед началом занятия.
 
 ::: {.assessment-items}
 1. @exr-clamp
-2. @exr-service
 :::
 
+Сформулируйте гипотезу о граничных случаях и обоснуйте набор примеров.
 Разбор на практике: @practice:sec-clamp.

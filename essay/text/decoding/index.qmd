@@ -4,7 +4,6 @@ difficulty: intermediate
 categories: [UTF-8, Декодирование, Контракты, Тестирование]
 assessment:
   kind: test
-  prairielearn: {}
 ---
 
 # Строгое декодирование UTF-8 {#sec-utf8-policies}

@@ -7,6 +7,7 @@ import {
   resolve,
 } from "stdlib/path";
 import { parse } from "stdlib/yaml";
+import { featureContract } from "./feature-contract.ts";
 
 export interface SourceLocation {
   file: string;
@@ -20,18 +21,7 @@ const mapping = (value: unknown): Mapping =>
     : {};
 const list = (value: unknown): unknown[] =>
   value === undefined ? [] : Array.isArray(value) ? value : [value];
-const enumKeys = new Set([
-  "course-role",
-  "target",
-  "difficulty",
-  "work-mode",
-  "requirement",
-]);
-// Штатные возможности разметки, для которых курс должен показывать пример.
-// Конкретная ширина изображения или число колонок остаются авторскими данными.
-const nativeAttributes = new Set(["width", "layout-ncol"]);
-const customRoot =
-  /^(?:course(?:-.*)?|prairielearn|assessment|reference-catalog)$/;
+const { enumKeys, nativeAttributes, customRoot } = featureContract;
 const slash = (path: string): string => path.replaceAll("\\", "/");
 
 async function exists(path: string): Promise<boolean> {
@@ -137,8 +127,8 @@ export async function inventory(directory: string): Promise<FeatureInventory> {
       for (const [key, child] of Object.entries(mapping(node))) {
         // Имена подключаемых проектов/каталогов — данные, а не новая возможность.
         const normalized =
-          path.length === 2 && path[0] === "reference-catalog" &&
-            ["projects", "imports"].includes(path[1])
+          path.length === 2 &&
+            featureContract.dynamicCollections[path[0]]?.includes(path[1])
             ? "*"
             : path[0] === "listing" && path.at(-1) === "field-display-names"
             ? "*"
@@ -170,7 +160,7 @@ export async function inventory(directory: string): Promise<FeatureInventory> {
             if (typeof pdf["pdf-engine"] === "string") {
               record(`pdf-engine:${pdf["pdf-engine"]}`, "pdf-engine");
             }
-            for (const font of ["mainfont", "sansfont", "monofont"]) {
+            for (const font of featureContract.pdfFonts) {
               if (Object.hasOwn(pdf, font)) {
                 record(`yaml:format.pdf.${font}`, font);
               }
@@ -192,7 +182,7 @@ export async function inventory(directory: string): Promise<FeatureInventory> {
               for (const field of list(config.fields)) {
                 if (
                   typeof field === "string" &&
-                  ["categories", "difficulty", "semester"].includes(field)
+                  featureContract.listingFields.has(field)
                 ) {
                   record(`listing:field=${field}`, "fields");
                 }
@@ -209,7 +199,7 @@ export async function inventory(directory: string): Promise<FeatureInventory> {
         }
         if (
           path.length === 0 &&
-          ["categories", "semester", "time", ...enumKeys].includes(key)
+          (featureContract.metadataKeys.has(key) || enumKeys.has(key))
         ) {
           record(`metadata:${key}`, key);
           if (enumKeys.has(key) && typeof child === "string") {
@@ -283,14 +273,12 @@ export async function inventory(directory: string): Promise<FeatureInventory> {
           if (nativeAttributes.has(key)) record(`attribute:${key}`);
           if (
             /^course-/.test(key) ||
-            ["project", "for", "time", ...enumKeys].includes(key)
+            featureContract.attributeKeys.has(key)
           ) record(`attribute:${key}`);
         }
         for (const css of attrs[1].matchAll(/(?:^|\s)\.([\w-]+)/g)) {
           if (
-            ["assessment-items", "grading-notes", "unnumbered"].includes(
-              css[1],
-            ) ||
+            featureContract.markerClasses.has(css[1]) ||
             /^(?:when|unless)-/.test(css[1])
           ) {
             record(`class:${css[1].replace(/^(when|unless)-.+$/, "$1-*")}`);
@@ -355,7 +343,7 @@ export async function inventory(directory: string): Promise<FeatureInventory> {
     for (const value of configs) {
       for (
         const member of Object.values(
-          mapping(mapping(value["reference-catalog"]).projects),
+          mapping(mapping(value["project-publish"]).projects),
         )
       ) {
         const path = mapping(member).path;
@@ -405,7 +393,7 @@ export async function inventory(directory: string): Promise<FeatureInventory> {
 
   await project(root);
   // Самостоятельные раздаточные материалы тоже принадлежат курсу, даже если
-  // они не публикуются в составе сайта QRC. Исходники расширений исключены.
+  // они не публикуются в составе сайта. Исходники расширений исключены.
   async function standalone(directory: string): Promise<void> {
     for await (const entry of Deno.readDir(directory)) {
       if (

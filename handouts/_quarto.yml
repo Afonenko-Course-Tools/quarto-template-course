@@ -5,12 +5,12 @@ project:
 lang: ru
 format:
   pdf:
-    pdf-engine: lualatex
+    pdf-engine: xelatex
     papersize: a4
     fontsize: 11pt
-    mainfont: CMU Serif
-    sansfont: CMU Sans Serif
-    monofont: CMU Typewriter Text
+    mainfont: DejaVu Serif
+    sansfont: DejaVu Sans
+    monofont: DejaVu Sans Mono
     colorlinks: true
     code-block-bg: true
 crossref:

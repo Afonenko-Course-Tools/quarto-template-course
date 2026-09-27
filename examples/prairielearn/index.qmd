@@ -1,0 +1,29 @@
+---
+assessment:
+  kind: test
+  prairielearn: {}
+difficulty: intermediate
+semester: 1
+categories: [Оценивание, Контракты]
+---
+
+# Контроль с PrairieLearn {#sec-prairielearn-control}
+
+Этот отдельный пример показывает декларацию контрольной. Сборка описывает
+учебную модель; отправка заданий и компиляторы платформы сюда не входят.
+
+Число попыток: {{< meta prairielearn.assessment-defaults.attempts >}}.
+Для зачёта нужно {{< meta prairielearn.assessment-defaults.pass.at-least >}} задание.
+
+:::: {.when-full}
+::: {#exr-platform-check target="prairielearn" project="/project"}
+## Проверка контракта
+
+Реализуйте ограничение числа диапазоном в стартовом проекте.
+Обоснуйте различие предусловия и гарантии результата.
+:::
+
+::: {.assessment-items}
+1. @exr-platform-check
+:::
+::::

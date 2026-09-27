@@ -2,7 +2,7 @@
 
 ## Контроль освоения темы
 
-:::: {#exr-utf8-experiment target="prairielearn" project="/text/decoding/projects/experiment"}
+:::: {#exr-utf8-experiment target="manual" project="/text/decoding/projects/experiment"}
 ### Неоднозначность результата декодирования с заменой
 
 {{< project-download exr-utf8-experiment >}}
@@ -14,7 +14,7 @@
 :::
 ::::
 
-:::: {#exr-utf8-test-design target="prairielearn" project="/text/decoding/projects/test-design"}
+:::: {#exr-utf8-test-design target="manual" project="/text/decoding/projects/test-design"}
 ### Тестирование контракта строгого декодирования
 
 {{< project-download exr-utf8-test-design >}}
@@ -28,7 +28,7 @@
 :::
 ::::
 
-:::: {#exr-utf8-implementation target="prairielearn" project="/text/decoding/projects/implementation"}
+:::: {#exr-utf8-implementation target="manual" project="/text/decoding/projects/implementation"}
 ### Реализация строгого декодирования полного сообщения
 
 {{< project-download exr-utf8-implementation >}}
