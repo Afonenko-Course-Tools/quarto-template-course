@@ -27,6 +27,9 @@ const enumKeys = new Set([
   "work-mode",
   "requirement",
 ]);
+// Штатные возможности разметки, для которых курс должен показывать пример.
+// Конкретная ширина изображения или число колонок остаются авторскими данными.
+const nativeAttributes = new Set(["width", "layout-ncol"]);
 const customRoot =
   /^(?:course(?:-.*)?|prairielearn|assessment|reference-catalog)$/;
 const slash = (path: string): string => path.replaceAll("\\", "/");
@@ -277,6 +280,7 @@ export async function inventory(directory: string): Promise<FeatureInventory> {
         ) {
           const key = attr[1], value = attr[2] ?? attr[3] ?? attr[4];
           if (enumKeys.has(key)) record(`value:${key}=${value}`);
+          if (nativeAttributes.has(key)) record(`attribute:${key}`);
           if (
             /^course-/.test(key) ||
             ["project", "for", "time", ...enumKeys].includes(key)
@@ -284,7 +288,9 @@ export async function inventory(directory: string): Promise<FeatureInventory> {
         }
         for (const css of attrs[1].matchAll(/(?:^|\s)\.([\w-]+)/g)) {
           if (
-            ["assessment-items", "grading-notes"].includes(css[1]) ||
+            ["assessment-items", "grading-notes", "unnumbered"].includes(
+              css[1],
+            ) ||
             /^(?:when|unless)-/.test(css[1])
           ) {
             record(`class:${css[1].replace(/^(when|unless)-.+$/, "$1-*")}`);

@@ -15,7 +15,7 @@ categories:
 Предусловие определяет допустимый вход, постусловие — гарантированный результат.
 Для ограничения числа диапазоном требуется `lower <= upper`.
 
-![Путь от аргументов к результату](../../assets/contract.svg){#fig-contract}
+![Путь от аргументов к результату](../../assets/contract.svg){#fig-contract width="6cm"}
 
 Обсуждение: @lectures:sec-contracts. Практика: @practice:sec-clamp.
 
