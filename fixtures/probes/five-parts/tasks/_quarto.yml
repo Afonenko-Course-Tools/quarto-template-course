@@ -7,7 +7,7 @@ project:
   post-render:
     - _extensions/Afonenko-Course-Tools/project-download/entrypoints/post.ts
     - _extensions/Afonenko-Course-Tools/course-core/entrypoints/post.ts
-  resources: [assets/**, "!materials/**", "!**/_*.qmd"]
+  resources: [./assets/**, "!materials/**", "!**/_*.qmd"]
 profile:
   default: student
   group: [[student, full]]
