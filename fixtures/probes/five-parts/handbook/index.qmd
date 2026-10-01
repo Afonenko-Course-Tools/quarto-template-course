@@ -1,0 +1,7 @@
+# P0 handbook {#sec-handbook}
+
+Course resources and references. Theory: @theory:sec-theory.
+
+::: {.content-visible when-profile="full"}
+FULL_ONLY_handbook
+:::

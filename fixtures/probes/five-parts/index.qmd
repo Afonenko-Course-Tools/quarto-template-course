@@ -1,0 +1,11 @@
+# Five-part portal {#sec-portal}
+
+Theory: @theory:sec-theory. Tasks: @tasks:sec-tasks.
+Practice: @practice:sec-practice. Lectures: @lectures:sec-lectures.
+Handbook: @handbook:sec-handbook.
+
+[Ordinary portal resource](assets/public.txt)
+
+::: {.content-visible when-profile="full"}
+FULL_ONLY_portal
+:::

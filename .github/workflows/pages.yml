@@ -37,7 +37,8 @@ jobs:
       - name: Средства сборки PDF и шрифты
         run: |
           sudo apt-get update
-          sudo apt-get install -y --no-install-recommends texlive-xetex texlive-latex-extra texlive-lang-cyrillic texlive-fonts-recommended fonts-lmodern fonts-dejavu
+          sudo apt-get install -y --no-install-recommends texlive-xetex texlive-latex-extra texlive-lang-cyrillic texlive-fonts-recommended lmodern fonts-lmodern fonts-dejavu
+          kpsewhich lmodern.sty
       - name: Версии инструментов
         run: |
           quarto --version
