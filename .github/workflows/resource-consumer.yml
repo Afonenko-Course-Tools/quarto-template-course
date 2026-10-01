@@ -1,0 +1,111 @@
+name: Production resources, текущие PDF и ZIP
+
+on:
+  pull_request:
+  push:
+    branches: [main, master]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  resources:
+    name: Нативная installed попытка (${{ matrix.quarto }})
+    runs-on: ubuntu-24.04
+    timeout-minutes: 55
+    strategy:
+      fail-fast: false
+      matrix:
+        quarto: ['1.10.18', '1.11.5']
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          path: template
+          persist-credentials: false
+      - name: Production Core и runtime producer Presentation
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          repository: Afonenko-Course-Tools/quarto-course
+          ref: 09f1967f6136fbf3195a4429f14f86bb3c5bb43b
+          path: core
+          persist-credentials: false
+      - name: Отдельный экспериментальный body producer
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          repository: Afonenko-Course-Tools/quarto-course
+          ref: 4f5caf9a15b9bd36476cad8a646e81521fbd29d1
+          path: core-export
+          persist-credentials: false
+      - name: Publisher с owner output context
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          repository: Afonenko-Course-Tools/quarto-project-publish
+          ref: 10d65dab2c8f394a570b12631a001147a1ef2fd6
+          path: publisher
+          persist-credentials: false
+      - name: Download с публичным ownership seam
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          repository: Afonenko-Course-Tools/quarto-project-download
+          ref: d78a533b14c38e3dd64dbfbd59e437a82e2752fd
+          path: download
+          persist-credentials: false
+      - name: Print с текущей materialization
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          repository: Afonenko-Course-Tools/quarto-course-print
+          ref: ba717cf2f4fa01e1fd4df41724d3257e5a3ffa07
+          path: print
+          persist-credentials: false
+      - uses: quarto-dev/quarto-actions/setup@8a96df13519ee81fd526f2dfca5962811136661b # v2.2.0
+        with:
+          version: ${{ matrix.quarto }}
+      - uses: cue-lang/setup-cue@b0e30e540a2dae47304ebf16586a5b2db023b61c # v2.0.0
+        with:
+          version: v0.17.1
+      - name: Штатные R, PDF и archive инструменты
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends file poppler-utils r-base-core r-cran-knitr r-cran-rmarkdown
+      - name: Конкретные archive/runtime parser guards
+        working-directory: template
+        run: |
+          python3 tests/probes/resource-archive-guards.py
+          python3 tests/probes/resource-runtime-guards.py
+      - name: Exact archives, quarto add и одна нативная owner computation
+        working-directory: template
+        run: |
+          export QUARTO="$(command -v quarto)"
+          quarto run tests/probes/resource-consumer.ts \
+            --core "$GITHUB_WORKSPACE/core" \
+            --core-export "$GITHUB_WORKSPACE/core-export" \
+            --publisher "$GITHUB_WORKSPACE/publisher" \
+            --download "$GITHUB_WORKSPACE/download" \
+            --print "$GITHUB_WORKSPACE/print" \
+            --output "$RUNNER_TEMP/resource-evidence"
+      - name: Версии, exact source trees и результаты
+        if: always()
+        env:
+          RESOURCE_EVIDENCE: ${{ runner.temp }}/resource-evidence
+        run: |
+          python3 - <<'PY'
+          import json, os
+          from pathlib import Path
+          root = Path(os.environ['RESOURCE_EVIDENCE'])
+          manifest = root / 'install-manifest.json'
+          if manifest.exists():
+              data = json.loads(manifest.read_text())
+              print(json.dumps({key:data[key] for key in ['versions','companionSources']},indent=2))
+          results = root / 'results.json'
+          if results.exists(): print(results.read_text())
+          else:
+              partial = root / 'partial-results.json'
+              if partial.exists(): print(partial.read_text())
+              for log in sorted(root.glob('*.log')):
+                  print(f'{log.name}:\n{log.read_text()[-12000:]}')
+          PY
