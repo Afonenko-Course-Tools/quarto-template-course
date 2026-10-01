@@ -121,10 +121,24 @@ export async function current(
   const attempt = await load(ctx),
     index = await validateOwnerResources(attempt.handle, { selections });
   assert(attempt.indexHash === index.indexHash, "CONSUMER_INDEX_CHANGED");
+  // Validator retains producer-owned CUE inputs in this already declared Core area.
+  await rememberTree(
+    attempt,
+    join(attempt.handle.root, ".course-owner"),
+    "owner-session",
+  );
+  await save(ctx, attempt);
   return { attempt, index };
 }
 export async function remember(attempt: Attempt, path: string, role: string) {
-  attempt.services.push({ path, sha256: await hash(path), role });
+  const sha256 = await hash(path);
+  if (
+    !attempt.services.some((f) =>
+      f.path === path && f.sha256 === sha256 && f.role === role
+    )
+  ) {
+    attempt.services.push({ path, sha256, role });
+  }
 }
 export async function rememberTree(
   attempt: Attempt,
@@ -132,6 +146,48 @@ export async function rememberTree(
   role: string,
 ) {
   for (const file of await files(path)) await remember(attempt, file, role);
+}
+function printZipTargets(printFiles: Record<string, string>, pdfHash?: string) {
+  if (pdfHash) {
+    assert(
+      printFiles["tasks/handouts/current.pdf"] === pdfHash,
+      "PRINT_RECEIPT_PDF_CHANGED",
+    );
+  }
+  return Object.fromEntries(
+    Object.entries(printFiles).map(([path, sha256]) => {
+      assert(path.startsWith("tasks/handouts/"), "PRINT_RECEIPT_PATH_CHANGED");
+      const target = path === "tasks/handouts/current.pdf"
+        ? "handout.pdf"
+        : path.slice("tasks/handouts/".length);
+      return [target, sha256];
+    }),
+  );
+}
+export function assertPrintTargetAvailable(
+  name: string,
+  printFiles: Record<string, string>,
+) {
+  assert(
+    !Object.hasOwn(printZipTargets(printFiles), name),
+    `PRINT_TARGET_COLLISION ${name}`,
+  );
+}
+export function assertPrintArchive(
+  entries: { path: string; sha256: string }[],
+  printFiles: Record<string, string>,
+  pdfHash?: string,
+) {
+  for (
+    const [target, sha256] of Object.entries(
+      printZipTargets(printFiles, pdfHash),
+    )
+  ) {
+    assert(
+      entries.find((entry) => entry.path === target)?.sha256 === sha256,
+      `CURRENT_PRINT_ZIP_RESOURCE_CHANGED ${target}`,
+    );
+  }
 }
 export function denied(index: OwnerResourceIndex, attempt: Attempt) {
   return [

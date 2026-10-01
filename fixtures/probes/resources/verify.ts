@@ -1,5 +1,6 @@
 import {
   assert,
+  assertPrintArchive,
   checkBytes,
   command,
   current,
@@ -86,6 +87,13 @@ export default {
             }_ZIP_RESOURCE ${forbidden.path} -> ${archive.path}/${entry.path}`,
           );
         }
+      }
+      if (archive.path === "tasks/_downloads/starter.zip") {
+        assertPrintArchive(
+          archive.entries,
+          attempt.delivery.printFiles,
+          attempt.delivery.pdfHash,
+        );
       }
       const expected = attempt.delivery.archives[archive.path];
       assert(expected, `UNPROVEN_ARCHIVE ${archive.path}`);

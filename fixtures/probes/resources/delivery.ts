@@ -4,6 +4,7 @@ import {
 } from "../../_extensions/course-print/application/export.ts";
 import {
   assert,
+  assertPrintTargetAvailable,
   checkBytes,
   command,
   copyTree,
@@ -171,7 +172,9 @@ export default {
             .map((path) => relative(attempt.handle.root, path)),
         );
       }
-      ({ index } = await current(ctx, selected));
+      // Keep current Print service receipts while refreshing validator-owned transports.
+      await save(ctx, attempt);
+      ({ attempt, index } = await current(ctx, selected));
       for (const path of selected) {
         const group = path.startsWith("materials/student/")
             ? "starter"
@@ -185,6 +188,7 @@ export default {
             ),
             join(attempt.handle.root, path),
           );
+        if (group === "starter") assertPrintTargetAvailable(name, printFiles);
         const out = join(utility, "prepared", group, name);
         await Deno.mkdir(dirname(out), { recursive: true });
         await Deno.copyFile(join(attempt.handle.root, path), out);

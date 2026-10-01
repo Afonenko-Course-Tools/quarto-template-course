@@ -1,5 +1,12 @@
 // Нативные negative probes: отдельные test-only finalizers, без изменения consumer predicates.
-import { assert, command, files, join, load } from "./resources/common.ts";
+import {
+  assert,
+  command,
+  files,
+  hash,
+  join,
+  load,
+} from "./resources/common.ts";
 export const ownerFault = {
   async finalize(ctx: any) {
     const attempt = await load(ctx);
@@ -55,6 +62,24 @@ export const zipFault = {
         join(ctx.stage, "renamed-carrier.bin"),
         source,
       ], ctx.root);
+    }
+    if (options.fail === "renamed-core-transport") {
+      const owned = await Promise.all(
+        (await files(join(attempt.handle.root, ".course-owner"))).map(async (
+          path,
+        ) => ({ path, time: (await Deno.stat(path)).mtime?.getTime() ?? 0 })),
+      );
+      owned.sort((a, b) => b.time - a.time);
+      assert(owned.length, "TEST_CORE_PRODUCER_FILE_MISSING");
+      console.log(
+        `Test current Core producer file: ${owned[0].path} SHA ${await hash(
+          owned[0].path,
+        )}`,
+      );
+      await Deno.copyFile(
+        owned[0].path,
+        join(ctx.stage, "renamed-evidence.json"),
+      );
     }
     if (options.fail === "renamed-runtime-plain") {
       await Deno.copyFile(

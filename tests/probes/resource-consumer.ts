@@ -25,6 +25,8 @@ const evidence = resolve(
   arg("--output") || await Deno.makeTempDir({ prefix: "resource-evidence-" }),
 );
 const resume = arg("--resume");
+const reviewOnly = Deno.args.includes("--review-fixes");
+assert(!reviewOnly || !!resume, "--review-fixes requires --resume");
 const consumer = resume
   ? resolve(resume)
   : await Deno.makeTempDir({ prefix: "resource-consumer-" });
@@ -534,6 +536,15 @@ try {
   if (!resume) {
     await render("student-current");
     await verifyRelease("student");
+    await Deno.writeTextFile(
+      join(evidence, "print-guards.log"),
+      await command(quarto, [
+        "run",
+        join(repo, "tests/probes/resource-print-guards.ts"),
+        "--consumer",
+        consumer,
+      ], consumer),
+    );
   }
   if (!Deno.args.includes("--smoke")) {
     const protectedFull = resume
@@ -597,6 +608,9 @@ try {
         "renamed-service-zip",
         "renamed-runtime-plain",
         "renamed-runtime-zip",
+        "print-pdf-collision",
+        "print-resource-collision",
+        "renamed-core-transport",
       ]
     ) {
       if (failure === arg("--from")) reached = true;
@@ -616,6 +630,7 @@ try {
             "renamed-service-zip",
             "renamed-runtime-plain",
             "renamed-runtime-zip",
+            "renamed-core-transport",
           ].includes(failure)
         ? originalRoot.replace(
           "    - _probe/resources/verify.ts",
@@ -624,21 +639,47 @@ try {
         : originalRoot;
       await Deno.writeTextFile(rootConfig, faultConfig);
       await selection({ print: true, fail: failure });
-      await render(
-        failure,
-        "student",
-        ({
-          "late-link": "RESOURCE.POLICY_DENIED",
-          "source-mutation": "SOURCE.FROZEN_INPUT_CHANGED",
-          "config-mutation": "SOURCE.PROFILE_VIEW_MISMATCH",
-          "session-mutation": "SOURCE.INVALID_ATTEMPT",
-          "missing-observation": "SOURCE.RECONCILIATION_MISSING",
-          "renamed-private-zip": "DENIED_ZIP_RESOURCE",
-          "renamed-service-zip": "SERVICE_ZIP_RESOURCE",
-          "renamed-runtime-plain": "DENIED_DELIVERY_RESOURCE",
-          "renamed-runtime-zip": "DENIED_ZIP_RESOURCE",
-        } as Record<string, string>)[failure],
-      );
+      const collision = failure === "print-pdf-collision"
+        ? "handout.pdf"
+        : failure === "print-resource-collision"
+        ? "resources/artifact-course/data.txt"
+        : undefined;
+      const collisionPath = collision
+        ? join(consumer, "tasks/materials/student", collision)
+        : undefined;
+      if (collisionPath) {
+        assert(
+          !await exists(collisionPath),
+          "collision setup path already exists",
+        );
+        await Deno.mkdir(dirname(collisionPath), { recursive: true });
+        await Deno.writeTextFile(
+          collisionPath,
+          "PUBLIC_PRINT_TARGET_COLLISION\n",
+        );
+      }
+      try {
+        await render(
+          failure,
+          "student",
+          ({
+            "late-link": "RESOURCE.POLICY_DENIED",
+            "source-mutation": "SOURCE.FROZEN_INPUT_CHANGED",
+            "config-mutation": "SOURCE.PROFILE_VIEW_MISMATCH",
+            "session-mutation": "SOURCE.INVALID_ATTEMPT",
+            "missing-observation": "SOURCE.RECONCILIATION_MISSING",
+            "renamed-private-zip": "DENIED_ZIP_RESOURCE",
+            "renamed-service-zip": "SERVICE_ZIP_RESOURCE",
+            "renamed-runtime-plain": "DENIED_DELIVERY_RESOURCE",
+            "renamed-runtime-zip": "DENIED_ZIP_RESOURCE",
+            "print-pdf-collision": "PRINT_TARGET_COLLISION",
+            "print-resource-collision": "PRINT_TARGET_COLLISION",
+            "renamed-core-transport": "SERVICE_DELIVERY_RESOURCE",
+          } as Record<string, string>)[failure],
+        );
+      } finally {
+        if (collisionPath) await Deno.remove(collisionPath);
+      }
     }
     await Deno.writeTextFile(rootConfig, originalRoot);
     assert(
@@ -649,11 +690,24 @@ try {
     await selection({ print: true });
     await render("restored-print-target");
     await verifyRelease("student");
-    await Deno.remove(
-      join(consumer, "_site-student/tasks/handouts/current.pdf"),
-    );
-    await render("deleted-current-pdf");
-    await verifyRelease("student");
+    if (reviewOnly) {
+      await Deno.writeTextFile(
+        join(evidence, "print-guards.log"),
+        await command(quarto, [
+          "run",
+          join(repo, "tests/probes/resource-print-guards.ts"),
+          "--consumer",
+          consumer,
+        ], consumer),
+      );
+    }
+    if (!reviewOnly) {
+      await Deno.remove(
+        join(consumer, "_site-student/tasks/handouts/current.pdf"),
+      );
+      await render("deleted-current-pdf");
+      await verifyRelease("student");
+    }
   }
   await Deno.writeTextFile(
     join(evidence, "results.json"),
