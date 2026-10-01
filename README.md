@@ -199,6 +199,13 @@ quarto run tests/features.ts --course /путь/к/Java
 новую разметку сначала демонстрируют здесь. Правила инвентаризации собраны
 в `tests/feature-contract.ts`, учебные атрибуты читаются из словаря Core.
 
+Отдельные технические пробы не меняют обычный контракт шаблона:
+[пять частей и установленная поставка](docs/probes/installed-consumer.md),
+[QRC → печатный PDF → ZIP и доверенная политика ресурсов](docs/probes/artifact-consumer.md).
+Вторая использует явно выбранные companion-версии Publisher, Print и
+экспериментального производителя Core; её fixture не заменяет production Core
+resource bridge.
+
 Для GitHub Pages выберите Settings → Pages → GitHub Actions. CI проверяет Quarto
 `release` и `pre-release`; после успешной проверки публикуется только студенческий
 сайт, собранный стабильным выпуском. PR и плановые проверки ничего не публикуют.
