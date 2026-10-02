@@ -155,14 +155,41 @@ async function mutateBody(ctx: any, failure: string) {
     );
   }
   if (failure === "body-generated-mutation") {
-    const receipt = JSON.parse(
-      await Deno.readTextFile(attempt.body.receiptPath),
-    );
-    const resource = receipt.resources.find((r: any) =>
+    const { index, receipt } = await current(ctx);
+    const resource = receipt.resources.find((r) =>
       r.source.includes("figure-html")
     );
     assert(resource, "TEST_CURRENT_GENERATED_RESOURCE_REQUIRED");
-    path = join(attempt.handle.root, resource.source);
+    const generated = index.files.filter((file) =>
+      file.path === resource.source && file.sha256 === resource.sha256 &&
+      file.origin === "generated"
+    );
+    assert(
+      generated.length === 1,
+      "TEST_UNIQUE_CURRENT_GENERATED_BACKING_REQUIRED",
+    );
+    path = generated[0].actualPath;
+    const actualBytesSha256 = await hash(path);
+    assert(
+      actualBytesSha256 === resource.sha256,
+      "TEST_CURRENT_GENERATED_BACKING_BYTES_REQUIRED",
+    );
+    const coordinates = {
+      sourceRoot: index.root,
+      nativeOutput: attempt.output ?? null,
+      indexHash: index.indexHash,
+      resource,
+      backing: generated[0],
+      actualBytesSha256,
+    };
+    await event(ctx, "body-generated-locator", {
+      ...coordinates,
+      bodyHandle: attempt.body,
+      resourceIndex: index,
+    });
+    console.log(
+      `Test current generated backing: ${JSON.stringify(coordinates)}`,
+    );
   }
   let original: Uint8Array | undefined;
   if (failure === "body-index-mutation") {

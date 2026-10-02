@@ -91,7 +91,7 @@ const wants = (label: string) => selectedCases.has(label);
 const phaseBudget = Object.fromEntries(
   Object.entries(phases).map(([name, cases]) => {
     const nativeBuilds = cases.length + 1,
-      additionalCurrentCalls = name === "body" ? 27 : 0;
+      additionalCurrentCalls = name === "body" ? 28 : 0;
     return [name, {
       nativeBuilds,
       additionalCurrentCalls,
@@ -128,6 +128,7 @@ const manifest: unknown[] = [],
   results: Record<string, unknown>[] = [],
   initialization: unknown[] = [];
 let bodyIntegrityCases: Record<string, string>[] = [];
+let generatedLocatorEvidence: Record<string, unknown>[] = [];
 const providerPins = new Map<string, { commit: string; tree: string }>();
 async function toolVersion(args: string[]) {
   const result = await new Deno.Command(quarto, {
@@ -1058,23 +1059,42 @@ try {
         );
         if (failure.startsWith("body-")) {
           const events = await latestEvents();
-          assert(
-            !events.some((e) =>
-              ["print-ready", "package-start", "package-ready", "verified"]
-                .includes(e.stage)
-            ),
-            `${failure}: stale body reached delivery`,
-          );
           bodyIntegrityCases = events.filter((e) =>
             e.stage === "body-integrity-checked"
           ).map((e) => ({ failure: e.failure, code: e.code }));
-          assert(
-            bodyIntegrityCases.length === 13 &&
-              new Set(bodyIntegrityCases.map((e) => e.failure)).size === 13 &&
-              events.find((e) => e.stage === "owner-index").engineRuns === 1,
-            "complete sequential body refusals/recovery after one native engine pass",
+          generatedLocatorEvidence = events.filter((e) =>
+            e.stage === "body-generated-locator"
           );
           results.at(-1)!.batchedCases = bodyIntegrityCases;
+          results.at(-1)!.generatedLocatorEvidence = generatedLocatorEvidence;
+          await Deno.writeTextFile(
+            join(evidence, "partial-results.json"),
+            JSON.stringify({ consumer, results }, null, 2),
+          );
+          try {
+            assert(
+              !events.some((e) =>
+                ["print-ready", "package-start", "package-ready", "verified"]
+                  .includes(e.stage)
+              ),
+              `${failure}: stale body reached delivery`,
+            );
+            assert(
+              bodyIntegrityCases.length === 13 &&
+                new Set(bodyIntegrityCases.map((e) => e.failure)).size === 13 &&
+                generatedLocatorEvidence.length === 1 &&
+                events.find((e) => e.stage === "owner-index").engineRuns === 1,
+              "complete sequential body refusals/recovery after one native engine pass",
+            );
+          } catch (error) {
+            results.at(-1)!.status = "failed";
+            results.at(-1)!.error = String(error);
+            await Deno.writeTextFile(
+              join(evidence, "partial-results.json"),
+              JSON.stringify({ consumer, results }, null, 2),
+            );
+            throw error;
+          }
         }
       } finally {
         if (collisionPath) await Deno.remove(collisionPath);
@@ -1155,6 +1175,7 @@ try {
           nativeBuilds: bodyIntegrityCases.length ? 1 : 0,
           sequentialMutationCases: bodyIntegrityCases.length,
           cases: bodyIntegrityCases,
+          generatedLocatorEvidence,
           recovery: "exact bytes/handle then production current(ctx)",
           finalRefusal: "ordinary delivery before Print/ZIP/commit",
         },
