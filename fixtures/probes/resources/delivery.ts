@@ -31,7 +31,6 @@ function linkTargets(node: any, targets = new Set<string>()): Set<string> {
 export default {
   async finalize(ctx: any) {
     const deliveryStarted = Date.now();
-    let { attempt, index } = await current(ctx);
     const options = JSON.parse(
       await Deno.readTextFile(join(ctx.sourceRoot, "_probe/selection.json")),
     );
@@ -40,11 +39,11 @@ export default {
       ),
       target = catalog.targets["theory:sec-theory"];
     assert(target?.page && target.fragment, "QRC must finalize before Print");
-    const url = new URL(
-      `${target.page}#${target.fragment}`,
-      ctx.config.website["site-url"],
-    ).href;
-    await event(ctx, "qrc-observed", { url });
+    await event(ctx, "qrc-observed", {
+      catalogHash: await hash(join(ctx.stage, "reference-catalog.json")),
+      target: "theory:sec-theory",
+    });
+    let { attempt, index, publicPackage: bundle, receipt } = await current(ctx);
     const utility = await Deno.makeTempDir({
         prefix: "resource-download-utility-",
       }),
@@ -52,46 +51,37 @@ export default {
         prefix: "resource-print-candidate-",
       });
     try {
-      const bundle = JSON.parse(await Deno.readTextFile(attempt.packagePath));
-      const bind = (node: any) => {
-        if (!node || typeof node !== "object") return;
-        if (
-          node.t === "Link" &&
-          node.c[2][0] === "https://example.org/course#def-one"
-        ) node.c[2][0] = url;
-        for (const child of Object.values(node)) {
-          if (Array.isArray(child)) child.forEach(bind);
-          else bind(child);
-        }
-      };
-      bundle.questions.forEach((q: any) => bind(q.condition));
-      const bound = join(ctx.sourceRoot, "_probe/bound-package.json");
-      await Deno.writeTextFile(bound, JSON.stringify(bundle));
-      await remember(attempt, bound, "bound-print-input");
       let pdfHash: string | undefined;
       const printFiles: Record<string, string> = {};
       const expected: Record<string, Record<string, string>> = { starter: {} };
       if (options.print) {
+        const workKey = `${bundle.owner}/sec-body-one`;
+        assert(
+          bundle.works.some((w) => w.key === workKey),
+          "FIXED_CURRENT_WORK_REQUIRED",
+        );
         const used = linkTargets(
-          preparePrint(bundle, bundle.works[0].key, {}).blocks,
+          preparePrint(bundle, workKey, {}).blocks,
         );
         const resources = bundle.resources.filter((r: any) =>
           used.has(r.target)
         );
-        // Concrete producer relation: only these bundled current input bytes may be Print resources.
+        // Exact current producer binding; Print receives only its validated public projection.
         for (const r of resources) {
           assert(
-            attempt.body.some((f) =>
-              [
-                join(ctx.sourceRoot, "_probe/body/input/dot.png"),
-                join(ctx.sourceRoot, "_probe/body/input/data.txt"),
-              ].includes(f.path) && f.sha256 === r.sha256
-            ),
+            receipt.resources.some((binding) =>
+              binding.source === r.source && binding.sha256 === r.sha256 &&
+              binding.target === r.target &&
+              binding.effectiveBase === r.effectiveBase
+            ) &&
+              index.files.some((file) =>
+                file.path === r.source && file.sha256 === r.sha256
+              ),
             `UNPROVEN_PRINT_RESOURCE ${r.target}`,
           );
         }
         const owned = join(privatePrint, "work"),
-          result = await renderPrint(bundle, bundle.works[0].key, owned, {}, {
+          result = await renderPrint(bundle, workKey, owned, {}, {
             upstreamCurrent: true,
           });
         assert(
@@ -158,7 +148,8 @@ export default {
         await event(ctx, "print-ready", {
           pdfHash,
           result,
-          experimentalBody: true,
+          bodyPublicHash: attempt.body!.publicHash,
+          bodySchema: bundle.schema,
         });
       }
       const selected =
