@@ -197,7 +197,29 @@ async function mutateBody(ctx: any, failure: string) {
   }
   if (path) {
     original = await Deno.readFile(path);
-    if (failure === "body-index-mutation") {
+    if (failure === "body-source-mutation") {
+      const beforeSHA256 = await hash(path);
+      await Deno.writeFile(
+        path,
+        new Uint8Array([
+          ...original,
+          ...new TextEncoder().encode(
+            "\n<!-- changed after native finish -->\n",
+          ),
+        ]),
+      );
+      const coordinates = {
+        source: "corpus.qmd",
+        sourceRoot: attempt.handle.root,
+        actualPath: path,
+        beforeSHA256,
+        afterSHA256: await hash(path),
+      };
+      await event(ctx, "body-source-mutation-locator", coordinates);
+      console.log(
+        `Test current source mutation: ${JSON.stringify(coordinates)}`,
+      );
+    } else if (failure === "body-index-mutation") {
       const index = JSON.parse(new TextDecoder().decode(original));
       index.invocationId += "-changed";
       await Deno.writeTextFile(path, JSON.stringify(index));
@@ -240,13 +262,25 @@ export const bodyFault = {
       for (const [failure, code] of Object.entries(bodyCases)) {
         const restore = await mutateBody(ctx, failure);
         let refused = false;
+        let actualRefusal: Record<string, unknown> | null = null;
         try {
           await current(ctx);
         } catch (e) {
+          const caught = e as Error & { code?: unknown };
+          actualRefusal = {
+            name: caught?.name ?? null,
+            code: caught?.code ?? null,
+            message: caught?.message ?? String(e),
+            cause: caught?.cause ?? null,
+            stack: caught?.stack ?? null,
+          };
           refused = String(e).includes(code);
         } finally {
           await restore();
         }
+        const diagnostic = { failure, expectedCode: code, actualRefusal };
+        await event(ctx, "body-current-refusal", diagnostic);
+        console.log(`Test current body refusal: ${JSON.stringify(diagnostic)}`);
         assert(refused, `TEST_CURRENT_BODY_REFUSAL ${failure}: ${code}`);
         await current(ctx);
         await event(ctx, "body-integrity-checked", { failure, code });

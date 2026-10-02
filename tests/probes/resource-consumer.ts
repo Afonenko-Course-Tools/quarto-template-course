@@ -1067,6 +1067,12 @@ try {
           );
           results.at(-1)!.batchedCases = bodyIntegrityCases;
           results.at(-1)!.generatedLocatorEvidence = generatedLocatorEvidence;
+          results.at(-1)!.bodyCurrentRefusals = events.filter((e) =>
+            e.stage === "body-current-refusal"
+          );
+          results.at(-1)!.sourceMutationEvidence = events.filter((e) =>
+            e.stage === "body-source-mutation-locator"
+          );
           await Deno.writeTextFile(
             join(evidence, "partial-results.json"),
             JSON.stringify({ consumer, results }, null, 2),
