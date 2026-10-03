@@ -157,10 +157,18 @@ export async function verifyOriginalCourse(output: string, profile: string) {
       ),
     "root native search entry missing",
   );
-  for (const mount of ["book", "lectures", "practice", "essay"]) {
+  // Standard Quarto search stays within each HTML project. The isolated portal
+  // index does not merge the independently rendered Book and Essay indexes.
+  for (const mount of ["book", "essay"]) {
+    const memberSearch = JSON.parse(
+      await Deno.readTextFile(join(output, mount, "search.json")),
+    );
     assert(
-      search.some((p) => p.href?.startsWith(`${mount}/`)),
-      `native search omitted ${mount}`,
+      Array.isArray(memberSearch) &&
+        memberSearch.some((p) =>
+          p.href === "index.html" || p.href?.startsWith("index.html#")
+        ),
+      `original ${mount} native search entry missing`,
     );
   }
   let links = 0;

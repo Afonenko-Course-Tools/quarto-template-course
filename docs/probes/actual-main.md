@@ -43,7 +43,10 @@ runner, ни hook: исходный root и все9 глав сравниваю�
 до и после каждой попытки. Slot adapters используют те же documented public
 Core/Publisher interfaces, actual `ctx.portal`, member boundaries и metadata
 outputs. Root остаётся только навигацией, а book/essay получают собственные
-current owners. `tests/check.ts` отдельно проверяет реальные product controllers,
+current owners. Стандартные поисковые индексы Quarto проверяются отдельно у
+root portal, book и essay; единый межкнижный индекс не требуется. QRC обновляет
+текст всех фактических `search.json`, а проверки student visibility сохраняются
+для каждого из них. `tests/check.ts` отдельно проверяет реальные product controllers,
 оба профиля, оба optional examples, roles/archive assertions и local links;
 `tests/external.ts` сохраняет внешний каталог/HTTP gate.
 
