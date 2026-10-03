@@ -4,6 +4,8 @@
 
 ## Progress
 
+Таблица ниже — исходный snapshot восстановления; выбранный текущий provider set для OriginalCourse задаёт `tests/probes/portal-provider-refs.json`.
+
 - Восстановлены девять чистых checkout из GitHub. Исходники не извлекались из evidence. Действующих AGENTS.md в этих checkout и родительских каталогах нет.
 - Проверены SHA256 всех семи файлов передачи.
 - Template `feat/native-listing-consumer` восстановлен с точным tree `f4689e7267359163abfc0573352e9c837869385c`.
@@ -32,7 +34,15 @@
 
 - Свои изменения выполняются в новых локально восстановленных feature checkout; чужих изменений в них нет.
 - Задачи 1→2→3→4→5→6 сохраняют порядок. Pending provider gates не объявляются принятыми; независимые быстрые тесты выполняются параллельно.
-- Source и тестовые authored QMD/configs не упрощаются. Новый student attempt создаётся только после Core #15 acceptance и полного installed Template commit.
+- Source и тестовые authored QMD/configs не упрощаются. Свежая локальная student-проверка может идти после полного installed Template commit параллельно оставшимся Core jobs: оба current-head root-address jobs уже success, production package bytes неизменны. Приёмка курса требует сначала всех mandatory Core checks и saved-byte proof; pending CI не считается принятым.
+
+## Подготовка исходного курса
+
+- Core #15 теперь имеет head `5ea107e3338f2cb90dc3c7cf47884875d2fe384f`, tree `e18bb48df76be19b167d58585cb3247ace0ad8b1`. Последний commit исправляет только Stable Navigation budget 90→120 минут. Причина — timeout предыдущего Stable job после 10/12 final mutations; assertion failure не обнаружен. Все production package bytes сохранены. Новый mandatory CI ещё выполняется; provider acceptance остаётся открытым.
+- Локальный Stable root-address corpus полностью прошёл: четыре native outputs, три stage/current, три child и шесть audit refusals; все 104 Core files и restored staged hashes сверены. Время после первого add — 1841.591s. Это небольшой fixture, а не исходный курс.
+- Все шесть provider archives прошли реальные stock `quarto add`; 15 product copies и 21 installation scopes сверены по целому file-set, bytes, SHA и modes. Core 104, Presentation 11, Navigation 7, Publisher 20, QRC 85, Download 11 файлов. Bundled licenses сохранены.
+- Все 80 authored QMD/config files, book4/essay5 inputs и четыре Listing declarations сохранены побайтно. Исторические 96-file proofs помечены отдельно. Другие dormant/optional Core copies и старые consumer pins остаются задачей общего integration-транша.
+- Native OriginalCourse, Body+Navigation и общая текущая production composition ещё не приняты. Эта запись фиксируется до Source freeze и не используется как динамический CI status или permission proof. Текущие результаты и точная следующая команда сохраняются в активном handoff рабочего пакета.
 
 ## Outcomes & Retrospective
 

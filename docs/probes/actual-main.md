@@ -76,20 +76,29 @@ late refusal и full preservation создаётся отдельный complete
 на двух channels. Synthetic receipt guards и real archive-transfer guards
 проверяют transport; они не заменяют native course proof.
 
-Финальный exact Core pin `5eaf483fdd6d5189d096aca24536482ae5679a41` содержит96 файлов в
-каждом whole Core payload. Root/book/essay устанавливаются полностью; Presentation
-и Navigation берутся из того же архивированного commit. `source-root.json` сохраняет
+Выбранный текущий exact Core pin `5ea107e3338f2cb90dc3c7cf47884875d2fe384f`, tree
+`e18bb48df76be19b167d58585cb3247ace0ad8b1`, содержит 104 файла в каждом whole Core
+payload. Root/book/essay устанавливаются полностью; Presentation и Navigation
+берутся из того же архивированного commit. Подготовка установленной поставки
+сверяет все шесть whole archives через штатный `quarto add` и все 15 product copies
+по полному file-set, SHA, bytes и modes. Mandatory CI этого выбранного Core и
+actual OriginalCourse native acceptance ещё ожидаются; source/install equality
+сама по себе не закрывает эти gates. Изменение `5ea107e` относительно `0f7f9a8`
+касается только Stable Navigation timeout; все 104 Core files и оба соседних
+пакета побайтно сохранены. `source-root.json` сохраняет
 путь свежей source-копии, exact refs и время начала для пассивного сохранения логов.
 Он относится только к native evidence; public-only downstream artifacts его не
 содержат и не используют как permission proof. Native Green требует actual run.
 
-`SOURCE.PUBLICATION_ADDRESS_CHANGED` фактически получен на Quarto1.10.18 после
+Историческая малая native проба: `SOURCE.PUBLICATION_ADDRESS_CHANGED` фактически
+получен на Quarto 1.10.18 после
 QRC и child finish, до Nav finish/seal, через публичный child current accessor
 при изменении mounted `handouts/contracts.pdf`. Малый native checkpoint использовал
 точный Core29f payload96, затем восстановил PDF, подтвердил current positive и
-завершил обычные Nav finish/seal. Финальный Core5eaf меняет только CI environment;
+завершил обычные Nav finish/seal. Тогдашний Core5eaf менял только CI environment;
 все96 Core и пакеты Navigation/Presentation побайтно равны29f. Это наблюдение
-accessor, не отрицательный вызов Nav finish и не original9 late case. Required
+accessor, не отрицательный вызов Nav finish и не original 9 late case. Оно относится
+к прежнему payload 96 и не доказывает выбранный текущий Core 104. Required
 original late CI вызывает реальный Nav finish после этой же мутации и обязан
 наблюдать точный code, сохранить оба public trees и показать zero public events.
 Generic nonzero не принимается.
