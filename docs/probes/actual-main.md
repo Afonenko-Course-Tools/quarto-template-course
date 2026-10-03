@@ -58,7 +58,7 @@ hashes и сохранность обоих прежних полных public t
 
 Каждый student-release, full-release и fresh late job имеет budget150 минут;
 aggregate5. Standard `pages.yml` сохраняет оба original profiles, оба optional
-examples, external imports и все assertions с budget240 минут. Для исходных
+examples, external imports и все assertions с budget360 минут. Для исходных
 Markdown inputs prepare требует16 book +20 essay +2 navigation captures за
 попытку,76 за positive pair (budget консервативно40/80). Первый original-course attempt наблюдал интервалы216–224 секунды между
 source/identity парами: около110 секунд/render с обязательными current parent

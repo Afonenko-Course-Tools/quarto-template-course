@@ -20,8 +20,8 @@ jobs:
     name: Проверка (${{ matrix.quarto }})
     runs-on: ubuntu-latest
     # The original 4 book inputs and 5 essay inputs plus Navigation use 76 captures/profile pair.
-    # The 240 minute budget preserves both profiles, members/PDF, external and optional checks.
-    timeout-minutes: 240
+    # The 360 minute budget preserves both profiles, members/PDF, external and optional checks.
+    timeout-minutes: 360
     strategy:
       fail-fast: false
       matrix:

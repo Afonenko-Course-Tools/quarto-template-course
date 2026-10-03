@@ -140,7 +140,8 @@ for (const profile of ["student", "full"]) {
     );
   }
   assert(
-    /href="\.\.\/index\.html(?:#sec-course)?"/.test(home),
+    // Stock Book navigation prefixes relative hrefs with "./" on both channels.
+    /href="(?:\.\/)?\.\.\/index\.html(?:#sec-course)?"/.test(home),
     "Нет перехода книги к навигации курса",
   );
   assert(
