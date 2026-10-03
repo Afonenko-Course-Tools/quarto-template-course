@@ -76,19 +76,22 @@ late refusal и full preservation создаётся отдельный complete
 на двух channels. Synthetic receipt guards и real archive-transfer guards
 проверяют transport; они не заменяют native course proof.
 
-Выбранный текущий exact Core pin `480f4ef7ed98daef198a417207ca8b516094ac8f`, tree
-`b6516ad97efad7212db48ba01573e7b498fb65fd`, содержит 104 файла в каждом whole Core
+Выбранный текущий exact Core pin `fe576c4eb1d77191b89216ae2e6bbdaef50b28a2`, tree
+`6a3a998e3d22907967135daca68991e06801eca0`, содержит 104 файла в каждом whole Core
 payload. Root/book/essay устанавливаются полностью; Presentation и Navigation
 берутся из того же архивированного commit. Подготовка установленной поставки
 сверяет все шесть whole archives через штатный `quarto add` и все 15 product copies
 по полному file-set, SHA, bytes и modes. Mandatory CI этого выбранного Core и
 actual OriginalCourse native acceptance ещё ожидаются; source/install equality
-сама по себе не закрывает эти gates. Изменение `480f4ef` относительно `5ea107e`
-сверяет render-phase writer с текущим `outputDirectory` в publication address
-проверке. Для выбранного pin полный corpus из 4 native book-writer cases
-на обоих channels и обоих profiles и все 16 current CI jobs пока pending.
+сама по себе не закрывает эти gates. Изменение `fe576c4` относительно `480f4ef`
+выбирает одну render-phase writer convention по frozen native config текущего
+профиля: default использует Source, book/website — текущий `outputDirectory`.
+Отсутствующий `project.type` сохраняет implicit default; обязательный
+нормализованный строковый type здесь не предполагается. Для выбранного pin полный
+corpus из 8 native book/default writer cases на обоих channels и обоих profiles
+и все 20 current CI jobs пока pending.
 Прежние native результаты относятся к своим pins и не закрывают current proof
-`480f4ef`. Presentation и Navigation побайтно сохранены. `source-root.json` сохраняет
+`fe576c4`. Presentation и Navigation побайтно сохранены. `source-root.json` сохраняет
 путь свежей source-копии, exact refs и время начала для пассивного сохранения логов.
 Он относится только к native evidence; public-only downstream artifacts его не
 содержат и не используют как permission proof. Native Green требует actual run.
