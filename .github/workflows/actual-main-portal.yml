@@ -128,6 +128,7 @@ jobs:
             ${{ runner.temp }}/actual-main-evidence/*.jsonl
             ${{ runner.temp }}/actual-main-evidence/*.log
             ${{ runner.temp }}/actual-main-evidence/archives/
+            ${{ runner.temp }}/actual-main-evidence/failure-diagnostics/
             ${{ runner.temp }}/actual-main-evidence/publications.tar.gz
       - name: Verified public baseline only for downstream preservation
         if: success()
@@ -256,6 +257,7 @@ jobs:
             ${{ runner.temp }}/actual-main-evidence/*.jsonl
             ${{ runner.temp }}/actual-main-evidence/*.log
             ${{ runner.temp }}/actual-main-evidence/archives/
+            ${{ runner.temp }}/actual-main-evidence/failure-diagnostics/
             ${{ runner.temp }}/actual-main-evidence/publications.tar.gz
       - name: Verified public baseline only for downstream preservation
         if: success()
@@ -385,6 +387,7 @@ jobs:
             ${{ runner.temp }}/actual-main-evidence/*.jsonl
             ${{ runner.temp }}/actual-main-evidence/*.log
             ${{ runner.temp }}/actual-main-evidence/archives/
+            ${{ runner.temp }}/actual-main-evidence/failure-diagnostics/
             ${{ runner.temp }}/actual-main-evidence/publications.tar.gz
 
   complete:

@@ -7,8 +7,18 @@ import {
   activateOwner,
   prepareOwner,
 } from "../_extensions/Afonenko-Course-Tools/course-core/owner-preflight/owner.ts";
-import { assert, load, observe, relative, save } from "./state.ts";
+import {
+  assert,
+  load,
+  observe,
+  relative,
+  retainFailureDiagnostics,
+  save,
+} from "./state.ts";
 export default {
+  async onFailure(ctx: any) {
+    await retainFailureDiagnostics(ctx);
+  },
   async beforeRender(ctx: any) {
     assert(
       ctx.portal && ctx.profiles.length === 1 &&

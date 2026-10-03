@@ -29,6 +29,11 @@ import {
   verifySingleRelease,
 } from "./actual-main-split-contract.ts";
 import { authenticatePublicBaseline } from "./actual-main-public-evidence.ts";
+import {
+  armFailureDiagnostics,
+  diagnosticDigest,
+  writeFailureDiagnosticsObservation,
+} from "../../fixtures/probes/actual-main/state.ts";
 const repo = dirname(dirname(dirname(fromFileUrl(import.meta.url))));
 const args = argumentsFor(Deno.args, [
   "--phase",
@@ -408,6 +413,67 @@ for (
       2,
     ),
   );
+  const diagnosticRequest = await armFailureDiagnostics({
+    label,
+    phase,
+    profile,
+    root,
+    forbiddenRoots: [
+      root,
+      ...(baselinePublic
+        ? [resolve(args["--baseline"]), baselinePublic.extracted]
+        : []),
+    ],
+    members,
+    sourceInputs,
+    selectedHashes: { ...before, ...inputsBefore },
+    run,
+    anchors: {
+      installManifestSha256: await hash(
+        join(evidence, "install-manifest.json"),
+      ),
+      inspectSha256: Object.fromEntries(
+        await Promise.all(
+          ["book-student", "book-full", "essay-student", "essay-full"].map(
+            async (name) => [
+              name,
+              await hash(join(evidence, `${name}-inspect.json`)),
+            ],
+          ),
+        ),
+      ),
+      template: { commit: templateSource.commit, tree: templateSource.tree },
+      providers: companionSources.map(({ name, commit, tree }) => ({
+        name,
+        commit,
+        tree,
+      })),
+      packages: await Promise.all(packages.map(async (p) => ({
+        name: p.name,
+        archiveSha256: p.archiveSha256,
+        fileMapSha256: await diagnosticDigest(
+          new TextEncoder().encode(JSON.stringify(p.files)),
+        ),
+      }))),
+      installationsSha256: await diagnosticDigest(
+        new TextEncoder().encode(JSON.stringify(installations)),
+      ),
+      coreModuleSha256: Object.fromEntries(
+        Object.entries(
+          packages.find((p) => p.name === "course-core").files,
+        ).filter(([path]) =>
+          [
+            "owner-preflight/owner.ts",
+            "owner-preflight/filter.lua",
+            "owner-preflight/native-listing.lua",
+            "owner-preflight/native-listing-evidence.ts",
+            "owner-preflight/native-listing-provider.ts",
+            "owner-preflight/native-listing-providers.json",
+          ].includes(path)
+        ),
+      ) as Record<string, string>,
+    },
+  }, join(evidence, "failure-diagnostics", label));
   const result = await new Deno.Command(Deno.env.get("QUARTO") || "quarto", {
     args: [
       "run",
@@ -422,6 +488,9 @@ for (
       QUARTO_PROJECT_OUTPUT_DIR: "",
       ACTUAL_MAIN_MODE: label,
       ACTUAL_MAIN_OBSERVER_PATH: observerPath,
+      ACTUAL_MAIN_NATIVE_DIAGNOSTICS_REQUEST: diagnosticRequest.requestPath,
+      ACTUAL_MAIN_NATIVE_DIAGNOSTICS_REQUEST_SHA256:
+        diagnosticRequest.requestSha256,
     },
     stdout: "piped",
     stderr: "piped",
@@ -431,6 +500,28 @@ for (
   const log = new TextDecoder().decode(result.stdout) +
     new TextDecoder().decode(result.stderr);
   await Deno.writeTextFile(join(evidence, `${label}.log`), log);
+  // Diagnostics remain outside the authenticated publication observation/receipt.
+  try {
+    await writeFailureDiagnosticsObservation(diagnosticRequest, result.code);
+  } catch (error) {
+    await Deno.writeTextFile(
+      join(evidence, `${label}-failure-diagnostics-error.json`),
+      JSON.stringify(
+        {
+          label,
+          phase,
+          profile,
+          childExit: result.code,
+          status: "inventory-error",
+          error: error instanceof Error
+            ? error.message
+            : "diagnostic inventory failure",
+        },
+        null,
+        2,
+      ),
+    );
+  }
   const events = await exists(observerPath)
     ? (await Deno.readTextFile(observerPath)).trim().split("\n").filter(Boolean)
       .map((s) => JSON.parse(s))
