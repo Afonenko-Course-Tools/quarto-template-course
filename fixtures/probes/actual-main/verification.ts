@@ -143,7 +143,8 @@ export async function verifyOriginalCourse(output: string, profile: string) {
     );
   }
   assert(
-    /href="\.\.\/index\.html(?:#sec-course)?"/.test(book),
+    // Stock Book navigation prefixes relative hrefs with "./" on both channels.
+    /href="(?:\.\/)?\.\.\/index\.html(?:#sec-course)?"/.test(book),
     "authored book/root portal navigation backlink absent",
   );
   const search = JSON.parse(
