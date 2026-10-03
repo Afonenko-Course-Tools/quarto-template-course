@@ -465,13 +465,36 @@ if (main) {
     "RESOURCE.PUBLICATION_DENIED_BYTES",
   );
   const originalMain = await Deno.readTextFile(join(main, "_quarto.yml"));
+  const rawRuntimePath = join(
+    main,
+    "lectures/_extensions/Afonenko-Course-Tools/course-presentation/presentation.css",
+  );
   await write(
     main,
     "_quarto.yml",
     originalMain.replace(
       "resources: [./configured.txt",
       "resources: [./lectures/_extensions/Afonenko-Course-Tools/course-presentation/presentation.css, ./configured.txt",
+    ).replace(', "!lectures/**"', ""),
+  );
+  // Quarto subtracts resource exclusions after includes. The negative case
+  // must select these bytes, rather than leave them excluded with the member.
+  const rawInspect = JSON.parse(
+    await command(quarto, ["inspect", main, "--profile", "student"], main, {
+      QUARTO_RUN_NO_NETWORK: "true",
+      QUARTO_PROFILE: "student",
+      QUARTO_PROJECT_OUTPUT_DIR: "",
+    }),
+  );
+  await Deno.writeTextFile(
+    join(evidence, "raw-runtime-selection-inspect.json"),
+    JSON.stringify(rawInspect, null, 2),
+  );
+  assert(
+    rawInspect.files.resources.some((path: string) =>
+      resolve(main, path) === rawRuntimePath
     ),
+    "raw-runtime-selection: native inspect did not select the raw runtime",
   );
   await render(main, "raw-runtime-selection", "student", "RESOURCE.");
   await write(main, "_quarto.yml", originalMain);
