@@ -1,3 +1,7 @@
+import {
+  ORIGINAL_COURSE,
+  originalCourseFiles,
+} from "./original-course-source.ts";
 // Original course only: current source/install/native proof; public bytes seed retention.
 import { copy } from "stdlib/fs";
 import { dirname, fromFileUrl, join, relative, resolve } from "stdlib/path";
@@ -64,11 +68,15 @@ if (await exists(evidence)) {
   assert(!populated, "ACTUAL_MAIN: evidence must be fresh; no stale reuse");
 }
 // Reject the old home-book root before installing, preparing or invoking native render.
-const authored: any = parse(await Deno.readTextFile(join(repo, "_quarto.yml"))),
+const authoredRoot = join(repo, ORIGINAL_COURSE);
+const authored: any = parse(
+    await Deno.readTextFile(join(authoredRoot, "_quarto.yml")),
+  ),
   config = await settings(repo);
 assert(
   authored["project-publish"]?.portal === "index.qmd" &&
-    !authored["project-publish"].home && await exists(join(repo, "index.qmd")),
+    !authored["project-publish"].home &&
+    await exists(join(authoredRoot, "index.qmd")),
   "ACTUAL_MAIN: MAIN_NOT_CONVERTED managed root required",
 );
 const integrations: string[] = authored["project-publish"].integrations;
@@ -97,7 +105,7 @@ exact(config.adapterSlots, {
 }, "frozen adapter slot paths");
 for (const path of Object.values(config.adapterSlots) as string[]) {
   assert(
-    await exists(join(repo, path)),
+    await exists(join(authoredRoot, path)),
     `ACTUAL_MAIN: MAIN_NOT_CONVERTED authored slot ${path} absent`,
   );
 }
@@ -123,14 +131,22 @@ assert(
   "ACTUAL_MAIN: required native channel",
 );
 const root = await Deno.makeTempDir({ prefix: "actual-main-source-" });
-for (const path of Object.keys(templateSource.files)) {
+const mountedSource = originalCourseFiles(templateSource.files);
+const sourceOrigins = originalCourseFiles(Object.fromEntries(
+  Object.keys(templateSource.files).map((path) => [path, path]),
+));
+for (const [path, origin] of Object.entries(sourceOrigins)) {
   await Deno.mkdir(dirname(join(root, path)), { recursive: true });
-  await Deno.copyFile(join(repo, path), join(root, path));
+  await Deno.copyFile(join(repo, origin), join(root, path));
+  assert(
+    await hash(join(root, path)) === mountedSource[path],
+    `ACTUAL_MAIN: fresh complete source byte mismatch ${path} from ${origin}`,
+  );
 }
 const authorConfigs = async () =>
   Object.fromEntries(
     await Promise.all(
-      Object.keys(templateSource.files).filter((p) =>
+      Object.keys(mountedSource).filter((p) =>
         /(^|\/)\_quarto[^/]*\.ya?ml$/.test(p)
       ).map(async (p) => [p, await hash(join(root, p))]),
     ),
@@ -148,7 +164,7 @@ exact(
   Object.fromEntries(
     ["index.qmd", ...ACTUAL_MAIN_INPUTS.book, ...ACTUAL_MAIN_INPUTS.essay].map((
       p,
-    ) => [p, templateSource.files[p]]),
+    ) => [p, mountedSource[p]]),
   ),
   "fresh original authored root/chapter byte set",
 );
@@ -632,6 +648,19 @@ for (
       "positive release changed opposite profile",
     );
   }
+}
+if (phase === "releases" || phase === "full-release") {
+  const result = await command(Deno.env.get("QUARTO") || "quarto", [
+    "run",
+    "tests/check-original.ts",
+    "--root",
+    root,
+    "--skip-render",
+  ], root);
+  await Deno.writeTextFile(
+    join(evidence, "original-product-check.log"),
+    result,
+  );
 }
 const labels = observations.map((o) => o.label),
   receipt: any = {

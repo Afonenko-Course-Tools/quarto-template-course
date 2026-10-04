@@ -1,3 +1,4 @@
+import { originalCourseFiles } from "./original-course-source.ts";
 // Original-course CI transport; visibility/resource policy remains in installed Core.
 import {
   canonical,
@@ -330,9 +331,9 @@ export function observation(
   same(
     configs.before,
     Object.fromEntries(
-      Object.entries(expected.template.files).filter(([p]) =>
-        /(^|\/)\_quarto[^/]*\.ya?ml$/.test(p)
-      ),
+      Object.entries(originalCourseFiles(expected.template.files)).filter((
+        [p],
+      ) => /(^|\/)\_quarto[^/]*\.ya?ml$/.test(p)),
     ),
     "author config map is not the complete exact authored source",
   );
@@ -340,7 +341,7 @@ export function observation(
   const originalInputs = Object.fromEntries(
     ["index.qmd", ...ACTUAL_MAIN_INPUTS.book, ...ACTUAL_MAIN_INPUTS.essay].map((
       p,
-    ) => [p, expected.template.files[p]]),
+    ) => [p, originalCourseFiles(expected.template.files)[p]]),
   );
   same(
     actualMainFileMap(inputs.before, "before author input bytes"),

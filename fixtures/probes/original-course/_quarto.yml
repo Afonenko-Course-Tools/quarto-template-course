@@ -3,13 +3,9 @@ project:
   output-dir: .project-publish/native
   render: []
   resources:
-    - ./assets/**
-    - "!theory/**"
-    - "!tasks/**"
+    - "!book/**"
     - "!lectures/**"
     - "!practice/**"
-    - "!handbook/**"
-    - "!book/**"
     - "!essay/**"
     - "!handouts/**"
     - "!examples/**"
@@ -33,34 +29,41 @@ project:
 format: html
 lang: ru
 course:
-  id: course-portal
+  id: template-navigation
 website:
   title: Учебный курс
   search: true
-filters: [course-core, reference-catalog]
+filters:
+  - course-core
+  - reference-catalog
 reference-catalog:
-  namespace: portal
+  namespace: site
   publication:
     title: Учебный курс
   exports:
-    portal: [sec-portal]
-    theory: [sec-theory]
-    tasks: [sec-tasks, sec-lab, sec-plan, exr-compare, exr-evidence]
-    lectures: [sec-lectures]
-    practice: [sec-practice]
-    handbook: [sec-handbook]
+    site: [sec-course]
+    book: [sec-contracts, sec-contract-demo]
+    essay: [sec-essays, sec-utf8-policies]
+  imports:
+    os:
+      source: fixtures/external-reference.json
+      namespace: book
+      base-url: https://example.edu/os/
+      style: external
+
 profile:
   default: student
   group: [[student, full]]
+
 project-publish:
   portal: index.qmd
   output-dir: _site
   projects:
-    theory: {path: theory, format: html}
-    tasks: {path: tasks, format: html}
+    book: {path: book, format: html}
     lectures: {path: lectures, format: revealjs}
     practice: {path: practice, format: revealjs}
-    handbook: {path: handbook, format: html}
+    essay: {path: essay, format: html}
+    handouts: {path: handouts, format: pdf, mount: handouts}
   integrations:
     - _publication/prepare.ts
     - _extensions/Afonenko-Course-Tools/reference-catalog/entrypoints/publication.ts

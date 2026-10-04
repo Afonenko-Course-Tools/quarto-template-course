@@ -1,7 +1,16 @@
-# Учебный курс {#sec-course}
+# Учебный курс {#sec-portal}
 
-- [Книга: теория, задания и лабораторные занятия](book/index.html).
-- [Лекции](lectures/01/contracts.html).
-- [Практические занятия](practice/01/clamp.html).
-- [Исследовательские работы](essay/index.html).
-- [Раздаточные материалы в PDF](handouts/contracts.pdf).
+Материалы одного занятия связаны общими идентификаторами. Начните с
+@theory:sec-theory и следуйте @tasks:sec-plan.
+
+- @theory:sec-theory — определения, объяснения и примеры.
+- @tasks:sec-tasks — единый источник заданий и оцениваемых работ.
+- @lectures:sec-lectures — обсуждение на занятии.
+- @practice:sec-practice — самостоятельное применение.
+- @handbook:sec-handbook — правила оформления и памятки.
+
+[Краткая памятка](assets/public.txt).
+
+::: {.content-visible when-profile="full"}
+Преподавателю: полный выпуск содержит комментарии и образцы оценивания.
+:::

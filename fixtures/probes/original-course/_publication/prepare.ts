@@ -25,7 +25,7 @@ export default {
       members: ctx.members,
     });
     const owners: Record<string, PreparedOwner> = {};
-    for (const name of ["tasks"]) {
+    for (const name of ["book", "essay"]) {
       const member = ctx.members.find((m) => m.namespace === name);
       assert(member?.format === "html", `unsupported current owner: ${name}`);
       owners[name] = await prepareOwner(member.path, {

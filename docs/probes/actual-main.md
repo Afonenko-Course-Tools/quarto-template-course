@@ -1,3 +1,10 @@
+> Original авторский corpus теперь находится в `fixtures/probes/original-course/`.
+> Runner создаёт свежий полный checkout и применяет фиксированное отображение
+> Source origins; все frozen bytes, конфигурации и runtime-копии продолжают
+> аутентифицироваться целиком. Корневой продукт теперь является нейтральным курсом.
+> Прежние продуктовые проверки сохранены в `tests/check-original.ts --root <fresh-root>`
+> и автоматически выполняются в releases/full-release после native guard проверок.
+
 # Исходный пятичастный курс: отдельная native проверка
 
 `actual-main-portal.yml` проверяет product managed portal на Quarto 1.10.18 и
@@ -46,7 +53,7 @@ outputs. Root остаётся только навигацией, а book/essay 
 current owners. Стандартные поисковые индексы Quarto проверяются отдельно у
 root portal, book и essay; единый межкнижный индекс не требуется. QRC обновляет
 текст всех фактических `search.json`, а проверки student visibility сохраняются
-для каждого из них. `tests/check.ts` отдельно проверяет реальные product controllers,
+для каждого из них. `tests/check-original.ts --root <fresh-root>` отдельно проверяет реальные product controllers,
 оба профиля, оба optional examples, roles/archive assertions и local links;
 `tests/external.ts` сохраняет внешний каталог/HTTP gate.
 
@@ -66,7 +73,7 @@ optional examples, external imports и все assertions. Каждый native п
 checkout того же Source/run/channel. Передаются только полные публичные деревья
 full и двух optional examples; их bytes, modes и complete maps проверяются до
 переноса и после student-сборки. Финальные jobs с прежними именами `Проверка`
-проверяют оба выпуска неизменёнными `tests/check.ts --skip-render` и
+проверяют оба выпуска неизменёнными `tests/check-original.ts --root <fresh-root> --skip-render` и
 `tests/external.ts`. Только успешные full/student допускают финальную проверку
 и прежнюю conditional student Pages upload/deploy. Добавленные четыре workers
 увеличивают Source-defined required set с 18 до 22 jobs; deploy остаётся отдельно.

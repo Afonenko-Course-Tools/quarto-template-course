@@ -16,7 +16,7 @@ export default {
       format,
       output,
     }));
-    for (const name of ["tasks"]) {
+    for (const name of ["book", "essay"]) {
       const result = await finishOwner(state.owners[name], {
         publicationAddresses: { output: ctx.stage, members: addresses },
       });

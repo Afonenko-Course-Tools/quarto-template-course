@@ -6,9 +6,11 @@ const suites = [
   "contracts/actual-main/split_test.ts",
   "transport/actual-main-public-transfer_test.ts",
   "diagnostics/actual-main-retention_test.ts",
+  "contracts/template/original-source_test.ts",
+  "contracts/template/neutral-publication_test.ts",
 ];
 if (import.meta.main) {
-  // Explicit paths select a suite; a flags-only invocation runs all 163 checks.
+  // Explicit paths select a suite; a flags-only invocation runs all Original and neutral Template checks.
   const hasPath = Deno.args.some((arg) =>
     /(?:_test\.ts|\/tests\/?$)$/.test(arg)
   );

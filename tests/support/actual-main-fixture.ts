@@ -1,3 +1,7 @@
+import {
+  ORIGINAL_COURSE,
+  originalCourseFiles,
+} from "../probes/original-course-source.ts";
 // Synthetic evidence transport only; never a native course success claim.
 import {
   ACTUAL_MAIN_INPUTS,
@@ -21,6 +25,15 @@ export const expected = {
         "book/_quarto.yml",
         "essay/_quarto.yaml",
         "index.qmd",
+        ...[
+          "_quarto.yml",
+          "_quarto-student.yml",
+          "book/_quarto.yml",
+          "index.qmd",
+          "book/topics/contracts/_control.qmd",
+          ...ACTUAL_MAIN_INPUTS.book,
+          ...ACTUAL_MAIN_INPUTS.essay,
+        ].map((p) => ORIGINAL_COURSE + p),
         ...ACTUAL_MAIN_INPUTS.book,
         ...ACTUAL_MAIN_INPUTS.essay,
         ...["prepare", "finish", "verify", "state", "verification"].map((p) =>
@@ -40,14 +53,18 @@ export const expected = {
 };
 export function fixture() {
   const configs = Object.fromEntries(
-    Object.entries(expected.template.files).filter(([p]) =>
+    Object.entries(originalCourseFiles(expected.template.files)).filter(([p]) =>
       /(^|\/)\_quarto[^/]*\.ya?ml$/.test(p)
     ),
   );
   const sources = Object.fromEntries(
-    ["index.qmd", ...ACTUAL_MAIN_INPUTS.book, ...ACTUAL_MAIN_INPUTS.essay].map((
+    [
+      "index.qmd",
+      ...ACTUAL_MAIN_INPUTS.book,
+      ...ACTUAL_MAIN_INPUTS.essay,
+    ].map((
       p,
-    ) => [p, expected.template.files[p]]),
+    ) => [p, originalCourseFiles(expected.template.files)[p]]),
   );
   return structuredClone(["1.10.18", "1.11.5"].flatMap((version, channel) => {
     const source = { ...expected.template, dirty: false };
