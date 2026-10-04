@@ -61,7 +61,15 @@ hashes и сохранность обоих прежних полных public t
 
 Каждый student-release, full-release и fresh late job имеет budget 360 минут;
 aggregate — 5 минут. Standard `pages.yml` сохраняет оба original profiles, оба
-optional examples, external imports и все assertions с budget 360 минут.
+optional examples, external imports и все assertions. Каждый native профиль
+собирается в отдельном job с budget 360 минут: full, затем student в свежем
+checkout того же Source/run/channel. Передаются только полные публичные деревья
+full и двух optional examples; их bytes, modes и complete maps проверяются до
+переноса и после student-сборки. Финальные jobs с прежними именами `Проверка`
+проверяют оба выпуска неизменёнными `tests/check.ts --skip-render` и
+`tests/external.ts`. Только успешные full/student допускают финальную проверку
+и прежнюю conditional student Pages upload/deploy. Добавленные четыре workers
+увеличивают Source-defined required set с 18 до 22 jobs; deploy остаётся отдельно.
 Для исходных Markdown inputs prepare требует 16 book + 20 essay + 2 navigation
 source/identity renders за попытку, 76 за positive pair. Эти 38 renders не
 включают repeated current owner/parent inspect audits, native members/PDF,
@@ -77,6 +85,14 @@ pipeline и свои completed public baselines. Поэтому все три na
 получают одинаковый лимит 360 минут без сокращения inputs, matrices, assertions
 или preservation chain. Новый лимит требует проверки новым завершённым run;
 это не гарантия длительности и не утверждение о native Green или acceptance.
+
+
+Stable Pages на предшествующем `21ef5f0` завершился по hosted-job лимиту 6 часов;
+prerelease завершился успешно. Повышение лимита выше 360 минут не используется.
+Разделение сохраняет последовательность full→student и проверку сохранности
+предыдущего выпуска, не переносит private Owner/captures/caches и не сокращает
+native inputs или assertions. Длительность отдельного профиля и весь новый
+Source требуют завершённых fresh local/CI проверок; приёмка ещё не заявлена.
 
 Aggregation принимает только все шесть успешных phases/jobs текущего run,
 exact clean Template head/tree/file map, одинаковые provider/installed maps,

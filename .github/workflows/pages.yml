@@ -15,12 +15,13 @@ concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 
+# Each native profile gets its own hosted-job budget. Full public trees are
+# restored in a fresh student checkout and verified again after student rendering.
+# Existing named checks validate both profiles before any Pages deployment.
 jobs:
-  check:
-    name: Проверка (${{ matrix.quarto }})
+  full:
+    name: Полный профиль (${{ matrix.quarto }})
     runs-on: ubuntu-latest
-    # The original 4 book inputs and 5 essay inputs plus Navigation use 76 captures/profile pair.
-    # The 360 minute budget preserves both profiles, members/PDF, external and optional checks.
     timeout-minutes: 360
     strategy:
       fail-fast: false
@@ -45,9 +46,131 @@ jobs:
         run: |
           quarto --version
           cue version
-      - name: Сборка и проверка студенческого и полного профилей
+      - name: Свежая сборка полного профиля и публичных примеров
+        env:
+          PAGES_VERSION: ${{ matrix.quarto }}
         run: |
-          quarto run tests/check.ts
+          python3 tests/pages-ci.py full \
+            --version "$PAGES_VERSION" \
+            --run-id "$GITHUB_RUN_ID" \
+            --run-attempt "$GITHUB_RUN_ATTEMPT" \
+            --repository "$GITHUB_REPOSITORY" \
+            --artifact "$RUNNER_TEMP/pages-full"
+      - name: Полная проверенная публичная публикация
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: pages-full-${{ matrix.quarto }}
+          if-no-files-found: error
+          retention-days: 7
+          path: |
+            ${{ runner.temp }}/pages-full/manifest.json
+            ${{ runner.temp }}/pages-full/publications.tar.gz
+
+  student:
+    name: Студенческий профиль (${{ matrix.quarto }})
+    needs: full
+    runs-on: ubuntu-latest
+    timeout-minutes: 360
+    strategy:
+      fail-fast: false
+      matrix:
+        quarto: ['1.10.18', '1.11.5']
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: quarto-dev/quarto-actions/setup@8a96df13519ee81fd526f2dfca5962811136661b # v2.2.0
+        with:
+          version: ${{ matrix.quarto }}
+      - uses: cue-lang/setup-cue@b0e30e540a2dae47304ebf16586a5b2db023b61c # v2.0.0
+        with:
+          version: v0.17.1
+      - name: Средства сборки PDF и шрифты
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends texlive-xetex texlive-latex-extra texlive-lang-cyrillic texlive-fonts-recommended lmodern fonts-lmodern fonts-dejavu
+          kpsewhich lmodern.sty
+      - name: Версии инструментов
+        run: |
+          quarto --version
+          cue version
+      - name: Полный публичный выпуск текущего run и channel
+        uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8.0.1
+        with:
+          name: pages-full-${{ matrix.quarto }}
+          path: ${{ runner.temp }}/pages-full
+      - name: Свежая студенческая сборка с сохранением полного выпуска
+        env:
+          PAGES_VERSION: ${{ matrix.quarto }}
+        run: |
+          python3 tests/pages-ci.py student \
+            --version "$PAGES_VERSION" \
+            --run-id "$GITHUB_RUN_ID" \
+            --run-attempt "$GITHUB_RUN_ATTEMPT" \
+            --repository "$GITHUB_REPOSITORY" \
+            --baseline "$RUNNER_TEMP/pages-full" \
+            --artifact "$RUNNER_TEMP/pages-pair"
+      - name: Оба проверенных публичных выпуска
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: pages-pair-${{ matrix.quarto }}
+          if-no-files-found: error
+          retention-days: 7
+          path: |
+            ${{ runner.temp }}/pages-pair/manifest.json
+            ${{ runner.temp }}/pages-pair/publications.tar.gz
+
+  check:
+    name: Проверка (${{ matrix.quarto }})
+    needs: [full, student]
+    if: always()
+    runs-on: ubuntu-latest
+    timeout-minutes: 360
+    strategy:
+      fail-fast: false
+      matrix:
+        quarto: ['1.10.18', '1.11.5']
+    steps:
+      - name: Оба native профиля должны завершиться успешно
+        env:
+          FULL_RESULT: ${{ needs.full.result }}
+          STUDENT_RESULT: ${{ needs.student.result }}
+        run: |
+          test "$FULL_RESULT" = success
+          test "$STUDENT_RESULT" = success
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: quarto-dev/quarto-actions/setup@8a96df13519ee81fd526f2dfca5962811136661b # v2.2.0
+        with:
+          version: ${{ matrix.quarto }}
+      - uses: cue-lang/setup-cue@b0e30e540a2dae47304ebf16586a5b2db023b61c # v2.0.0
+        with:
+          version: v0.17.1
+      - name: Средства сборки PDF и шрифты
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends texlive-xetex texlive-latex-extra texlive-lang-cyrillic texlive-fonts-recommended lmodern fonts-lmodern fonts-dejavu
+          kpsewhich lmodern.sty
+      - name: Версии инструментов
+        run: |
+          quarto --version
+          cue version
+      - name: Оба публичных выпуска текущего run и channel
+        uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8.0.1
+        with:
+          name: pages-pair-${{ matrix.quarto }}
+          path: ${{ runner.temp }}/pages-pair
+      - name: Полные проверки обоих профилей и внешнего каталога
+        env:
+          PAGES_VERSION: ${{ matrix.quarto }}
+        run: |
+          python3 tests/pages-ci.py check \
+            --version "$PAGES_VERSION" \
+            --run-id "$GITHUB_RUN_ID" \
+            --run-attempt "$GITHUB_RUN_ATTEMPT" \
+            --repository "$GITHUB_REPOSITORY" \
+            --baseline "$RUNNER_TEMP/pages-pair"
           quarto run tests/external.ts
       - name: Загрузка проверенной студенческой публикации
         if: >-
@@ -57,6 +180,7 @@ jobs:
         uses: actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9 # v5.0.0
         with:
           path: _site-student
+
 
   deploy:
     needs: check
