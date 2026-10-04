@@ -4,7 +4,7 @@ Run the complete bounded suite with the selected stock Quarto:
 
 ```sh
 quarto run tests/run.ts --junit-path /tmp/actual-main-fast.xml
-quarto run tests/run.ts tests/support/quarto-test-runner_test.ts
+quarto run tests/run.ts tests/support/quarto-test-runner_test.ts tests/support/actual-main-retention-report_test.ts
 quarto run tests/probes/actual-main-transfer-guards.ts
 ```
 
@@ -40,7 +40,9 @@ development checks and never substitute for complete Native evidence.
 The separate launcher regression suite has three real child-process checks:
 registered failures return exit 1 and preserve streams; filtering executes the
 positive control and writes JUnit; an intentional leaked file is refused by the
-normal sanitizer. These do not alter the 163 contract checks.
+normal sanitizer. Four focused report-completion regressions additionally cover
+public exclusion, cache-without-execution, and conservative handling of
+selection/execution options. These do not alter the 163 contract checks.
 
 Synthetic receipt factories live in `tests/support/actual-main-fixture.ts` and
 do not execute tests on import. Each call returns independent mutable data. Case
@@ -69,7 +71,10 @@ ACTUAL_MAIN_RETENTION_PURE_OUTPUT=/tmp/fresh-retention \
 updated after each executed case so partial or failed runs remain diagnostic.
 The complete transfer facade or complete `tests/run.ts` records
 `publicTransferChecks: 16` only after all public checks and all 38 diagnostic
-cases pass. A filtered or direct diagnostic-only run leaves that field at zero.
+cases pass. Count promotion accepts only presentation options (`--junit-path`,
+`--reporter`, `--quiet`/`-q`, and `--hide-stacktraces`). Filtered, excluded,
+direct diagnostic-only, and unrecognized execution/selection/sharding options
+leave that field at zero. Other options are still forwarded to the stock runner.
 
 Fast guards run in the two existing student jobs immediately after Quarto setup,
 before PDF installation and Native attempts. Their JUnit files are uploaded
