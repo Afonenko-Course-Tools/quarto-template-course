@@ -14,20 +14,26 @@ export {
   resolve,
   serviceSegments,
 } from "../artifacts/common.ts";
+import { assert, files, hash, join } from "../artifacts/common.ts";
 import {
-  assert,
-  childOrEqual,
-  files,
-  hash,
-  join,
-} from "../artifacts/common.ts";
-import type { PreparedOwner } from "../../_extensions/Afonenko-Course-Tools/course-core/owner-preflight/owner.ts";
+  type BodyReceipt,
+  type OwnerBodyHandle,
+  type PreparedOwner,
+  type PublicBodyPackage,
+  validateOwnerBodies,
+} from "../../_extensions/Afonenko-Course-Tools/course-core/owner-preflight/owner.ts";
 import {
   type OwnerResourceIndex,
   validateOwnerResources,
 } from "../../_extensions/Afonenko-Course-Tools/course-core/owner-preflight/resources.ts";
-export { validateOwnerResources };
-export type { OwnerResourceIndex, PreparedOwner };
+export { validateOwnerBodies, validateOwnerResources };
+export type {
+  BodyReceipt,
+  OwnerBodyHandle,
+  OwnerResourceIndex,
+  PreparedOwner,
+  PublicBodyPackage,
+};
 export interface OwnedBytes {
   path: string;
   sha256: string;
@@ -65,11 +71,9 @@ export interface Attempt {
   protocol: 1;
   timings: Record<string, number>;
   handle: PreparedOwner;
-  body: OwnedBytes[];
+  body?: OwnerBodyHandle;
   services: OwnedBytes[];
   runtimeProviders: RuntimeProvider[];
-  packagePath: string;
-  packageHash: string;
   output?: string;
   indexHash?: string;
   delivery?: {
@@ -92,21 +96,6 @@ export async function load(ctx: any): Promise<Attempt> {
       a.handle.profile === ctx.profiles[0],
     "INVALID_CONSUMER_ATTEMPT",
   );
-  assert(
-    a.packagePath === join(ctx.sourceRoot, "_probe/current-package.json"),
-    "INVALID_BODY_PATH",
-  );
-  for (const file of a.body) {
-    assert(
-      childOrEqual(join(ctx.sourceRoot, "_probe/body"), file.path),
-      "INVALID_BODY_RECEIPT",
-    );
-    assert(
-      await hash(file.path) === file.sha256,
-      `BODY_BYTES_CHANGED ${file.path}`,
-    );
-  }
-  assert(await hash(a.packagePath) === a.packageHash, "BODY_PACKAGE_CHANGED");
   a.services.push({
     path: attemptPath(ctx),
     sha256: await hash(attemptPath(ctx)),
@@ -117,8 +106,20 @@ export async function load(ctx: any): Promise<Attempt> {
 export async function current(
   ctx: any,
   selections: string[] = [],
-): Promise<{ attempt: Attempt; index: OwnerResourceIndex }> {
-  const attempt = await load(ctx),
+): Promise<
+  {
+    attempt: Attempt;
+    index: OwnerResourceIndex;
+    publicPackage: PublicBodyPackage;
+    receipt: BodyReceipt;
+  }
+> {
+  const attempt = await load(ctx);
+  assert(
+    attempt.body?.schema === "course-body-handle-v1",
+    "CURRENT_OWNER_BODY_HANDLE_REQUIRED",
+  );
+  const checked = await validateOwnerBodies(attempt.handle, attempt.body),
     index = await validateOwnerResources(attempt.handle, { selections });
   assert(attempt.indexHash === index.indexHash, "CONSUMER_INDEX_CHANGED");
   // Validator retains producer-owned CUE inputs in this already declared Core area.
@@ -128,7 +129,12 @@ export async function current(
     "owner-session",
   );
   await save(ctx, attempt);
-  return { attempt, index };
+  return {
+    attempt,
+    index,
+    publicPackage: checked.publicPackage,
+    receipt: checked.receipt,
+  };
 }
 export async function remember(attempt: Attempt, path: string, role: string) {
   const sha256 = await hash(path);

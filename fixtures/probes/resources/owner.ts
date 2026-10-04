@@ -1,4 +1,3 @@
-import { toFileUrl } from "stdlib/path";
 import {
   activateOwner,
   finishOwner,
@@ -10,16 +9,17 @@ import {
   childOrEqual,
   command,
   event,
-  files,
+  exists,
   hash,
   join,
   load,
+  type OwnerBodyHandle,
   relative,
-  remember,
   rememberTree,
   resolve,
   save,
   serviceSegments,
+  validateOwnerBodies,
   validateOwnerResources,
 } from "./common.ts";
 async function selectionGate(ctx: any) {
@@ -76,48 +76,9 @@ export default {
       attemptId: ctx.attemptId,
       profile: ctx.profiles[0],
       extension: "_extensions/Afonenko-Course-Tools/course-core",
+      body: { sources: ["corpus.qmd", "work-one.qmd", "work-two.qmd"] },
     });
     const prepareOwnerMs = Date.now() - prepareStarted;
-    const manifest = JSON.parse(
-      await Deno.readTextFile(
-        join(ctx.sourceRoot, "_probe/body-manifest.json"),
-      ),
-    );
-    const body = [];
-    for (const entry of manifest) {
-      const path = resolve(ctx.sourceRoot, entry.path);
-      assert(
-        childOrEqual(join(ctx.sourceRoot, "_probe/body"), path) &&
-          await hash(path) === entry.sha256,
-        `BODY_SETUP_CHANGED ${entry.path}`,
-      );
-      body.push({
-        path,
-        sha256: entry.sha256,
-        role: [
-            join(ctx.sourceRoot, "_probe/body/input/dot.png"),
-            join(ctx.sourceRoot, "_probe/body/input/data.txt"),
-          ].includes(path)
-          ? "experimental-public-resource"
-          : "experimental-body-input",
-      });
-    }
-    const actual = (await files(join(ctx.sourceRoot, "_probe/body"))).sort();
-    assert(
-      JSON.stringify(actual) === JSON.stringify(body.map((f) => f.path).sort()),
-      "BODY_SETUP_FILE_SET_CHANGED",
-    );
-    const { buildPackage } = await import(
-      toFileUrl(join(ctx.sourceRoot, "_probe/body/producer/package.ts")).href
-    );
-    const bundle = await buildPackage(
-      ["corpus.qmd", "work-one.qmd", "work-two.qmd"].map((name) =>
-        toFileUrl(join(ctx.sourceRoot, "_probe/body/input", name))
-      ),
-      "artifact-course",
-    );
-    const packagePath = join(ctx.sourceRoot, "_probe/current-package.json");
-    await Deno.writeTextFile(packagePath, JSON.stringify(bundle));
     const runtimeProviders = [];
     for (const member of ctx.members) {
       const providerRoot = join(
@@ -167,24 +128,9 @@ export default {
       protocol: 1,
       timings: { prepareOwnerMs },
       handle,
-      body,
-      services: body.filter((file) =>
-        file.role !== "experimental-public-resource"
-      ),
-      packagePath,
+      services: [],
       runtimeProviders,
-      packageHash: await hash(packagePath),
     };
-    attempt.services.push({
-      path: packagePath,
-      sha256: attempt.packageHash,
-      role: "experimental-print-input",
-    });
-    await remember(
-      attempt,
-      join(ctx.sourceRoot, "_probe/body-manifest.json"),
-      "body-receipt",
-    );
     await rememberTree(
       attempt,
       join(handle.root, ".course-owner"),
@@ -195,8 +141,7 @@ export default {
     await event(ctx, "owner-prepared", {
       timings: attempt.timings,
       sessionId: handle.sessionId,
-      packageHash: attempt.packageHash,
-      experimental: "snapshot-local Pandoc+CUE body",
+      bodySources: ["corpus.qmd", "work-one.qmd", "work-two.qmd"],
     });
   },
   async metadata(ctx: any) {
@@ -230,6 +175,12 @@ export default {
       result.exitCode === 0,
       `${result.stage}: ${JSON.stringify(result.report)}`,
     );
+    assert(
+      result.report.body?.schema === "course-body-handle-v1",
+      "CURRENT_OWNER_BODY_HANDLE_REQUIRED",
+    );
+    attempt.body = result.report.body as OwnerBodyHandle;
+    const body = await validateOwnerBodies(attempt.handle, attempt.body);
     await event(ctx, "owner-finished", { resultStage: result.stage });
     const indexStarted = Date.now();
     const index = await validateOwnerResources(attempt.handle);
@@ -241,16 +192,29 @@ export default {
       "owner-session",
     );
     await save(ctx, attempt);
-    const count =
-      (await Deno.readTextFile(join(ctx.sourceRoot, "_probe/engine-runs.txt")))
-        .trim().split("\n").length;
-    attempt.timings.cellMs = Number(
-      await Deno.readTextFile(join(ctx.sourceRoot, "_probe/engine-ms.txt")),
-    );
+    const engineCount = join(ctx.sourceRoot, "_probe/engine-runs.txt"),
+      engineTime = join(ctx.sourceRoot, "_probe/engine-ms.txt");
+    const count = await exists(engineCount)
+      ? (await Deno.readTextFile(engineCount)).trim().split("\n").length
+      : 0;
+    attempt.timings.cellMs = await exists(engineTime)
+      ? Number(await Deno.readTextFile(engineTime))
+      : 0;
     await save(ctx, attempt);
     await event(ctx, "owner-index", {
       index,
       engineRuns: count,
+      body: {
+        schema: attempt.body.schema,
+        publicHash: attempt.body.publicHash,
+        receiptHash: attempt.body.receiptHash,
+        questions: body.publicPackage.questions.map((q) => q.key),
+        works: body.publicPackage.works.map((w) => w.key),
+        workItems: body.publicPackage.works.map((w) => ({
+          key: w.key,
+          items: w.items,
+        })),
+      },
       timings: attempt.timings,
     });
   },

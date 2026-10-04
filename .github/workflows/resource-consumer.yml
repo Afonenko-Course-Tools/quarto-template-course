@@ -15,38 +15,46 @@ concurrency:
 
 jobs:
   resources:
-    name: Нативная installed попытка (${{ matrix.quarto }})
+    name: Installed ${{ matrix.phase }} (${{ matrix.quarto }})
     runs-on: ubuntu-24.04
-    timeout-minutes: 55
+    timeout-minutes: 150
     strategy:
       fail-fast: false
       matrix:
         quarto: ['1.10.18', '1.11.5']
+        phase: [current, lifecycle, owner, body, delivery]
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           path: template
           persist-credentials: false
-      - name: Production Core и runtime producer Presentation
+      - name: Production Core body и Presentation
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           repository: Afonenko-Course-Tools/quarto-course
-          ref: 09f1967f6136fbf3195a4429f14f86bb3c5bb43b
+          ref: 9690514a6c92dfde377d2be551ca861022387506
           path: core
           persist-credentials: false
-      - name: Отдельный экспериментальный body producer
+      - name: Immutable native Navigation producer
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           repository: Afonenko-Course-Tools/quarto-course
-          ref: 4f5caf9a15b9bd36476cad8a646e81521fbd29d1
-          path: core-export
+          ref: e8aa63af4dd0a895c3b250515c06f6f9d160b70d
+          path: navigation
           persist-credentials: false
       - name: Publisher с owner output context
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           repository: Afonenko-Course-Tools/quarto-project-publish
-          ref: 10d65dab2c8f394a570b12631a001147a1ef2fd6
+          ref: ef313672b7392f51838fde3546aaca465ffa0900
           path: publisher
+          persist-credentials: false
+      - name: QRC после native managed portal
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          repository: Afonenko-Course-Tools/quarto-reference-catalog
+          ref: 9a4bf6aafd73aff0daf51ae208247f3f194057c2
+          path: qrc
           persist-credentials: false
       - name: Download с публичным ownership seam
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
@@ -59,7 +67,7 @@ jobs:
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           repository: Afonenko-Course-Tools/quarto-course-print
-          ref: ba717cf2f4fa01e1fd4df41724d3257e5a3ffa07
+          ref: 1ae4f0c5697d415746c7fce94067b5a1e13db503
           path: print
           persist-credentials: false
       - uses: quarto-dev/quarto-actions/setup@8a96df13519ee81fd526f2dfca5962811136661b # v2.2.0
@@ -77,30 +85,32 @@ jobs:
         run: |
           python3 tests/probes/resource-archive-guards.py
           python3 tests/probes/resource-runtime-guards.py
-      - name: Exact archives, quarto add и одна нативная owner computation
+      - name: Immutable archives, quarto add и текущий body/resource lifecycle
         working-directory: template
         run: |
           export QUARTO="$(command -v quarto)"
           quarto run tests/probes/resource-consumer.ts \
             --core "$GITHUB_WORKSPACE/core" \
-            --core-export "$GITHUB_WORKSPACE/core-export" \
+            --navigation "$GITHUB_WORKSPACE/navigation" \
             --publisher "$GITHUB_WORKSPACE/publisher" \
+            --qrc "$GITHUB_WORKSPACE/qrc" \
             --download "$GITHUB_WORKSPACE/download" \
             --print "$GITHUB_WORKSPACE/print" \
-            --output "$RUNNER_TEMP/resource-evidence"
-      - name: Версии, exact source trees и результаты
+            --phase "${{ matrix.phase }}" \
+            --output "$RUNNER_TEMP/resource-evidence-${{ matrix.phase }}"
+      - name: Версии, exact source trees, результаты и обе публикации
         if: always()
         env:
-          RESOURCE_EVIDENCE: ${{ runner.temp }}/resource-evidence
+          RESOURCE_EVIDENCE: ${{ runner.temp }}/resource-evidence-${{ matrix.phase }}
         run: |
           python3 - <<'PY'
-          import json, os
+          import hashlib, json, os
           from pathlib import Path
           root = Path(os.environ['RESOURCE_EVIDENCE'])
           manifest = root / 'install-manifest.json'
           if manifest.exists():
               data = json.loads(manifest.read_text())
-              print(json.dumps({key:data[key] for key in ['versions','companionSources']},indent=2))
+              print(json.dumps({key:data[key] for key in ['versions','templateSource','companionSources','packages','initialization']},indent=2))
           results = root / 'results.json'
           if results.exists(): print(results.read_text())
           else:
@@ -108,4 +118,7 @@ jobs:
               if partial.exists(): print(partial.read_text())
               for log in sorted(root.glob('*.log')):
                   print(f'{log.name}:\n{log.read_text()[-12000:]}')
+          for retained in sorted(root.glob('*-publication-*.json')):
+              raw = retained.read_bytes()
+              print(json.dumps({'evidencePath':str(retained),'sha256':hashlib.sha256(raw).hexdigest(),'publicationMaps':json.loads(raw)},indent=2))
           PY
