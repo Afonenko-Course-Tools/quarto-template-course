@@ -59,17 +59,24 @@ hashes и сохранность обоих прежних полных public t
 неопределённый код останавливает required gate. Произвольный nonzero не считается
 доказательством.
 
-Каждый student-release, full-release и fresh late job имеет budget150 минут;
-aggregate5. Standard `pages.yml` сохраняет оба original profiles, оба optional
-examples, external imports и все assertions с budget360 минут. Для исходных
-Markdown inputs prepare требует16 book +20 essay +2 navigation captures за
-попытку,76 за positive pair (budget консервативно40/80). Первый original-course attempt наблюдал интервалы216–224 секунды между
-source/identity парами: около110 секунд/render с обязательными current parent
-Native audits. Это нижний planning anchor; исправление provider может увеличить
-стоимость. Для18 child pairs estimate уже около66 минут/attempt до root
-preparation, native members/PDF, QRC/proofs и tools.150 минут — консервативный
-budget, который сверяется после завершённого affected positive на финальном pin.
-Это оценка бюджета, а не утверждение о native Green.
+Каждый student-release, full-release и fresh late job имеет budget 360 минут;
+aggregate — 5 минут. Standard `pages.yml` сохраняет оба original profiles, оба
+optional examples, external imports и все assertions с budget 360 минут.
+Для исходных Markdown inputs prepare требует 16 book + 20 essay + 2 navigation
+source/identity renders за попытку, 76 за positive pair. Эти 38 renders не
+включают repeated current owner/parent inspect audits, native members/PDF,
+QRC, finalization и setup. Исторические интервалы 216–224 секунды между
+source/identity парами давали лишь нижний planning anchor, а не полный runtime.
+
+На exact head `21ef5f0` оба student jobs завершились по лимиту 150 минут
+(`The job has exceeded the maximum execution time of 2h30m0s`). В обоих
+diagnostic artifacts последний из 8 observer markers — `child-owners-finished`;
+последующие navigation finish/current seal и phase receipt не сохранены.
+Full и late jobs были skipped из-за `needs`; они используют тот же fresh course
+pipeline и свои completed public baselines. Поэтому все три native phase jobs
+получают одинаковый лимит 360 минут без сокращения inputs, matrices, assertions
+или preservation chain. Новый лимит требует проверки новым завершённым run;
+это не гарантия длительности и не утверждение о native Green или acceptance.
 
 Aggregation принимает только все шесть успешных phases/jobs текущего run,
 exact clean Template head/tree/file map, одинаковые provider/installed maps,

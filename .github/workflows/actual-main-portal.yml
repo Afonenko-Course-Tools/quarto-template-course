@@ -23,9 +23,10 @@ jobs:
     name: Original course student release (${{ matrix.quarto }})
     runs-on: ubuntu-24.04
     # The original 4 book inputs and 5 essay inputs plus Navigation use 38 captures.
-    # Each 150 minute job renders one fresh original-course attempt, preserving inputs.
+    # Each 360 minute job renders one fresh original-course attempt, preserving inputs.
+    # Exact-head student jobs exceeded 150 minutes; repeated current audits add work.
     # Current proofs, native members, PDF and setup are included in this budget.
-    timeout-minutes: 150
+    timeout-minutes: 360
     strategy:
       fail-fast: false
       matrix:
@@ -145,9 +146,10 @@ jobs:
     needs: student_release
     runs-on: ubuntu-24.04
     # The original 4 book inputs and 5 essay inputs plus Navigation use 38 captures.
-    # Each 150 minute job renders one fresh original-course attempt, preserving inputs.
+    # Each 360 minute job renders one fresh original-course attempt, preserving inputs.
+    # Exact-head student jobs exceeded 150 minutes; repeated current audits add work.
     # Current proofs, native members, PDF and setup are included in this budget.
-    timeout-minutes: 150
+    timeout-minutes: 360
     strategy:
       fail-fast: false
       matrix:
@@ -274,10 +276,11 @@ jobs:
     needs: full_release
     runs-on: ubuntu-24.04
     # A fresh original-course attempt uses 38 captures; budget conservatively 40.
-    # The 150 minute single-attempt budget includes current proofs, members and PDF.
+    # The 360 minute single-attempt budget includes current proofs, members and PDF.
+    # Exact-head student jobs exceeded 150 minutes; this fresh pipeline retains scope.
     # Only completed public trees seed preservation checks. Current source,
     # installations, owners, native captures and publication proofs are fresh.
-    timeout-minutes: 150
+    timeout-minutes: 360
     strategy:
       fail-fast: false
       matrix:
