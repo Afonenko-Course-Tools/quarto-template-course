@@ -6,13 +6,13 @@
 
 | Поставщик | Exact commit | Exact tree |
 |---|---|---|
-| [quarto-course](https://github.com/Afonenko-Course-Tools/quarto-course) | `7d17720317a2528b3a37d85a50f8c32fea763836` | `4fe4b921feb4f387bde6f5b81d585bc6227745df` |
+| [quarto-course](https://github.com/Afonenko-Course-Tools/quarto-course) | `7014d0532b058a5bbddbd04ddd9be102653b5551` | `8bbc5144a55a0a8a4fe0ca80693579b8a4be69e0` |
 | [quarto-project-publish](https://github.com/Afonenko-Course-Tools/quarto-project-publish) | `ab481838a92bbe1d7705a3df7dc3194fb97b334c` | `4da5b9e489fa41157c8b20ee139e88b355c79656` |
 | [quarto-reference-catalog](https://github.com/Afonenko-Course-Tools/quarto-reference-catalog) | `d366cacf37457802506c5b75e87f39f89d31c373` | `f2283f0b038a1e2972037b93420774df69cd54cc` |
 | [quarto-project-download](https://github.com/Afonenko-Course-Tools/quarto-project-download) | `d78a533b14c38e3dd64dbfbd59e437a82e2752fd` | `7e21f82dd770eb2c1593aae54bebedf1b8e6cbaf` |
 | [quarto-course-print](https://github.com/Afonenko-Course-Tools/quarto-course-print) | `12ef8b905ef5477b384789ce8ae268ad0076ddde` | `a06f4812bb872742f0b5152afe042411a50cedb7` |
 | [quarto-course-cloud](https://github.com/Afonenko-Course-Tools/quarto-course-cloud) | `66675ed4988e035828a03826f7c6f38747f2afe9` | `94e709100592029e4d1bdfc1a513fee3eeab5486` |
-| [quarto-course-prairielearn](https://github.com/Afonenko-Course-Tools/quarto-course-prairielearn) | `423ae23a1950f1b92d50a63cba8a8adbb25cda65` | `8f128684add0ef11bf2abd496ccbee00b07e5963` |
+| [quarto-course-prairielearn](https://github.com/Afonenko-Course-Tools/quarto-course-prairielearn) | `d296a0841a53a2035cfc79eaf3db5ea471c90408` | `2dc11045c27703c29bb4a997391bf932549df684` |
 
 Core, Presentation и Navigation происходят из одного Core U. Cloud/PL содержат
 совместимость с Source capture этого U: при capture они пассивны, а расширение
@@ -32,6 +32,12 @@ Core, Presentation и Navigation происходят из одного Core U. 
 | `course-prairielearn` | 6 | `examples/prairielearn` |
 
 Все девять пакетов прошли штатный local `quarto add` из frozen git archives.
+После test-only fixture corrections новые Core/PL archives дополнительно
+прошли whole-add и заменили Core8/PL1 copies. Полные `_extensions` Git trees
+новых refs совпадают с прежними; Presentation/Navigation имеют тот же payload
+финального Core. Отдельная карта `final-ref-composition/manifest.json` сохраняет
+эту эквивалентность, девять замен и итоговую проверку всех26 copies; прежние
+installation/native receipts остаются привязанными к своим исходным refs.
 Для 26 product copies сверены полный file set, SHA256, размеры и права файлов;
 сохранены все bundled license files. Полные карты, архивы и их SHA256 находятся
 в `whole-installations.json` и соседних archives evidence отчёта Task7a.
