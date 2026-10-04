@@ -1,16 +1,18 @@
 import { dirname, fromFileUrl } from "stdlib/path";
+import { renderOptionalExample } from "./render-example.ts";
 import { checkNeutralPublication } from "./check-neutral.ts";
 const root = dirname(dirname(fromFileUrl(import.meta.url)));
 const quarto = Deno.env.get("QUARTO") || "quarto";
 if (!Deno.args.includes("--skip-render")) {
   for (const profile of ["full", "student"]) {
-    for (
-      const target of [undefined, "examples/cloud", "examples/prairielearn"]
-    ) {
+    for (const target of [undefined, "cloud", "prairielearn"]) {
+      if (target) {
+        await renderOptionalExample(root, target, profile);
+        continue;
+      }
       const result = await new Deno.Command(quarto, {
         args: [
           "render",
-          ...(target ? [target] : []),
           "--profile",
           profile,
           "--fail-if-warnings",

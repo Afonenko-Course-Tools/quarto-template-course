@@ -103,8 +103,13 @@ const phaseBudget = Object.fromEntries(
     }];
   }),
 );
+assert(
+  !Deno.args.includes("--navigation") &&
+    !Deno.args.includes("--navigation-ref"),
+  "current Navigation is supplied by --core/--core-ref; independent Navigation is unsupported",
+);
 const providers = Object.fromEntries(
-  ["core", "publisher", "qrc", "download", "print", "navigation"].map(
+  ["core", "publisher", "qrc", "download", "print"].map(
     (name) => {
       const path = arg(`--${name}`);
       assert(path, `--${name} required`);
@@ -589,9 +594,9 @@ try {
       ],
       [
         "course-navigation",
-        providers.navigation,
+        providers.core,
         "_extensions/course-navigation",
-        "navigation",
+        "core",
       ],
       [
         "project-download",
@@ -750,7 +755,7 @@ try {
     );
     await Deno.writeTextFile(tasksConfig, baseTasks);
     const permittedTask = (await Deno.readTextFile(taskInput)) +
-      '\n[Source](https://github.com/example/five-parts) · [Report issue](https://github.com/example/five-parts/issues/new).\n\n:::: {#exr-public target="manual" difficulty="introductory" work-mode="individual"}\n## Public exercise\nPublic condition.\n::::\n\n::: {#sol-public for="exr-public"}\nPUBLIC_ORDINARY_SOL\n:::\n';
+      '\n[Source](https://github.com/example/five-parts) · [Report issue](https://github.com/example/five-parts/issues/new).\n\n## Public questions {#sec-public-questions}\n\n:::: {#exr-public course-role="discussion" target="manual" difficulty="introductory" work-mode="individual"}\n## Public exercise\nPublic condition.\n::::\n\n::: {#sol-public for="exr-public"}\nPUBLIC_ORDINARY_SOL\n:::\n';
     await Deno.writeTextFile(taskInput, permittedTask);
     await Deno.writeTextFile(join(consumer, "tasks/corpus.qmd"), corpus(true));
     await Deno.writeTextFile(

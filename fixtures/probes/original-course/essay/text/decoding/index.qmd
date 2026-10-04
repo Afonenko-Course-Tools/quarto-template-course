@@ -8,7 +8,9 @@ assessment:
 
 # Строгое декодирование UTF-8 {#sec-utf8-policies}
 
-:::: {#exr-utf8-research target="manual"}
+## Исследование декодирования {#sec-decoding-investigation}
+
+:::: {#exr-utf8-research course-role="independent-study" difficulty="intermediate" target="manual"}
 ## Вопрос исследования
 
 {{< include ../_prerequisites.qmd >}}

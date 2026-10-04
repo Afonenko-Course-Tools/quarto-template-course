@@ -6,7 +6,9 @@ categories: [Неизменяемость, Массивы, Границы ком
 
 # Сохранность данных на границе компонентов {#sec-text-immutability}
 
-:::: {#exr-text-immutability target="manual"}
+## Исследование сохранности {#sec-immutability-investigation}
+
+:::: {#exr-text-immutability course-role="independent-study" difficulty="advanced" target="manual"}
 ## Исследовательская задача
 
 {{< include ../_prerequisites.qmd >}}

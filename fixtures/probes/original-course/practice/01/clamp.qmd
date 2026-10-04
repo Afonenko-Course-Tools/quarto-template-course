@@ -16,13 +16,13 @@ title: Ограничение диапазона
 
 ## Самопроверка {#sec-self-check}
 
-:::: {#exr-clamp-self-check course-role="self-check" difficulty="introductory" work-mode="individual"}
+:::: {#exm-clamp-self-check course-role="self-check" difficulty="introductory" work-mode="individual"}
 ### Какие входы различаются?
 
 Чем отличаются `clamp(3, 3, 3)` и `clamp(3, 5, 1)` с точки зрения контракта?
 ::::
 
-::: {#sol-clamp-self-check for="exr-clamp-self-check"}
+::: {#sol-clamp-self-check .when-full for="exm-clamp-self-check"}
 ### Объяснение
 
 Первый вызов имеет корректный вырожденный диапазон и возвращает `3`.

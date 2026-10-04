@@ -98,8 +98,8 @@ class PagesTests(unittest.TestCase):
         self.ci.run_profile(self.root, "student", "stock-quarto", execute)
         self.assertEqual([c[0] for c in calls], [
             ["stock-quarto", "render", "--profile", "student", "--fail-if-warnings"],
-            ["stock-quarto", "render", "examples/cloud", "--profile", "student", "--fail-if-warnings"],
-            ["stock-quarto", "render", "examples/prairielearn", "--profile", "student", "--fail-if-warnings"],
+            ["stock-quarto", "run", "tests/render-example.ts", "--example", "cloud", "--profile", "student"],
+            ["stock-quarto", "run", "tests/render-example.ts", "--example", "prairielearn", "--profile", "student"],
         ])
         self.assertTrue(all(cwd == self.root for _, cwd in calls))
 
@@ -403,9 +403,9 @@ class PagesTests(unittest.TestCase):
                 calls.append(args)
                 if args[1] == "--version": return subprocess.CompletedProcess(args, 0, version + "\n")
                 root = kwargs["cwd"]
-                if args[1] == "render":
+                if args[1] == "render" or args[2] == "tests/render-example.ts":
                     profile = args[args.index("--profile") + 1]
-                    index = 0 if args[2] == "--profile" else (1 if args[2] == "examples/cloud" else 2)
+                    index = 0 if args[1] == "render" else (1 if args[args.index("--example") + 1] == "cloud" else 2)
                     self.publications(root, ((FULL if profile == "full" else STUDENT)[index],))
                 else:
                     self.assertTrue(all((root / tree / "index.html").is_file() for tree in FULL + STUDENT))

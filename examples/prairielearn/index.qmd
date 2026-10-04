@@ -16,7 +16,7 @@ categories: [Оценивание, Контракты]
 Для зачёта нужно {{< meta prairielearn.assessment-defaults.pass.at-least >}} задание.
 
 :::: {.when-full}
-::: {#exr-platform-check target="prairielearn" project="/project"}
+::: {#exr-platform-check course-role="control" difficulty="intermediate" target="prairielearn" project="/project"}
 ## Проверка контракта
 
 Реализуйте ограничение числа диапазоном в стартовом проекте.

@@ -7,7 +7,9 @@ categories: [UTF-8, Строки, Представление данных]
 
 # Символ и его байтовое представление {#sec-text-representation}
 
-:::: {#exr-text-representation target="manual" course-role="demonstration"}
+## Исследование представления {#sec-representation-investigation}
+
+:::: {#exr-text-representation target="manual" course-role="demonstration" difficulty="introductory"}
 ## Начальное исследование
 
 {{< include ../_prerequisites.qmd >}}

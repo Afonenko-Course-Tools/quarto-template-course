@@ -24,11 +24,13 @@ async function fixture(root: string) {
         join(output, part, "index.html"),
         `<a href="../index.html">Курс</a>${
           part === "tasks"
-            ? '<div id="exr-compare"></div><div id="exr-evidence"></div>'
+            ? '<div id="exr-observation"><p>Приведите одно наблюдение</p></div><div id="exr-compare"></div><div id="exr-evidence"></div>'
+            : part === "theory"
+            ? '<div id="exm-observation">две группы</div>'
             : ""
         }${
           profile === "full" && part === "tasks"
-            ? "NEUTRAL_PRIVATE_GRADING"
+            ? 'NEUTRAL_PRIVATE_GRADING<div id="sol-compare">Private explanation</div>'
             : ""
         }`,
       );

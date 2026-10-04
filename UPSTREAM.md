@@ -1,49 +1,58 @@
 # Источники установленных расширений
 
-Каталоги `_extensions` хранятся в Git и используются непосредственно при сборке.
-Установка не включает пакет: фильтры, обработчики и тема подключаются явно в YAML.
-При обновлении меняют целую установленную копию и проверяют оба профиля.
+Полные каталоги `_extensions` хранятся в Git и используются непосредственно
+при сборке. Обновление переносит целый архивированный пакет, включая vendor
+и лицензии. Фильтры, обработчики и тема подключаются явно в YAML.
 
-| Пакеты | Исходный репозиторий | Коммит происхождения установленной копии |
+| Поставщик | Exact commit | Exact tree |
 |---|---|---|
-| `course-core` (root/book/essay), `course-navigation` (lectures/practice) | [Afonenko-Course-Tools/quarto-course](https://github.com/Afonenko-Course-Tools/quarto-course) | [fe576c4eb1d77191b89216ae2e6bbdaef50b28a2](https://github.com/Afonenko-Course-Tools/quarto-course/tree/fe576c4eb1d77191b89216ae2e6bbdaef50b28a2) |
-| `course-presentation` (book/essay/lectures/practice/examples/cloud/examples/prairielearn) | [Afonenko-Course-Tools/quarto-course](https://github.com/Afonenko-Course-Tools/quarto-course) | [fe576c4eb1d77191b89216ae2e6bbdaef50b28a2](https://github.com/Afonenko-Course-Tools/quarto-course/tree/fe576c4eb1d77191b89216ae2e6bbdaef50b28a2) |
-| `reference-catalog` | [Afonenko-Course-Tools/quarto-reference-catalog](https://github.com/Afonenko-Course-Tools/quarto-reference-catalog) | [9a4bf6aafd73aff0daf51ae208247f3f194057c2](https://github.com/Afonenko-Course-Tools/quarto-reference-catalog/tree/9a4bf6aafd73aff0daf51ae208247f3f194057c2) |
-| `project-publish` | [Afonenko-Course-Tools/quarto-project-publish](https://github.com/Afonenko-Course-Tools/quarto-project-publish) | [ae6b5320f99afba1b6adada654ead7978d8a8dab](https://github.com/Afonenko-Course-Tools/quarto-project-publish/tree/ae6b5320f99afba1b6adada654ead7978d8a8dab) |
-| `project-download` | [Afonenko-Course-Tools/quarto-project-download](https://github.com/Afonenko-Course-Tools/quarto-project-download) | [d78a533b14c38e3dd64dbfbd59e437a82e2752fd](https://github.com/Afonenko-Course-Tools/quarto-project-download/tree/d78a533b14c38e3dd64dbfbd59e437a82e2752fd) |
-| `bsu-theme` | [BSU-RFCT-Afonenko-Courses/quarto-theme-bsu](https://github.com/BSU-RFCT-Afonenko-Courses/quarto-theme-bsu) | [176701f68e32c6424c67ca00a31deb15aeca6818](https://github.com/BSU-RFCT-Afonenko-Courses/quarto-theme-bsu/tree/176701f68e32c6424c67ca00a31deb15aeca6818) |
-| `course-prairielearn` | [Afonenko-Course-Tools/quarto-course-prairielearn](https://github.com/Afonenko-Course-Tools/quarto-course-prairielearn) | [95c6718640210b654c1f332bd8ba48effa1a92a6](https://github.com/Afonenko-Course-Tools/quarto-course-prairielearn/tree/95c6718640210b654c1f332bd8ba48effa1a92a6) |
-| `course-cloud` | [Afonenko-Course-Tools/quarto-course-cloud](https://github.com/Afonenko-Course-Tools/quarto-course-cloud) | [5ff8d85762f428e24a20b1a5a5d295c7b2ec8c01](https://github.com/Afonenko-Course-Tools/quarto-course-cloud/tree/5ff8d85762f428e24a20b1a5a5d295c7b2ec8c01) |
+| [quarto-course](https://github.com/Afonenko-Course-Tools/quarto-course) | `7d17720317a2528b3a37d85a50f8c32fea763836` | `4fe4b921feb4f387bde6f5b81d585bc6227745df` |
+| [quarto-project-publish](https://github.com/Afonenko-Course-Tools/quarto-project-publish) | `ab481838a92bbe1d7705a3df7dc3194fb97b334c` | `4da5b9e489fa41157c8b20ee139e88b355c79656` |
+| [quarto-reference-catalog](https://github.com/Afonenko-Course-Tools/quarto-reference-catalog) | `d366cacf37457802506c5b75e87f39f89d31c373` | `f2283f0b038a1e2972037b93420774df69cd54cc` |
+| [quarto-project-download](https://github.com/Afonenko-Course-Tools/quarto-project-download) | `d78a533b14c38e3dd64dbfbd59e437a82e2752fd` | `7e21f82dd770eb2c1593aae54bebedf1b8e6cbaf` |
+| [quarto-course-print](https://github.com/Afonenko-Course-Tools/quarto-course-print) | `12ef8b905ef5477b384789ce8ae268ad0076ddde` | `a06f4812bb872742f0b5152afe042411a50cedb7` |
+| [quarto-course-cloud](https://github.com/Afonenko-Course-Tools/quarto-course-cloud) | `66675ed4988e035828a03826f7c6f38747f2afe9` | `94e709100592029e4d1bdfc1a513fee3eeab5486` |
+| [quarto-course-prairielearn](https://github.com/Afonenko-Course-Tools/quarto-course-prairielearn) | `423ae23a1950f1b92d50a63cba8a8adbb25cda65` | `8f128684add0ef11bf2abd496ccbee00b07e5963` |
 
-Cloud и PrairieLearn установлены только в самостоятельных `examples/`.
-Обычная публикация не подключает их и не требует учебной платформы.
+Core, Presentation и Navigation происходят из одного Core U. Cloud/PL содержат
+совместимость с Source capture этого U: при capture они пассивны, а расширение
+модели выполняется во время настоящего native render. Их runtime-пакеты
+устанавливаются целиком.
 
-Точный portal provider set закреплён в
-[`tests/probes/portal-provider-refs.json`](tests/probes/portal-provider-refs.json).
-Для текущей подготовки Core tree — `6a3a998e3d22907967135daca68991e06801eca0`,
-Publisher tree — `22e97a507062072066092d3f838b3fe50063424f`; QRC и Download
-сохраняют указанные commits и exact trees из того же контракта. Все шесть whole
-payloads установлены через штатный local `quarto add`, затем полностью перенесены
-в 15 product copies с проверкой file-set/SHA/bytes/modes и bundled license files.
-Это provenance установленной подготовки. Mandatory CI выбранного Core и
-OriginalCourse native acceptance ещё ожидаются; эта ведомость не объявляет Core
-принятым и не заменяет required native gates.
+| Пакет | Файлов в полном payload | Установленные scope |
+|---|---:|---|
+| `course-core` | 119 | `root`, `tasks`, `book`, `essay`, `lectures`, `practice`, `examples/cloud`, `examples/prairielearn` |
+| `course-presentation` | 11 | `theory`, `tasks`, `handbook`, `book`, `essay`, `lectures`, `practice`, `examples/cloud`, `examples/prairielearn` |
+| `course-navigation` | 7 | `lectures`, `practice` |
+| `project-publish` | 20 | `root` |
+| `reference-catalog` | 85 | `root` |
+| `project-download` | 11 | `tasks`, `book`, `essay` |
+| `course-print` | 31 | внешняя installed production Print probe |
+| `course-cloud` | 7 | `examples/cloud` |
+| `course-prairielearn` | 6 | `examples/prairielearn` |
 
-Core `fe576c4` сохраняет одну writer convention frozen native config: implicit
-default использует Source, book/website — текущий output directory. Полный corpus
-из 8 native book/default writer cases и все 20 current CI jobs этого pin пока
-pending. Они должны отдельно подтвердить выбранную native convention;
-прежние native результаты не переносятся в его acceptance. Здесь фиксируется
-только подготовка установленных bytes.
+Все девять пакетов прошли штатный local `quarto add` из frozen git archives.
+Для 26 product copies сверены полный file set, SHA256, размеры и права файлов;
+сохранены все bundled license files. Полные карты, архивы и их SHA256 находятся
+в `whole-installations.json` и соседних archives evidence отчёта Task7a.
+Print используется внешней production-пробой, а не добавляется в нейтральный сайт.
 
-Указанный Core pin относится только к root/book/essay из
-[`ACTUAL_MAIN_INSTALLATIONS`](tests/probes/actual-main-contract.ts). Четыре другие
-Core copies в lectures/practice/examples/cloud/examples/prairielearn находятся
-вне этого install contract и сохраняют прежнюю поставку. Оставшаяся нормализация
-consumer/API/pins относится к последующему Task5; acceptance единой composition
-текущей подготовкой не подтверждён.
+`ACTUAL_MAIN_INSTALLATIONS` проверяет 24 product copies шести общих поставок:
+все восемь Core, девять Presentation, две Navigation, три Download и root
+Publisher/QRC. Две optional adapter copies отдельно проверяются native route
+Cloud/PL и полной Source-аутентификацией. Существующий
+`tests/probes/portal-provider-refs.json` сохраняет ровно четыре ключа
+`core/download/publisher/qrc`; он не заменяется новым реестром.
 
-Сведения о коммитах фиксируют происхождение этой поставки, а не поддерживаемые
-варианты схем. Учебная модель имеет один текущий контракт. Изменения реализации
-вносятся в указанные исходные репозитории. При установке через `quarto add`
-учитывайте возможное пространство имён владельца в пути пакета.
+BSU theme в Original остаётся whole payload из
+[quarto-theme-bsu](https://github.com/BSU-RFCT-Afonenko-Courses/quarto-theme-bsu/tree/176701f68e32c6424c67ca00a31deb15aeca6818),
+commit `176701f68e32c6424c67ca00a31deb15aeca6818`.
+Все три theme copies (book/lectures/practice, по шесть файлов) побайтно и по
+правам совпадают с BASE Template; карта сохранена в
+`unchanged-theme-provenance.json` evidence Task7a. Нейтральный курс использует стандартную тему.
+
+Это provenance установленной композиции. Полные Original student/full/late,
+Pages и Body/Print/Download native gates проверяются на свежих Source attempts
+после заморозки Template; прежние результаты других pins не объявляются
+приёмкой текущего Source. Точная авторская миграция — в
+[карте Original](docs/original-author-migration.md).

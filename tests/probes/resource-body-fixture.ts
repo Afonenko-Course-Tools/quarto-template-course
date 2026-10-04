@@ -35,7 +35,7 @@ ${computed ? "engine: knitr\n" : ""}---
 
 ## Canonical questions {#sec-body-bank}
 
-:::: {#exr-body target="manual"}
+:::: {#exr-body course-role="discussion" difficulty="introductory" target="manual"}
 ## Explain the result
 
 Explain $x^2+1$ and the [ordinary course reference](https://example.org/current-owner-body).
@@ -53,7 +53,7 @@ GRADING_SECRET_CURRENT_OWNER_BODY
 TEACHER_SECRET_CURRENT_OWNER_BODY
 :::
 
-:::: {#exr-choice target="manual"}
+:::: {#exr-choice course-role="independent-study" difficulty="introductory" target="manual"}
 ## Choose the secure option
 Choose one protocol.
 

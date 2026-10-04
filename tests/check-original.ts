@@ -1,4 +1,5 @@
 import { dirname, join, resolve } from "stdlib/path";
+import { renderOptionalExample } from "./render-example.ts";
 import { inventory } from "./features.ts";
 const rootArgument = Deno.args.indexOf("--root");
 if (rootArgument < 0 || !Deno.args[rootArgument + 1]) {
@@ -31,22 +32,7 @@ if (!Deno.args.includes("--skip-render")) {
     }).output();
     assert(result.success, `Не удалось собрать профиль ${profile}`);
     for (const example of ["cloud", "prairielearn"]) {
-      const optional = await new Deno.Command(quarto, {
-        args: [
-          "render",
-          `examples/${example}`,
-          "--profile",
-          profile,
-          "--fail-if-warnings",
-        ],
-        cwd: root,
-        stdout: "inherit",
-        stderr: "inherit",
-      }).output();
-      assert(
-        optional.success,
-        `Не удалось собрать самостоятельный пример ${example}/${profile}`,
-      );
+      await renderOptionalExample(root, example, profile);
     }
   }
 }
@@ -156,12 +142,13 @@ for (const profile of ["student", "full"]) {
     join(output, "essay/text/decoding/index.html"),
   );
   assert(
-    lecture.includes("course-answer-solution fragment") &&
+    lecture.includes("course-answer-solution fragment") ===
+        (profile === "full") &&
       lecture.includes('data-course-role="prediction"'),
     "Потеряны прогноз или раскрытие ответа при переходе вперёд",
   );
   assert(
-    practice.includes("<details><summary>") &&
+    practice.includes("<details><summary>") === (profile === "full") &&
       !practice.includes("course-answer-solution fragment"),
     "Потерян режим самостоятельного раскрытия ответа",
   );
@@ -182,7 +169,7 @@ for (const profile of ["student", "full"]) {
   );
   assert(
     essay.includes("course-meta-difficulty") && essay.includes("Средний"),
-    "Сложность не унаследована из метаданных документа",
+    "Явная сложность задания не сохранена",
   );
   for (const path of paths) {
     assert(

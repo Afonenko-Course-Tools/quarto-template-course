@@ -17,7 +17,6 @@ Student positive вычисляет реальный paragraph/table/plot одн
 ```sh
 quarto run tests/probes/resource-consumer.ts \
   --core <body-Core-repo> --core-ref <immutable-body-commit> \
-  --navigation <runtime-Core-repo> --navigation-ref <immutable-runtime-commit> \
   --publisher <Publisher-repo> --publisher-ref <immutable-Publisher-commit> \
   --qrc <QRC-repo> --qrc-ref <immutable-QRC-commit> \
   --download <Download-repo> --download-ref <immutable-Download-commit> \
@@ -27,7 +26,7 @@ python3 tests/probes/resource-archive-guards.py
 python3 tests/probes/resource-runtime-guards.py
 ```
 
-Каждый complete extension устанавливается из immutable git archive через `quarto add`; manifest фиксирует commit/tree, archive hashes, полный file set/SHA и равенство member copies. QRC и Navigation берутся из собственных exact provider trees. Stock `quarto create-project --type default --no-scaffold --engine markdown` инициализирует metadata до owner freeze. `QUARTO` и `PATH` должны указывать на одну выбранную дистрибуцию Quarto; fresh XDG/DENO cache создаётся для каждой попытки. Проверка archive detector требует штатный `file` (libmagic), а PDF assertions — poppler-utils. Controlled negative finalizers находятся только в tests/probes/resource-faults.ts и подключаются тестом для конкретных отказов; обычные consumer finalizers не содержат mutations.
+Каждый complete extension устанавливается из immutable git archive через `quarto add`; manifest фиксирует commit/tree, archive hashes, полный file set/SHA и равенство member copies. QRC берётся из собственного exact provider tree; Body, Presentation и Navigation — из одного exact Core tree. Stock `quarto create-project --type default --no-scaffold --engine markdown` инициализирует metadata до owner freeze. `QUARTO` и `PATH` должны указывать на одну выбранную дистрибуцию Quarto; fresh XDG/DENO cache создаётся для каждой попытки. Проверка archive detector требует штатный `file` (libmagic), а PDF assertions — poppler-utils. Controlled negative finalizers находятся только в tests/probes/resource-faults.ts и подключаются тестом для конкретных отказов; обычные consumer finalizers не содержат mutations.
 
 Тайминги fresh полного rebuild записываются в phaseTimings/printTimings и events: prepare/captures, native tasks render, duration R cell body, finish/index, Print, native Download и final audit. Они не доказывают incremental performance; адресный preview здесь не поддержан.
 
@@ -44,3 +43,5 @@ Job budget составляет 150 минут: измеренный fresh basel
 Каждый ожидаемый отказ сравнивает полные before/after file set и SHA сразу обоих public деревьев student/full. Точные карты, пути evidence и hashes сохраняются в final/partial outcomes до assertions; отказ guard сохраняет failed outcome. CI печатает outcomes и обе сохранённые карты с hashes даже при падении проверки.
 
 Generated mutation использует только `actualPath` уникального generated entry из fresh проверенного public owner index, совпадающего с canonical body resource по source/SHA. Logical source не является физическим путём под SourceRoot: stock book переносит plot в native output. Перед изменением сохраняются current handle/index, SourceRoot/native output coordinates и actual byte SHA; final/partial outcomes сохраняют эту evidence вместе со всеми 13 точными отказами и восстановлениями.
+
+Current Body, Presentation and Navigation are installed from the same `--core` / `--core-ref` archive; there is no independent current Navigation provider. Historical P0 probes keep their original pins.

@@ -32,28 +32,21 @@ jobs:
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           repository: Afonenko-Course-Tools/quarto-course
-          ref: 9690514a6c92dfde377d2be551ca861022387506
+          ref: 7d17720317a2528b3a37d85a50f8c32fea763836
           path: core
-          persist-credentials: false
-      - name: Immutable native Navigation producer
-        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
-        with:
-          repository: Afonenko-Course-Tools/quarto-course
-          ref: e8aa63af4dd0a895c3b250515c06f6f9d160b70d
-          path: navigation
           persist-credentials: false
       - name: Publisher с owner output context
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           repository: Afonenko-Course-Tools/quarto-project-publish
-          ref: ef313672b7392f51838fde3546aaca465ffa0900
+          ref: ab481838a92bbe1d7705a3df7dc3194fb97b334c
           path: publisher
           persist-credentials: false
       - name: QRC после native managed portal
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           repository: Afonenko-Course-Tools/quarto-reference-catalog
-          ref: 9a4bf6aafd73aff0daf51ae208247f3f194057c2
+          ref: d366cacf37457802506c5b75e87f39f89d31c373
           path: qrc
           persist-credentials: false
       - name: Download с публичным ownership seam
@@ -67,7 +60,7 @@ jobs:
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           repository: Afonenko-Course-Tools/quarto-course-print
-          ref: 1ae4f0c5697d415746c7fce94067b5a1e13db503
+          ref: 12ef8b905ef5477b384789ce8ae268ad0076ddde
           path: print
           persist-credentials: false
       - uses: quarto-dev/quarto-actions/setup@8a96df13519ee81fd526f2dfca5962811136661b # v2.2.0
@@ -91,7 +84,6 @@ jobs:
           export QUARTO="$(command -v quarto)"
           quarto run tests/probes/resource-consumer.ts \
             --core "$GITHUB_WORKSPACE/core" \
-            --navigation "$GITHUB_WORKSPACE/navigation" \
             --publisher "$GITHUB_WORKSPACE/publisher" \
             --qrc "$GITHUB_WORKSPACE/qrc" \
             --download "$GITHUB_WORKSPACE/download" \

@@ -1,8 +1,14 @@
 # Задания {#sec-tasks}
 
+## Наблюдение и объяснение {#sec-task-observations}
+
 {{< include _intro.qmd >}}
 
-:::: {#exr-compare course-role="discussion" target="manual" difficulty="introductory" work-mode="individual" time="10"}
+::: {#exr-observation course-role="discussion" difficulty="introductory"}
+Приведите одно наблюдение из повседневной жизни и отделите его от своего объяснения.
+:::
+
+:::: {#exr-compare course-role="discussion" difficulty="introductory" work-mode="individual" time="10"}
 ## Сравнить два объяснения
 
 Две группы выполняли одинаковую работу 8 и 12 минут. Запишите два возможных
@@ -25,7 +31,7 @@
 Число исправленных ошибок помогло бы сравнить эти версии.
 :::
 
-:::: {#exr-evidence course-role="discussion" target="manual" difficulty="intermediate" work-mode="group" time="20"}
+:::: {#exr-evidence course-role="discussion" difficulty="intermediate" work-mode="group" time="20"}
 ## Обосновать вывод
 
 Выберите повседневное утверждение. Сформулируйте проверяемый вопрос,

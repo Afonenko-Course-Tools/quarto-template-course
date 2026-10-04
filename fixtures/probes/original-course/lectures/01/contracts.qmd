@@ -16,13 +16,13 @@ title: Контракты функций
 
 ## Прогноз {#sec-prediction}
 
-:::: {#exr-clamp-prediction course-role="prediction" difficulty="introductory" time="2" work-mode="individual"}
+:::: {#exm-clamp-prediction course-role="prediction" difficulty="introductory" time="2" work-mode="individual"}
 ### Совпадающие границы
 
 Что вернёт `clamp(7, 3, 3)`? Сначала сформулируйте прогноз.
 ::::
 
-::: {#sol-clamp-prediction for="exr-clamp-prediction"}
+::: {#sol-clamp-prediction .when-full for="exm-clamp-prediction"}
 ### Объяснение
 
 Результат — `3`: допустимый диапазон состоит из одного числа.
@@ -30,14 +30,14 @@ title: Контракты функций
 
 ## Обсуждение {#sec-contract-discussion}
 
-:::: {#exr-contract-discussion course-role="discussion" time="3" work-mode="pair"}
+:::: {#exm-contract-discussion course-role="discussion" time="3" work-mode="pair"}
 ### Недопустимый вход
 
 Почему перестановка границ внутри функции может скрыть ошибку вызывающего кода?
 Сопоставьте две политики и явно назовите выбранный контракт.
 ::::
 
-::: {#sol-contract-discussion for="exr-contract-discussion"}
+::: {#sol-contract-discussion .when-full for="exm-contract-discussion"}
 ### Направление обсуждения
 
 Автоматическая перестановка допустима для другого контракта.

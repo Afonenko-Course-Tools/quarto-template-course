@@ -9,18 +9,14 @@ import {
 import {
   activeOwner,
   assertFrozen,
-  digestFile,
   evaluate,
-  exists,
   inspectOwnerDownloads,
-  type Invocation,
-  OwnerFailure,
-  type PreparedOwner,
   preparedSession,
-  type Session,
   sessionAt,
-  sha,
 } from "./owner.ts";
+import { OwnerFailure } from "./owner/failure.ts";
+import { digestFile, exists, sha } from "./owner/runtime.ts";
+import type { Invocation, PreparedOwner, Session } from "./owner/protocol.ts";
 import {
   assertCaptureProjections,
   type CaptureProjection,
@@ -43,6 +39,7 @@ import {
   type NativeListingAddress,
   validateNativeListingAddresses,
 } from "./native-listing-addresses.ts";
+import { bodyServicePaths } from "../body-export/producer.ts";
 export interface ResourceUse {
   kind: "Link" | "Image";
   target: string;
@@ -59,6 +56,8 @@ export interface ResourceObservation {
   raw: ResourceUse[];
   projected: ResourceUse[];
   opaque?: string[];
+  canonicalIds?: string[];
+  references?: { id: string; target: string }[];
   nativeListingAddresses?: NativeListingAddress[];
   nativeListingWitness?: { inputPath: string; witnessPath: string };
 }
@@ -327,6 +326,22 @@ export async function sourceResourceFiles(
   s: Session,
 ): Promise<OwnerResourceFile[]> {
   const files: OwnerResourceFile[] = [];
+  // Body delivery consumes exact public native inspect identities from both
+  // profiles. Author configs are frozen service bytes, not starter assets.
+  const configs = new Set<string>(
+    s.body
+      ? Object.values(s.audit.profiles).flatMap((info) =>
+        (info.files.config || []).map((path: string) =>
+          resourceRelative(s.root, resolve(s.root, path))
+        )
+      )
+      : [],
+  );
+  for (const path of configs) {
+    if (!Object.hasOwn(s.files, path)) {
+      fail("RESOURCE.NATIVE_CONFIG_UNFROZEN", path);
+    }
+  }
   const producers = new Map<string, string>([[
     s.extension,
     "Core installed extension",
@@ -346,9 +361,11 @@ export async function sourceResourceFiles(
     if (await digestFile(actualPath) !== sha256) {
       fail("RESOURCE.BYTES_CHANGED", path);
     }
-    const producer = [...producers].find(([directory]) =>
-      path === directory || path.startsWith(directory + "/")
-    )?.[1];
+    const producer = configs.has(path)
+      ? "Core frozen native config"
+      : [...producers].find(([directory]) =>
+        path === directory || path.startsWith(directory + "/")
+      )?.[1];
     const navigation = s.audit.navigation;
     const navigationService = navigation && (
       path.endsWith(".qmd") ||
@@ -572,6 +589,19 @@ export async function sealResourceObservation(
       : {}),
   };
 }
+function selectedNativeAdapter(native: any) {
+  return ["cloud", "prairielearn"].find((name) =>
+    JSON.stringify(native?.config.course?.adapters) ===
+      JSON.stringify([name]) &&
+    [["course-core", "course-" + name], [
+      "course-core",
+      "course-" + name,
+      "course-presentation",
+    ]].some((chain) =>
+      JSON.stringify(native?.config.filters) === JSON.stringify(chain)
+    )
+  );
+}
 export async function coreServiceResourceFiles(
   s: Session,
   ownedRequests: { path: string; sha256: string }[] = [],
@@ -612,10 +642,29 @@ export async function coreServiceResourceFiles(
     ...Object.values(s.readerInputs).map((path) =>
       resourceRelative(s.root, path)
     ),
+    ...await bodyServicePaths(s, invocation),
   ];
+  // Only the selected, audited native adapter owns these exact source fragments.
+  // The current profile's native input list also binds synthetic child scopes.
+  const profile = invocation?.profile || s.profile;
+  const native = s.audit.profiles?.[profile];
+  const adapter = selectedNativeAdapter(native);
+  const adapterSources = new Map<string, string>();
   for (const [path, role] of Object.entries(s.audit.coverage)) {
     if (role.kind === "root") {
       paths.push(`_generated/course-spec/core/${await sha(path)}.json`);
+      if (
+        adapter && path.endsWith(".qmd") && role.profiles?.includes(profile) &&
+        native.files.input.some((input: string) =>
+          resolve(s.root, input) === join(s.root, path)
+        )
+      ) {
+        const fragment = `_generated/course-spec/${adapter}/${await sha(
+          path,
+        )}.json`;
+        paths.push(fragment);
+        adapterSources.set(fragment, path);
+      }
       if (invocation && role.profiles?.includes(invocation.profile)) {
         const key = await sha(invocation.profile + ":" + path);
         paths.push(
@@ -653,11 +702,23 @@ export async function coreServiceResourceFiles(
   }
   await checkProducerArea(join(s.root, "_generated/course-spec"));
   await checkProducerArea(join(s.root, ".course-owner/native-listing"));
+  if (s.body) await checkProducerArea(join(s.root, ".course-owner/body"));
   const files: OwnerResourceFile[] = [];
   for (const path of paths) {
     const actualPath = join(s.root, path);
     if (await exists(actualPath)) {
       await resourceNoLinks(s.root, actualPath);
+      if (adapterSources.has(path)) {
+        let fragment: any;
+        try {
+          fragment = JSON.parse(await Deno.readTextFile(actualPath));
+        } catch {
+          fail("RESOURCE.SERVICE_PRODUCER_UNSUPPORTED", path);
+        }
+        if (fragment?.source !== adapterSources.get(path)) {
+          fail("RESOURCE.SERVICE_PRODUCER_UNSUPPORTED", path);
+        }
+      }
       files.push({
         path,
         sha256: await digestFile(actualPath),
@@ -665,6 +726,8 @@ export async function coreServiceResourceFiles(
         actualPath,
         producer: path.startsWith(".course-owner/")
           ? "Core native owner session producer"
+          : adapterSources.has(path)
+          ? `${adapter} native adapter producer`
           : "Core native model producer",
         role: "other",
         ...(Object.values(s.captureProjections).find((p) =>
@@ -731,7 +794,13 @@ export async function coreServiceResourceFiles(
       nativeListingHashes: undefined,
       nativeListingServiceFiles: undefined,
       headers: [],
-      audit: { ...s.audit, root, navigation: undefined, coverage },
+      audit: {
+        ...s.audit,
+        root,
+        navigation: undefined,
+        coverage,
+        profiles: { [s.profile]: scope.native },
+      },
     } as Session;
     const childPath = join(root, ".course-owner/session.json");
     let current = child;
@@ -761,12 +830,19 @@ export async function coreServiceResourceFiles(
       );
     }
     for (const file of await coreServiceResourceFiles(current, [], active)) {
-      if (file.path.startsWith("_generated/course-spec/core/")) {
+      const producer = file.path.match(
+        /^_generated\/course-spec\/(core|cloud|prairielearn)\//,
+      )?.[1];
+      if (producer) {
         const fragment = JSON.parse(await Deno.readTextFile(file.actualPath));
         if (
+          (producer !== "core" &&
+            producer !== selectedNativeAdapter(scope.native)) ||
           !Object.hasOwn(coverage, fragment.source) ||
           file.path !==
-            `_generated/course-spec/core/${await sha(fragment.source)}.json`
+            `_generated/course-spec/${producer}/${await sha(
+              fragment.source,
+            )}.json`
         ) fail("RESOURCE.SERVICE_PRODUCER_UNSUPPORTED", file.path);
       }
       files.push({ ...file, path: scope.path + "/" + file.path });

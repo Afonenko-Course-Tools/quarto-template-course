@@ -537,7 +537,7 @@ if (composition) {
           composition,
           "index.qmd",
           originalInput +
-            '\n::: {#exr-unsupported target="manual"}\nUnknown root pedagogy.\n:::\n',
+            '\n## Unsupported root exercise {#sec-root-pedagogy}\n\n::: {#exr-unsupported course-role="discussion" difficulty="introductory" target="manual"}\nUnknown root pedagogy.\n:::\n',
         ), "SOURCE.NAVIGATION_UNSUPPORTED"],
       ["root-engine", async () =>
         write(

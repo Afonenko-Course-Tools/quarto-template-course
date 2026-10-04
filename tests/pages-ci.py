@@ -122,8 +122,9 @@ def source_identity(root):
 def run_profile(root, profile, quarto, run_command=None):
     run_command = run_command or subprocess.run
     require(profile in ("full", "student"), "Unknown Pages profile")
-    for target in (None, "examples/cloud", "examples/prairielearn"):
-        args = [quarto, "render"] + ([target] if target else []) + ["--profile", profile, "--fail-if-warnings"]
+    for target in (None, "cloud", "prairielearn"):
+        args = ([quarto, "run", "tests/render-example.ts", "--example", target, "--profile", profile]
+                if target else [quarto, "render", "--profile", profile, "--fail-if-warnings"])
         result = run_command(args, cwd=root)
         require(result.returncode == 0, "Pages render failed for " + (target or "root"))
 

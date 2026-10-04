@@ -122,7 +122,7 @@ engine: knitr
 
 ## Canonical questions {#sec-body-bank}
 
-:::: {#exr-body target="manual"}
+:::: {#exr-body course-role="discussion" difficulty="introductory" target="manual"}
 ## Explain the result
 
 Explain $x^2+1$ and the [ordinary course reference](https://example.org/course).

@@ -50,12 +50,25 @@ export async function checkNeutralPublication(root: string) {
       "explicit neutral exports differ",
     );
     const tasks = await Deno.readTextFile(join(output, "tasks/index.html"));
-    for (const id of ["exr-compare", "exr-evidence"]) {
+    for (const id of ["exr-observation", "exr-compare", "exr-evidence"]) {
       assert(tasks.includes(`id="${id}"`), `canonical tasks missing ${id}`);
     }
     assert(
+      tasks.includes("Приведите одно наблюдение"),
+      "minimal paragraph-only task did not compile",
+    );
+    const theory = await Deno.readTextFile(join(output, "theory/index.html"));
+    assert(
+      theory.includes('id="exm-observation"') && theory.includes("две группы"),
+      "native display example did not compile",
+    );
+    assert(
       tasks.includes("NEUTRAL_PRIVATE_GRADING") === (profile === "full"),
       "manual grading visibility differs",
+    );
+    assert(
+      tasks.includes('id="sol-compare"') === (profile === "full"),
+      "ordinary solution visibility differs",
     );
     const archives = paths.filter((path) => path.endsWith(".zip"));
     assert(

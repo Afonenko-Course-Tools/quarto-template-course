@@ -2,7 +2,9 @@
 
 {{< include _intro.qmd >}}
 
-:::: {#exr-p0 target="manual" difficulty="introductory" work-mode="individual"}
+## Questions {#sec-p0-questions}
+
+:::: {#exr-p0 course-role="discussion" target="manual" difficulty="introductory" work-mode="individual"}
 ## Predict the boundary
 
 Give one input on the boundary. Theory: @theory:sec-theory.

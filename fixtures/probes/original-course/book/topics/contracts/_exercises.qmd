@@ -1,4 +1,4 @@
-:::: {#exr-clamp target="manual" project="/projects/clamp" difficulty="introductory" work-mode="individual"}
+:::: {#exr-clamp course-role="independent-study" target="manual" project="/projects/clamp" difficulty="introductory" work-mode="individual"}
 ## Ограничение диапазона
 
 ::: {course-role="prerequisites"}

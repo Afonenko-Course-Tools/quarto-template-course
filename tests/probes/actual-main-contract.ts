@@ -52,9 +52,9 @@ const packageNames = [
   "reference-catalog",
 ];
 const destinations: Record<string, string[]> = {
-  "course-core": ["root", "book", "essay"],
-  "course-navigation": ["lectures", "practice"],
-  "course-presentation": [
+  "course-core": [
+    "root",
+    "tasks",
     "book",
     "essay",
     "lectures",
@@ -62,7 +62,19 @@ const destinations: Record<string, string[]> = {
     "examples/cloud",
     "examples/prairielearn",
   ],
-  "project-download": ["book", "essay"],
+  "course-navigation": ["lectures", "practice"],
+  "course-presentation": [
+    "theory",
+    "tasks",
+    "handbook",
+    "book",
+    "essay",
+    "lectures",
+    "practice",
+    "examples/cloud",
+    "examples/prairielearn",
+  ],
+  "project-download": ["tasks", "book", "essay"],
   "project-publish": ["root"],
   "reference-catalog": ["root"],
 };
