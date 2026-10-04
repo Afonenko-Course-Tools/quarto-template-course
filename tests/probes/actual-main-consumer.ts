@@ -18,10 +18,12 @@ import {
   checkoutSource,
   command,
   currentRun,
+  diagnosticSourceSelection,
   exact,
   exists,
   expectedCheckout,
   hash,
+  installActualMainAdapter,
   readJson,
   settings,
   treeHashes,
@@ -168,19 +170,12 @@ exact(
   ),
   "fresh original authored root/chapter byte set",
 );
-const scaffoldNames = ["prepare", "finish", "verify", "state", "verification"];
-const scaffolding = [];
-for (const name of scaffoldNames) {
-  const source = `fixtures/probes/actual-main/${name}.ts`,
-    target = `_publication/${name}.ts`,
-    sha256 = await hash(join(repo, source));
-  await Deno.copyFile(join(repo, source), join(root, target));
-  assert(
-    await hash(join(root, target)) === sha256,
-    "ACTUAL_MAIN: exact test adapter payload mismatch",
-  );
-  scaffolding.push({ source, target, sha256 });
-}
+const scaffolding = await installActualMainAdapter(
+  repo,
+  root,
+  templateSource.files,
+);
+const diagnosticSelection = diagnosticSourceSelection(templateSource.files);
 const providers = Object.fromEntries(
   ["publisher", "qrc", "core", "download"].map((
     name,
@@ -412,6 +407,21 @@ for (
     before = await authorConfigs(),
     inputsBefore = await authorInputs(),
     publicEvents: any[] = [];
+  exact(
+    {
+      ...before,
+      ...inputsBefore,
+      ...Object.fromEntries(
+        await Promise.all(
+          scaffolding.map(async (
+            { target },
+          ) => [target, await hash(join(root, target))]),
+        ),
+      ),
+    },
+    diagnosticSelection.selectedHashes,
+    "diagnostic selection differs from authenticated Source",
+  );
   const watcher = Deno.watchFs([
     join(root, "_site-student"),
     join(root, "_site-full"),
@@ -452,7 +462,7 @@ for (
     ],
     members,
     sourceInputs,
-    selectedHashes: { ...before, ...inputsBefore },
+    ...diagnosticSelection,
     run,
     anchors: {
       installManifestSha256: await hash(

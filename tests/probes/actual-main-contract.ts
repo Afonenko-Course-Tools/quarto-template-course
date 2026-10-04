@@ -1,4 +1,8 @@
 import { originalCourseFiles } from "./original-course-source.ts";
+import settings from "./actual-main-settings.json" with { type: "json" };
+// One finite copied payload for the consumer, checkout proof and receipt validator.
+export const ACTUAL_MAIN_ADAPTER_FILES: readonly string[] =
+  settings.adapterFiles;
 // Original-course CI transport; visibility/resource policy remains in installed Core.
 import {
   canonical,
@@ -257,10 +261,10 @@ export function manifest(
   );
   same(
     m.scaffolding,
-    ["prepare", "finish", "verify", "state", "verification"].map((name) => ({
-      source: `fixtures/probes/actual-main/${name}.ts`,
-      target: `_publication/${name}.ts`,
-      sha256: expected.template.files[`fixtures/probes/actual-main/${name}.ts`],
+    ACTUAL_MAIN_ADAPTER_FILES.map((path) => ({
+      source: `fixtures/probes/actual-main/${path}`,
+      target: `_publication/${path}`,
+      sha256: expected.template.files[`fixtures/probes/actual-main/${path}`],
     })),
     "missing, unsigned or config-mutating test adapter bytes",
   );

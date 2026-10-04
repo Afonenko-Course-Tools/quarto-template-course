@@ -2,6 +2,8 @@
 import { dirname, join, relative, resolve } from "stdlib/path";
 import { canonical } from "./portal-contract.ts";
 import {
+  ACTUAL_MAIN_ADAPTER_FILES,
+  ACTUAL_MAIN_INPUTS,
   type ActualMainEvidence,
   type ActualMainExpected,
   actualMainFileMap,
@@ -14,6 +16,7 @@ import {
   hash,
   treeHashes,
 } from "../../fixtures/probes/portal/common.ts";
+import { originalCourseFiles } from "./original-course-source.ts";
 export {
   assert,
   command,
@@ -44,14 +47,72 @@ export function argumentsFor(args: string[], keys: string[]) {
 export async function readJson(path: string) {
   return JSON.parse(await Deno.readTextFile(path));
 }
+/** Copy only the finite adapter payload authenticated by the complete checkout. */
+export async function installActualMainAdapter(
+  repo: string,
+  root: string,
+  sourceFiles: Record<string, string>,
+) {
+  const scaffolding = [];
+  for (const path of ACTUAL_MAIN_ADAPTER_FILES) {
+    const source = `fixtures/probes/actual-main/${path}`;
+    const target = `_publication/${path}`;
+    const sha256 = sourceFiles[source];
+    assert(
+      /^[a-f0-9]{64}$/.test(sha256) &&
+        await hash(join(repo, source)) === sha256,
+      `ACTUAL_MAIN: unsigned or changed test adapter source ${source}`,
+    );
+    await Deno.mkdir(dirname(join(root, target)), { recursive: true });
+    await Deno.copyFile(join(repo, source), join(root, target));
+    assert(
+      await hash(join(root, target)) === sha256,
+      "ACTUAL_MAIN: exact test adapter payload mismatch",
+    );
+    scaffolding.push({ source, target, sha256 });
+  }
+  return scaffolding;
+}
+/** The current checkout defines the finite diagnostic selection and its hashes. */
+export function diagnosticSourceSelection(sourceFiles: Record<string, string>) {
+  const mounted = originalCourseFiles(sourceFiles);
+  const configPaths = Object.keys(mounted).filter((path) =>
+    /(^|\/)\_quarto[^/]*\.ya?ml$/.test(path)
+  );
+  const adapterPaths = ACTUAL_MAIN_ADAPTER_FILES.map((path) =>
+    `_publication/${path}`
+  );
+  const selectedHashes = Object.fromEntries([
+    ...[
+      ...configPaths,
+      "index.qmd",
+      ...ACTUAL_MAIN_INPUTS.book,
+      ...ACTUAL_MAIN_INPUTS.essay,
+    ].map((path) => [path, mounted[path]]),
+    ...ACTUAL_MAIN_ADAPTER_FILES.map((path) => [
+      `_publication/${path}`,
+      sourceFiles[`fixtures/probes/actual-main/${path}`],
+    ]),
+  ]);
+  actualMainFileMap(
+    selectedHashes,
+    "authenticated diagnostic Source selection",
+  );
+  return { selectedHashes, sourceSelection: { configPaths, adapterPaths } };
+}
 export async function settings(repo: string) {
   const value = await readJson(
     join(repo, "tests/probes/actual-main-settings.json"),
   );
   exact(
     Object.keys(value).sort(),
-    ["adapterSlots", "lateRefusal"],
+    ["adapterFiles", "adapterSlots", "lateRefusal"],
     "settings fields",
+  );
+  exact(
+    value.adapterFiles,
+    ACTUAL_MAIN_ADAPTER_FILES,
+    "finite adapter payload",
   );
   assert(
     value.lateRefusal === null ||

@@ -28,21 +28,23 @@ registered with an ordinary `for` loop and `Deno.test`. JUnit includes filtered
 cases as `<skipped/>`; its total includes those skipped cases. Filtered runs are
 development checks and never substitute for complete Native evidence.
 
-| Suite                            | Existing logical checks / named tests |
-| -------------------------------- | ------------------------------------: |
-| receipt contracts                |                                    63 |
-| public metadata contracts        |                                    13 |
-| split contracts                  |                                    33 |
-| public archive/artifact transfer |                                    16 |
-| diagnostic storage and ordering  |                                    38 |
-| total                            |                                   163 |
+| Suite                                | Existing logical checks / named tests |
+| ------------------------------------ | ------------------------------------: |
+| receipt contracts                    |                                    63 |
+| public metadata contracts            |                                    13 |
+| split contracts                      |                                    33 |
+| public archive/artifact transfer     |                                    16 |
+| diagnostic storage and ordering      |                                    38 |
+| Original Source / neutral product    |                                     7 |
+| adapter payload and Source selection |                                     6 |
+| total                                |                                   176 |
 
 The separate launcher regression suite has three real child-process checks:
 registered failures return exit 1 and preserve streams; filtering executes the
 positive control and writes JUnit; an intentional leaked file is refused by the
 normal sanitizer. Four focused report-completion regressions additionally cover
 public exclusion, cache-without-execution, and conservative handling of
-selection/execution options. These do not alter the 163 contract checks.
+selection/execution options. These seven support checks run separately.
 
 Synthetic receipt factories live in `tests/support/actual-main-fixture.ts` and
 do not execute tests on import. Each call returns independent mutable data. Case
@@ -58,6 +60,34 @@ bytes, finite closure, sparse/absent rows, forbidden neighbors, real read races,
 exclusive write collisions, and awaited cleanup barriers retain their original
 assertions. Temporary roots are created within each test and removed in
 `finally`.
+
+The copied adapter keeps `state.ts` as its public facade. `common.ts` owns
+shared assert/hash primitives; `diagnostics/contract.ts` validates requests and
+actual notification geometry; `files.ts` owns safe filesystem operations;
+`reports.ts` arms/authenticates requests and reads/writes external reports;
+`retention.ts` orders the same 228 candidates and awaits their stable copies and
+manifest. These modules do not import the state facade and create no runtime
+cycle.
+
+`tests/probes/actual-main-settings.json` lists the complete ten-file adapter
+payload once. The actual consumer copies exactly those files, checks their bytes
+against the authenticated checkout, and records every file in the strict receipt
+scaffolding. Tests compare an independent literal payload, reject each
+missing/changed file and extra files, verify copied bytes/modes, and run
+retention through the real copied facade. Omitting any new runtime dependency
+fails import.
+
+Current Source diagnostics include every mounted checkout config, the ten
+selected authored inputs, and all ten adapter files. The request's optional
+`sourceSelection` records the authenticated config and adapter paths; the
+validator requires their exact union with the finite input registry, canonical
+paths and unique entries. The actual consumer compares all selected hashes to
+the current authenticated checkout before arming. This replaces the obsolete
+53-file limit for that explicit selection (currently 91 files); legacy callers
+without a selection retain the old limit. Request/report property order and
+candidate ordering remain unchanged apart from the added selection and module
+hashes. This evidence is diagnostic only; current native acceptance must still
+be regenerated after the checkout freezes.
 
 Optional legacy JSON remains available:
 

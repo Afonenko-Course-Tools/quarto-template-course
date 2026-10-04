@@ -16,8 +16,9 @@ files remain authenticated checkout inputs but cannot join Original wildcard
 render selections. The native consumer inspects exact historical inputs for all
 five members before rendering their unchanged configurations.
 The native consumer reinstalls complete frozen provider packages and retains
-all current/source/resource/private/late guards. It overlays the existing five
-instrumented adapter modules only after authenticating all authored bytes.
+all current/source/resource/private/late guards. It overlays the finite adapter
+payload listed in `tests/probes/actual-main-settings.json`, including the internal
+diagnostic modules, only after authenticating all authored bytes.
 
 Run the documented Original consumer, not `quarto render` in this directory:
 relative package paths intentionally describe the fresh native root.

@@ -4,6 +4,7 @@ import {
 } from "../probes/original-course-source.ts";
 // Synthetic evidence transport only; never a native course success claim.
 import {
+  ACTUAL_MAIN_ADAPTER_FILES,
   ACTUAL_MAIN_INPUTS,
   ACTUAL_MAIN_INSTALLATIONS,
   ACTUAL_MAIN_MEMBERS,
@@ -36,8 +37,8 @@ export const expected = {
         ].map((p) => ORIGINAL_COURSE + p),
         ...ACTUAL_MAIN_INPUTS.book,
         ...ACTUAL_MAIN_INPUTS.essay,
-        ...["prepare", "finish", "verify", "state", "verification"].map((p) =>
-          `fixtures/probes/actual-main/${p}.ts`
+        ...ACTUAL_MAIN_ADAPTER_FILES.map((p) =>
+          `fixtures/probes/actual-main/${p}`
         ),
       ].map((p, i) => [p, h(10 + i, 64)]),
     ),
@@ -98,12 +99,11 @@ export function fixture() {
       })),
       sourceInputs: { student: ACTUAL_MAIN_INPUTS, full: ACTUAL_MAIN_INPUTS },
       members: ACTUAL_MAIN_MEMBERS,
-      scaffolding: ["prepare", "finish", "verify", "state", "verification"].map(
+      scaffolding: ACTUAL_MAIN_ADAPTER_FILES.map(
         (p) => ({
-          source: `fixtures/probes/actual-main/${p}.ts`,
-          target: `_publication/${p}.ts`,
-          sha256:
-            expected.template.files[`fixtures/probes/actual-main/${p}.ts`],
+          source: `fixtures/probes/actual-main/${p}`,
+          target: `_publication/${p}`,
+          sha256: expected.template.files[`fixtures/probes/actual-main/${p}`],
         }),
       ),
     });

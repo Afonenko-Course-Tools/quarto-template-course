@@ -2,6 +2,7 @@ import { runQuartoTests } from "./support/quarto-test-runner.ts";
 import { completeRetentionReport } from "./support/actual-main-retention-report.ts";
 const suites = [
   "contracts/actual-main/receipt_test.ts",
+  "contracts/actual-main/adapter_test.ts",
   "contracts/actual-main/public_test.ts",
   "contracts/actual-main/split_test.ts",
   "transport/actual-main-public-transfer_test.ts",
