@@ -10,6 +10,11 @@ not the neutral starter course.
 Template checkout, then mounts this fixture at the fresh native root using
 `tests/probes/original-course-source.ts`. Installed extensions remain at their
 shared root/book/essay/lectures/practice scopes; this fixture contains none.
+Within the active Original member directories, only relocated Original authored
+files and the shared installed extensions are mounted. Neutral-only authored
+files remain authenticated checkout inputs but cannot join Original wildcard
+render selections. The native consumer inspects exact historical inputs for all
+five members before rendering their unchanged configurations.
 The native consumer reinstalls complete frozen provider packages and retains
 all current/source/resource/private/late guards. It overlays the existing five
 instrumented adapter modules only after authenticating all authored bytes.

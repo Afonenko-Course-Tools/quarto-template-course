@@ -11,13 +11,24 @@ export function originalCourseFiles<T>(
       throw new Error(`ACTUAL_MAIN: missing fixed Original origin ${required}`);
     }
   }
-  const mounted = { ...files };
+  // Complete checkout authentication stays in files. Active Original directories
+  // contain only their frozen authored origins and shared installed runtimes;
+  // neutral-only files must not enter historical wildcard render selections.
+  const nativeDirectory =
+    /^(?:book|essay|lectures|practice|handouts|_publication)\//;
+  const installedRuntime =
+    /^(?:book|essay|lectures|practice|handouts)\/_extensions\//;
+  const mounted = Object.fromEntries(
+    Object.entries(files).filter(([path]) =>
+      !nativeDirectory.test(path) || installedRuntime.test(path)
+    ),
+  );
   for (const [source, value] of Object.entries(files)) {
     if (!source.startsWith(ORIGINAL_COURSE)) continue;
     const target = source.slice(ORIGINAL_COURSE.length);
     if (
       /^(?:_quarto(?:-[^/]*)?\.yml|index\.qmd)$/.test(target) ||
-      /^(?:book|essay|lectures|practice|handouts|_publication)\//.test(target)
+      nativeDirectory.test(target)
     ) {
       if (
         target.split("/").some((p) =>

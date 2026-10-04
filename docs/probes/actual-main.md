@@ -67,14 +67,17 @@ hashes и сохранность обоих прежних полных public t
 доказательством.
 
 Каждый student-release, full-release и fresh late job имеет budget 360 минут;
-aggregate — 5 минут. Standard `pages.yml` сохраняет оба original profiles, оба
-optional examples, external imports и все assertions. Каждый native профиль
+aggregate — 5 минут. Standard `pages.yml` проверяет нейтральный корневой курс
+в обоих профилях, оба optional examples и external imports. Каждый native профиль
 собирается в отдельном job с budget 360 минут: full, затем student в свежем
 checkout того же Source/run/channel. Передаются только полные публичные деревья
 full и двух optional examples; их bytes, modes и complete maps проверяются до
 переноса и после student-сборки. Финальные jobs с прежними именами `Проверка`
-проверяют оба выпуска неизменёнными `tests/check-original.ts --root <fresh-root> --skip-render` и
-`tests/external.ts`. Только успешные full/student допускают финальную проверку
+проверяют оба нейтральных выпуска через `tests/check.ts --skip-render` и
+`tests/external.ts`. Самостоятельный Original consumer вызывает сохранённый
+`tests/check-original.ts --root <fresh-root> --skip-render` в releases/full-release
+после появления обоих настоящих Original public trees. Только успешные
+full/student Pages jobs допускают финальную проверку
 и прежнюю conditional student Pages upload/deploy. Добавленные четыре workers
 увеличивают Source-defined required set с 18 до 22 jobs; deploy остаётся отдельно.
 Для исходных Markdown inputs prepare требует 16 book + 20 essay + 2 navigation

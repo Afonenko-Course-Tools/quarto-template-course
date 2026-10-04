@@ -263,9 +263,17 @@ for (const [name, provider] of Object.entries(packageProviders)) {
   packages.push({ name, archiveSha256: await hash(archive), files });
 }
 const sourceInputs: any = {};
+// Retain the book/essay receipt contract, while guarding every native member's
+// exact historical selection before rendering its unchanged configuration.
+const nativeInputs = {
+  ...ACTUAL_MAIN_INPUTS,
+  lectures: ["lectures/01/contracts.qmd"],
+  practice: ["practice/01/clamp.qmd"],
+  handouts: ["handouts/contracts.qmd"],
+};
 for (const profile of ["student", "full"]) {
   sourceInputs[profile] = {};
-  for (const member of ["book", "essay"]) {
+  for (const [member, expectedInputs] of Object.entries(nativeInputs)) {
     const result = JSON.parse(
       await command(Deno.env.get("QUARTO") || "quarto", [
         "inspect",
@@ -277,7 +285,7 @@ for (const profile of ["student", "full"]) {
     const inputs = result.files.input.map((p: string) => relative(root, p));
     exact(
       inputs,
-      ACTUAL_MAIN_INPUTS[member as "book" | "essay"],
+      expectedInputs,
       `original ${member}/${profile} native input set`,
     );
     assert(
@@ -287,7 +295,9 @@ for (const profile of ["student", "full"]) {
         ),
       "ACTUAL_MAIN: changed original native engine coverage",
     );
-    sourceInputs[profile][member] = inputs;
+    if (member === "book" || member === "essay") {
+      sourceInputs[profile][member] = inputs;
+    }
     await Deno.writeTextFile(
       join(evidence, `${member}-${profile}-inspect.json`),
       JSON.stringify(result, null, 2),

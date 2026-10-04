@@ -12,6 +12,9 @@ Deno.test("Original uses authenticated relocated source and preserves whole-sour
     "_quarto.yml": "neutral-config",
     "index.qmd": "neutral-portal",
     "lectures/index.qmd": "neutral-lecture",
+    "practice/index.qmd": "neutral-practice",
+    "lectures/assets/neutral.txt": "neutral-resource",
+    "lectures/_extensions/package/payload": "installed-slides",
     "fixtures/probes/original-course/_quarto.yml": "original-config",
     "fixtures/probes/original-course/index.qmd": "original-portal",
     "fixtures/probes/original-course/lectures/01/contracts.qmd":
@@ -25,6 +28,15 @@ Deno.test("Original uses authenticated relocated source and preserves whole-sour
   assertEquals(mapped["_quarto.yml"], "original-config");
   assertEquals(mapped["index.qmd"], "original-portal");
   assertEquals(mapped["lectures/01/contracts.qmd"], "original-lecture");
+  assertEquals(mapped["lectures/index.qmd"], undefined);
+  assertEquals(mapped["practice/index.qmd"], undefined);
+  assertEquals(mapped["lectures/assets/neutral.txt"], undefined);
+  assertEquals(
+    mapped["lectures/_extensions/package/payload"],
+    "installed-slides",
+  );
+  assertEquals(files["lectures/index.qmd"], "neutral-lecture");
+  assertEquals(files["practice/index.qmd"], "neutral-practice");
   assertEquals(mapped["book/topics/contracts/_control.qmd"], "closed-control");
   assertEquals(mapped["book/_extensions/package/payload"], "installed-package");
   assertEquals(mapped["tests/probes/actual-main-consumer.ts"], "runner");
@@ -88,8 +100,10 @@ Deno.test("Original receipts refuse neutral hashes substituted at mounted author
   const { expected, fixture } = await import(
     "../../support/actual-main-fixture.ts"
   );
-  check(aggregateActualMain(fixture(), expected).totalNativeCases === 6,
-    "unmodified Original evidence must remain valid before origin mutations");
+  check(
+    aggregateActualMain(fixture(), expected).totalNativeCases === 6,
+    "unmodified Original evidence must remain valid before origin mutations",
+  );
   for (const field of ["authorConfigs", "authorInputs"] as const) {
     const observations = fixture(),
       path = field === "authorConfigs" ? "_quarto.yml" : "index.qmd";
