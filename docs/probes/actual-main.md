@@ -134,3 +134,8 @@ accessor, не отрицательный вызов Nav finish и не original
 original late CI вызывает реальный Nav finish после этой же мутации и обязан
 наблюдать точный code, сохранить оба public trees и показать zero public events.
 Generic nonzero не принимается.
+
+Быстрые 163 transport/storage проверки, прежние CLI paths, filtering, JUnit и
+карта всех 33 split / 54 transfer cases описаны в
+[actual-main-fast-tests.md](actual-main-fast-tests.md). Они запускаются перед
+native попыткой в существующих student jobs и не заменяют native proof.

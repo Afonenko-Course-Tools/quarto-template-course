@@ -82,6 +82,20 @@ jobs:
       - uses: quarto-dev/quarto-actions/setup@8a96df13519ee81fd526f2dfca5962811136661b # v2.2.0
         with:
           version: ${{ matrix.quarto }}
+      - name: Fast contract, public transfer and diagnostic guards
+        working-directory: template
+        run: |
+          quarto run tests/run.ts --junit-path "$RUNNER_TEMP/actual-main-fast.xml"
+          quarto run tests/run.ts tests/support/quarto-test-runner_test.ts --junit-path "$RUNNER_TEMP/actual-main-launcher.xml"
+      - name: Fast guard JUnit results
+        if: always()
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: actual-main-fast-${{ matrix.quarto }}
+          if-no-files-found: error
+          path: |
+            ${{ runner.temp }}/actual-main-fast.xml
+            ${{ runner.temp }}/actual-main-launcher.xml
       - uses: cue-lang/setup-cue@b0e30e540a2dae47304ebf16586a5b2db023b61c # v2.0.0
         with:
           version: v0.17.1
