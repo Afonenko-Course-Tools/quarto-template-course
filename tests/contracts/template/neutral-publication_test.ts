@@ -1,6 +1,28 @@
 import { join } from "stdlib/path";
 import { check } from "../../support/contract-cases.ts";
 import { checkNeutralPublication } from "../../check-neutral.ts";
+for (const part of ["theory", "tasks", "lectures", "practice", "handbook"]) {
+  Deno.test(`neutral ${part} authors Quarto startup ignores before owner freeze`, async () => {
+    let text: string | undefined;
+    try {
+      text = await Deno.readTextFile(
+        new URL(`../../../${part}/.gitignore`, import.meta.url),
+      );
+    } catch (error) {
+      if (!(error instanceof Deno.errors.NotFound)) throw error;
+    }
+    check(
+      text !== undefined,
+      `${part}: authored .gitignore missing before owner freeze`,
+    );
+    for (const entry of ["/.quarto/", "**/*.quarto_ipynb"]) {
+      check(
+        text.split(/\r?\n/).includes(entry),
+        `${part}: native startup entry missing ${entry}`,
+      );
+    }
+  });
+}
 async function fixture(root: string) {
   const exports = [
     "portal:sec-portal",
