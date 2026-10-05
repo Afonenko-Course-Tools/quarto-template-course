@@ -44,10 +44,8 @@ const quarto = Deno.env.get("QUARTO") || "quarto";
 const results: any[] = [], manifest: any[] = [];
 await Deno.mkdir(evidence, { recursive: true });
 const packages = [
-  [
-    "course-core",
-    join(repo, "book/_extensions/Afonenko-Course-Tools/course-core"),
-  ],
+  // The historical P0 producer and its native runtime come from the same source.
+  ["course-core", join(core, "_extensions/course-core")],
   [
     "course-presentation",
     join(repo, "book/_extensions/Afonenko-Course-Tools/course-presentation"),
