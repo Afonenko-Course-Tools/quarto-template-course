@@ -9,7 +9,7 @@ cloud:
 
 # Проверка состояния службы {#sec-cloud-lab}
 
-:::: {#exr-service target="cloud"}
+:::: {#exr-service course-role="independent-study" difficulty="introductory" target="cloud"}
 ## Состояние службы
 
 ### Запись состояния {.cloud-step key="configure"}

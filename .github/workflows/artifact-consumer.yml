@@ -1,0 +1,86 @@
+name: Установленная печать и выдача P0
+
+on:
+  pull_request:
+  push:
+    branches: [main, master]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  artifact-consumer:
+    name: QRC, PDF и ZIP (${{ matrix.quarto }})
+    runs-on: ubuntu-24.04
+    timeout-minutes: 35
+    strategy:
+      fail-fast: false
+      matrix:
+        quarto: [release, pre-release]
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          path: template
+          persist-credentials: false
+      - name: Производитель экспериментального пакета Core
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          repository: Afonenko-Course-Tools/quarto-course
+          ref: 4f5caf9a15b9bd36476cad8a646e81521fbd29d1
+          path: core-export
+          persist-credentials: false
+      - name: Согласованный Publisher
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          repository: Afonenko-Course-Tools/quarto-project-publish
+          ref: 59d4b98c4eaf568730121ce0a107f4ca4b3d4458
+          path: publisher
+          persist-credentials: false
+      - name: Согласованный Print
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          repository: Afonenko-Course-Tools/quarto-course-print
+          ref: ba717cf2f4fa01e1fd4df41724d3257e5a3ffa07
+          path: print
+          persist-credentials: false
+      - uses: quarto-dev/quarto-actions/setup@8a96df13519ee81fd526f2dfca5962811136661b # v2.2.0
+        with:
+          version: ${{ matrix.quarto }}
+      - uses: cue-lang/setup-cue@b0e30e540a2dae47304ebf16586a5b2db023b61c # v2.0.0
+        with:
+          version: v0.17.1
+      - name: Проверка PDF штатными инструментами
+        run: sudo apt-get update && sudo apt-get install -y --no-install-recommends poppler-utils
+      - name: Частный вход не проходит до commit публикации
+        working-directory: template
+        run: quarto run tests/probes/artifact-guards.ts
+      - name: Архивы, quarto add и совместная нативная сборка
+        working-directory: template
+        run: |
+          quarto run tests/probes/artifact-consumer.ts \
+            --publisher "$GITHUB_WORKSPACE/publisher" \
+            --print "$GITHUB_WORKSPACE/print" \
+            --core-export "$GITHUB_WORKSPACE/core-export" \
+            --output "$RUNNER_TEMP/artifact-evidence"
+      - name: Версии и итоговая матрица
+        if: always()
+        env:
+          ARTIFACT_EVIDENCE: ${{ runner.temp }}/artifact-evidence
+        run: |
+          python3 - <<'PY'
+          import json, os
+          from pathlib import Path
+          root = Path(os.environ["ARTIFACT_EVIDENCE"])
+          manifest = root / "install-manifest.json"
+          if manifest.exists():
+              data = json.loads(manifest.read_text())
+              print(json.dumps({k: data[k] for k in ["versions", "companionSources"]}, indent=2))
+          results = root / "results.json"
+          if results.exists():
+              print(results.read_text())
+          PY

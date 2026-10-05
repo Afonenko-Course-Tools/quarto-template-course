@@ -1,0 +1,28 @@
+project:
+  type: book
+  output-dir: _output
+  pre-render:
+    - _extensions/Afonenko-Course-Tools/course-core/entrypoints/pre.ts
+  post-render:
+    - _extensions/Afonenko-Course-Tools/course-core/entrypoints/post.ts
+  resources: [./assets/**, "!materials/**", "!**/_*.qmd"]
+profile:
+  default: student
+  group: [[student, full]]
+course:
+  id: p0-handbook
+  validate: true
+filters: [course-core, course-presentation]
+course-presentation:
+  mode: study
+book:
+  title: P0 handbook
+  repo-url: https://github.com/example/five-parts
+  repo-branch: feat/p0-consumer-proof
+  repo-subdir: handbook
+  repo-actions: [source, issue]
+  chapters:
+    - index.qmd
+format:
+  html:
+    theme: cosmo

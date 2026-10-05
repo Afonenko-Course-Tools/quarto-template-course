@@ -2,7 +2,9 @@ project:
   type: default
   output-dir: _output
   render: [index.qmd]
-  pre-render: _extensions/Afonenko-Course-Tools/course-core/entrypoints/pre.ts
+  pre-render:
+    - _extensions/Afonenko-Course-Tools/course-core/entrypoints/pre.ts
+    - _extensions/Afonenko-Course-Tools/course-core/entrypoints/owner-freeze.ts
   post-render: _extensions/Afonenko-Course-Tools/course-core/entrypoints/post.ts
 format: html
 lang: ru

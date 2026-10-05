@@ -1,0 +1,18 @@
+{
+  "publisher": {
+    "commit": "ab481838a92bbe1d7705a3df7dc3194fb97b334c",
+    "tree": "4da5b9e489fa41157c8b20ee139e88b355c79656"
+  },
+  "qrc": {
+    "commit": "d366cacf37457802506c5b75e87f39f89d31c373",
+    "tree": "f2283f0b038a1e2972037b93420774df69cd54cc"
+  },
+  "core": {
+    "commit": "da4c3730ec4779206588cbb1e9532ec541421c9f",
+    "tree": "196dbc08b01113b43b54c4cb3a7d6dd26c71bf05"
+  },
+  "download": {
+    "commit": "d78a533b14c38e3dd64dbfbd59e437a82e2752fd",
+    "tree": "7e21f82dd770eb2c1593aae54bebedf1b8e6cbaf"
+  }
+}

@@ -1,0 +1,36 @@
+---
+title: Ограничение диапазона
+---
+
+## Реализация clamp {#sec-clamp}
+
+Условие: @book:exr-clamp. Теория: @lectures:sec-contracts.
+
+Сначала сформулируйте контракт, затем напишите реализацию и проверьте границы.
+
+## Обсуждение {#sec-discussion}
+
+Что возвращать, если границы совпадают? Что делать при `lower > upper`?
+
+Сверьтесь с @book:sec-contracts и @lectures:sec-boundaries.
+
+## Самопроверка {#sec-self-check}
+
+:::: {#exm-clamp-self-check course-role="self-check" difficulty="introductory" work-mode="individual"}
+### Какие входы различаются?
+
+Чем отличаются `clamp(3, 3, 3)` и `clamp(3, 5, 1)` с точки зрения контракта?
+::::
+
+::: {#sol-clamp-self-check .when-full for="exm-clamp-self-check"}
+### Объяснение
+
+Первый вызов имеет корректный вырожденный диапазон и возвращает `3`.
+Второй нарушает предусловие и должен вызвать `IllegalArgumentException`.
+:::
+
+::: {.when-full}
+
+Комментарий преподавателю: начните обсуждение с вырожденного диапазона.
+
+:::

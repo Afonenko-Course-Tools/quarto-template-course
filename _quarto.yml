@@ -1,41 +1,68 @@
 project:
   type: website
-  output-dir: _site
+  output-dir: .project-publish/native
   render: []
-  pre-render: _extensions/Afonenko-Course-Tools/project-publish/entrypoints/pre.ts
+  resources:
+    - ./assets/**
+    - "!theory/**"
+    - "!tasks/**"
+    - "!lectures/**"
+    - "!practice/**"
+    - "!handbook/**"
+    - "!book/**"
+    - "!essay/**"
+    - "!handouts/**"
+    - "!examples/**"
+    - "!fixtures/**"
+    - "!tests/**"
+    - "!docs/**"
+    - "!_extensions/**"
+    - "!_publication/**"
+    - "!.project-publish/**"
+    - "!_generated/**"
+    - "!_site*/**"
+  pre-render:
+    - _extensions/Afonenko-Course-Tools/project-publish/entrypoints/pre.ts
+    - _extensions/Afonenko-Course-Tools/course-core/entrypoints/owner-freeze.ts
   post-render: _extensions/Afonenko-Course-Tools/project-publish/entrypoints/post.ts
   preview:
     watch-inputs: false
     serve:
-      cmd: "quarto run ../.project-publish/preview.ts --port {port} --host {host}"
+      cmd: "quarto run ../preview.ts --port {port} --host {host}"
       ready: "Публикация предпросмотр готов"
-filters:
-  - reference-catalog
+format: html
+lang: ru
+course:
+  id: course-portal
+website:
+  title: Учебный курс
+  search: true
+filters: [course-core, reference-catalog]
 reference-catalog:
-  namespace: site
+  namespace: portal
   publication:
     title: Учебный курс
   exports:
-    book: [sec-contracts, sec-contract-demo]
-    essay: [sec-essays, sec-utf8-policies]
-  imports:
-    os:
-      source: fixtures/external-reference.json
-      namespace: book
-      base-url: https://example.edu/os/
-      style: external
-
+    portal: [sec-portal]
+    theory: [sec-theory]
+    tasks: [sec-tasks, sec-lab, sec-plan, exr-compare, exr-evidence]
+    lectures: [sec-lectures]
+    practice: [sec-practice]
+    handbook: [sec-handbook]
 profile:
   default: student
   group: [[student, full]]
-
 project-publish:
-  home: book
+  portal: index.qmd
+  output-dir: _site
   projects:
-    book: {path: book, format: html}
+    theory: {path: theory, format: html}
+    tasks: {path: tasks, format: html}
     lectures: {path: lectures, format: revealjs}
     practice: {path: practice, format: revealjs}
-    essay: {path: essay, format: html}
-    handouts: {path: handouts, format: pdf, mount: handouts}
+    handbook: {path: handbook, format: html}
   integrations:
+    - _publication/prepare.ts
     - _extensions/Afonenko-Course-Tools/reference-catalog/entrypoints/publication.ts
+    - _publication/finish.ts
+    - _publication/verify.ts

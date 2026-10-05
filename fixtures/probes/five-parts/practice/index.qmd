@@ -1,0 +1,7 @@
+# P0 practice {#sec-practice}
+
+Tasks: @tasks:sec-tasks. Theory: @theory:sec-theory.
+
+::: {.content-visible when-profile="full"}
+FULL_ONLY_practice
+:::

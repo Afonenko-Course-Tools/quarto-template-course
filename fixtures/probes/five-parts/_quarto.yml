@@ -1,0 +1,40 @@
+project:
+  type: website
+  output-dir: _site
+  render: [index.qmd]
+  resources:
+    - ./assets/**
+    - "!theory/**"
+    - "!tasks/**"
+    - "!practice/**"
+    - "!lectures/**"
+    - "!handbook/**"
+  pre-render: _extensions/Afonenko-Course-Tools/project-publish/entrypoints/pre.ts
+  post-render: _extensions/Afonenko-Course-Tools/project-publish/entrypoints/post.ts
+format: html
+website:
+  title: Five-part P0 portal
+  site-url: https://example.edu/courses/p0/
+profile:
+  default: student
+  group: [[student, full]]
+filters: [reference-catalog]
+reference-catalog:
+  namespace: portal
+  publication:
+    title: Five-part P0
+  exports:
+    theory: [sec-theory]
+    tasks: [sec-tasks, sec-lab, sec-plan]
+    practice: [sec-practice]
+    lectures: [sec-lectures]
+    handbook: [sec-handbook]
+project-publish:
+  projects:
+    theory: {path: theory, format: html}
+    tasks: {path: tasks, format: html}
+    practice: {path: practice, format: revealjs}
+    lectures: {path: lectures, format: revealjs}
+    handbook: {path: handbook, format: html}
+  integrations:
+    - _extensions/Afonenko-Course-Tools/reference-catalog/entrypoints/publication.ts

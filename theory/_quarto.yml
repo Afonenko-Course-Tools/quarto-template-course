@@ -1,0 +1,26 @@
+project:
+  type: book
+  output-dir: _output
+  resources: [./assets/**, "!materials/**", "!**/_*.qmd"]
+profile:
+  default: student
+  group: [[student, full]]
+course:
+  id: course-theory
+  validate: true
+filters: [course-core, course-presentation]
+course-presentation:
+  mode: study
+book:
+  sidebar:
+    tools:
+      - icon: house
+        href: ../index.html#sec-portal
+        text: Навигация курса
+  title: Теория
+  chapters:
+    - index.qmd
+format:
+  html:
+    theme: cosmo
+lang: ru

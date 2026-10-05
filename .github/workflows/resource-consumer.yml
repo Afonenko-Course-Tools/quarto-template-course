@@ -1,0 +1,116 @@
+name: Production resources, текущие PDF и ZIP
+
+on:
+  pull_request:
+  push:
+    branches: [main, master]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  resources:
+    name: Installed ${{ matrix.phase }} (${{ matrix.quarto }})
+    runs-on: ubuntu-24.04
+    timeout-minutes: 150
+    strategy:
+      fail-fast: false
+      matrix:
+        quarto: ['1.10.18', '1.11.5']
+        phase: [current, lifecycle, owner, body, delivery]
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          path: template
+          persist-credentials: false
+      - name: Production Core body и Presentation
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          repository: Afonenko-Course-Tools/quarto-course
+          ref: da4c3730ec4779206588cbb1e9532ec541421c9f
+          path: core
+          persist-credentials: false
+      - name: Publisher с owner output context
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          repository: Afonenko-Course-Tools/quarto-project-publish
+          ref: ab481838a92bbe1d7705a3df7dc3194fb97b334c
+          path: publisher
+          persist-credentials: false
+      - name: QRC после native managed portal
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          repository: Afonenko-Course-Tools/quarto-reference-catalog
+          ref: d366cacf37457802506c5b75e87f39f89d31c373
+          path: qrc
+          persist-credentials: false
+      - name: Download с публичным ownership seam
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          repository: Afonenko-Course-Tools/quarto-project-download
+          ref: d78a533b14c38e3dd64dbfbd59e437a82e2752fd
+          path: download
+          persist-credentials: false
+      - name: Print с текущей materialization
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          repository: Afonenko-Course-Tools/quarto-course-print
+          ref: 12ef8b905ef5477b384789ce8ae268ad0076ddde
+          path: print
+          persist-credentials: false
+      - uses: quarto-dev/quarto-actions/setup@8a96df13519ee81fd526f2dfca5962811136661b # v2.2.0
+        with:
+          version: ${{ matrix.quarto }}
+      - uses: cue-lang/setup-cue@b0e30e540a2dae47304ebf16586a5b2db023b61c # v2.0.0
+        with:
+          version: v0.17.1
+      - name: Штатные R, PDF и archive инструменты
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends file poppler-utils r-base-core r-cran-knitr r-cran-rmarkdown
+      - name: Конкретные archive/runtime parser guards
+        working-directory: template
+        run: |
+          python3 tests/probes/resource-archive-guards.py
+          python3 tests/probes/resource-runtime-guards.py
+      - name: Immutable archives, quarto add и текущий body/resource lifecycle
+        working-directory: template
+        run: |
+          export QUARTO="$(command -v quarto)"
+          quarto run tests/probes/resource-consumer.ts \
+            --core "$GITHUB_WORKSPACE/core" \
+            --publisher "$GITHUB_WORKSPACE/publisher" \
+            --qrc "$GITHUB_WORKSPACE/qrc" \
+            --download "$GITHUB_WORKSPACE/download" \
+            --print "$GITHUB_WORKSPACE/print" \
+            --phase "${{ matrix.phase }}" \
+            --output "$RUNNER_TEMP/resource-evidence-${{ matrix.phase }}"
+      - name: Версии, exact source trees, результаты и обе публикации
+        if: always()
+        env:
+          RESOURCE_EVIDENCE: ${{ runner.temp }}/resource-evidence-${{ matrix.phase }}
+        run: |
+          python3 - <<'PY'
+          import hashlib, json, os
+          from pathlib import Path
+          root = Path(os.environ['RESOURCE_EVIDENCE'])
+          manifest = root / 'install-manifest.json'
+          if manifest.exists():
+              data = json.loads(manifest.read_text())
+              print(json.dumps({key:data[key] for key in ['versions','templateSource','companionSources','packages','initialization']},indent=2))
+          results = root / 'results.json'
+          if results.exists(): print(results.read_text())
+          else:
+              partial = root / 'partial-results.json'
+              if partial.exists(): print(partial.read_text())
+              for log in sorted(root.glob('*.log')):
+                  print(f'{log.name}:\n{log.read_text()[-12000:]}')
+          for retained in sorted(root.glob('*-publication-*.json')):
+              raw = retained.read_bytes()
+              print(json.dumps({'evidencePath':str(retained),'sha256':hashlib.sha256(raw).hexdigest(),'publicationMaps':json.loads(raw)},indent=2))
+          PY

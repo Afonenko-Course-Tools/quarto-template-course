@@ -1,0 +1,27 @@
+# Локальное состояние Quarto. Сохраняйте записи, которые Quarto добавляет автоматически.
+/.quarto/
+**/.quarto/
+**/*.quarto_ipynb
+/_*.local
+
+# Результаты сборки, учебные модели и кэши на любой глубине.
+**/.qrc/
+**/_generated/
+**/_site/
+**/_book/
+**/_output/
+**/site_libs/
+**/*_files/
+**/*_cache/
+
+.DS_Store
+
+# Публикации профилей и результаты компиляции стартовых проектов.
+**/_site-student/
+**/_site-full/
+**/_downloads/
+**/.gradle/
+**/build/
+**/target/
+**/out/
+**/*.class

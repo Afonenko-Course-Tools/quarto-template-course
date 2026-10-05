@@ -1,32 +1,21 @@
 project:
-  pre-render:
-    - _extensions/Afonenko-Course-Tools/course-core/entrypoints/pre.ts
-  post-render:
-    - _extensions/Afonenko-Course-Tools/course-core/entrypoints/post.ts
   type: default
+  render: [index.qmd]
   output-dir: _output
-  render: ["**/*.qmd"]
-format:
-  revealjs:
-    theme: [default]
-    hash: true
-    slide-number: true
-    menu: false
-    pdf-separate-fragments: false
-    revealjs-plugins: [course-navigation]
-    course-nav:
-      sidebar: false
-metadata-files: [_bsu.yml]
-course-presentation:
-  mode: study
-lang: ru
-number-sections: false
-
+  resources: [./assets/**, "!materials/**", "!**/_*.qmd"]
 profile:
   default: student
   group: [[student, full]]
-
 course:
   id: course-practice
   validate: true
 filters: [course-core, course-presentation]
+course-presentation:
+  mode: study
+format:
+  revealjs:
+    theme: default
+    show-notes: false
+    slide-number: true
+    revealjs-plugins: [course-navigation]
+lang: ru
