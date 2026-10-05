@@ -1,0 +1,23 @@
+[Source](https://github.com/example/five-parts) · [Report issue](https://github.com/example/five-parts/issues/new).
+
+## Public questions {#sec-public-questions}
+
+:::: {#exr-public course-role="demonstration" target="manual" difficulty="introductory" work-mode="individual"}
+## Demonstration exercise
+
+Public condition.
+::::
+
+::: {#sol-public}
+PUBLIC_DEMONSTRATION_SOL
+:::
+
+:::: {#exr-discussion course-role="discussion" target="manual" difficulty="introductory" work-mode="individual"}
+## Discussion exercise
+
+Ordinary condition.
+::::
+
+::: {#sol-discussion}
+FULL_ONLY_DISCUSSION_SOL
+:::

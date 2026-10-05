@@ -10,6 +10,7 @@ const suites = [
   "contracts/template/original-source_test.ts",
   "contracts/template/neutral-publication_test.ts",
   "contracts/template/optional-example_test.ts",
+  "contracts/resource/solution-visibility_test.ts",
 ];
 if (import.meta.main) {
   // Explicit paths select a suite; a flags-only invocation runs all Original and neutral Template checks.

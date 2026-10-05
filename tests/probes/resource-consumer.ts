@@ -459,11 +459,14 @@ async function verifyRelease(
     ),
     "public notes",
   );
+  const taskIndex = await Deno.readTextFile(join(output, "tasks/index.html"));
   assert(
-    (await Deno.readTextFile(join(output, "tasks/index.html"))).includes(
-      "PUBLIC_ORDINARY_SOL",
-    ),
-    "ordinary public sol lost",
+    taskIndex.includes("PUBLIC_DEMONSTRATION_SOL"),
+    "demonstration solution must remain public",
+  );
+  assert(
+    taskIndex.includes("FULL_ONLY_DISCUSSION_SOL") === (profile === "full"),
+    "ordinary discussion solution must be full-only",
   );
   const zipFile = join(output, "tasks/_downloads/starter.zip");
   const archive = JSON.parse(
@@ -754,8 +757,10 @@ try {
       './materials/student/**, "!materials/instructor/**"',
     );
     await Deno.writeTextFile(tasksConfig, baseTasks);
-    const permittedTask = (await Deno.readTextFile(taskInput)) +
-      '\n[Source](https://github.com/example/five-parts) · [Report issue](https://github.com/example/five-parts/issues/new).\n\n## Public questions {#sec-public-questions}\n\n:::: {#exr-public course-role="discussion" target="manual" difficulty="introductory" work-mode="individual"}\n## Public exercise\nPublic condition.\n::::\n\n::: {#sol-public for="exr-public"}\nPUBLIC_ORDINARY_SOL\n:::\n';
+    const permittedTask = (await Deno.readTextFile(taskInput)) + "\n" +
+      await Deno.readTextFile(
+        join(repo, "fixtures/probes/resources/solution-visibility.qmd"),
+      );
     await Deno.writeTextFile(taskInput, permittedTask);
     await Deno.writeTextFile(join(consumer, "tasks/corpus.qmd"), corpus(true));
     await Deno.writeTextFile(
