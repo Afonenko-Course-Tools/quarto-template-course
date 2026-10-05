@@ -12,13 +12,18 @@
 `_extensions` соответствующего проекта; сборка не обновляет их из сети.
 
 ```sh
-quarto run _extensions/Afonenko-Course-Tools/project-publish/entrypoints/render.ts --profile student
 quarto run _extensions/Afonenko-Course-Tools/project-publish/entrypoints/render.ts --profile full
-quarto preview --profile student --no-browser --port 4200
-quarto run tests/check.ts
+quarto run _extensions/Afonenko-Course-Tools/project-publish/entrypoints/render.ts --profile student
+quarto run tests/check.ts --skip-render
 ```
 
-По умолчанию выбран `student`; результаты — `_site-student/` и `_site-full/`.
+Команды выполняются из корня шаблона. По умолчанию выбран `student`;
+результаты — `_site-student/` и `_site-full/`. Проверка с `--skip-render` читает
+уже построенные результаты обоих профилей и сама их не создаёт. Для предпросмотра:
+
+```sh
+quarto preview --profile student --no-browser --port 4200
+```
 Для обычного нейтрального HTML/Reveal курса TeX не требуется. Независимый Original
 regression содержит PDF и требует XeLaTeX/DejaVu/Latin Modern.
 
@@ -61,8 +66,9 @@ regression содержит PDF и требует XeLaTeX/DejaVu/Latin Modern.
 ближайшим окружающим явно написанным заголовком `sec-*`; отдельную метадату темы
 добавлять не нужно. В книге используйте для темы тела явный `## … {#sec-*}`:
 Quarto извлекает начальный H1 в заголовок главы до захвата тела.
-Заголовок внутри задания и `target` необязательны.
-`target` выбирают только при необходимости конкретного адаптера. Обычное ручное
+Без `target` заголовок внутри задания необязателен. Явный `target="manual"`
+или имя выбранного адаптера сохраняет требование ведущего заголовка внутри
+задачи. `target` выбирают только при необходимости конкретной привязки. Обычное ручное
 задание не требует ни платформы, ни проекта с программой.
 
 Нативный `exm` показывает пример без извлечения канонического задания: см.
@@ -77,8 +83,10 @@ Quarto извлекает начальный H1 в заголовок главы
 контейнер. Заметки, ключи и `.grading-notes` закрыты. Задание `control` всегда
 закрыто в student. Для решения display-примера `exm` можно явно указать
 `.when-full`, сохраняя пару `for="exm-…"` и ID `sol-…`.
-В full доступны преподавательские пояснения и архив; в student они отсутствуют.
-Исходники открытого Git при этом остаются открытыми.
+В full доступны преподавательские пояснения и выбранный преподавательский
+архив; в student они отсутствуют. Full — представление материалов, а не режим
+автоматического экспорта или оценивания в LMS. Исходники открытого Git при этом
+остаются открытыми.
 
 `project-download.resources` выбирает конкретные каталоги. `materials/student`
 содержит нейтральный лист наблюдений; соседний `materials/reference` не включён
@@ -119,13 +127,21 @@ quarto run tests/check.ts
 quarto run tests/check.ts --skip-render
 quarto run tests/run.ts
 quarto run tests/external.ts
-quarto run tests/features.ts --course /путь/к/курсу
+quarto run tests/features.ts --course ../my-course
 ```
 
-Product checker проверяет пять нейтральных частей, каноническое владение tasks,
+`tests/check.ts` без `--skip-render` заново собирает оба профиля корневого курса
+и независимых примеров Cloud/PrairieLearn, затем проверяет продукты. Проверка
+нейтрального курса включает пять частей, единственное владение заданиями в tasks,
 QRC, локальные ссылки, архивы и отсутствие преподавательских данных в student.
-Pages CI сохраняет последовательность full → student → check и публикует только
-проверенный student стабильного канала.
+`tests/run.ts` запускает именованные `Deno.test` штатным Deno выбранного Quarto;
+можно передать путь набора, `--filter` и `--junit-path`. Это отдельные контрактные
+проверки, которые не заменяют сборку курса. `tests/features.ts` проверяет выбранный
+курс; путь `../my-course` замените своим относительным путём.
+
+Pages workflow задаёт последовательность full → student → check и публикует
+student стабильного канала после успешной проверки. Наличие workflow или
+контрактных тестов само по себе не подтверждает успех конкретной публикации.
 
 [Original regression](fixtures/probes/original-course/README.md) отдельно сохраняет
 прежние book/essay, лекции/практику, четыре Listing, PDF-раздатку, Java-проекты
@@ -146,3 +162,10 @@ quarto run tests/render-example.ts --example prairielearn --profile full
 `finishOwner` и проверку текущих ресурсов. Только после успеха публикация попадает в `examples/<name>/_output/<profile>`.
 `tests/check.ts` и Pages используют тот же маршрут. Эти проверки подтверждают
 декларацию адаптера; отправку задания на платформу они не выполняют.
+
+Java-исходники, стартовые Gradle-проекты, авторские решения и тесты сохранены
+в Original и отдельном PrairieLearn-примере. Сборка Quarto не компилирует эти
+проекты и не проверяет Java grader. PrairieLearn package export, настоящий
+LMS import/submission и оценки требуют отдельной реализации и испытаний.
+Семантические планы, каталог/карта задач и снимки студенческих сред также не
+следуют из адресного каталога QRC; их границы указаны в матрице покрытия.
