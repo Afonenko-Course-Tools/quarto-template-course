@@ -1,4 +1,5 @@
 import { dirname, join, relative, resolve } from "stdlib/path";
+import { isNeutralPublicDescriptor } from "./neutral-public-assets.ts";
 function assert(value: unknown, message: string): asserts value {
   if (!value) throw new Error(`NEUTRAL_PUBLICATION: ${message}`);
 }
@@ -86,8 +87,10 @@ export async function checkNeutralPublication(root: string) {
     );
     for (const path of paths) {
       const publicPath = relative(output, path);
+      const bytes = await Deno.readFile(path);
       assert(
-        !/\.(qmd|java|gradle|ts|lua|cue|ya?ml)$/.test(path) &&
+        (!/\.(qmd|java|gradle|ts|lua|cue|ya?ml)$/.test(path) ||
+          await isNeutralPublicDescriptor(publicPath, bytes)) &&
           !publicPath.split("/").some((part) =>
             [
               "_extensions",
@@ -103,7 +106,7 @@ export async function checkNeutralPublication(root: string) {
         `source/private path published ${publicPath}`,
       );
       // Project-download uses ZIP; scan all bytes too so a stored closed payload is caught.
-      const text = new TextDecoder().decode(await Deno.readFile(path));
+      const text = new TextDecoder().decode(bytes);
       assert(
         !text.includes("NEUTRAL_UNPUBLISHED_REFERENCE"),
         `unselected reference resource published ${publicPath}`,
