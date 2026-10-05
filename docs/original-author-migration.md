@@ -57,3 +57,9 @@ stock-версий проверяется отдельно после замор
 The native refactor preserves the author source, theme, project and asset bytes from the saved pre-refactor checkpoint, with one required topic normalization: `essay/text/decoding/_control.qmd` now gives the existing “Контроль освоения темы” heading the explicit ID `sec-decoding-control`. Native Core validates closed declarations before visibility, so the previously unnamed nearest heading could not own its exercises. The heading text and all questions remain unchanged.
 
 Project/profile YAML now uses native Core, Download and QRC hooks, followed by site collection. The root uses Course Site and native website output directories. The acceptance fixture installs complete provider packages and renders the original books, slides and PDF directly in one persistent tree through student → full → student.
+
+## Native Reveal sections (2026-10-05)
+
+Lecture and practice sources now use the first existing `##` heading as a section with content, followed by `###` slide headings. Their nested display headings change from `###` to `####` so the Reveal-only `shift-heading-level-by: -1` preserves their rendered H3 level. The configured `slide-level: 2` gives Reveal native section/slide structure, and `navigation-mode: linear` keeps forward/backward traversal in reading order. The section heading supplies the Course Navigation group name.
+
+All heading text, `sec-*` IDs, lesson content, display roles, solution pairs and `.when-full` markers are preserved. Books and PDF handouts keep their original heading levels because the shift is configured only under `format.revealjs`.

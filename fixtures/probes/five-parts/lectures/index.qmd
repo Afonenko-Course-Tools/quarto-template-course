@@ -1,4 +1,4 @@
-# P0 lectures {#sec-lectures}
+## P0 lectures {#sec-lectures}
 
 Theory: @theory:sec-theory. Practice: @practice:sec-practice.
 

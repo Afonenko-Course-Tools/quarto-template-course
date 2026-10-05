@@ -8,37 +8,37 @@ title: Контракты функций
 
 `lower <= upper` — предусловие для ограничения числа диапазоном.
 
-## Граничные случаи {#sec-boundaries}
+### Граничные случаи {#sec-boundaries}
 
 Проверьте число ниже диапазона, на каждой границе и выше диапазона.
 
 Задание: @book:exr-clamp.
 
-## Прогноз {#sec-prediction}
+### Прогноз {#sec-prediction}
 
 :::: {#exm-clamp-prediction course-role="prediction" difficulty="introductory" time="2" work-mode="individual"}
-### Совпадающие границы
+#### Совпадающие границы
 
 Что вернёт `clamp(7, 3, 3)`? Сначала сформулируйте прогноз.
 ::::
 
 ::: {#sol-clamp-prediction .when-full for="exm-clamp-prediction"}
-### Объяснение
+#### Объяснение
 
 Результат — `3`: допустимый диапазон состоит из одного числа.
 :::
 
-## Обсуждение {#sec-contract-discussion}
+### Обсуждение {#sec-contract-discussion}
 
 :::: {#exm-contract-discussion course-role="discussion" time="3" work-mode="pair"}
-### Недопустимый вход
+#### Недопустимый вход
 
 Почему перестановка границ внутри функции может скрыть ошибку вызывающего кода?
 Сопоставьте две политики и явно назовите выбранный контракт.
 ::::
 
 ::: {#sol-contract-discussion .when-full for="exm-contract-discussion"}
-### Направление обсуждения
+#### Направление обсуждения
 
 Автоматическая перестановка допустима для другого контракта.
 В рассматриваемом контракте `lower > upper` — ошибка вызывающего кода;
