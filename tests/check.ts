@@ -1,33 +1,8 @@
-import { dirname, fromFileUrl } from "stdlib/path";
-import { renderOptionalExample } from "./render-example.ts";
+import { resolve } from "stdlib/path";
 import { checkNeutralPublication } from "./check-neutral.ts";
-const root = dirname(dirname(fromFileUrl(import.meta.url)));
-const quarto = Deno.env.get("QUARTO") || "quarto";
-if (!Deno.args.includes("--skip-render")) {
-  for (const profile of ["full", "student"]) {
-    for (const target of [undefined, "cloud", "prairielearn"]) {
-      if (target) {
-        await renderOptionalExample(root, target, profile);
-        continue;
-      }
-      const result = await new Deno.Command(quarto, {
-        args: [
-          "render",
-          "--profile",
-          profile,
-          "--fail-if-warnings",
-        ],
-        cwd: root,
-        stdout: "inherit",
-        stderr: "inherit",
-      }).output();
-      if (!result.success) {
-        throw new Error(`Не удалось собрать ${target || "курс"}/${profile}`);
-      }
-    }
-  }
-}
-const links = await checkNeutralPublication(root);
+const root = resolve(Deno.args[0] || ".");
 console.log(
-  `Проверены student/full, пять нейтральных частей, канонические задания, QRC, ручные материалы, изоляция преподавательских данных; ${links} локальных ссылок.`,
+  `PASS neutral public assets, privacy, downloads, catalog and ${await checkNeutralPublication(
+    root,
+  )} local links`,
 );

@@ -26,5 +26,7 @@
 **/out/
 **/*.class
 
-# Служебное состояние координатора публикации.
-**/.project-publish/
+# Native execution cache and local acceptance workspaces.
+**/_freeze/
+/native-acceptance/
+**/__pycache__/

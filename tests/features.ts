@@ -342,9 +342,7 @@ export async function inventory(directory: string): Promise<FeatureInventory> {
     }
     for (const value of configs) {
       for (
-        const member of Object.values(
-          mapping(mapping(value["project-publish"]).projects),
-        )
+        const member of list(mapping(value["course-site"]).projects)
       ) {
         const path = mapping(member).path;
         if (typeof path === "string") await project(resolve(projectRoot, path));

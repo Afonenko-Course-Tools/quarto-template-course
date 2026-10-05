@@ -8,10 +8,10 @@ export const featureContract = {
     ...vocabulary.pedagogyAttributes.filter((key: string) => !["time", "for"].includes(key)),
   ]),
   nativeAttributes: new Set(["width", "layout-ncol"]),
-  customRoot: /^(?:course(?:-.*)?|prairielearn|cloud|assessment|reference-catalog|project-publish|project-download)$/,
+  customRoot: /^(?:course(?:-.*)?|prairielearn|cloud|assessment|reference-catalog|course-site|project-download)$/,
   dynamicCollections: {
     "reference-catalog": ["imports", "exports"],
-    "project-publish": ["projects"],
+    "course-site": ["projects"],
     "project-download": ["resources"],
   } as Record<string, string[]>,
   markerClasses: new Set(["assessment-items", "grading-notes", "unnumbered"]),

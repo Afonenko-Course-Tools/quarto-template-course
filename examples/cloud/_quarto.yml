@@ -1,19 +1,29 @@
 project:
   type: default
   output-dir: _output
-  render: [index.qmd]
+  render:
+  - index.qmd
   pre-render:
-    - _extensions/Afonenko-Course-Tools/course-core/entrypoints/pre.ts
-    - _extensions/Afonenko-Course-Tools/course-core/entrypoints/owner-freeze.ts
-  post-render: _extensions/Afonenko-Course-Tools/course-core/entrypoints/post.ts
+  - _extensions/Afonenko-Course-Tools/course-core/entrypoints/pre.ts
+  post-render:
+  - _extensions/Afonenko-Course-Tools/course-core/entrypoints/post.ts
+  - _extensions/Afonenko-Course-Tools/reference-catalog/entrypoints/post.ts
 format: html
 lang: ru
 profile:
   default: student
-  group: [[student, full]]
+  group:
+  - - student
+    - full
 course:
-  adapters: [cloud]
+  adapters:
+  - cloud
   id: example-cloud
-  validate: true
   view: student
-filters: [course-core, course-cloud, course-presentation]
+filters:
+- course-core
+- course-cloud
+- course-presentation
+- reference-catalog
+reference-catalog:
+  namespace: cloud

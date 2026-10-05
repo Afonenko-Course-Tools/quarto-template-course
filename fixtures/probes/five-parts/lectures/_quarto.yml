@@ -1,19 +1,32 @@
 project:
   type: default
-  render: [index.qmd]
+  render:
+  - index.qmd
   output-dir: _output
   pre-render:
-    - _extensions/Afonenko-Course-Tools/course-core/entrypoints/pre.ts
+  - _extensions/Afonenko-Course-Tools/course-core/entrypoints/pre.ts
   post-render:
-    - _extensions/Afonenko-Course-Tools/course-core/entrypoints/post.ts
-  resources: [./assets/**, "!materials/**", "!**/_*.qmd"]
+  - _extensions/Afonenko-Course-Tools/course-core/entrypoints/post.ts
+  - _extensions/Afonenko-Course-Tools/reference-catalog/entrypoints/post.ts
+  - ../_extensions/Afonenko-Course-Tools/course-site/entrypoints/collect.ts
+  resources:
+  - ./assets/**
+  - '!materials/**'
+  - '!**/_*.qmd'
+  - '!_generated/**'
+  - '!_freeze/**'
+  - '!.quarto/**'
 profile:
   default: student
-  group: [[student, full]]
+  group:
+  - - student
+    - full
 course:
   id: p0-lectures
-  validate: true
-filters: [course-core, course-presentation]
+filters:
+- course-core
+- course-presentation
+- reference-catalog
 course-presentation:
   mode: lecture
 format:
@@ -21,5 +34,9 @@ format:
     theme: default
     show-notes: false
     slide-number: true
-    revealjs-plugins: [course-navigation]
-    footer: '[View source](https://github.com/example/five-parts/blob/feat/p0-consumer-proof/lectures/index.qmd) · [Report issue](https://github.com/example/five-parts/issues/new)'
+    revealjs-plugins:
+    - course-navigation
+    footer: '[View source](https://github.com/example/five-parts/blob/main/lectures/index.qmd)
+      · [Report issue](https://github.com/example/five-parts/issues/new)'
+reference-catalog:
+  namespace: lectures

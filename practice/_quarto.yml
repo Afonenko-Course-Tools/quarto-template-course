@@ -1,15 +1,32 @@
 project:
   type: default
-  render: [index.qmd]
+  render:
+  - index.qmd
   output-dir: _output
-  resources: [./assets/**, "!materials/**", "!**/_*.qmd"]
+  resources:
+  - ./assets/**
+  - '!materials/**'
+  - '!**/_*.qmd'
+  - '!_generated/**'
+  - '!_freeze/**'
+  - '!.quarto/**'
+  pre-render:
+  - _extensions/Afonenko-Course-Tools/course-core/entrypoints/pre.ts
+  post-render:
+  - _extensions/Afonenko-Course-Tools/course-core/entrypoints/post.ts
+  - _extensions/Afonenko-Course-Tools/reference-catalog/entrypoints/post.ts
+  - ../_extensions/Afonenko-Course-Tools/course-site/entrypoints/collect.ts
 profile:
   default: student
-  group: [[student, full]]
+  group:
+  - - student
+    - full
 course:
   id: course-practice
-  validate: true
-filters: [course-core, course-presentation]
+filters:
+- course-core
+- course-presentation
+- reference-catalog
 course-presentation:
   mode: study
 format:
@@ -17,5 +34,8 @@ format:
     theme: default
     show-notes: false
     slide-number: true
-    revealjs-plugins: [course-navigation]
+    revealjs-plugins:
+    - course-navigation
 lang: ru
+reference-catalog:
+  namespace: practice

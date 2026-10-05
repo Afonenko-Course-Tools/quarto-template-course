@@ -1,7 +1,10 @@
 project:
   type: default
   output-dir: _output
-  render: [contracts.qmd]
+  render:
+  - contracts.qmd
+  post-render:
+  - ../_extensions/Afonenko-Course-Tools/course-site/entrypoints/collect.ts
 lang: ru
 format:
   pdf:

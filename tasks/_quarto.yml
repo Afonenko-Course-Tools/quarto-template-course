@@ -2,38 +2,56 @@ project:
   type: book
   output-dir: _output
   pre-render:
-    - _extensions/Afonenko-Course-Tools/project-download/entrypoints/pre.ts
-    - _extensions/Afonenko-Course-Tools/course-core/entrypoints/pre.ts
-    - _extensions/Afonenko-Course-Tools/course-core/entrypoints/owner-freeze.ts
+  - _extensions/Afonenko-Course-Tools/course-core/entrypoints/pre.ts
+  - _extensions/Afonenko-Course-Tools/project-download/entrypoints/pre.ts
   post-render:
-    - _extensions/Afonenko-Course-Tools/project-download/entrypoints/post.ts
-    - _extensions/Afonenko-Course-Tools/course-core/entrypoints/post.ts
-  resources: [./assets/**, "!materials/**", "!**/_*.qmd"]
+  - _extensions/Afonenko-Course-Tools/course-core/entrypoints/post.ts
+  - _extensions/Afonenko-Course-Tools/project-download/entrypoints/post.ts
+  - _extensions/Afonenko-Course-Tools/reference-catalog/entrypoints/post.ts
+  - ../_extensions/Afonenko-Course-Tools/course-site/entrypoints/collect.ts
+  resources:
+  - ./assets/**
+  - '!materials/**'
+  - '!**/_*.qmd'
+  - '!_generated/**'
+  - '!_freeze/**'
+  - '!.quarto/**'
 profile:
   default: student
-  group: [[student, full]]
+  group:
+  - - student
+    - full
 course:
   id: course-tasks
-  validate: true
-filters: [course-core, course-presentation, project-download]
+filters:
+- course-core
+- course-presentation
+- project-download
+- reference-catalog
 course-presentation:
   mode: study
 book:
   sidebar:
     tools:
-      - icon: house
-        href: ../index.html#sec-portal
-        text: Навигация курса
+    - icon: house
+      href: ../index.html#sec-portal
+      text: Навигация курса
   title: Задания и работы
   chapters:
-    - index.qmd
-    - labs/01.qmd
-    - plans/01.qmd
+  - index.qmd
+  - labs/01.qmd
+  - plans/01.qmd
 format:
   html:
     theme: cosmo
 project-download:
   resources:
-    starter: {path: materials/student}
-    instructor: {path: materials/instructor, profiles: [full]}
+    starter:
+      path: materials/student
+    instructor:
+      path: materials/instructor
+      profiles:
+      - full
 lang: ru
+reference-catalog:
+  namespace: tasks
