@@ -32,7 +32,7 @@ jobs:
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           repository: Afonenko-Course-Tools/quarto-course
-          ref: 7014d0532b058a5bbddbd04ddd9be102653b5551
+          ref: da4c3730ec4779206588cbb1e9532ec541421c9f
           path: core
           persist-credentials: false
       - name: Publisher с owner output context

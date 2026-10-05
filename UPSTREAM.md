@@ -6,13 +6,13 @@
 
 | Поставщик | Exact commit | Exact tree |
 |---|---|---|
-| [quarto-course](https://github.com/Afonenko-Course-Tools/quarto-course) | `7014d0532b058a5bbddbd04ddd9be102653b5551` | `8bbc5144a55a0a8a4fe0ca80693579b8a4be69e0` |
+| [quarto-course](https://github.com/Afonenko-Course-Tools/quarto-course) | `da4c3730ec4779206588cbb1e9532ec541421c9f` | `196dbc08b01113b43b54c4cb3a7d6dd26c71bf05` |
 | [quarto-project-publish](https://github.com/Afonenko-Course-Tools/quarto-project-publish) | `ab481838a92bbe1d7705a3df7dc3194fb97b334c` | `4da5b9e489fa41157c8b20ee139e88b355c79656` |
 | [quarto-reference-catalog](https://github.com/Afonenko-Course-Tools/quarto-reference-catalog) | `d366cacf37457802506c5b75e87f39f89d31c373` | `f2283f0b038a1e2972037b93420774df69cd54cc` |
 | [quarto-project-download](https://github.com/Afonenko-Course-Tools/quarto-project-download) | `d78a533b14c38e3dd64dbfbd59e437a82e2752fd` | `7e21f82dd770eb2c1593aae54bebedf1b8e6cbaf` |
 | [quarto-course-print](https://github.com/Afonenko-Course-Tools/quarto-course-print) | `12ef8b905ef5477b384789ce8ae268ad0076ddde` | `a06f4812bb872742f0b5152afe042411a50cedb7` |
-| [quarto-course-cloud](https://github.com/Afonenko-Course-Tools/quarto-course-cloud) | `66675ed4988e035828a03826f7c6f38747f2afe9` | `94e709100592029e4d1bdfc1a513fee3eeab5486` |
-| [quarto-course-prairielearn](https://github.com/Afonenko-Course-Tools/quarto-course-prairielearn) | `d296a0841a53a2035cfc79eaf3db5ea471c90408` | `2dc11045c27703c29bb4a997391bf932549df684` |
+| [quarto-course-cloud](https://github.com/Afonenko-Course-Tools/quarto-course-cloud) | `edd4c9c62ce6dfe94e1ca0f9e8f7f9d3f47848ff` | `6b973b6abe460bff0c30416ee7d7e5378fd5fe2b` |
+| [quarto-course-prairielearn](https://github.com/Afonenko-Course-Tools/quarto-course-prairielearn) | `fe1f3d9bc71979cdfbfba49a81f44bb75d19bbfd` | `acaaf1f885a6023c544781c71e7df0c1bee2de60` |
 
 Core, Presentation и Navigation происходят из одного Core U. Cloud/PL содержат
 совместимость с Source capture этого U: при capture они пассивны, а расширение
@@ -32,15 +32,22 @@ Core, Presentation и Navigation происходят из одного Core U. 
 | `course-prairielearn` | 6 | `examples/prairielearn` |
 
 Все девять пакетов прошли штатный local `quarto add` из frozen git archives.
-После test-only fixture corrections новые Core/PL archives дополнительно
-прошли whole-add и заменили Core8/PL1 copies. Полные `_extensions` Git trees
-новых refs совпадают с прежними; Presentation/Navigation имеют тот же payload
-финального Core. Отдельная карта `final-ref-composition/manifest.json` сохраняет
-эту эквивалентность, девять замен и итоговую проверку всех26 copies; прежние
-installation/native receipts остаются привязанными к своим исходным refs.
-Для 26 product copies сверены полный file set, SHA256, размеры и права файлов;
-сохранены все bundled license files. Полные карты, архивы и их SHA256 находятся
-в `whole-installations.json` и соседних archives evidence отчёта Task7a.
+Исторические U1/U2 и PL installation/native receipts сохраняют исходные refs;
+`final-ref-composition/manifest.json` фиксирует прежнюю полную эквивалентность
+U1/U2 и PL и проверку всех 26 copies. После исправлений видимости и owning
+context новый Core V3 архив прошёл отдельный штатный whole-add для каждого
+из восьми Core scopes. Полный file set, SHA256, размеры, права и bundled
+license paths каждой копии сверены с точным архивом frozen V3 Source.
+Presentation/Navigation побайтно совпадают с соответствующими пакетами того
+же V3 Source. Финальные CI-only Source refs PL/Cloud из таблицы выше имеют
+полный `_extensions` Git tree, побайтно идентичный прежним PL d296 и Cloud
+66675. Их installed runtime payload и исходные installation receipts сохранены;
+`adapter-final-source-equivalence.json` фиксирует свежую архивную provenance.
+Новая карта `acceptance/template-V3-verifier-fix/core-v3-composition/manifest.json`
+сохраняет provenance, восемь замен и свежую проверку всех 26 product copies;
+прежние native receipts не объявляются приёмкой нового Core или Template.
+Полные исторические карты и архивы остаются в `whole-installations.json`
+и соседних archives evidence отчёта Task7a.
 Print используется внешней production-пробой, а не добавляется в нейтральный сайт.
 
 `ACTUAL_MAIN_INSTALLATIONS` проверяет 24 product copies шести общих поставок:
