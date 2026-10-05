@@ -1,6 +1,6 @@
-# Лекция {#sec-lectures}
+## Лекция {#sec-lectures}
 
-## От наблюдения к выводу {#sec-lecture-question}
+### От наблюдения к выводу {#sec-lecture-question}
 
 Подготовка: @theory:sec-theory.
 
@@ -11,6 +11,6 @@
 Дайте участникам время сформулировать разные объяснения, затем сравните основания.
 :::
 
-## Обсуждение {#sec-lecture-discussion}
+### Обсуждение {#sec-lecture-discussion}
 
 Какие ограничения остались? Продолжение: @practice:sec-practice.

@@ -11,6 +11,9 @@ project:
   - '**/*.qmd'
 format:
   revealjs:
+    shift-heading-level-by: -1
+    slide-level: 2
+    navigation-mode: linear
     theme:
     - default
     hash: true

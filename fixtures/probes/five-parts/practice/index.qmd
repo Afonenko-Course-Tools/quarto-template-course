@@ -1,4 +1,4 @@
-# P0 practice {#sec-practice}
+## P0 practice {#sec-practice}
 
 Tasks: @tasks:sec-tasks. Theory: @theory:sec-theory.
 
