@@ -102,12 +102,13 @@ export async function verifyOriginalCourse(output: string, profile: string) {
   const root = await Deno.readTextFile(join(output, "index.html")),
     book = await Deno.readTextFile(join(output, "book/index.html"));
   assert(
-    lecture.includes("course-answer-solution fragment") &&
+    lecture.includes("course-answer-solution fragment") ===
+        (profile === "full") &&
       lecture.includes('data-course-role="prediction"'),
     "original lecture prediction/reveal changed",
   );
   assert(
-    practice.includes("<details><summary>") &&
+    practice.includes("<details><summary>") === (profile === "full") &&
       !practice.includes("course-answer-solution fragment"),
     "original practice disclosure changed",
   );

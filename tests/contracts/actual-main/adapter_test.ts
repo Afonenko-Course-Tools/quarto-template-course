@@ -345,3 +345,166 @@ Deno.test("actual-main adapter: copied facade refuses an omitted runtime depende
     await Deno.remove(root, { recursive: true });
   }
 });
+
+// Finite public-stage inputs exercise the installed copy, without native acceptance.
+async function originalPublication(output: string, profile: string) {
+  const authored = {
+    "handouts/contracts.pdf": "%PDF-1.7\n",
+    "lectures/01/contracts.html": '<div data-course-role="prediction"></div>' +
+      (profile === "full"
+        ? '<div class="course-answer-solution fragment"></div>'
+        : ""),
+    "practice/01/clamp.html": profile === "full"
+      ? "<details><summary>Answer</summary></details>"
+      : "<p>Practice</p>",
+    "book/topics/contracts/demonstration.html":
+      '<div class="course-answer-solution callout" data-course-role="demonstration"></div>',
+    "essay/text/decoding/index.html": "course-meta-difficulty Средний" +
+      (profile === "full" ? '<div id="exr-utf8-implementation"></div>' : ""),
+    "index.html": ["book", "lectures", "practice", "essay", "handouts"].map((
+      mount,
+    ) => `${mount}/`).join(" "),
+    "book/index.html":
+      '<a href="../index.html">Portal</a><a class="qrc-external" rel="external" href="https://example.edu/os/memory.html#sec-memory">Операционные системы</a>',
+    "book/assets/contract.svg": "<svg/>",
+    "reference-catalog.json": JSON.stringify({
+      schema: "quarto-reference-catalog",
+      targets: Object.fromEntries([
+        "book:sec-contracts",
+        "book:sec-contract-demo",
+        "essay:sec-essays",
+        "essay:sec-utf8-policies",
+        "site:sec-course",
+      ].map((target) => [target, {}])),
+    }),
+    "search.json": '[{"href":"index.html"}]',
+    "book/search.json": '[{"href":"index.html"}]',
+    "essay/search.json": '[{"href":"index.html"}]',
+  };
+  for (const [path, content] of Object.entries(authored)) {
+    await Deno.mkdir(join(output, path, ".."), { recursive: true });
+    await Deno.writeTextFile(join(output, path), content);
+  }
+  // Reuse the native ZIP writer already used by the finite resource probes.
+  const archive = await new Deno.Command("python3", {
+    args: [
+      "-c",
+      [
+        "import pathlib,sys,zipfile",
+        "root=pathlib.Path(sys.argv[1])",
+        "with zipfile.ZipFile(root/'observations.zip','w') as z:",
+        " for name in ['observations.csv','README.md']: z.writestr(name,'public')",
+        "for index in range(int(sys.argv[2])):",
+        " with zipfile.ZipFile(root/('starter-%d.zip'%index),'w') as z:",
+        "  for name in ['build.gradle','settings.gradle','Main.java']: z.writestr(name,'public')",
+      ].join("\n"),
+      output,
+      profile === "full" ? "5" : "1",
+    ],
+    stdout: "piped",
+    stderr: "piped",
+  }).output();
+  check(
+    archive.success,
+    `publication fixture ZIP writer: ${
+      new TextDecoder().decode(archive.stderr)
+    }`,
+  );
+}
+
+const originalVerifierCases = [
+  { name: "student hides both full-only disclosures", profile: "student" },
+  { name: "full retains both disclosures", profile: "full" },
+  {
+    name: "student rejects leaked lecture disclosure",
+    profile: "student",
+    path: "lectures/01/contracts.html",
+    content:
+      '<div data-course-role="prediction" class="course-answer-solution fragment"></div>',
+    refusal: "original lecture prediction/reveal changed",
+  },
+  {
+    name: "student rejects leaked practice disclosure",
+    profile: "student",
+    path: "practice/01/clamp.html",
+    content: "<details><summary>Leaked answer</summary></details>",
+    refusal: "original practice disclosure changed",
+  },
+  {
+    name: "full rejects missing lecture disclosure",
+    profile: "full",
+    path: "lectures/01/contracts.html",
+    content: '<div data-course-role="prediction"></div>',
+    refusal: "original lecture prediction/reveal changed",
+  },
+  {
+    name: "full rejects missing practice disclosure",
+    profile: "full",
+    path: "practice/01/clamp.html",
+    content: "<p>Practice</p>",
+    refusal: "original practice disclosure changed",
+  },
+  {
+    name: "full still requires lecture prediction",
+    profile: "full",
+    path: "lectures/01/contracts.html",
+    content: '<div class="course-answer-solution fragment"></div>',
+    refusal: "original lecture prediction/reveal changed",
+  },
+  {
+    name: "full still rejects lecture fragments in practice",
+    profile: "full",
+    path: "practice/01/clamp.html",
+    content:
+      '<details><summary>Answer</summary></details><div class="course-answer-solution fragment"></div>',
+    refusal: "original practice disclosure changed",
+  },
+];
+for (const scenario of originalVerifierCases) {
+  Deno.test(`actual-main copied Original verifier: ${scenario.name}`, async () => {
+    const root = await Deno.makeTempDir({
+      prefix: "actual-main-verifier-copy-",
+    });
+    try {
+      await installActualMainAdapter(repo, root, await sourceHashes());
+      const installed = await import(
+        toFileUrl(join(root, "_publication/verification.ts")).href
+      );
+      const output = join(root, "publication");
+      await originalPublication(output, scenario.profile);
+      if (scenario.path) {
+        await Deno.writeTextFile(
+          join(output, scenario.path),
+          scenario.content!,
+        );
+      }
+      let failure: unknown;
+      let result: unknown;
+      try {
+        result = await installed.verifyOriginalCourse(output, scenario.profile);
+      } catch (error) {
+        failure = error;
+      }
+      if (scenario.refusal) {
+        check(
+          failure instanceof Error &&
+            failure.message === `ACTUAL_MAIN_NATIVE: ${scenario.refusal}`,
+          `${scenario.name}: ${String(failure)}`,
+        );
+      } else {
+        check(failure === undefined, `${scenario.name}: ${String(failure)}`);
+        check(
+          JSON.stringify(result) ===
+            JSON.stringify({
+              rolesArchives: true,
+              qrcSearchLinks: true,
+              allFive: true,
+            }),
+          "complete copied-verifier result",
+        );
+      }
+    } finally {
+      await Deno.remove(root, { recursive: true });
+    }
+  });
+}
