@@ -141,7 +141,7 @@ ${
         name === "handouts" ? "CURRENT_NATIVE_PDF_HANDOUT" : "@site:sec-portal"
       }\n${
         owner
-          ? '\n[Public starter](public-starter.txt)\n\n::: {.when-full}\n[Closed-only](closed.txt)\n\n## Closed target {#sec-closed}\n:::\n\n## Fixture questions {#sec-fixture-questions}\n\n::: {#exr-known course-role="discussion" target="manual" difficulty="introductory" work-mode="individual"}\nSupported fixture question.\n:::\n'
+          ? '\n[Public starter](public-starter.txt)\n\n::: {.when-full}\n[Closed-only](closed.txt)\n\n## Closed target {#sec-closed}\n:::\n\n## Fixture questions {#sec-fixture-questions}\n\n::: {#exr-known course-role="discussion" target="manual" difficulty="introductory" work-mode="individual"}\n## Supported fixture question\n\nSupported fixture question.\n:::\n'
           : ""
       }`,
     );

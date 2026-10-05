@@ -11,6 +11,7 @@ const suites = [
   "contracts/template/neutral-publication_test.ts",
   "contracts/template/optional-example_test.ts",
   "contracts/resource/solution-visibility_test.ts",
+  "contracts/template/native-fixtures_test.ts",
 ];
 if (import.meta.main) {
   // Explicit paths select a suite; a flags-only invocation runs all Original and neutral Template checks.

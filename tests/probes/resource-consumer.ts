@@ -759,7 +759,7 @@ try {
     await Deno.writeTextFile(tasksConfig, baseTasks);
     const permittedTask = (await Deno.readTextFile(taskInput)) + "\n" +
       await Deno.readTextFile(
-        join(repo, "fixtures/probes/resources/solution-visibility.qmd"),
+        join(repo, "fixtures/probes/resources/solution-visibility.txt"),
       );
     await Deno.writeTextFile(taskInput, permittedTask);
     await Deno.writeTextFile(join(consumer, "tasks/corpus.qmd"), corpus(true));

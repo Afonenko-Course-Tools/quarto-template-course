@@ -2,7 +2,7 @@ import { check } from "../../support/contract-cases.ts";
 import { fromFileUrl, join } from "stdlib/path";
 
 const fixture = new URL(
-  "../../../fixtures/probes/resources/solution-visibility.qmd",
+  "../../../fixtures/probes/resources/solution-visibility.txt",
   import.meta.url,
 );
 const installedCore = fromFileUrl(
