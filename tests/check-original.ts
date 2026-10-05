@@ -1,5 +1,4 @@
 import { dirname, join, resolve } from "stdlib/path";
-import { renderOptionalExample } from "./render-example.ts";
 import { inventory } from "./features.ts";
 const rootArgument = Deno.args.indexOf("--root");
 if (rootArgument < 0 || !Deno.args[rootArgument + 1]) {
@@ -31,9 +30,6 @@ if (!Deno.args.includes("--skip-render")) {
       stderr: "inherit",
     }).output();
     assert(result.success, `Не удалось собрать профиль ${profile}`);
-    for (const example of ["cloud", "prairielearn"]) {
-      await renderOptionalExample(root, example, profile);
-    }
   }
 }
 function zipNames(bytes: Uint8Array): string[] {

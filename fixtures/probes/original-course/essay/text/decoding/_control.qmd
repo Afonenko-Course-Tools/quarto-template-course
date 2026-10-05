@@ -1,6 +1,6 @@
 :::::: {.when-full}
 
-## Контроль освоения темы
+## Контроль освоения темы {#sec-decoding-control}
 
 :::: {#exr-utf8-experiment course-role="control" difficulty="intermediate" target="manual" project="/text/decoding/projects/experiment"}
 ### Неоднозначность результата декодирования с заменой

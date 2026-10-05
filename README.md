@@ -1,171 +1,34 @@
-# Шаблон учебного курса
+# Native Quarto course template
 
-Пять частей — теория, задания, лекции, практика и справочник — собираются
-в один сайт с общей стартовой страницей. Нейтральный пример посвящён работе
-с наблюдениями и выводами: программирование и внешняя учебная платформа для него
-не нужны. Все канонические задания объявлены только в книге `tasks`.
+The course is a normal Quarto website. Its landing page composes five independently renderable parts: theory, tasks, lectures, practice, and handbook. Tasks contain canonical exercises; the other parts link to them through Reference Catalog. Books, Reveal slides, includes, listings, navigation, and execution remain native Quarto features.
 
-## Запуск
-
-Проверяемые версии: Quarto 1.10.18 и 1.11.5, CUE 0.17.1. TypeScript запускается
-штатным bundled Deno Quarto. Полные установленные расширения находятся в
-`_extensions` соответствующего проекта; сборка не обновляет их из сети.
+Install Quarto 1.10.18 or 1.11.5 and CUE v0.17.1, then run:
 
 ```sh
-quarto run _extensions/Afonenko-Course-Tools/project-publish/entrypoints/render.ts --profile full
-quarto run _extensions/Afonenko-Course-Tools/project-publish/entrypoints/render.ts --profile student
-quarto run tests/check.ts --skip-render
+quarto render . --profile student
+quarto render . --profile full
+quarto preview --profile student --no-watch-inputs
 ```
 
-Команды выполняются из корня шаблона. По умолчанию выбран `student`;
-результаты — `_site-student/` и `_site-full/`. Проверка с `--skip-render` читает
-уже построенные результаты обоих профилей и сама их не создаёт. Для предпросмотра:
+The outputs are `_site-student` and `_site-full`. Each part has separate profile output directories. Repeated renders retain `.quarto` and `_freeze`; the site coordinator collects only the successful current native render and fresh assets. A failed build returns a nonzero exit; fix the source and rerun the same command. The full profile includes teacher material and is not deployed by the workflow.
+
+`course-site.projects` in `_quarto.yml` declares the five native projects, their formats, and mounts. Root hooks coordinate the site. Each Course part explicitly runs Core pre/post hooks; Download follows Core where enabled, QRC follows Download, and site collection runs last. A part can be rendered directly from its directory. Quarto determines selected-file and preview scope; the coordinator follows its public full-render flag.
+
+The repository contains complete installed extension packages. `providers.json` pins their source commits; `installed-packages.json` records every installed file and SHA256 digest. `python3 tests/native/packages.py` verifies all copies. Maintainers with sibling provider checkouts can refresh whole frozen packages with `python3 tools/sync-providers.py`; this uses `git archive` and ordinary `quarto add`, then checks the full installed file set and bytes.
+
+The original author course remains in `fixtures/probes/original-course`, with its books, essays, PDF handout, Java starter projects, private controls, and themes. Its acceptance fixture overlays the corresponding complete installed packages without changing its authored sources. See [the migration notes](docs/original-author-migration.md).
+
+Optional native examples are `examples/cloud`, `examples/prairielearn`, and `examples/exports`. The export example produces current Core Body packages for Print and Moodle. Print consumes the public package and emits a PDF with attachments; Moodle consumes the teacher package and an explicit binding and emits XML with attachments. Export generation does not deploy a VM or submit work to an LMS.
 
 ```sh
-quarto preview --profile student --no-browser --port 4200
-```
-Для обычного нейтрального HTML/Reveal курса TeX не требуется. Независимый Original
-regression содержит PDF и требует XeLaTeX/DejaVu/Latin Modern.
-
-## Авторские части
-
-| Каталог | Содержание |
-|---|---|
-| `theory` | Объяснения, темы с явными `sec-ID`, цели и предварительные знания |
-| `tasks` | Все `exr-ID`, ответы, материалы, планы и отдельные страницы работ |
-| `lectures` | Слайды обсуждения со ссылками на теорию и задания |
-| `practice` | Слайды работы в группе и самопроверки со ссылками на задания |
-| `handbook` | Памятки, оформление ответа и правила сдачи |
-| `index.qmd` | Навигация по пяти частям |
-
-`tasks/index.qmd` содержит минимальное задание без заголовка и `target`,
-а также два развёрнутых ручных задания с явной сложностью, формой работы,
-оценкой времени в минутах, описанием результата и критериями. `tasks/labs/01.qmd` объявляет
-одну работу и один список `.assessment-items`. `tasks/plans/01.qmd` показывает
-обычный план занятия со ссылками. Текстовый план и блок предварительных знаний
-сейчас являются авторским содержанием: они не заявлены как проверенный граф
-семантических зависимостей.
-
-Ссылки внутри книги имеют вид `@exr-compare`, между частями —
-`@tasks:exr-compare` или `@theory:sec-theory`. Не копируйте условия и не используйте
-межкнижный `include`. QRC разрешает ссылки и экспортирует явный набор целей
-из корневого `_quarto.yml`. `reference-catalog.exports` задаёт внешний каталог;
-это не средство сокрытия уже опубликованной страницы.
-
-```qmd
-## Тема с авторским ID {#sec-observations}
-
-::: {#exr-example course-role="discussion" difficulty="introductory"}
-Сформулируйте объяснение и укажите данные, которыми его можно проверить.
-:::
+python3 tests/native/packages.py
+quarto run tests/native/config.ts
+python3 tests/native/run.py all --workspace /tmp/course-native
+python3 tests/native/exports.py /tmp/course-native/neutral
+python3 tests/native/lifecycle.py /tmp/course-native/neutral
+python3 tests/native/preview.py /tmp/course-native/neutral
 ```
 
-У каждого канонического `exr` обязательны `course-role` из четырёх назначений:
-`demonstration`, `discussion`, `independent-study`, `control`, и собственная
-`difficulty`. Сложность страницы не заменяет атрибут задания. Тема определяется
-ближайшим окружающим явно написанным заголовком `sec-*`; отдельную метадату темы
-добавлять не нужно. В книге используйте для темы тела явный `## … {#sec-*}`:
-Quarto извлекает начальный H1 в заголовок главы до захвата тела.
-Без `target` заголовок внутри задания необязателен. Явный `target="manual"`
-или имя выбранного адаптера сохраняет требование ведущего заголовка внутри
-задачи. `target` выбирают только при необходимости конкретной привязки. Обычное ручное
-задание не требует ни платформы, ни проекта с программой.
+Set `QUARTO` to select a specific local executable. Use separate cache directories for the two Quarto versions, and retain each directory across repeated renders. The suite checks student → full → student, native books/slides/PDF, local links, catalogs and search, actual resources, optional adapters, exports, failed-build retry, current output selection, and preview. GitHub Actions runs both fixed versions on pull requests and `main`.
 
-Нативный `exm` показывает пример без извлечения канонического задания: см.
-`theory/index.qmd`. На слайдах ссылайтесь на `tasks:exr-*`; прогноз и самопроверку
-можно оформить как `exm`. Шаблон использует единственный текущий контракт Core.
-Оставшиеся предметные возможности перечислены в [матрице покрытия](docs/authoring-coverage.md).
-
-## Профили, ответы и материалы
-
-Каждая часть получает тот же профиль. Обычный `sol` виден только в full;
-решение задания `demonstration` доступно студенту, если его не закрывает внешний
-контейнер. Заметки, ключи и `.grading-notes` закрыты. Задание `control` всегда
-закрыто в student. Для решения display-примера `exm` можно явно указать
-`.when-full`, сохраняя пару `for="exm-…"` и ID `sol-…`.
-В full доступны преподавательские пояснения и выбранный преподавательский
-архив; в student они отсутствуют. Full — представление материалов, а не режим
-автоматического экспорта или оценивания в LMS. Исходники открытого Git при этом
-остаются открытыми.
-
-`project-download.resources` выбирает конкретные каталоги. `materials/student`
-содержит нейтральный лист наблюдений; соседний `materials/reference` не включён
-в скачивание. `materials/instructor` выбран только для full. Исходные материалы
-исключены из обычного копирования Quarto через `project.resources`.
-
-## Сборка и расширения
-
-Корневой Publisher управляет порталом и пятью native-проектами. Подготовка root
-navigation и owner книги заданий, завершение после QRC и проверка текущих
-ресурсов используют существующие Core API в `_publication`. При штатном отказе
-managed сборки предыдущие публикации сохраняются. Для CLI используйте показанный
-`render.ts`, проверяющий профиль и запрет переопределения публичного output.
-
-| Пакет | Назначение |
-|---|---|
-| `course-core` | Проверка учебной модели, Source/Body/ресурсов и профилей |
-| `course-presentation` | Учебные блоки и раскрытие ответов |
-| `course-navigation` | Управление слайдами Reveal |
-| `reference-catalog` | Цели и ссылки внутри выпуска и между курсами |
-| `project-publish` | Совместный выпуск native-проектов |
-| `project-download` | Архивы явно выбранных материалов |
-
-Установка и активация разделены: фильтры включаются в `filters`, навигация —
-в `revealjs-plugins`, обработчики — в `project.pre-render/post-render`.
-Репозитории поставщиков перечислены в [UPSTREAM.md](UPSTREAM.md). Обновляйте пакеты
-целиком, затем проверяйте оба профиля.
-
-## Перенос и проверка
-
-[Руководство переноса обычной Quarto Book](docs/migrate-quarto-book.md)
-разбирает теорию, лабораторные, семинары и контроль без привязки defaults
-к дисциплине. [Матрица покрытия](docs/authoring-coverage.md) отделяет доступную
-авторскую запись от ожидающих Core предметных проверок.
-
-```sh
-quarto run tests/check.ts
-quarto run tests/check.ts --skip-render
-quarto run tests/run.ts
-quarto run tests/external.ts
-quarto run tests/features.ts --course ../my-course
-```
-
-`tests/check.ts` без `--skip-render` заново собирает оба профиля корневого курса
-и независимых примеров Cloud/PrairieLearn, затем проверяет продукты. Проверка
-нейтрального курса включает пять частей, единственное владение заданиями в tasks,
-QRC, локальные ссылки, архивы и отсутствие преподавательских данных в student.
-`tests/run.ts` запускает именованные `Deno.test` штатным Deno выбранного Quarto;
-можно передать путь набора, `--filter` и `--junit-path`. Это отдельные контрактные
-проверки, которые не заменяют сборку курса. `tests/features.ts` проверяет выбранный
-курс; путь `../my-course` замените своим относительным путём.
-
-Pages workflow задаёт последовательность full → student → check и публикует
-student стабильного канала после успешной проверки. Наличие workflow или
-контрактных тестов само по себе не подтверждает успех конкретной публикации.
-
-[Original regression](fixtures/probes/original-course/README.md) отдельно сохраняет
-прежние book/essay, лекции/практику, четыре Listing, PDF-раздатку, Java-проекты
-и все прежние negative guards. Его неизменные продуктовые утверждения живут в
-`tests/check-original.ts`; команды native proof — в
-[документации Original](docs/probes/actual-main.md).
-
-Cloud и PrairieLearn остаются независимыми примерами и используют
-поддерживаемый HTML owner route:
-
-```sh
-quarto run tests/render-example.ts --example cloud --profile student
-quarto run tests/render-example.ts --example prairielearn --profile full
-```
-
-Каждый запуск готовит свежую копию исходников, вызывает `prepareOwner`,
-`activateOwner`, один native HTML render, проверку собранной модели,
-`finishOwner` и проверку текущих ресурсов. Только после успеха публикация попадает в `examples/<name>/_output/<profile>`.
-`tests/check.ts` и Pages используют тот же маршрут. Эти проверки подтверждают
-декларацию адаптера; отправку задания на платформу они не выполняют.
-
-Java-исходники, стартовые Gradle-проекты, авторские решения и тесты сохранены
-в Original и отдельном PrairieLearn-примере. Сборка Quarto не компилирует эти
-проекты и не проверяет Java grader. PrairieLearn package export, настоящий
-LMS import/submission и оценки требуют отдельной реализации и испытаний.
-Семантические планы, каталог/карта задач и снимки студенческих сред также не
-следуют из адресного каталога QRC; их границы указаны в матрице покрытия.
+Publication is optional. After configuring GitHub Pages for the repository with **GitHub Actions** as its source, set the repository Actions variable `COURSE_PUBLISH_PAGES` to `true`. Successful `main` builds then upload and deploy the student site through standard GitHub Pages actions. With the variable unset, all native validation still runs and publication is skipped. Pull requests never publish.

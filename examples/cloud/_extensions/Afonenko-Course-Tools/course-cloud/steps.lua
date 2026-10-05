@@ -24,7 +24,16 @@ function M.read(div)
   local result = {steps = pandoc.List(), orphanActions = 0,
     unknownClasses = unknown, misplacedMarkers = 0}
   local current, consumed = nil, 0
-  for _, block in ipairs(div.content) do
+  local content = pandoc.List()
+  local function flatten(blocks)
+    for _, block in ipairs(blocks) do
+      if block.t == "Div" and (block.classes:includes("when-full") or block.classes:includes("when-student")
+        or block.attributes["when-profile"] or block.attributes["unless-profile"]) then flatten(block.content)
+      else content:insert(block) end
+    end
+  end
+  flatten(div.content)
+  for _, block in ipairs(content) do
     if block.t == "Header" and block.classes:includes(classes.step) then
       local attributes = pandoc.List()
       for key, _ in pairs(block.attributes) do

@@ -2,27 +2,43 @@ project:
   type: book
   output-dir: _output
   pre-render:
-    - _extensions/Afonenko-Course-Tools/course-core/entrypoints/pre.ts
+  - _extensions/Afonenko-Course-Tools/course-core/entrypoints/pre.ts
   post-render:
-    - _extensions/Afonenko-Course-Tools/course-core/entrypoints/post.ts
-  resources: [./assets/**, "!materials/**", "!**/_*.qmd"]
+  - _extensions/Afonenko-Course-Tools/course-core/entrypoints/post.ts
+  - _extensions/Afonenko-Course-Tools/reference-catalog/entrypoints/post.ts
+  - ../_extensions/Afonenko-Course-Tools/course-site/entrypoints/collect.ts
+  resources:
+  - ./assets/**
+  - '!materials/**'
+  - '!**/_*.qmd'
+  - '!_generated/**'
+  - '!_freeze/**'
+  - '!.quarto/**'
 profile:
   default: student
-  group: [[student, full]]
+  group:
+  - - student
+    - full
 course:
   id: p0-theory
-  validate: true
-filters: [course-core, course-presentation]
+filters:
+- course-core
+- course-presentation
+- reference-catalog
 course-presentation:
   mode: study
 book:
   title: P0 theory
   repo-url: https://github.com/example/five-parts
-  repo-branch: feat/p0-consumer-proof
+  repo-branch: main
   repo-subdir: theory
-  repo-actions: [source, issue]
+  repo-actions:
+  - source
+  - issue
   chapters:
-    - index.qmd
+  - index.qmd
 format:
   html:
     theme: cosmo
+reference-catalog:
+  namespace: theory

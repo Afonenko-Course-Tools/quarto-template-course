@@ -1,28 +1,44 @@
 project:
   type: default
   output-dir: _output
-  render: [index.qmd]
-  resources: ["!project/**", "!_generated/**"]
+  render:
+  - index.qmd
+  resources:
+  - '!project/**'
+  - '!_generated/**'
+  - '!_freeze/**'
+  - '!.quarto/**'
   pre-render:
-    - _extensions/Afonenko-Course-Tools/course-core/entrypoints/pre.ts
-    - _extensions/Afonenko-Course-Tools/course-core/entrypoints/owner-freeze.ts
-  post-render: _extensions/Afonenko-Course-Tools/course-core/entrypoints/post.ts
+  - _extensions/Afonenko-Course-Tools/course-core/entrypoints/pre.ts
+  post-render:
+  - _extensions/Afonenko-Course-Tools/course-core/entrypoints/post.ts
+  - _extensions/Afonenko-Course-Tools/reference-catalog/entrypoints/post.ts
 format: html
 lang: ru
 profile:
   default: student
-  group: [[student, full]]
+  group:
+  - - student
+    - full
 course:
-  adapters: [prairielearn]
+  adapters:
+  - prairielearn
   id: example-prairielearn
-  validate: true
   view: student
-filters: [course-core, course-prairielearn, course-presentation]
+filters:
+- course-core
+- course-prairielearn
+- course-presentation
+- reference-catalog
 course-pedagogy:
   document-defaults: true
 work-mode: individual
 prairielearn:
   assessment-defaults:
     attempts: 3
-    pass: {at-least: 1}
-    assignment: {mode: assessment-id}
+    pass:
+      at-least: 1
+    assignment:
+      mode: assessment-id
+reference-catalog:
+  namespace: prairielearn

@@ -1,44 +1,52 @@
 project:
   pre-render:
-    - _extensions/Afonenko-Course-Tools/course-core/entrypoints/pre.ts
-    - _extensions/Afonenko-Course-Tools/project-download/entrypoints/pre.ts
-    - _extensions/Afonenko-Course-Tools/course-core/entrypoints/owner-freeze.ts
+  - _extensions/Afonenko-Course-Tools/course-core/entrypoints/pre.ts
+  - _extensions/Afonenko-Course-Tools/project-download/entrypoints/pre.ts
   post-render:
-    - _extensions/Afonenko-Course-Tools/course-core/entrypoints/post.ts
-    - _extensions/Afonenko-Course-Tools/project-download/entrypoints/post.ts
+  - _extensions/Afonenko-Course-Tools/course-core/entrypoints/post.ts
+  - _extensions/Afonenko-Course-Tools/project-download/entrypoints/post.ts
+  - _extensions/Afonenko-Course-Tools/reference-catalog/entrypoints/post.ts
+  - ../_extensions/Afonenko-Course-Tools/course-site/entrypoints/collect.ts
   type: book
-  output-dir: _book/student
+  output-dir: _book/default
   resources:
-    - "!**/projects/**"
-    - "!**/_control.qmd"
-    - "!_generated/**"
+  - '!**/projects/**'
+  - '!**/_control.qmd'
+  - '!_generated/**'
+  - '!_freeze/**'
+  - '!.quarto/**'
 profile:
   default: student
-  group: [[student, full]]
+  group:
+  - - student
+    - full
 course:
   id: course-essays
-  validate: true
   view: student
 course-pedagogy:
   document-defaults: true
 work-mode: individual
-filters: [course-core, course-presentation, project-download]
+filters:
+- course-core
+- course-presentation
+- project-download
+- reference-catalog
 course-presentation:
   mode: study
 book:
   title: Исследования программных контрактов
   sidebar:
     tools:
-      - icon: house
-        href: ../index.html#sec-course
-        text: Навигация курса
+    - icon: house
+      href: ../index.html#sec-course
+      text: Навигация курса
   chapters:
-    - index.qmd
-    - part: text/index.qmd
-      chapters:
-        - text/representation/index.qmd
-        - text/decoding/index.qmd
-        - text/immutability/index.qmd
+  - index.qmd
+  - part: text/index.qmd
+    chapters:
+    - text/representation/index.qmd
+    - text/decoding/index.qmd
+    - text/immutability/index.qmd
 format:
   html:
     theme: cosmo
@@ -47,15 +55,25 @@ format:
     number-depth: 1
     code-copy: true
 lang: ru
-
 project-download:
   resources:
     exr-utf8-experiment:
       path: text/decoding/projects/experiment/student
-      profiles: [full]
+      profiles:
+      - full
+      exclude:
+      - '**/.gitignore'
     exr-utf8-implementation:
       path: text/decoding/projects/implementation/student
-      profiles: [full]
+      profiles:
+      - full
+      exclude:
+      - '**/.gitignore'
     exr-utf8-test-design:
       path: text/decoding/projects/test-design/student
-      profiles: [full]
+      profiles:
+      - full
+      exclude:
+      - '**/.gitignore'
+reference-catalog:
+  namespace: essay

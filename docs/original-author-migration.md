@@ -51,3 +51,9 @@ Lecture prediction/discussion и practice self-check — display-примеры 
 Полная before/after карта SHA256, размеров, атрибутов и добавленных тем хранится
 в evidence `original-author-map.json` отчёта Task7a. Native acceptance обеих
 stock-версий проверяется отдельно после заморозки всех поставщиков.
+
+## Native lifecycle migration (2026-10-05)
+
+The native refactor preserves the author source, theme, project and asset bytes from the saved pre-refactor checkpoint, with one required topic normalization: `essay/text/decoding/_control.qmd` now gives the existing “Контроль освоения темы” heading the explicit ID `sec-decoding-control`. Native Core validates closed declarations before visibility, so the previously unnamed nearest heading could not own its exercises. The heading text and all questions remain unchanged.
+
+Project/profile YAML now uses native Core, Download and QRC hooks, followed by site collection. The root uses Course Site and native website output directories. The acceptance fixture installs complete provider packages and renders the original books, slides and PDF directly in one persistent tree through student → full → student.
