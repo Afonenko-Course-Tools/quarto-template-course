@@ -8,7 +8,7 @@ profile:
 course:
   id: course-theory
   validate: true
-filters: [course-presentation]
+filters: [course-core, course-presentation]
 course-presentation:
   mode: study
 book:

@@ -54,7 +54,9 @@ const packageNames = [
 const destinations: Record<string, string[]> = {
   "course-core": [
     "root",
+    "theory",
     "tasks",
+    "handbook",
     "book",
     "essay",
     "lectures",

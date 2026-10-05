@@ -9,7 +9,7 @@ profile:
 course:
   id: course-lectures
   validate: true
-filters: [course-presentation]
+filters: [course-core, course-presentation]
 course-presentation:
   mode: lecture
 format:

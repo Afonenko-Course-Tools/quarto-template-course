@@ -21,7 +21,7 @@ Core, Presentation и Navigation происходят из одного Core U. 
 
 | Пакет | Файлов в полном payload | Установленные scope |
 |---|---:|---|
-| `course-core` | 119 | `root`, `tasks`, `book`, `essay`, `lectures`, `practice`, `examples/cloud`, `examples/prairielearn` |
+| `course-core` | 119 | `root`, `theory`, `tasks`, `handbook`, `book`, `essay`, `lectures`, `practice`, `examples/cloud`, `examples/prairielearn` |
 | `course-presentation` | 11 | `theory`, `tasks`, `handbook`, `book`, `essay`, `lectures`, `practice`, `examples/cloud`, `examples/prairielearn` |
 | `course-navigation` | 7 | `lectures`, `practice` |
 | `project-publish` | 20 | `root` |
@@ -50,8 +50,10 @@ Presentation/Navigation побайтно совпадают с соответс�
 и соседних archives evidence отчёта Task7a.
 Print используется внешней production-пробой, а не добавляется в нейтральный сайт.
 
-`ACTUAL_MAIN_INSTALLATIONS` проверяет 24 product copies шести общих поставок:
-все восемь Core, девять Presentation, две Navigation, три Download и root
+Нейтральные книги `theory` и `handbook` имеют собственные полные Core installs: штатный Quarto не наследует расширения из корневого проекта. Эти две копии добавлены целыми архивами исходного Core `6bdb904fa51971ff0f21b92897c43fe6e22a7711` (tree `2c9c352ad27cfb33ae5f92a0e5e638e4ba14407e`); все 119 файлов, режимы и четыре bundled license paths каждого пакета побайтно совпадают с Core V3 из таблицы. Карта `acceptance/template-V7-ci-correction/member-core-installations.json` сохраняет новые whole-add receipts и оригинальную provenance. Теперь установлены 28 product copies; все прежние 26 copies и три theme copies сохранены без изменений.
+
+`ACTUAL_MAIN_INSTALLATIONS` проверяет 26 product copies шести общих поставок:
+все десять Core, девять Presentation, две Navigation, три Download и root
 Publisher/QRC. Две optional adapter copies отдельно проверяются native route
 Cloud/PL и полной Source-аутентификацией. Существующий
 `tests/probes/portal-provider-refs.json` сохраняет ровно четыре ключа

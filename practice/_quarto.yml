@@ -9,7 +9,7 @@ profile:
 course:
   id: course-practice
   validate: true
-filters: [course-presentation]
+filters: [course-core, course-presentation]
 course-presentation:
   mode: study
 format:
