@@ -16,19 +16,21 @@ The outputs are `_site-student` and `_site-full`. Each part has separate profile
 
 Reveal sources use `##` for a section and `###` for its slides. A section heading may introduce content or stand alone as a divider; Course Navigation takes the group name from that heading. Existing `sec-*` IDs remain the link targets. Under `format.revealjs`, `shift-heading-level-by: -1` maps these authoring levels to native Reveal H1/H2, `slide-level: 2` creates the slide structure, and `navigation-mode: linear` moves through slides in order. The shift is scoped to Reveal so book and handout headings retain their own levels. No custom section attribute is required.
 
-The repository contains complete installed extension packages. `providers.json` pins their source commits; `installed-packages.json` records every installed file and SHA256 digest. `python3 tests/native/packages.py` verifies all copies. Maintainers with sibling provider checkouts can refresh whole frozen packages with `python3 tools/sync-providers.py`; this uses `git archive` and ordinary `quarto add`, then checks the full installed file set and bytes.
+The repository contains installed extension releases in `_extensions`, committed with the course source. Refresh them with `bash tools/install-extensions.sh`: the script contains explicit `quarto add organization/repository@version --no-prompt` commands for the root, parts and examples. It requires Quarto and Bash, with no Python, local provider checkouts, custom package registry or file-hash manifest. The Course release installs Core, Presentation and Navigation together; authored YAML selects the filters and plugins that are used.
+
+To upgrade, choose a published release tag in the install script, run it, inspect the Git diff and run the native acceptance suite. CI repeats the tagged installation and checks that it reproduces the committed `_extensions` through Git. Release tags are never moved. Extension publishers update `version` in `_extension.yml`, merge the tested PR into `main`, and publish the matching `vMAJOR.MINOR.PATCH` tag. The template itself is released as `v1.0.0`.
 
 The original author course remains in `fixtures/probes/original-course`, with its books, essays, PDF handout, Java starter projects, private controls, and themes. Its acceptance fixture overlays the corresponding complete installed packages without changing its authored sources. See [the migration notes](docs/original-author-migration.md).
 
 Optional native examples are `examples/cloud`, `examples/prairielearn`, and `examples/exports`. The export example produces current Core Body packages for Print and Moodle. Print consumes the public package and emits a PDF with attachments; Moodle consumes the teacher package and an explicit binding and emits XML with attachments. Export generation does not deploy a VM or submit work to an LMS.
 
 ```sh
-python3 tests/native/packages.py
+bash tools/install-extensions.sh
 quarto run tests/native/config.ts
-python3 tests/native/run.py all --workspace /tmp/course-native
-python3 tests/native/exports.py /tmp/course-native/neutral
-python3 tests/native/lifecycle.py /tmp/course-native/neutral
-python3 tests/native/preview.py /tmp/course-native/neutral
+quarto run tests/native/run.ts all --workspace /tmp/course-native
+quarto run tests/native/exports.ts /tmp/course-native/neutral
+quarto run tests/native/lifecycle.ts /tmp/course-native/neutral
+quarto run tests/native/preview.ts /tmp/course-native/neutral
 ```
 
 Set `QUARTO` to select a specific local executable. Use separate cache directories for the two Quarto versions, and retain each directory across repeated renders. The suite checks student → full → student, native books/slides/PDF, local links, catalogs and search, actual resources, optional adapters, exports, failed-build retry, current output selection, and preview. GitHub Actions runs both fixed versions on pull requests and `main`.

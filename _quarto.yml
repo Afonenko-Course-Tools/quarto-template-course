@@ -42,23 +42,6 @@ reference-catalog:
   namespace: portal
   publication:
     title: Учебный курс
-  exports:
-    portal:
-    - sec-portal
-    theory:
-    - sec-theory
-    tasks:
-    - sec-tasks
-    - sec-lab
-    - sec-plan
-    - exr-compare
-    - exr-evidence
-    lectures:
-    - sec-lectures
-    practice:
-    - sec-practice
-    handbook:
-    - sec-handbook
 profile:
   default: student
   group:
