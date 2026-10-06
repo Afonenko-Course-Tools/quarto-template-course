@@ -1,7 +1,7 @@
 // A test-only XML 1.0 gate for the generated Moodle bank vocabulary. The bundled
 // DOM parser repairs malformed input, so validate the original text before it.
-// DTDs and custom entities are deliberately unsupported by this transport.
-const name = "[A-Za-z_:][A-Za-z0-9_.:-]*";
+// DTDs, namespaces and custom entities are unsupported by this transport.
+const name = "[A-Za-z_][A-Za-z0-9_.-]*";
 function fail(message: string): never {
   throw Error(`XML well-formedness: ${message}`);
 }
@@ -41,6 +41,7 @@ function attributes(source: string): Map<string, string> {
     );
     if (!matched) fail("attribute must have a quoted value");
     const key = matched[1], quote = matched[2];
+    if (key === "xmlns") fail("namespaces are unsupported");
     if (values.has(key)) fail(`duplicate attribute ${key}`);
     const end = source.indexOf(quote, matched[0].length);
     if (end === -1) fail("unclosed attribute quote");
@@ -123,6 +124,12 @@ export function assertWellFormed(xml: string) {
             !["version", "encoding", "standalone"].includes(key)
           )
         ) fail("invalid XML declaration attribute");
+        const expectedOrder = ["version", "encoding", "standalone"].filter((
+          key,
+        ) => attrs.has(key));
+        if ([...attrs.keys()].join(",") !== expectedOrder.join(",")) {
+          fail("invalid XML declaration attribute order");
+        }
         const encoding = attrs.get("encoding"),
           standalone = attrs.get("standalone");
         if (

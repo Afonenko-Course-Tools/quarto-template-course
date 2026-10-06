@@ -86,7 +86,7 @@ export async function preview(
     if (pending) console.log(pending);
   }
   const drains = Promise.all([drain(child.stdout), drain(child.stderr)]);
-  const timers = new Set<number>();
+  const timers = new Set<ReturnType<typeof setTimeout>>();
   function delay(ms: number): Promise<void> {
     return new Promise((resolve) => {
       const id = setTimeout(() => {

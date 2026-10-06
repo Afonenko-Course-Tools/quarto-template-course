@@ -23,6 +23,15 @@ try {
   assert(xml.children[0].children[0].children[0].text === "<p>A & B</p>");
   assert(xml.children[0].children[0].children[1].attributes.name === "x&y.png");
   for (
+    const declaration of [
+      'version="1.0" encoding="UTF-8"',
+      'version="1.0" standalone="yes"',
+      'version="1.0" encoding="UTF-8" standalone="yes"',
+    ]
+  ) {
+    assert(parseXml(`<?xml ${declaration}?><quiz/>`).name === "quiz");
+  }
+  for (
     const invalid of [
       "<quiz><question></quiz>",
       "<quiz><question>",
@@ -36,6 +45,11 @@ try {
       "<quiz><![CDATA[unclosed</quiz>",
       '<quiz/><?xml version="1.0"?>',
       "<!DOCTYPE quiz><quiz/>",
+      "<quiz><p:x/></quiz>",
+      '<quiz p:attr="x"/>',
+      '<quiz xmlns="urn:bank"/>',
+      '<quiz xmlns:p="urn:bank"/>',
+      '<?xml version="1.0" standalone="yes" encoding="UTF-8"?><quiz/>',
     ]
   ) {
     let rejected = false;

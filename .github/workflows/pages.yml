@@ -42,6 +42,8 @@ jobs:
           bash tools/install-extensions.sh
           git diff --exit-code -- ':(glob)**/_extensions/**'
           test -z "$(git ls-files --others --exclude-standard -- ':(glob)**/_extensions/**')"
+          quarto run tests/native/helpers.test.ts
+          quarto run tests/native/preview.test.ts
           quarto run tests/native/config.ts
           quarto run tests/native/run.ts all --workspace "$RUNNER_TEMP/course-native"
           quarto run tests/native/exports.ts "$RUNNER_TEMP/course-native/neutral"
