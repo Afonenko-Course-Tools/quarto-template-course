@@ -1,4 +1,0 @@
-::: {course-role="prerequisites"}
-- Контракт функции и граничные случаи: @book:sec-contracts.
-- Массивы байтов, строки и исключения Java.
-:::

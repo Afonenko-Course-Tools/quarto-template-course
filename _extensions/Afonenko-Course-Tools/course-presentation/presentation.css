@@ -11,8 +11,23 @@
 .course-answer > details > summary:focus-visible { outline: 2px solid var(--course-accent, var(--bs-primary, currentColor)); outline-offset: .2em; }
 .course-answer > details[open] > summary { margin-bottom: .65em; }
 .course-print-tab-title { display: none; }
+
+/* Автор задаёт темы, колонки и ссылки обычной Markdown-таблицей.
+   Класс задаётся в атрибутах таблицы; .responsive обрабатывает Quarto. */
+.course-plan:not(table), .table-responsive:has(table.course-plan) { max-width: 100%; overflow-x: auto; margin-block: 1rem 1.5rem; }
+.course-plan:focus-visible { outline: 2px solid var(--course-accent, var(--bs-primary, currentColor)); outline-offset: .2em; }
+table.course-plan, .course-plan table { width: 100%; min-width: 58rem; margin-bottom: 0; font-size: .92rem; }
+.course-plan th, .course-plan td { padding: .7rem .8rem; vertical-align: top; }
+.course-plan th:first-child, .course-plan td:first-child { width: 18%; font-weight: 600; }
+.course-plan td { line-height: 1.6; }
+.course-plan td a { text-decoration: none; }
+.course-plan td a:hover { text-decoration: underline; }
+
 /* Режим печати относится к представлению и не зависит от навигации или темы. */
 @media print {
+  .course-plan:not(table), .table-responsive:has(table.course-plan) { overflow: visible; }
+  table.course-plan, .course-plan table { min-width: 0; }
+  .course-plan th, .course-plan td { overflow-wrap: anywhere; }
   .course-answer, .course-block { break-inside: auto; }
   .callout .collapse, .course-answer .collapse { display: block !important; height: auto !important; overflow: visible !important; }
   .fragment { opacity: 1 !important; visibility: visible !important; transform: none !important; }
@@ -23,6 +38,9 @@
   .course-meta { background: transparent; }
 }
 /* Reveal измеряет макет печати до события печати браузера. */
+html.print-pdf .course-plan:not(table), html.print-pdf .table-responsive:has(table.course-plan) { overflow: visible; }
+html.print-pdf table.course-plan, html.print-pdf .course-plan table { min-width: 0; }
+html.print-pdf .course-plan th, html.print-pdf .course-plan td { overflow-wrap: anywhere; }
 html.print-pdf .callout .collapse, html.print-pdf .course-answer .collapse { display: block !important; height: auto !important; overflow: visible !important; }
 html.print-pdf .fragment { opacity: 1 !important; visibility: visible !important; transform: none !important; }
 html.print-pdf .panel-tabset > .tab-content > div { display: block !important; opacity: 1 !important; }
@@ -34,3 +52,21 @@ html.print-pdf .course-answer > details > summary { display: none; }
    измерения должна совпадать с конечной шириной слайда: иначе длинный ответ
    после переноса строк будет обрезан на последней странице. */
 html.print-pdf .reveal .slides section:not(.stack) { width: var(--slide-width); }
+
+/* Native Reveal notes reserve the remaining right-hand area. */
+.course-mode-toggle { position: fixed; z-index: 40; top: .6rem; right: .6rem; padding: .45rem .75rem; font: 14px/1.4 system-ui,sans-serif; color: #24292f; background: #fff; border: 1px solid #8995a1; border-radius: .3rem; cursor: pointer; }
+.course-mode-toggle:focus-visible { outline: 3px solid #2963a3; outline-offset: 2px; }
+html[lang^="ru"] .reveal .speaker-notes::before { content: "Общие заметки"; }
+body.course-navigation-active .reveal.show-notes { width: calc((100% - var(--course-nav-width)) * .75); max-width: none; }
+body.course-navigation-no-sidebar .reveal.show-notes { width: 75%; }
+@media screen and (max-width: 1024px) {
+ body.course-navigation-active .reveal.show-notes { width: calc(100% - var(--course-nav-width)); height: calc((100% - var(--course-nav-footer)) * .7); }
+ body.course-navigation-no-sidebar .reveal.show-notes { width: 100%; }
+ body.course-navigation-active .reveal.show-notes .speaker-notes { height: calc((100vh - var(--course-nav-footer)) * .3); }
+}
+@media screen and (max-width: 600px) {
+ body.course-navigation-active .reveal.show-notes { left: 0; width: 100%; height: calc((100% - var(--course-nav-footer)) * .6); }
+ body.course-navigation-active .reveal.show-notes .speaker-notes { height: calc((100vh - var(--course-nav-footer)) * .4); }
+}
+@media print { .course-mode-toggle, .reveal .speaker-notes, .reveal aside.notes { display: none !important; } }
+html.print-pdf .course-mode-toggle, html.print-pdf .reveal .speaker-notes, html.print-pdf .reveal aside.notes { display: none !important; }

@@ -1,0 +1,40 @@
+---
+title: Начало работы
+---
+
+Создайте обычный Quarto website, book или презентацию. Для книг и слайдов
+достаточно установить общий выпуск Core, Presentation и Navigation:
+
+```sh
+quarto add Afonenko-Course-Tools/quarto-course@v3.0.1 --no-prompt
+```
+
+```yaml
+filters: [course-core, course-presentation]
+format: html
+```
+
+Обычный рендер не требует `course.id`, сложности или роли каждого упражнения.
+Фильтр Presentation работает также самостоятельно. Для составного сайта
+добавьте Publisher и QRC и следуйте [настройке подпроектов](composition.qmd).
+
+## Сборка этой документации
+
+Нужны Quarto, Task, `curl` и `tar`. Для получения и проверки результата нужен Node.js.
+На Windows команды подготовки каталогов используют PowerShell, не Bash/WSL.
+
+```sh
+task fetch
+task render
+task check
+task preview
+```
+
+Получение готовых примеров выполняется явно. `render` и `preview` используют
+уже подготовленную папку `examples/`, не запускают Gradle, LMS или виртуальную машину.
+Публикация — отдельная ручная операция `task publish` после успешной проверки;
+в текущем внедрении сайт проверяется только локально.
+
+Команды Linux проверены в этой поставке. Ветки команд Windows и macOS
+описаны в Taskfile; фактический запуск на этих ОС отмечается отдельно от
+переносимости Task.

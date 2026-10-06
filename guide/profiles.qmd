@@ -1,0 +1,41 @@
+---
+title: Student и full
+---
+
+У полноценного курса публикуется student. Full собирается локально для решений,
+закрытых комментариев и контрольных файлов. У демонстраций и документации
+по умолчанию full: их материалы специально подготовлены для публичного показа.
+
+```yaml
+profile:
+  default: student
+  group:
+    - [student, full]
+```
+
+В book не задавайте общий базовый `book.chapters`: массивы профилей Quarto
+могут объединяться. Задайте полный список отдельно в каждом профильном файле.
+
+```yaml
+# _quarto-student.yml
+course: {view: student}
+book:
+  chapters: [index.qmd, topics/checksum.qmd, labs/checksum.qmd]
+```
+
+```yaml
+# _quarto-full.yml
+course: {view: full}
+book:
+  chapters: [index.qmd, topics/checksum.qmd, labs/checksum.qmd, controls/tasks.qmd, controls/variant-01.qmd]
+```
+
+Для условного содержимого используйте нативную форму
+`.content-visible when-profile="full"`. Условия файлов и ресурсов должны
+соответствовать друг другу: отсутствие QMD в student не исключает вложения,
+попавшие под широкий resources glob. Исключите `_site-full`, локальные LMS-пакеты
+и закрытые каталоги из ресурсов открытого сайта.
+
+Тип задания `control` не скрывает его автоматически. Student/full определяют
+состав сайта; экспорт выбранной работы получает полные исходники банка независимо
+от опубликованной проекции. Общие заметки презентации не помещаются в full-only блоки.

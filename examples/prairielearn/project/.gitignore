@@ -1,5 +1,0 @@
-# Java compilation and build-tool caches.
-/build/
-/target/
-/.gradle/
-*.class

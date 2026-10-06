@@ -1,6 +1,0 @@
-project:
-  output-dir: _book/student
-course:
-  view: student
-book:
-  subtitle: Студенческая версия

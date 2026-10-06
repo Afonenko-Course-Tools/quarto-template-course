@@ -1,3 +1,0 @@
-# P0 plan {#sec-plan}
-
-Read @theory:sec-theory, then complete @exr-p0 during @sec-lab.

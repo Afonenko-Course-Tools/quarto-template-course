@@ -1,73 +1,35 @@
-name: Native course validation and publication
+name: Local documentation checks
 on:
   pull_request:
-    branches: [main]
-  push:
     branches: [main]
   workflow_dispatch:
 permissions:
   contents: read
-concurrency:
-  group: ${{ github.workflow }}-${{ github.ref }}
-  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 jobs:
   check:
-    name: Native course (${{ matrix.quarto }})
     runs-on: ubuntu-latest
-    timeout-minutes: 90
-    strategy:
-      fail-fast: false
-      matrix:
-        quarto: ['1.10.18', '1.11.5']
+    timeout-minutes: 20
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
-        with:
-          persist-credentials: false
       - uses: quarto-dev/quarto-actions/setup@8a96df13519ee81fd526f2dfca5962811136661b
         with:
-          version: ${{ matrix.quarto }}
-      - uses: cue-lang/setup-cue@b0e30e540a2dae47304ebf16586a5b2db023b61c
+          version: '1.11.5'
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # node runtime
         with:
-          version: v0.17.1
-      - name: Native PDF tools
+          node-version: '22'
+      - name: Installed documentation and ready demos
         run: |
-          sudo apt-get update
-          sudo apt-get install -y --no-install-recommends texlive-xetex texlive-latex-extra texlive-lang-cyrillic texlive-fonts-recommended lmodern fonts-lmodern fonts-dejavu poppler-utils
-      - name: Installed native acceptance
-        env:
-          XDG_CACHE_HOME: ${{ runner.temp }}/quarto-cache-${{ matrix.quarto }}
-        run: |
-          quarto --version
-          cue version
-          bash tools/install-extensions.sh
-          git diff --exit-code -- ':(glob)**/_extensions/**'
-          test -z "$(git ls-files --others --exclude-standard -- ':(glob)**/_extensions/**')"
-          quarto run tests/native/helpers.test.ts
-          quarto run tests/native/preview.test.ts
-          quarto run tests/native/config.ts
-          quarto run tests/native/run.ts all --workspace "$RUNNER_TEMP/course-native"
-          quarto run tests/native/exports.ts "$RUNNER_TEMP/course-native/neutral"
-          quarto run tests/native/lifecycle.ts "$RUNNER_TEMP/course-native/neutral"
-          quarto run tests/native/preview.ts "$RUNNER_TEMP/course-native/neutral"
-          quarto run tests/external.ts
-      - name: Upload student site
-        if: vars.COURSE_PUBLISH_PAGES == 'true' && matrix.quarto == '1.10.18' && github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
-        uses: actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9
-        with:
-          path: ${{ runner.temp }}/course-native/neutral/_site-student
-  deploy:
-    needs: check
-    if: vars.COURSE_PUBLISH_PAGES == 'true' && github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
-    runs-on: ubuntu-latest
-    permissions:
-      pages: write
-      id-token: write
-    concurrency:
-      group: course-pages
-      cancel-in-progress: false
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    steps:
-      - id: deployment
-        uses: actions/deploy-pages@368f82528645a54fb793d4d04e342629a3f51346
+          cd "$RUNNER_TEMP"
+          curl --fail --location --output task.tar.gz https://github.com/go-task/task/releases/download/v3.54.0/task_linux_amd64.tar.gz
+          curl --fail --location --output task_checksums.txt https://github.com/go-task/task/releases/download/v3.54.0/task_checksums.txt
+          awk '$2 == "task_linux_amd64.tar.gz" {print $1 "  task.tar.gz"}' task_checksums.txt | sha256sum -c -
+          mkdir -p "$RUNNER_TEMP/task"
+          tar -xzf task.tar.gz -C "$RUNNER_TEMP/task" task
+          export PATH="$RUNNER_TEMP/task:$PATH"
+          export TASK="$RUNNER_TEMP/task/task"
+          cd "$GITHUB_WORKSPACE"
+          task install
+          task fetch
+          task render
+          task check
+          python3 tests/fetch.py
