@@ -1,9 +1,0 @@
-# Необязательное оформление; навигация и учебные элементы подключаются отдельно.
-project:
-  brand: _extensions/BSU-RFCT-Afonenko-Courses/bsu-theme/_brand.yml
-format:
-  revealjs:
-    theme:
-      - brand
-      - _extensions/BSU-RFCT-Afonenko-Courses/bsu-theme/styles/common.scss
-      - _extensions/BSU-RFCT-Afonenko-Courses/bsu-theme/styles/slides.scss

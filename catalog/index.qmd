@@ -1,0 +1,38 @@
+---
+title: Каталог готовых примеров
+---
+
+Группы показывают небольшие курсы, банки и отдельные возможности расширений.
+Получите всю папку группы из GitHub, затем установите её закреплённые расширения
+штатным `quarto add`. Исходники не упаковываются отдельным инструментом.
+
+| Группа | Готовый результат | Среда исполнения |
+| --- | --- | --- |
+| Модель и представление | [Курс и презентация](../examples/core/index.html) | Quarto, CUE; Chromium для проверки PDF |
+| Составной сайт | [Book + HTML/Reveal](../examples/composition/index.html) | Quarto |
+| Межпроектные ссылки | [Каталог QRC](../examples/qrc/index.html) | Quarto |
+| Печатные работы | [Раздатки и варианты](../examples/print/index.html) | Quarto, PDF engine |
+| PrairieLearn | [Java/Gradle](../examples/prairielearn/index.html) | Java и Gradle для проекта |
+| Moodle | [Банк вопросов](../examples/moodle/index.html) | Quarto; Moodle для импорта |
+| Внешние ссылки | [Внешний каталог QRC](../examples/external/index.html) | Quarto; публичная документация Quarto |
+| Cloud | [Метаданные облачного задания](../examples/cloud/index.html) | Quarto; облачная платформа отдельно |
+
+Внешняя группа использует подготовленный адресный снимок публичной документации
+Quarto; это не экспорт чужого сайта. Её внешние переходы ведут на официальный сайт.
+
+Готовые архивы получаются задачей `task fetch` из точных URL неизменяемых Releases.
+В каждой группе `BUILD.json` указывает исходную ревизию, выпуски зависимостей
+и выполненные проверки. Внутренние ссылки локальны; внешние QRC-импорты могут
+вести в выбранную публичную публикацию. Текст демонстраций не входит в поиск
+этого сайта; поиск охватывает руководство и описания групп.
+
+## Исходники групп
+
+- [Core, Presentation, Navigation](https://github.com/Afonenko-Course-Tools/quarto-course/tree/demo-20261007-patch1/examples/course)
+- [Составная сборка](https://github.com/Afonenko-Course-Tools/quarto-project-publish/tree/v4.0.0/examples/course)
+- [QRC](https://github.com/Afonenko-Course-Tools/quarto-reference-catalog/tree/demo-20261007/examples/course)
+- [Печать](https://github.com/Afonenko-Course-Tools/quarto-course-print/tree/v0.2.0/examples/paper)
+- [Java/Gradle](https://github.com/Afonenko-Course-Tools/quarto-course-prairielearn/tree/v2.1.0/examples/java-gradle)
+- [Moodle](https://github.com/Afonenko-Course-Tools/quarto-course-moodle/tree/v0.2.0/examples/questions)
+- [Cloud](https://github.com/Afonenko-Course-Tools/quarto-course-cloud/tree/v2.1.0/examples/course)
+- [Внешний адресный каталог QRC](https://github.com/Afonenko-Course-Tools/quarto-reference-catalog/tree/demo-20261007/examples/external)

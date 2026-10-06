@@ -1,0 +1,122 @@
+version: '3'
+tasks:
+  install:
+    desc: Установить закреплённый bundle для документации
+    cmds:
+    - quarto add Afonenko-Course-Tools/quarto-course@v3.0.1 --no-prompt
+  fetch:
+    desc: Явно получить готовые закреплённые демонстрации
+    cmds:
+    - task: fetch:core
+    - task: fetch:composition
+    - task: fetch:qrc
+    - task: fetch:print
+    - task: fetch:prairielearn
+    - task: fetch:moodle
+    - task: fetch:cloud
+    - task: fetch:external
+  render:
+    desc: Рендер документации с уже полученными примерами
+    cmds:
+    - quarto render
+  check:
+    desc: Проверить локальные ссылки, поиск и полный состав примеров
+    cmds:
+    - node tests/site.cjs
+  preview:
+    cmds:
+    - quarto preview --no-watch-inputs
+  publish:
+    desc: Отдельная ручная публикация уже проверенного сайта
+    cmds:
+    - task: check
+    - quarto publish gh-pages --no-render
+  _fetch:
+    internal: true
+    vars:
+      STAGE: .demo-staging/{{.GROUP}}
+      DEST: examples/{{.GROUP}}
+    cmds:
+    - cmd: rm -rf "{{.STAGE}}" && mkdir -p "{{.STAGE}}/files" "examples"
+      platforms:
+      - linux
+      - darwin
+    - cmd: powershell -NoProfile -Command '$ErrorActionPreference="Stop"; if (Test-Path "{{.STAGE}}") { Remove-Item -Recurse -Force "{{.STAGE}}"
+        }; New-Item -ItemType Directory -Force "{{.STAGE}}/files","examples" | Out-Null'
+      platforms:
+      - windows
+    - curl --fail --location --retry 2 --output "{{.STAGE}}/demo.tar.gz" "{{.URL}}"
+    - tar -xzf "{{.STAGE}}/demo.tar.gz" -C "{{.STAGE}}/files"
+    - cmd: test -s "{{.STAGE}}/files/index.html" && test -s "{{.STAGE}}/files/BUILD.json"
+      platforms:
+      - linux
+      - darwin
+    - cmd: 'powershell -NoProfile -Command ''$ErrorActionPreference="Stop"; foreach ($name in "index.html","BUILD.json") { if (!(Test-Path (Join-Path
+        "{{.STAGE}}/files" $name) -PathType Leaf)) { throw ("Missing demo file: "+$name) } }'''
+      platforms:
+      - windows
+    - node tests/site.cjs --demo-dir "{{.STAGE}}/files"
+    - cmd: rm -rf "{{.DEST}}" && mv "{{.STAGE}}/files" "{{.DEST}}"
+      platforms:
+      - linux
+      - darwin
+    - cmd: powershell -NoProfile -Command '$ErrorActionPreference="Stop"; if (Test-Path "{{.DEST}}") { Remove-Item -Recurse -Force "{{.DEST}}"
+        }; Move-Item "{{.STAGE}}/files" "{{.DEST}}"'
+      platforms:
+      - windows
+  fetch:core:
+    desc: Получить core
+    cmds:
+    - task: _fetch
+      vars:
+        GROUP: core
+        URL: https://github.com/Afonenko-Course-Tools/quarto-course/releases/download/demo-20261007-patch1/course.tar.gz
+  fetch:composition:
+    desc: Получить composition
+    cmds:
+    - task: _fetch
+      vars:
+        GROUP: composition
+        URL: https://github.com/Afonenko-Course-Tools/quarto-project-publish/releases/download/demo-20261007/composite-course.tar.gz
+  fetch:qrc:
+    desc: Получить qrc
+    cmds:
+    - task: _fetch
+      vars:
+        GROUP: qrc
+        URL: https://github.com/Afonenko-Course-Tools/quarto-reference-catalog/releases/download/demo-20261007/catalog-cross-project.tar.gz
+  fetch:print:
+    desc: Получить print
+    cmds:
+    - task: _fetch
+      vars:
+        GROUP: print
+        URL: https://github.com/Afonenko-Course-Tools/quarto-course-print/releases/download/demo-20261007/paper.tar.gz
+  fetch:prairielearn:
+    desc: Получить prairielearn
+    cmds:
+    - task: _fetch
+      vars:
+        GROUP: prairielearn
+        URL: https://github.com/Afonenko-Course-Tools/quarto-course-prairielearn/releases/download/demo-20261007/java-gradle.tar.gz
+  fetch:moodle:
+    desc: Получить moodle
+    cmds:
+    - task: _fetch
+      vars:
+        GROUP: moodle
+        URL: https://github.com/Afonenko-Course-Tools/quarto-course-moodle/releases/download/demo-20261007/moodle-questions.tar.gz
+  fetch:cloud:
+    desc: Получить cloud
+    cmds:
+    - task: _fetch
+      vars:
+        GROUP: cloud
+        URL: https://github.com/Afonenko-Course-Tools/quarto-course-cloud/releases/download/demo-20261007/cloud.tar.gz
+  fetch:external:
+    desc: Получить external
+    cmds:
+    - task: _fetch
+      vars:
+        GROUP: external
+        URL: https://github.com/Afonenko-Course-Tools/quarto-reference-catalog/releases/download/demo-20261007/external-catalog.tar.gz

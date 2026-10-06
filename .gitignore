@@ -30,3 +30,7 @@
 **/_freeze/
 /native-acceptance/
 **/__pycache__/
+
+# Prepared immutable demos, never source-controlled.
+/examples/
+/.demo-staging/

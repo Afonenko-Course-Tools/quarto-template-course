@@ -1,7 +1,0 @@
-# P0 theory {#sec-theory}
-
-Definition in a book. Lecture: @lectures:sec-lectures. Work: @tasks:sec-tasks.
-
-::: {.content-visible when-profile="full"}
-FULL_ONLY_theory
-:::
