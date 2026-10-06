@@ -122,6 +122,7 @@ export async function optional(root: string): Promise<void> {
       await command([
         "run",
         join(ROOT, "tests/render-example.ts"),
+        "--", // Keep script flags out of Quarto's global option parser.
         "--root",
         root,
         "--example",
