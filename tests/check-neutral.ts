@@ -16,7 +16,7 @@ async function files(directory: string): Promise<string[]> {
   return result;
 }
 const members = ["theory", "tasks", "lectures", "practice", "handbook"];
-const exports = [
+const requiredTargets = [
   "portal:sec-portal",
   "theory:sec-theory",
   "tasks:sec-tasks",
@@ -27,6 +27,9 @@ const exports = [
   "lectures:sec-lectures",
   "practice:sec-practice",
   "handbook:sec-handbook",
+  "tasks:exr-observation",
+  "theory:sec-evidence",
+  "handbook:sec-answer-format",
 ];
 /** Product assertions for the neutral authoring example, independent of Original. */
 export async function checkNeutralPublication(root: string) {
@@ -45,11 +48,12 @@ export async function checkNeutralPublication(root: string) {
       catalog.schema === "quarto-reference-catalog",
       "current QRC schema required",
     );
-    assert(
-      JSON.stringify(Object.keys(catalog.targets).sort()) ===
-        JSON.stringify(exports.slice().sort()),
-      "explicit neutral exports differ",
-    );
+    for (const key of requiredTargets) {
+      assert(catalog.targets[key], `default own export missing ${key}`);
+    }
+    for (const target of Object.values(catalog.targets) as { namespace: string }[]) {
+      assert(["portal", ...members].includes(target.namespace), "imported target reexported");
+    }
     const tasks = await Deno.readTextFile(join(output, "tasks/index.html"));
     for (const id of ["exr-observation", "exr-compare", "exr-evidence"]) {
       assert(tasks.includes(`id="${id}"`), `canonical tasks missing ${id}`);
