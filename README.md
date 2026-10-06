@@ -2,6 +2,13 @@
 
 The course is a normal Quarto website. Its landing page composes five independently renderable parts: theory, tasks, lectures, practice, and handbook. Tasks contain canonical exercises; the other parts link to them through Reference Catalog. Books, Reveal slides, includes, listings, navigation, and execution remain native Quarto features.
 
+Start from the versioned template checkout:
+
+```sh
+git clone --branch v1.0.0 --depth 1 https://github.com/Afonenko-Course-Tools/quarto-template-course.git my-course
+cd my-course
+```
+
 Install Quarto 1.10.18 or 1.11.5 and CUE v0.17.1, then run:
 
 ```sh
