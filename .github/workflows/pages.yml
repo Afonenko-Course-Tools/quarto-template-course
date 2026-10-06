@@ -39,12 +39,16 @@ jobs:
         run: |
           quarto --version
           cue version
-          python3 tests/native/packages.py
+          bash tools/install-extensions.sh
+          git diff --exit-code -- ':(glob)**/_extensions/**'
+          test -z "$(git ls-files --others --exclude-standard -- ':(glob)**/_extensions/**')"
+          quarto run tests/native/helpers.test.ts
+          quarto run tests/native/preview.test.ts
           quarto run tests/native/config.ts
-          python3 tests/native/run.py all --workspace "$RUNNER_TEMP/course-native"
-          python3 tests/native/exports.py "$RUNNER_TEMP/course-native/neutral"
-          python3 tests/native/lifecycle.py "$RUNNER_TEMP/course-native/neutral"
-          python3 tests/native/preview.py "$RUNNER_TEMP/course-native/neutral"
+          quarto run tests/native/run.ts all --workspace "$RUNNER_TEMP/course-native"
+          quarto run tests/native/exports.ts "$RUNNER_TEMP/course-native/neutral"
+          quarto run tests/native/lifecycle.ts "$RUNNER_TEMP/course-native/neutral"
+          quarto run tests/native/preview.ts "$RUNNER_TEMP/course-native/neutral"
           quarto run tests/external.ts
       - name: Upload student site
         if: vars.COURSE_PUBLISH_PAGES == 'true' && matrix.quarto == '1.10.18' && github.ref == 'refs/heads/main' && github.event_name != 'pull_request'

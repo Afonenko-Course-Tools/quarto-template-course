@@ -86,9 +86,14 @@ if (import.meta.main) {
     const n = Deno.args.indexOf(name);
     return n < 0 ? undefined : Deno.args[n + 1];
   };
+  const profile = arg("--profile");
+  assert(
+    profile,
+    "Pass script arguments after --, including --profile student|full",
+  );
   await renderOptionalExample(
     resolve(arg("--root") || dirname(dirname(fromFileUrl(import.meta.url)))),
     arg("--example") || "",
-    arg("--profile") || "student",
+    profile,
   );
 }

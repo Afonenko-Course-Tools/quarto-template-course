@@ -1,7 +1,25 @@
-# Installed provider provenance
+# Released Quarto extensions
 
-`providers.json` is the source of truth for provider repositories, frozen commits, extension names, and installed scopes. `installed-packages.json` records each provider's `_extensions` Git tree and the full file set, SHA256, size, and installed mode of every package.
+The template installs published extension releases from the
+[Afonenko-Course-Tools](https://github.com/Afonenko-Course-Tools) repositories.
+The exact release tags and installation locations are the explicit `quarto add
+organization/repository@version` commands in
+[tools/install-extensions.sh](tools/install-extensions.sh).
 
-`tools/sync-providers.py` creates a local Git archive of each frozen commit, installs it with stock `quarto add`, compares all installed bytes to the archive, and replaces each declared package as a whole. It preserves unrelated BSU themes. `tests/native/packages.py` independently checks every installed scope against the recorded manifest. The manifests provide supply provenance; they do not participate in rendering or impose runtime identity checks.
+Installed `_extensions` directories, including bundled dependencies and
+licenses, are committed with the course source. Each `_extension.yml` reports
+the extension's semantic version. A Course repository release contains Core,
+Presentation and Navigation at the same bundle version; authored YAML chooses
+which contributions are active. Unrelated author themes are preserved.
 
-Core supplies Course capture, Body/resources, Presentation, and Navigation. Reference Catalog resolves explicit current outputs and search. Course Site coordinates native project renders. Download, Print, Moodle, Cloud, and PrairieLearn each use their provider's installed API. The template contains no copied provider domain logic or build coordinator implementation.
+To update, select a published tag, run the installation script, review the Git
+diff and run the native acceptance suite described in [README.md](README.md).
+CI installs those same tagged releases with Quarto and checks the committed
+extension trees through Git before exercising the course. No provider commit
+registry, generated file-digest inventory, local provider checkout or Python
+maintenance script is required.
+
+Publishers update `_extension.yml`, validate the PR, merge into `main` and
+publish the corresponding `vMAJOR.MINOR.PATCH` release. Published tags are
+never moved; a correction is a new version. Ordinary course rendering uses the
+committed installed files and does not fetch or update extensions.
