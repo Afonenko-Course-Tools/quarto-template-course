@@ -10,7 +10,17 @@ Cloud проверяет метаданные заданий с шагами и 
 quarto add Afonenko-Course-Tools/quarto-course-cloud@v2.1.0 --no-prompt
 ```
 
-Установите Cloud вместе с Core в проект банка. Полная конфигурация VM и корректные действия находятся в группе Cloud; после подключения выполните `quarto render --profile full --fail-if-warnings`. Результат — HTML и проверенная модель задания.
+Установите Cloud вместе с Core в проект банка. Полная конфигурация VM и корректные действия находятся в группе Cloud; для сбора фактов подключите Core pre/post hooks как на [странице Course](course.qmd),
+настройте [профиль full](../guide/profiles.qmd) и выполните:
+
+```sh
+quarto render --profile full --fail-if-warnings
+quarto run _extensions/Afonenko-Course-Tools/course-core/entrypoints/check.ts . full
+```
+
+Рендер создаёт HTML и факты документов. Вторая команда проверяет связи всего
+проекта, включая назначения и объявленные VM, и записывает модель
+`_generated/course-spec/course.json`.
 
 ```yaml
 course:

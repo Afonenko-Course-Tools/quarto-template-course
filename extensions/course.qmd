@@ -10,7 +10,19 @@ Core проверяет учебные факты и экспортирует в
 quarto add Afonenko-Course-Tools/quarto-course@v3.0.1 --no-prompt
 ```
 
-Для обычной книги оставьте `format: html` и уберите `revealjs-plugins`. Для выпуска модели полного проекта подключите Core pre/post hooks из `course-core/entrypoints/pre.ts` и `post.ts` в `project.pre-render` и `project.post-render`; пути при установке из GitHub начинаются с `_extensions/Afonenko-Course-Tools/`. Экспорт выбранной работы читает исходники банка самостоятельно.
+Для обычной книги оставьте `format: html` и уберите `revealjs-plugins`. Для сбора фактов текущего рендера подключите Core pre/post hooks из `course-core/entrypoints/pre.ts` и `post.ts` в `project.pre-render` и `project.post-render`; пути при установке из GitHub начинаются с `_extensions/Afonenko-Course-Tools/`. Экспорт выбранной работы читает исходники банка самостоятельно.
+
+Чтобы проверить модель всего проекта, настройте [профиль full](../guide/profiles.qmd)
+и выполните после успешного рендера:
+
+```sh
+quarto render --profile full --fail-if-warnings
+quarto run _extensions/Afonenko-Course-Tools/course-core/entrypoints/check.ts . full
+```
+
+Вторая команда проверяет связи между документами и правила активированных
+адаптеров, затем записывает `_generated/course-spec/course.json`. Pre/post hooks
+сами фиксируют текущий нативный результат, а не заменяют эту полную проверку.
 
 ```yaml
 filters: [course-core, course-presentation]
