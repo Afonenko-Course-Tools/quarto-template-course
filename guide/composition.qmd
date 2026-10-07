@@ -2,8 +2,20 @@
 title: Составной сайт
 ---
 
-У каждого подпроекта свой `_quarto.yml`, формат документов и профильный состав.
-Корень перечисляет только нормализованные относительные пути:
+Когда теория, банк и презентации являются самостоятельными Quarto-проектами,
+Publisher собирает их результаты в общий сайт. Он сохраняет конфигурацию
+каждой части и размещает её по пути папки. QRC отдельно отвечает за ссылки
+между публикациями; для самой составной сборки каталог ссылок не обязателен.
+
+## Установите сборщик
+
+В корне сайта выполните:
+
+```sh
+quarto add Afonenko-Course-Tools/quarto-project-publish@v4.0.1 --no-prompt
+```
+
+Создайте корневой `_quarto.yml`:
 
 ```yaml
 project:
@@ -12,27 +24,52 @@ project:
   render: [index.qmd]
   pre-render: _extensions/Afonenko-Course-Tools/course-site/entrypoints/pre.ts
   post-render: _extensions/Afonenko-Course-Tools/course-site/entrypoints/post.ts
+website:
+  title: Учебный курс
 format: html
-subprojects: [theory, task, seminars]
+lang: ru
+subprojects: [theory, task]
 ```
 
+У `theory` и `task` должны быть свои `_quarto.yml`. Например, книга теории:
+
+```yaml
+project:
+  type: book
+  output-dir: _book
+  post-render: ../_extensions/Afonenko-Course-Tools/course-site/entrypoints/collect.ts
+book:
+  title: Теория
+  chapters: [index.qmd]
+format: html
+lang: ru
+```
+
+Последним post-hook каждой части подключите корневой `collect.ts`. Если
+часть уже использует Core или QRC, их post-hooks идут перед ним.
+Пути здесь рассчитаны для части на один уровень ниже корня.
+
 ```sh
-quarto add Afonenko-Course-Tools/quarto-project-publish@v4.0.0 --no-prompt
-quarto add Afonenko-Course-Tools/quarto-reference-catalog@v2.2.0 --no-prompt
 quarto render --profile student
 ```
 
-Подпроект `seminars` публикуется в `/seminars/`; вложенный `a/slides` — в
-`/a/slides/`. Переименование папки меняет URL. Отдельный mount не задаётся.
-Пространство ссылок QRC выбирается в `reference-catalog.namespace` независимо
-от пути и экспортного ID курса.
+В `_site/theory/` и `_site/task/` появятся актуальные результаты частей.
+Путь `a/slides` публикуется как `a/slides/`; переименование папки меняет URL.
+Один выбранный веб-формат документа может быть HTML или Reveal. PDF и другие
+форматы собираются отдельно с учётом обычных ограничений Quarto book.
 
-Сборщик получает эффективную конфигурацию каждого документа через `quarto inspect`,
-учитывая front matter и выбранные профили. Website может сочетать HTML и Reveal.
-Для book сохраняются нативные ограничения Quarto. Один документ имеет один
-выбранный веб-формат; PDF и другие невеб-форматы собираются отдельно.
-Обычный подпроект рендерится один раз; `.quarto` и `_freeze` сохраняются.
+## Предупреждения частей
 
-Подключите Core/QRC native hooks в частях, последний post-hook —
-`../_extensions/Afonenko-Course-Tools/course-site/entrypoints/collect.ts`.
-Полный минимальный пример с работающими путями доступен в [каталоге](../catalog/index.qmd).
+Корневой CLI `--fail-if-warnings` не передаётся автоматически отдельным
+процессам рендера. Для публичной сборки задайте штатное
+`fail-if-warnings: true` в каждом самостоятельном проекте либо подключите
+общий файл через `metadata-files`. Предупреждение дочернего проекта тогда
+останавливает сборку до выдачи итогового результата.
+
+## Свяжите материалы
+
+Если нужны ссылки между книгой и слайдами, установите
+[QRC](../extensions/reference-catalog.qmd) в соответствующие проекты и задайте
+их пространства имён. Namespace ссылки, путь публикации и `course.id`
+решают разные задачи. Готовый пример [book и HTML/Reveal](../catalog/index.qmd)
+показывает hooks и локальные переходы целиком.

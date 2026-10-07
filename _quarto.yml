@@ -2,45 +2,83 @@ project:
   type: website
   output-dir: _site
   render:
-    - index.qmd
-    - guide/*.qmd
-    - extensions/*.qmd
-    - catalog/*.qmd
+  - index.qmd
+  - guide/*.qmd
+  - extensions/*.qmd
+  - reference/*.qmd
+  - catalog/*.qmd
   resources:
-    - examples/**
-    - assets/**
-    - '!_generated/**'
-    - '!_site*/**'
-    - '!_extensions/**'
-    - '!docs/**'
-    - '!tools/**'
-    - '!.demo-staging/**'
-    - '!Taskfile.yml'
-    - '!README.md'
+  - examples/**
+  - assets/**
+  - '!_generated/**'
+  - '!_site*/**'
+  - '!_extensions/**'
+  - '!docs/**'
+  - '!tools/**'
+  - '!.demo-staging/**'
+  - '!Taskfile.yml'
+  - '!README.md'
   preview:
     watch-inputs: false
 profile:
   default: full
 course:
   view: full
-filters: [course-core, course-presentation]
+filters:
+- course-core
+- course-presentation
 format:
   html:
     theme: cosmo
     toc: true
     code-copy: true
-    code-tools:
-      source: repo
+    code-tools: true
 lang: ru
 website:
   title: Инструменты учебного курса Quarto
   repo-url: https://github.com/Afonenko-Course-Tools/quarto-template-course
   repo-branch: main
-  repo-actions: [source]
   search: true
   navbar:
     left:
-      - {href: guide/start.qmd, text: Начало работы}
-      - {href: guide/model.qmd, text: Модель курса}
-      - {href: extensions/index.qmd, text: Расширения}
-      - {href: catalog/index.qmd, text: Примеры}
+    - href: guide/index.qmd
+      text: Руководство
+    - href: extensions/index.qmd
+      text: Расширения
+    - href: reference/index.qmd
+      text: Справочник
+    - href: catalog/index.qmd
+      text: Примеры
+  page-navigation: true
+  sidebar:
+    style: docked
+    search: true
+    contents:
+    - section: Руководство
+      contents:
+      - guide/index.qmd
+      - guide/start.qmd
+      - guide/model.qmd
+      - guide/profiles.qmd
+      - guide/composition.qmd
+      - guide/presentation.qmd
+      - guide/export.qmd
+    - section: Расширения
+      contents:
+      - extensions/index.qmd
+      - extensions/course.qmd
+      - extensions/publisher.qmd
+      - extensions/reference-catalog.qmd
+      - extensions/print.qmd
+      - extensions/prairielearn.qmd
+      - extensions/moodle.qmd
+      - extensions/cloud.qmd
+      - extensions/download.qmd
+    - section: Справочник
+      contents:
+      - reference/index.qmd
+      - reference/source.qmd
+      - reference/diagnostics.qmd
+    - section: Примеры
+      contents:
+      - catalog/index.qmd

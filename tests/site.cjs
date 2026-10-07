@@ -12,6 +12,33 @@ const search = JSON.parse(fs.readFileSync(path.join(site,'search.json'),'utf8'))
 assert.ok(search.some(entry => String(entry.href).startsWith('guide/')), 'Guide missing from central search');
 assert.ok(search.some(entry => String(entry.href).startsWith('catalog/')), 'Demo descriptions missing from search');
 assert.ok(search.every(entry => !String(entry.href).startsWith('examples/')), 'Demo learning text entered central search');
+const documentation = [
+  'index', 'guide/index', 'guide/start', 'guide/model', 'guide/profiles',
+  'guide/composition', 'guide/presentation', 'guide/export', 'extensions/index',
+  'extensions/course', 'extensions/publisher', 'extensions/reference-catalog',
+  'extensions/print', 'extensions/prairielearn', 'extensions/moodle',
+  'extensions/cloud', 'extensions/download', 'reference/index',
+  'reference/source', 'reference/diagnostics', 'catalog/index',
+];
+for (const page of documentation) {
+  const html = fs.readFileSync(path.join(site, page+'.html'), 'utf8');
+  assert.match(html, /<html[^>]+lang="ru"/, 'Russian document language missing: '+page);
+  assert.match(html, /id="quarto-sidebar"/, 'Native sidebar missing: '+page);
+  assert.equal([...html.matchAll(/id="quarto-code-tools-source"/g)].length, 1,
+    'Expected one native source action: '+page);
+  assert.match(html, /id="quarto-embedded-source-code-modal"/,
+    'Embedded native source missing: '+page);
+  assert.ok(!/data-quarto-source-url=/.test(html), 'Duplicate/repo source action: '+page);
+  const sidebar = html.split('id="quarto-sidebar"')[1].split('</nav>')[0];
+  const destinations = [...sidebar.matchAll(/href="([^"]+)"/g)].map(match =>
+    path.resolve(path.dirname(path.join(site, page+'.html')), match[1]));
+  for (const target of documentation.filter(p => p !== 'index')) {
+    assert.ok(destinations.includes(path.join(site, target+'.html')),
+      'Documentation page unreachable from sidebar: '+target+' from '+page);
+  }
+  assert.ok(search.some(entry => String(entry.href).split('#')[0] === page+'.html'),
+    'Documentation page missing from search: '+page);
+}
 }
 function checkBuild(directory) {
   const build = JSON.parse(fs.readFileSync(path.join(directory,'BUILD.json'),'utf8'));

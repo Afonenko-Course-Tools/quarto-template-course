@@ -1,0 +1,36 @@
+---
+title: Download — материалы проекта
+---
+
+Download создаёт ZIP явно выбранных материалов: например, данных семинара или стартового проекта. Самостоятельный сценарий не требует Core, CUE или адаптера оценивания.
+
+## Установка и подключение
+
+```sh
+quarto add Afonenko-Course-Tools/quarto-project-download@v1.1.1 --no-prompt
+```
+
+В QMD вставьте shortcode `{{< project-download seminar-data text="Скачать данные семинара" >}}`. После `quarto render` ссылка ведёт к архиву разрешённых файлов. Начальный `/` в `path` означает корень проекта. `include`, `exclude`, `profiles` и `gitignore` уточняют отбор.
+
+```yaml
+project:
+  type: website
+  resources: ["!materials/**"]
+  pre-render: _extensions/Afonenko-Course-Tools/project-download/entrypoints/pre.ts
+  post-render: _extensions/Afonenko-Course-Tools/project-download/entrypoints/post.ts
+filters: [project-download]
+project-download:
+  resources:
+    seminar-data:
+      path: /materials/observations
+      include: ["**/*.csv", "**/*.md"]
+```
+
+## Результат и ограничения
+
+Архив создаётся по видимому запросу. Профиль ресурса не скрывает shortcode автоматически. Исходники Quarto и закрытые reference/solution не становятся публичными материалами. Скачивание ZIP и просмотр QMD — отдельные действия.
+
+Продолжите с [руководством по сценарию](../guide/start.qmd).
+[Каталог готовых групп](../catalog/index.qmd) связывает результат, исходную папку
+и требования для просмотра, рендера и исполнения.
+Собственные ID описаны в [справочнике диагностики](../reference/diagnostics.qmd).
