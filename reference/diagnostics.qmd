@@ -1,0 +1,38 @@
+---
+title: Диагностика
+---
+
+Собственное сообщение расширения содержит устойчивый ID, русское пояснение
+и доступный контекст: входной документ, ID объекта, поле, связанное объявление
+и подсказку. Строки временного JSON, Lua или готового HTML не являются строками QMD.
+Если QRC показывает позицию HTML, она относится именно к результату рендера.
+
+| Компонент | ID | Смысл | Действие |
+| --- | --- | --- | --- |
+| Core | `CORE.DUPLICATE_EXERCISE, CORE.DUPLICATE_ASSESSMENT` | Два объявления одного ID | Проверить оба исходных файла и оставить уникальные ID; [полный справочник](https://github.com/Afonenko-Course-Tools/quarto-course/blob/v3.0.1/docs/diagnostics.md) |
+| Core | `CORE.UNKNOWN_MEMBER` | Не найден член работы | Сверить items и ID объявления в выбранном банке; [полный справочник](https://github.com/Afonenko-Course-Tools/quarto-course/blob/v3.0.1/docs/diagnostics.md) |
+| Core | `ANSWER_YAML, ANSWER_INVALID` | Не разобран или не проверен ответ | Исправить answer-spec; сохранить исходное пояснение parser/CUE; [полный справочник](https://github.com/Afonenko-Course-Tools/quarto-course/blob/v3.0.1/docs/diagnostics.md) |
+| Presentation | `PRESENTATION.CONFIG_INVALID, PRESENTATION.FILTER_ORDER_INVALID` | Конфигурация или порядок фильтров | Сверить поле и включить Core перед Presentation; [полный справочник](https://github.com/Afonenko-Course-Tools/quarto-course/blob/v3.0.1/docs/diagnostics.md) |
+| Publisher | `SITE.CONFIG_INVALID, SITE.CURRENT_RESULT_MISSING` | Конфигурация или актуальный результат части | Сверить путь проекта, hooks и результат текущего рендера; [полный справочник](https://github.com/Afonenko-Course-Tools/quarto-project-publish/blob/v4.0.0/docs/diagnostics.md) |
+| QRC | `QRC.TARGET_UNKNOWN, QRC.TARGET_DUPLICATE` | Не найдена цель или повторён ID | Сверить namespace и обе страницы результата; [полный справочник](https://github.com/Afonenko-Course-Tools/quarto-reference-catalog/blob/v2.2.0/docs/diagnostics.md) |
+| Print | `ADAPTER, PRINT.INPUT_INVALID` | Неподдерживаемый публичный пакет или вход CLI | Сверить вопрос, поле, ресурсы и аргументы команды; [полный справочник](https://github.com/Afonenko-Course-Tools/quarto-course-print/blob/v0.2.0/docs/diagnostics.md) |
+| Moodle | `ADAPTER, MOODLE.INPUT_INVALID` | Пакет, binding или вход CLI | Сверить тип ответа, выбор и явные настройки; [полный справочник](https://github.com/Afonenko-Course-Tools/quarto-course-moodle/blob/v0.2.0/docs/diagnostics.md) |
+| PrairieLearn | `ADAPTER, PL.INPUT_INVALID` | Пакет, binding или вход CLI | Сверить выбранный вопрос и его binding; [полный справочник](https://github.com/Afonenko-Course-Tools/quarto-course-prairielearn/blob/v2.1.0/docs/diagnostics.md) |
+| Cloud | `CLOUD005_declaredVm, CLOUD.ACTION_SOURCE_INVALID` | Необъявленная VM или неверный источник действия | Сверить VM и файл действия по контексту; [полный справочник](https://github.com/Afonenko-Course-Tools/quarto-course-cloud/blob/v2.1.0/docs/diagnostics.md) |
+| Download | `RESOURCE.PRIVATE_OR_SOURCE, DOWNLOAD.OUTPUT_CONFLICT` | Закрытый ресурс или конфликт результата | Выбрать публичный каталог и свободный путь архива; [полный справочник](https://github.com/Afonenko-Course-Tools/quarto-project-download/blob/v1.1.0/docs/diagnostics.md) |
+
+`ADAPTER` сохраняет своё широкое значение: компонент, вопрос и поле уточняют
+проверяемый контракт. Именованные CUE-правила, например
+`PL001_externalAssessmentMembers` и `CLOUD005_declaredVm`, остаются CUE ID;
+они не объявляются aliases собственных runtime ID.
+
+Внешний отказ сохраняет имя инструмента, код завершения и исходные stdout/stderr.
+Не заменяйте чужое сообщение предположением об ошибке задания: причиной может
+быть невозможность запуска Quarto, CUE, Pandoc или Gradle. Неизвестное исключение
+сохраняет stack для исследования.
+
+Публичный курс собирайте штатным `quarto render --fail-if-warnings`.
+В составном курсе задайте `fail-if-warnings: true` у каждой самостоятельной
+публичной части. Внутренний source-проход экспорта Core имеет отдельную политику;
+он не меняет постоянную конфигурацию авторского сайта. Подробности —
+в [составной сборке](../guide/composition.qmd) и [экспорте](../guide/export.qmd).

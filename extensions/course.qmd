@@ -1,0 +1,30 @@
+---
+title: Core, Presentation и Navigation
+---
+
+Core проверяет учебные факты и экспортирует выбранную работу. Presentation оформляет учебные блоки и раскрытие ответов. Navigation добавляет поиск, обзор и переходы в Reveal. Они входят в один bundle, но включаются отдельно.
+
+## Установка и подключение
+
+```sh
+quarto add Afonenko-Course-Tools/quarto-course@v3.0.1 --no-prompt
+```
+
+Для обычной книги оставьте `format: html` и уберите `revealjs-plugins`. Для выпуска модели полного проекта подключите Core pre/post hooks из `course-core/entrypoints/pre.ts` и `post.ts` в `project.pre-render` и `project.post-render`; пути при установке из GitHub начинаются с `_extensions/Afonenko-Course-Tools/`. Экспорт выбранной работы читает исходники банка самостоятельно.
+
+```yaml
+filters: [course-core, course-presentation]
+revealjs-plugins: [course-navigation]
+format:
+  revealjs:
+    slide-level: 2
+```
+
+## Результат и ограничения
+
+Core не требует `course.id` при обычном рендере. Для экспорта он нужен. Правила оценивания задаёт выбранная платформа. Core не переносит условия между проектами и не заменяет Markdown-парсер Quarto.
+
+Продолжите с [руководством по сценарию](../guide/model.qmd).
+[Каталог готовых групп](../catalog/index.qmd) связывает результат, исходную папку
+и требования для просмотра, рендера и исполнения.
+Собственные ID описаны в [справочнике диагностики](../reference/diagnostics.qmd).

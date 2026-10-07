@@ -2,37 +2,35 @@
 title: Каталог готовых примеров
 ---
 
-Группы показывают небольшие курсы, банки и отдельные возможности расширений.
-Получите всю папку группы из GitHub, затем установите её закреплённые расширения
-штатным `quarto add`. Исходники не упаковываются отдельным инструментом.
+Откройте готовый результат, чтобы познакомиться с возможностью. Затем получите
+целую исходную папку группы по ссылке в той же строке и выполните команды
+её README. Соседние файлы, конфигурации и ресурсы являются частью примера.
 
-| Группа | Готовый результат | Среда исполнения |
-| --- | --- | --- |
-| Модель и представление | [Курс и презентация](../examples/core/index.html) | Quarto, CUE; Chromium для проверки PDF |
-| Составной сайт | [Book + HTML/Reveal](../examples/composition/index.html) | Quarto |
-| Межпроектные ссылки | [Каталог QRC](../examples/qrc/index.html) | Quarto |
-| Печатные работы | [Раздатки и варианты](../examples/print/index.html) | Quarto, PDF engine |
-| PrairieLearn | [Java/Gradle](../examples/prairielearn/index.html) | Java и Gradle для проекта |
-| Moodle | [Банк вопросов](../examples/moodle/index.html) | Quarto; Moodle для импорта |
-| Внешние ссылки | [Внешний каталог QRC](../examples/external/index.html) | Quarto; публичная документация Quarto |
-| Cloud | [Метаданные облачного задания](../examples/cloud/index.html) | Quarto; облачная платформа отдельно |
+| Группа и задача | Средство | Готовый результат | Целая папка исходников | Зависимости для сборки и исполнения |
+| --- | --- | --- | --- | --- |
+| Модель и представление: Банк, работа и одна презентация | [course](../extensions/course.qmd) | [Открыть](../examples/core/index.html) | [GitHub](https://github.com/Afonenko-Course-Tools/quarto-course/tree/demo-20261007-patch1/examples/course) | Quarto и CUE; Chromium для проверки печати |
+| Составной сайт: Book и HTML/Reveal в общем сайте | [publisher](../extensions/publisher.qmd) | [Открыть](../examples/composition/index.html) | [GitHub](https://github.com/Afonenko-Course-Tools/quarto-project-publish/tree/v4.0.0/examples/course) | Quarto и Task для сценария группы |
+| Межпроектные ссылки: Переходы книги, лекций и практики | [reference-catalog](../extensions/reference-catalog.qmd) | [Открыть](../examples/qrc/index.html) | [GitHub](https://github.com/Afonenko-Course-Tools/quarto-reference-catalog/tree/demo-20261007/examples/course) | Quarto и Task |
+| Печатные работы: Раздатки и варианты PDF | [print](../extensions/print.qmd) | [Открыть](../examples/print/index.html) | [GitHub](https://github.com/Afonenko-Course-Tools/quarto-course-print/tree/v0.2.0/examples/paper) | Quarto/Pandoc/Typst для PDF |
+| PrairieLearn: Поставка Java-вопросов и локальные проверки | [prairielearn](../extensions/prairielearn.qmd) | [Открыть](../examples/prairielearn/index.html) | [GitHub](https://github.com/Afonenko-Course-Tools/quarto-course-prairielearn/tree/v2.1.0/examples/java-gradle) | Quarto, CUE; Java/Gradle для исполнения |
+| Moodle: HTML банка и XML вопросов | [moodle](../extensions/moodle.qmd) | [Открыть](../examples/moodle/index.html) | [GitHub](https://github.com/Afonenko-Course-Tools/quarto-course-moodle/tree/v0.2.0/examples/questions) | Quarto для экспорта; Moodle для импорта |
+| Cloud: Метаданные задания с шагами и VM | [cloud](../extensions/cloud.qmd) | [Открыть](../examples/cloud/index.html) | [GitHub](https://github.com/Afonenko-Course-Tools/quarto-course-cloud/tree/v2.1.0/examples/course) | Quarto/CUE для модели; облачная среда отдельно |
+| Внешние ссылки: Переходы к документации Quarto | [reference-catalog](../extensions/reference-catalog.qmd) | [Открыть](../examples/external/index.html) | [GitHub](https://github.com/Afonenko-Course-Tools/quarto-reference-catalog/tree/demo-20261007/examples/external) | Quarto для рендера; сеть для внешних ссылок |
 
-Внешняя группа использует подготовленный адресный снимок публичной документации
-Quarto; это не экспорт чужого сайта. Её внешние переходы ведут на официальный сайт.
+Для просмотра HTML достаточно браузера, PDF — программы просмотра PDF.
+Нужные версии расширений закреплены в README группы и её `BUILD.json`.
+Java/Gradle, LMS и Cloud не устанавливаются при просмотре этой документации.
+Успешный локальный экспорт не подтверждает обмен с реальной платформой.
 
-Готовые архивы получаются задачей `task fetch` из точных URL неизменяемых Releases.
-В каждой группе `BUILD.json` указывает исходную ревизию, выпуски зависимостей
-и выполненные проверки. Внутренние ссылки локальны; внешние QRC-импорты могут
-вести в выбранную публичную публикацию. Текст демонстраций не входит в поиск
-этого сайта; поиск охватывает руководство и описания групп.
+Готовые группы намеренно показывают full: их решения и заметки подготовлены
+для публичной демонстрации. В полноценном курсе [student и full](../guide/profiles.qmd)
+разделяют открытый и полный состав.
 
-## Исходники групп
+Внутренние ссылки готовых групп локальны. Внешний QRC-каталог использует
+подготовленный адресный снимок документации Quarto; его переходы ведут на
+официальный сайт. Исходник текущего документа открывается штатным Quarto
+[source-действием](../reference/source.qmd), а вся папка примера берётся из GitHub.
 
-- [Core, Presentation, Navigation](https://github.com/Afonenko-Course-Tools/quarto-course/tree/demo-20261007-patch1/examples/course)
-- [Составная сборка](https://github.com/Afonenko-Course-Tools/quarto-project-publish/tree/v4.0.0/examples/course)
-- [QRC](https://github.com/Afonenko-Course-Tools/quarto-reference-catalog/tree/demo-20261007/examples/course)
-- [Печать](https://github.com/Afonenko-Course-Tools/quarto-course-print/tree/v0.2.0/examples/paper)
-- [Java/Gradle](https://github.com/Afonenko-Course-Tools/quarto-course-prairielearn/tree/v2.1.0/examples/java-gradle)
-- [Moodle](https://github.com/Afonenko-Course-Tools/quarto-course-moodle/tree/v0.2.0/examples/questions)
-- [Cloud](https://github.com/Afonenko-Course-Tools/quarto-course-cloud/tree/v2.1.0/examples/course)
-- [Внешний адресный каталог QRC](https://github.com/Afonenko-Course-Tools/quarto-reference-catalog/tree/demo-20261007/examples/external)
+Текст учебных примеров исключён из центрального поиска. Поиск здесь охватывает
+руководство, справочник, страницы средств и описания групп. Сопровождающий
+явно получает закреплённые архивы через Task; рендер сайта не пересобирает производителей.

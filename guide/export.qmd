@@ -2,24 +2,76 @@
 title: Экспорт выбранной работы
 ---
 
-Запускайте экспорт из корня курса, указывая единственную книгу банка и работу:
+Экспорт получает задания одной работы из полной исходной книги банка.
+Публиковать full-сайт или заранее собирать его HTML не требуется. Выбор
+student/full определяет сайт для читателя; функциональные профили по-прежнему
+влияют на исходники выбранной работы.
+
+## Подготовьте пакет Core
+
+Установите [Course](../extensions/course.qmd) в книгу банка, задайте
+`course.id` в корне курса и `assessment.id` на странице работы. Имена ниже
+соответствуют примеру из [руководства по банку](model.qmd): книга находится
+в `task`, ID работы — `checksum-lab`.
+
+Из корня курса выполните:
 
 ```sh
-quarto run _extensions/Afonenko-Course-Tools/course-core/entrypoints/export.ts --book task --work sec-checksum-lab --output _generated/checksum.json
+quarto run task/_extensions/Afonenko-Course-Tools/course-core/entrypoints/export.ts --book task --work checksum-lab --output _generated/checksum.json
 ```
 
-Корневой `course.id` задаёт устойчивые ключи. Core получает native AST,
-включая контрольные источники, без предварительного полного HTML. Функциональные
-профили передаются явно через `--profile FEATURE`. Выбираются только задания
-работы и используемые ресурсы; неназначенные задания банка не обязаны быть
-экспортируемыми в выбранный адаптер.
+Core создаст полный `_generated/checksum.json` и публичный
+`_generated/checksum.public.json`. В публичном пакете нет закрытого ключа,
+решения и grading-notes. Условия контрольных заданий сохраняются. Для
+функционального профиля добавьте `--profile FEATURE` с именем вашего профиля.
 
-Создаются полный пакет `.json` и публичный `.public.json`. Условие для участника
-LMS содержит контрольное задание, но не его закрытый ключ, решение или grading-notes.
-Для Print используйте публичную часть; для Moodle/PL — предусмотренный адаптером
-вход и явные платформенные настройки.
+Внутренний JSON-проход читает полный исходный вход и допускает нативные
+предупреждения согласно своему контракту. Это отдельная операция от строгой
+публичной сборки. Неверное выбранное задание по-прежнему отклоняется.
+Неназначенные задания не обязаны поддерживать выбранный адаптер.
 
-Moodle XML переносит вопросы, не создаёт деятельность «Тест» и правила доступа.
-PrairieLearn получает минимальную поставку вопросов с явными bindings. Реальное
-исполнение на сервере LMS и доступ студентов проверяются отдельно от экспорта.
-Смотрите точные команды в README каждой [группы примеров](../catalog/index.qmd).
+## Печатная раздатка
+
+Установите [Print](../extensions/print.qmd) в корень курса, затем передайте
+публичный пакет и полный ключ работы:
+
+```sh
+quarto run _extensions/Afonenko-Course-Tools/course-print/entrypoints/export.ts _generated/checksum.public.json integrity-course/checksum-lab _generated/paper
+```
+
+Будет создан PDF в указанном каталоге. Компиляция требует Pandoc и Typst,
+доступных через Quarto. Print получает публичное условие и проверяет ресурсы
+перед записью результата.
+
+## Вопросы Moodle
+
+Установите [Moodle](../extensions/moodle.qmd). Для поддерживаемых ответов
+подготовьте `binding.json`:
+
+```json
+{"defaultGrade": 1, "shuffle": false}
+```
+
+```sh
+quarto run _extensions/Afonenko-Course-Tools/course-moodle/entrypoints/export.ts _generated/checksum.json binding.json _generated/questions.xml
+```
+
+XML содержит вопросы. Он не создаёт деятельность «Тест», правила доступа
+или попытки. Тип ответа должен поддерживаться текущим адаптером; импорт и
+работу в реальной LMS проверяют отдельно. Полный банк для этого сценария
+есть в [каталоге](../catalog/index.qmd).
+
+## Поставка PrairieLearn
+
+Установите [PrairieLearn](../extensions/prairielearn.qmd) в банк вместе с Core.
+Bindings явно связывают каждый выбранный вопрос с платформенными настройками:
+
+```sh
+quarto run task/_extensions/Afonenko-Course-Tools/course-prairielearn/entrypoints/export.ts . task checksum-lab binding.json _generated/pl
+```
+
+Эта команда подходит для банка с поддерживаемыми PL-заданиями и корректным
+`questions` binding. Законченная [Java/Gradle-группа](../catalog/index.qmd)
+содержит bindings, стартовые файлы и проверки. Локальное выполнение Gradle
+подтверждает её assertions; совместимость контейнера и запуск на сервере PL
+проверяются отдельно. Единой платформенно независимой формулы оценки нет.
