@@ -1,0 +1,30 @@
+---
+title: Moodle — экспорт вопросов
+---
+
+Moodle экспортирует поддерживаемые вопросы из полного пакета Core в XML. Закрытый ключ используется при построении ответа, а публичное условие становится текстом вопроса.
+
+## Установка и подключение
+
+```sh
+quarto add Afonenko-Course-Tools/quarto-course-moodle@v0.2.1 --no-prompt
+```
+
+Сохраните JSON настроек как `binding.json`. `defaultGrade` задаёт положительную оценку вопроса, `shuffle` — перемешивание вариантов. XML записывается после успешной проверки и преобразования содержимого Pandoc.
+
+```json
+{"defaultGrade": 1, "shuffle": false}
+```
+
+```sh
+quarto run _extensions/Afonenko-Course-Tools/course-moodle/entrypoints/export.ts _generated/checksum.json binding.json _generated/questions.xml
+```
+
+## Результат и ограничения
+
+Текущий адаптер поддерживает manual и single-choice. XML не создаёт деятельность «Тест», расписание, попытки или доступ студентов. Успешный экспорт не подтверждает импорт в реальную LMS.
+
+Продолжите с [руководством по сценарию](../guide/export.qmd).
+[Каталог готовых групп](../catalog/index.qmd) связывает результат, исходную папку
+и требования для просмотра, рендера и исполнения.
+Собственные ID описаны в [справочнике диагностики](../reference/diagnostics.qmd).

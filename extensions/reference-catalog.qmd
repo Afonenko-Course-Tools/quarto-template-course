@@ -1,0 +1,30 @@
+---
+title: QRC — ссылки между проектами
+---
+
+QRC связывает объекты из разных публикаций по namespace и нативному ID. Нумерацию и подписи внутри документа по-прежнему задаёт Quarto. Каталог нужен, когда ссылка должна пережить различие путей книги и презентации.
+
+## Установка и подключение
+
+```sh
+quarto add Afonenko-Course-Tools/quarto-reference-catalog@v2.2.1 --no-prompt
+```
+
+Namespace задаётся для каждого самостоятельного проекта. Если сборкой управляет Publisher, post-hook QRC идёт перед `course-site/entrypoints/collect.ts`. Ссылка `@theory:sec-checksum` выбирает объект `sec-checksum` из namespace `theory`. Объект должен быть объявлен в опубликованном каталоге.
+
+```yaml
+filters: [reference-catalog]
+reference-catalog:
+  namespace: theory
+project:
+  post-render: _extensions/Afonenko-Course-Tools/reference-catalog/entrypoints/post.ts
+```
+
+## Результат и ограничения
+
+Local-обработка может отложить внешний переход до общей публикации; full требует разрешённых целей. Импортированный каталог с `base-url` может вести на внешнюю публикацию даже при локальном просмотре. Ссылка QRC не включает условие в экспорт работы.
+
+Продолжите с [руководством по сценарию](../guide/composition.qmd).
+[Каталог готовых групп](../catalog/index.qmd) связывает результат, исходную папку
+и требования для просмотра, рендера и исполнения.
+Собственные ID описаны в [справочнике диагностики](../reference/diagnostics.qmd).
