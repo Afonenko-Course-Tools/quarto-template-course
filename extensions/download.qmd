@@ -7,7 +7,7 @@ Download создаёт ZIP явно выбранных материалов: н
 ## Установка и подключение
 
 ```sh
-quarto add Afonenko-Course-Tools/quarto-project-download@v1.1.0 --no-prompt
+quarto add Afonenko-Course-Tools/quarto-project-download@v1.1.1 --no-prompt
 ```
 
 В QMD вставьте shortcode `{{< project-download seminar-data text="Скачать данные семинара" >}}`. После `quarto render` ссылка ведёт к архиву разрешённых файлов. Начальный `/` в `path` означает корень проекта. `include`, `exclude`, `profiles` и `gitignore` уточняют отбор.

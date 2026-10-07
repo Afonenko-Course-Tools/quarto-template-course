@@ -7,7 +7,7 @@ PrairieLearn получает выбранную работу через уст�
 ## Установка и подключение
 
 ```sh
-quarto add Afonenko-Course-Tools/quarto-course-prairielearn@v2.1.0 --no-prompt
+quarto add Afonenko-Course-Tools/quarto-course-prairielearn@v2.1.1 --no-prompt
 ```
 
 Для проверки метаданных подключите адаптер вместе с Core в книге банка. Для экспорта установите оба средства в банк и передайте корень, путь банка, ID работы, binding и каталог результата как описано в руководстве. Группа Java/Gradle содержит законченные стартовые файлы, reference и проверки.

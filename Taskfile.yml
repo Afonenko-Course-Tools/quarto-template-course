@@ -3,7 +3,7 @@ tasks:
   install:
     desc: Установить закреплённый bundle для документации
     cmds:
-    - quarto add Afonenko-Course-Tools/quarto-course@v3.0.1 --no-prompt
+    - quarto add Afonenko-Course-Tools/quarto-course@v3.0.2 --no-prompt
   fetch:
     desc: Явно получить готовые закреплённые демонстрации
     cmds:
@@ -70,53 +70,53 @@ tasks:
     - task: _fetch
       vars:
         GROUP: core
-        URL: https://github.com/Afonenko-Course-Tools/quarto-course/releases/download/demo-20261007-patch1/course.tar.gz
+        URL: https://github.com/Afonenko-Course-Tools/quarto-course/releases/download/demo-20261007-ru1/course.tar.gz
   fetch:composition:
     desc: Получить composition
     cmds:
     - task: _fetch
       vars:
         GROUP: composition
-        URL: https://github.com/Afonenko-Course-Tools/quarto-project-publish/releases/download/demo-20261007/composite-course.tar.gz
+        URL: https://github.com/Afonenko-Course-Tools/quarto-project-publish/releases/download/demo-20261007-ru1/composite-course.tar.gz
   fetch:qrc:
     desc: Получить qrc
     cmds:
     - task: _fetch
       vars:
         GROUP: qrc
-        URL: https://github.com/Afonenko-Course-Tools/quarto-reference-catalog/releases/download/demo-20261007/catalog-cross-project.tar.gz
+        URL: https://github.com/Afonenko-Course-Tools/quarto-reference-catalog/releases/download/demo-20261007-ru1/catalog-cross-project.tar.gz
   fetch:print:
     desc: Получить print
     cmds:
     - task: _fetch
       vars:
         GROUP: print
-        URL: https://github.com/Afonenko-Course-Tools/quarto-course-print/releases/download/demo-20261007/paper.tar.gz
+        URL: https://github.com/Afonenko-Course-Tools/quarto-course-print/releases/download/demo-20261007-ru2/paper.tar.gz
   fetch:prairielearn:
     desc: Получить prairielearn
     cmds:
     - task: _fetch
       vars:
         GROUP: prairielearn
-        URL: https://github.com/Afonenko-Course-Tools/quarto-course-prairielearn/releases/download/demo-20261007/java-gradle.tar.gz
+        URL: https://github.com/Afonenko-Course-Tools/quarto-course-prairielearn/releases/download/demo-20261007-ru1/java-gradle.tar.gz
   fetch:moodle:
     desc: Получить moodle
     cmds:
     - task: _fetch
       vars:
         GROUP: moodle
-        URL: https://github.com/Afonenko-Course-Tools/quarto-course-moodle/releases/download/demo-20261007/moodle-questions.tar.gz
+        URL: https://github.com/Afonenko-Course-Tools/quarto-course-moodle/releases/download/demo-20261007-ru2/moodle-questions.tar.gz
   fetch:cloud:
     desc: Получить cloud
     cmds:
     - task: _fetch
       vars:
         GROUP: cloud
-        URL: https://github.com/Afonenko-Course-Tools/quarto-course-cloud/releases/download/demo-20261007/cloud.tar.gz
+        URL: https://github.com/Afonenko-Course-Tools/quarto-course-cloud/releases/download/demo-20261007-ru1/cloud.tar.gz
   fetch:external:
     desc: Получить external
     cmds:
     - task: _fetch
       vars:
         GROUP: external
-        URL: https://github.com/Afonenko-Course-Tools/quarto-reference-catalog/releases/download/demo-20261007/external-catalog.tar.gz
+        URL: https://github.com/Afonenko-Course-Tools/quarto-reference-catalog/releases/download/demo-20261007-ru1/external-catalog.tar.gz

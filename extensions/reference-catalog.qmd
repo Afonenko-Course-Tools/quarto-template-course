@@ -7,7 +7,7 @@ QRC связывает объекты из разных публикаций п�
 ## Установка и подключение
 
 ```sh
-quarto add Afonenko-Course-Tools/quarto-reference-catalog@v2.2.0 --no-prompt
+quarto add Afonenko-Course-Tools/quarto-reference-catalog@v2.2.1 --no-prompt
 ```
 
 Namespace задаётся для каждого самостоятельного проекта. Если сборкой управляет Publisher, post-hook QRC идёт перед `course-site/entrypoints/collect.ts`. Ссылка `@theory:sec-checksum` выбирает объект `sec-checksum` из namespace `theory`. Объект должен быть объявлен в опубликованном каталоге.

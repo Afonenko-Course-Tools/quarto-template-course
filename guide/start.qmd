@@ -51,7 +51,7 @@ website:
 Core, Presentation и Navigation устанавливаются одним выпуском:
 
 ```sh
-quarto add Afonenko-Course-Tools/quarto-course@v3.0.1 --no-prompt
+quarto add Afonenko-Course-Tools/quarto-course@v3.0.2 --no-prompt
 ```
 
 Команда помещает компоненты в `_extensions/Afonenko-Course-Tools/`.

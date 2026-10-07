@@ -7,7 +7,7 @@ Cloud проверяет метаданные заданий с шагами и 
 ## Установка и подключение
 
 ```sh
-quarto add Afonenko-Course-Tools/quarto-course-cloud@v2.1.0 --no-prompt
+quarto add Afonenko-Course-Tools/quarto-course-cloud@v2.1.1 --no-prompt
 ```
 
 Установите Cloud вместе с Core в проект банка. Полная конфигурация VM и корректные действия находятся в группе Cloud; для сбора фактов подключите Core pre/post hooks как на [странице Course](course.qmd),
