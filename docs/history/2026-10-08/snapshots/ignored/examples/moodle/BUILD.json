@@ -1,0 +1,12 @@
+{
+  "sourceRepository": "Afonenko-Course-Tools/quarto-course-moodle",
+  "commit": "42c8709d4b8be985796f894084400a8e8c8d44ab",
+  "sourceDirty": false,
+  "extensionVersion": "0.2.0",
+  "dependencies": {
+    "quarto-course": "3.0.0"
+  },
+  "projection": "full",
+  "verification": "local installed native build",
+  "livePlatformVerified": false
+}

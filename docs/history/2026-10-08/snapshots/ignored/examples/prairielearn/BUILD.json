@@ -1,0 +1,12 @@
+{
+  "sourceRepository": "Afonenko-Course-Tools/quarto-course-prairielearn",
+  "commit": "c65550182121c4ba3e3795c5d05d7c97e15ddd7c",
+  "sourceDirty": false,
+  "extensionVersion": "2.1.0",
+  "dependencies": {
+    "quarto-course": "3.0.0"
+  },
+  "projection": "full",
+  "verification": "local installed native build",
+  "livePlatformVerified": false
+}
