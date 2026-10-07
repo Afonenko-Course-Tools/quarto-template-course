@@ -1,6 +1,13 @@
+---
+type: plan
+component: template-course
+status: in-progress
+updated: 2026-10-08
+---
+
 # Документация-шаблон и gh-pages: план владельца
 
-Статус: следующий этап, реализация не начата. Пункты 14–15/17–18
+Статус: шаги 1–2 выполнены; runtime следующей модели ещё не реализован. Пункты 14–15/17–18
 [линейного плана](../../../quarto-course/docs/plans/2026-10-08-course-tools-implementation.md).
 Сначала читать [целевой контракт Core](../../../quarto-course/spec/authoring-model-next.md).
 Весь шаблон, его инструкции/проекты и тексты готовить на ultra, если настройка
@@ -89,3 +96,20 @@ gh-pages SHA, теги/пины и результат. Публикация яв
 открытых автоматических PR. Сначала сохранить нужные человеческие изменения
 в main/Git-истории и освободить только учтённые worktrees; tag/release оставить.
 Здесь записать итоговые SHA/site URL/checks и завершённый branch inventory.
+
+## Выполнение шагов 1–2 — 8 октября 2026
+
+Общий старт: 02:36 Europe/Minsk; дедлайн: 11:36. Рабочая ветка — `feat/authoring-model-20261008`, создана в существующем checkout; дополнительные репозитории/worktrees не создавались.
+
+- [x] Fresh `git fetch origin --tags`, live remote heads, releases и OPEN PR: сохранены в [inventory/history](../history/2026-10-08/README.md). Открытых PR на момент чтения нет. Все старые refs/tags и пользовательские worktrees оставлены.
+- [x] Dirty tracked/untracked owner-планы и выбранные root mixed документы сохранены exact snapshots: `717d473ee53b3366a572f946cc1d6113be4a2706`. [Provenance](../history/2026-10-08/provenance.json) содержит исходный путь, mtime, bytes и SHA-256; старые evidence не считаются текущим CI.
+- [x] Свежий `origin/main` `b3fa91d17c3c426b3c079ffeba4ea15ead069afe` объединён в рабочую ветку коммитом `f763e03e6127ee26646580b97dd8463a4623e582`. Старый план документации объединился автоматически; первоначальная dirty версия и upstream версия сохраняются в Git.
+- [x] Добавлен [spec/index.md](../../spec/index.md), type/component/status, links из README, явный main unreleased и accepted-next. Прежний план и historical snapshots удалены из активной ветки после exact Git-byte проверки; карта истории и исходные root файлы сохранены.
+
+Текущая база: Core pin `v3.0.2`; ready groups Core/composition/QRC/PL/Cloud/external `demo-20261007-ru1`, Print/Moodle `demo-20261007-ru2`; собственный прежний тег `v1.0.0`.
+
+Проверки: exact bytes/SHA-256 всех выбранных root snapshots; Git whitespace check; локальная проверка новых документационных links/меток; diff относительно свежего origin/main ограничен документацией и историей. Runtime suites и CI не запускались: эти шаги не меняют поведение. Восемь дополнительных user worktrees чисты и сохранены на прежних refs. Meaningful ignored авторских исходников вне известных generated/cache/dependency trees не найдено; BUILD и hashes ready archives учтены, существующие результаты оставлены на диске.
+
+Сохранение истории завершено до cleanup: исходные тексты восстанавливаются по preservation/merge SHA, а active docs/spec содержат действующие документы и dated owner-план. Root источники, runtime, generated результаты и пользовательские worktrees не удалялись.
+
+Ограничение исполнителя: текущий агент наследует настройку родителя; отдельное включение ultra для этой документационной подзадачи через доступные инструменты не выполнялось. Блокеров шагов 1–2 нет; реализация следующего контракта, проверки, новые pins/releases и публикация ожидают последовательных шагов 14–15/12–18.

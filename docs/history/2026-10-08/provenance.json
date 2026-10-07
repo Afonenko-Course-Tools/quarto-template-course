@@ -115,5 +115,7 @@
       "modified": "2026-10-03T20:25:07.040766+00:00",
       "scope": "Template: native documentation website, ready-demo ownership/byte copy, search/source links, gh-pages route and testing history."
     }
-  ]
+  ],
+  "preservation_commit": "717d473ee53b3366a572f946cc1d6113be4a2706",
+  "active_checkout": "snapshots removed after exact Git-byte verification; source paths are historical paths within preservation_commit"
 }

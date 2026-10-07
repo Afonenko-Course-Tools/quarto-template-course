@@ -11,11 +11,12 @@ updated: 2026-10-08
 
 Template: native documentation website, ready-demo ownership/byte copy, search/source links, gh-pages route and testing history.
 
-Исходные смешанные документы сохранены целиком в первом локальном коммите
+Исходные смешанные документы сохранены целиком в коммите `717d473ee53b3366a572f946cc1d6113be4a2706`
 ветки `feat/authoring-model-20261008`; предметная часть владельца определяется
 планом от 8 октября. Старые ограничения и результаты не являются текущим
-контрактом и не подтверждают сегодняшний CI. После сохранения снимки и старые
-планы убираются из активной ветки; exact source/hash/mtime map остаётся
+контрактом и не подтверждают сегодняшний CI. После exact проверки байтов в Git прежние owner-планы и снимки
+удалены из активной ветки. Они восстанавливаются по сохранённым коммитам;
+exact source/hash/mtime map остаётся
 в [provenance.json](provenance.json), исходные refs/worktrees —
 в [inventory.json](inventory.json). Корневые файлы и пользовательские worktrees
 не удаляются и не изменяются.
@@ -45,3 +46,5 @@ Template: native documentation website, ready-demo ownership/byte copy, search/s
 
 Локальные старые ветки сохраняют свои SHA и уникальные коммиты в refs;
 удаление/архивация веток и worktrees относится только к финальному шагу 17.
+
+Снимки восстанавливаются командой `git show 717d473ee53b3366a572f946cc1d6113be4a2706:docs/history/2026-10-08/snapshots/root/<исходный-путь>`. Первоначальные owner-планы доступны в том же коммите по прежнему пути `docs/plans/`; свежая upstream версия сохраняется также в origin/main и merge history.
