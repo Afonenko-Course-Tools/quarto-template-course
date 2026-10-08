@@ -7,9 +7,10 @@ title: Версии и спецификации владельцев
 
 ## Выпущенные версии {#guide-status}
 
-Руководство описывает модель Core `v4.0.0` и выпуски потребителей из таблицы
-ниже. В `Taskfile.yml` закреплены этот bundle и восемь готовых групп
-`demo-20261008` семи производителей. Архивные SHA-256, полный BUILD и hashes
+Руководство закрепляет Core `v4.0.1` и версии потребителей из таблицы ниже.
+Авторская модель, схемы и Body API сохраняют контракт Core 4.0.0.
+В `Taskfile.yml` Core закреплён на `demo-20261008-1`, остальные семь
+групп используют `demo-20261008`. Архивные SHA-256, полный BUILD и hashes
 каждого файла проверяются по `tests/ready-assets.json`; producer source каждой
 группы соответствует своему tool tag на том же Git SHA.
 
@@ -20,9 +21,9 @@ render не подтверждают текущий контракт или де
 
 ## Найдите владельца правила {#owner-contracts}
 
-| Правило | Владелец и актуальный индекс | Последний закреплённый выпуск |
+| Правило | Владелец и актуальный индекс | Закреплённая версия |
 | --- | --- | --- |
-| Банк, роли, решения, работы, время, student/full, Body | [Core / Presentation / Navigation](https://github.com/Afonenko-Course-Tools/quarto-course/blob/v4.0.0/spec/index.md) | [Core v4.0.0](https://github.com/Afonenko-Course-Tools/quarto-course/tree/v4.0.0) |
+| Банк, роли, решения, работы, время, student/full, Body | [Core / Presentation / Navigation](https://github.com/Afonenko-Course-Tools/quarto-course/blob/v4.0.1/spec/index.md) | [Core v4.0.1](https://github.com/Afonenko-Course-Tools/quarto-course/tree/v4.0.1) |
 | Составной native сайт и current outputs | [Publisher](https://github.com/Afonenko-Course-Tools/quarto-project-publish/blob/v5.0.0/spec/index.md) | [v5.0.0](https://github.com/Afonenko-Course-Tools/quarto-project-publish/tree/v5.0.0) |
 | Адресные ссылки и каталог целей | [QRC](https://github.com/Afonenko-Course-Tools/quarto-reference-catalog/blob/v3.0.0/spec/index.md) | [v3.0.0](https://github.com/Afonenko-Course-Tools/quarto-reference-catalog/tree/v3.0.0) |
 | Participant PDF и guards публичного пакета | [Print](https://github.com/Afonenko-Course-Tools/quarto-course-print/blob/v0.3.0/spec/index.md) | [v0.3.0](https://github.com/Afonenko-Course-Tools/quarto-course-print/tree/v0.3.0) |
@@ -38,10 +39,10 @@ render не подтверждают текущий контракт или де
 ## Сопоставьте руководство и результат {#contract-evidence}
 
 Модель определена в действующих тематических спецификациях Core:
-[банк, решения и работы](https://github.com/Afonenko-Course-Tools/quarto-course/blob/v4.0.0/spec/learning-elements.md),
-[видимость](https://github.com/Afonenko-Course-Tools/quarto-course/blob/v4.0.0/spec/visibility.md),
-[Body](https://github.com/Afonenko-Course-Tools/quarto-course/blob/v4.0.0/docs/body-export.md) и
-[NativeRun](https://github.com/Afonenko-Course-Tools/quarto-course/blob/v4.0.0/docs/native-run.md).
+[банк, решения и работы](https://github.com/Afonenko-Course-Tools/quarto-course/blob/v4.0.1/spec/learning-elements.md),
+[видимость](https://github.com/Afonenko-Course-Tools/quarto-course/blob/v4.0.1/spec/visibility.md),
+[Body](https://github.com/Afonenko-Course-Tools/quarto-course/blob/v4.0.1/docs/body-export.md) и
+[NativeRun](https://github.com/Afonenko-Course-Tools/quarto-course/blob/v4.0.1/docs/native-run.md).
 Индекс также связывает Presentation и diagnostics. Адаптер определяет свои
 поля и поддерживаемые формы; README и пример объясняют запуск.
 
