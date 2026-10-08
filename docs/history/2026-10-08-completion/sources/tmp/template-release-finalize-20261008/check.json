@@ -1,0 +1,14 @@
+{
+  "label": "check",
+  "command": [
+    "task",
+    "check"
+  ],
+  "started": "2026-10-08T04:06:18.199978+00:00",
+  "finished": "2026-10-08T04:07:49.118645+00:00",
+  "exitCode": 0,
+  "log": "/tmp/template-release-finalize-20261008/check.log",
+  "cue": "/home/tolya/course-tools/local-tools/cue/cue",
+  "task": "/home/tolya/course-tools/local-tools/task/task",
+  "cache": "/tmp/template-release-finalize-20261008/cache"
+}

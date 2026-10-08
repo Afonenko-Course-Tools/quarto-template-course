@@ -1,0 +1,23 @@
+{
+  "baseRefName": "main",
+  "headRefOid": "4880daa17905bc868066c93bde2db07776664a57",
+  "mergeCommit": {
+    "oid": "52316a762da3a9c054b5ac6a7a89620e46c7c150"
+  },
+  "mergedAt": "2026-10-08T06:32:05Z",
+  "number": 19,
+  "state": "MERGED",
+  "statusCheckRollup": [
+    {
+      "__typename": "CheckRun",
+      "completedAt": "2026-10-08T06:30:04Z",
+      "conclusion": "SUCCESS",
+      "detailsUrl": "https://github.com/Afonenko-Course-Tools/quarto-template-course/actions/runs/37737745573/job/113181067388",
+      "name": "check",
+      "startedAt": "2026-10-08T06:28:00Z",
+      "status": "COMPLETED",
+      "workflowName": "Local documentation checks"
+    }
+  ],
+  "url": "https://github.com/Afonenko-Course-Tools/quarto-template-course/pull/19"
+}

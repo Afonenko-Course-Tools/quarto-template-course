@@ -1,0 +1,14 @@
+{
+  "label": "install",
+  "command": [
+    "task",
+    "install"
+  ],
+  "started": "2026-10-08T04:04:00.697604+00:00",
+  "finished": "2026-10-08T04:04:04.811391+00:00",
+  "exitCode": 0,
+  "log": "/tmp/template-release-finalize-20261008/install.log",
+  "cue": "/home/tolya/course-tools/local-tools/cue/cue",
+  "task": "/home/tolya/course-tools/local-tools/task/task",
+  "cache": "/tmp/template-release-finalize-20261008/cache"
+}

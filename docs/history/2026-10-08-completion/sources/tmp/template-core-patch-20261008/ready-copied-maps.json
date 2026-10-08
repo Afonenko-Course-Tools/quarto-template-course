@@ -1,0 +1,104 @@
+{
+  "capturedAt": "2026-10-08T06:16:24.166706+00:00",
+  "totalReadyFiles": 549,
+  "groups": [
+    {
+      "group": "core",
+      "archiveSHA256": "fe90b587569891455694836a48385d102960e906e07f2011c1f28092d4455ae4",
+      "sourceRef": "v4.0.1",
+      "sourceSHA": "a9a439bd6e6498806d4d4943efd71232e70170be",
+      "fileCount": 107,
+      "maps": {
+        "examples": 107,
+        "_site/examples": 107
+      },
+      "otherProducerRecordUnchanged": null
+    },
+    {
+      "group": "composition",
+      "archiveSHA256": "713620d92f6a6baafcf118ec0a0b6c0be95e801a84ae14fcbdca1aa4f94314c5",
+      "sourceRef": "v5.0.0",
+      "sourceSHA": "215309b5c41669e56a857a1bc3e4f7f2ce782c5f",
+      "fileCount": 130,
+      "maps": {
+        "examples": 130,
+        "_site/examples": 130
+      },
+      "otherProducerRecordUnchanged": true
+    },
+    {
+      "group": "qrc",
+      "archiveSHA256": "7052934f30ecfd08bbe70b028cf4ee2c21db13e142c30590e50f889f945e2b53",
+      "sourceRef": "v3.0.0",
+      "sourceSHA": "559583805a514ae8a244b6ea4cb5124867064024",
+      "fileCount": 188,
+      "maps": {
+        "examples": 188,
+        "_site/examples": 188
+      },
+      "otherProducerRecordUnchanged": true
+    },
+    {
+      "group": "print",
+      "archiveSHA256": "76635e7759ecd22d3da3126c56b6c0a181ae7a1e2322ff407b2af6da6ad4e99c",
+      "sourceRef": "v0.3.0",
+      "sourceSHA": "00c51f7342da376e85027a925dd9f1207783f924",
+      "fileCount": 26,
+      "maps": {
+        "examples": 26,
+        "_site/examples": 26
+      },
+      "otherProducerRecordUnchanged": true
+    },
+    {
+      "group": "prairielearn",
+      "archiveSHA256": "aed0fe92cd465eb7842a8fd6d95f3c537bd36feee2accb3c9c6b2e79fcc20198",
+      "sourceRef": "v3.0.0",
+      "sourceSHA": "b9821b5b62863b7e1ae380a4c1a0a0bef855f8ba",
+      "fileCount": 35,
+      "maps": {
+        "examples": 35,
+        "_site/examples": 35
+      },
+      "otherProducerRecordUnchanged": true
+    },
+    {
+      "group": "moodle",
+      "archiveSHA256": "8c441aab45c3b2e30ff10c3ceaea301aea9fb5f7a832a7a6ced3afbdb9513030",
+      "sourceRef": "v0.3.0",
+      "sourceSHA": "60ce53d0d52a93e66ca545f2a6cd96f97f09d1e6",
+      "fileCount": 21,
+      "maps": {
+        "examples": 21,
+        "_site/examples": 21
+      },
+      "otherProducerRecordUnchanged": true
+    },
+    {
+      "group": "cloud",
+      "archiveSHA256": "fcce34efff234b1a8a476a7127a9cc608f5cd02f35e16e6072b48449b0f77eac",
+      "sourceRef": "v3.0.0",
+      "sourceSHA": "552612450b093b0cff2e33187a1cb5b9234c050a",
+      "fileCount": 22,
+      "maps": {
+        "examples": 22,
+        "_site/examples": 22
+      },
+      "otherProducerRecordUnchanged": true
+    },
+    {
+      "group": "external",
+      "archiveSHA256": "eb7509fdb50340d1dea7c73b233001082e926a2688d4337f3aaac7e844124795",
+      "sourceRef": "v3.0.0",
+      "sourceSHA": "559583805a514ae8a244b6ea4cb5124867064024",
+      "fileCount": 20,
+      "maps": {
+        "examples": 20,
+        "_site/examples": 20
+      },
+      "otherProducerRecordUnchanged": true
+    }
+  ],
+  "allSevenNonCoreRecordsUnchanged": true,
+  "allEightProducerTreesCopiedWithoutAlteration": true
+}

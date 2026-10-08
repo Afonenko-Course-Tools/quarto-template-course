@@ -1,0 +1,13 @@
+# Template Core 4.0.1 final local freeze
+
+Local ordered gates PASS; source/receipts frozen for independent ultra review before commit/PR. No commit, push, PR, merge or publication was performed.
+
+Worktree `/home/tolya/course-tools/quarto-template-core-patch-20261008`, branch `fix/core-student-link-guide-pins-20261008`, HEAD/base `8b050033b594eeae4270ca6f55f12a1d6e8f1243`. Exact 30-path scope/hashes and all receipts are in `final-scope.json`; combined tracked/new-payload diff is `final.diff`, SHA256 `1f4cf134c2ad7de5c67370889d309646d4e3e788a0c788e7d6054d9df94cc48b`.
+
+Actual Core tool `v4.0.1` and core demo `demo-20261008-1` share producer SHA `a9a439bd6e6498806d4d4943efd71232e70170be`. Independent published download: `course.tar.gz` SHA256 `fe90b587569891455694836a48385d102960e906e07f2011c1f28092d4455ae4`, 2,783,070 bytes, all107 paths/file hashes/BUILD equal producer native receipt, sourceDirty=false. The existing ready checker passed8HTML/230links. Only core manifest entry changed; seven other entries/BUILD/dependencies/files/URLs and catalog rows retain their original demo-20261008 producer provenance, including Core4.0.0 evidence.
+
+Native task install, fetch, render, check, then python3 tests/fetch.py completed in order with exit0. Actual Quarto1.11.5, local CUE0.17.1, Task3.54.0 and writable /tmp caches. Installed63-file bundle is exactly path/byte-equal to Core a9 Git object, no overlay/extras; new native deferred-assignments.lua is explicitly included in scope. Render28docs; full site check61HTML/2459local links and native sidebar/source/search; all549 opaque ready files copied exactly in examples and _site/examples. Literal native suite passed student/full, ordinary exercises, suffix/nested solutions, all12roles, four work scenarios, five answer forms, selected Body, four time totals and partial-run omission. Fetch regression passed native Task/curl/tar Unicode/spaces, refusals/preservation/repeated replacement.
+
+28 exact tagged Git Source/spec/diagnostic paths verified. All28QMD/95fenced blocks preserve authoring inputs except three shell installation pins. Model/schemas/NativeRun/Body APIs remain4.0.0; no native authoring flow implementation details added. Harness/config/workflow unchanged; git diff --check PASS. README/versions/catalog now report actual mixed published pins, no pending release claims remain there. Owner journal records actual first publication and patch local checks separately; current live source8b/gh-pagesa55 is not claimed to be republished yet.
+
+All six own sessions completed; none pending. Root owns independent review, commit/PR/CI/merge, clean-main repeat, existing native Task publish and gh-pages/live verification.

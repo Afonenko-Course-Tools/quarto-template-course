@@ -1,0 +1,558 @@
+{
+  "verdict": "Approved",
+  "capturedAt": "2026-10-08T06:23:49.760510+00:00",
+  "reviewedHEAD": "8b050033b594eeae4270ca6f55f12a1d6e8f1243",
+  "reviewedHEADTree": "4c808491faf6bc10ee0223510e40a60ecc80bfbc",
+  "releasedCoreSource": "a9a439bd6e6498806d4d4943efd71232e70170be",
+  "reviewedDiffSHA256": "1f4cf134c2ad7de5c67370889d309646d4e3e788a0c788e7d6054d9df94cc48b",
+  "scope": [
+    {
+      "path": "README.md",
+      "sha256": "66846d92238a0a9bda7ceda9f3005a2550ff77a16c7f40186b463546885bf9a7",
+      "bytes": 6661
+    },
+    {
+      "path": "Taskfile.yml",
+      "sha256": "08089143677dbba026abb18143abfb85511b238557d43fad62d02136a13d15bb",
+      "bytes": 4672
+    },
+    {
+      "path": "_extensions/Afonenko-Course-Tools/course-core/_extension.yml",
+      "sha256": "4d044049d39413e4ba49c2fb5395834d031ce6faed2476dcf1ea795fd1058464",
+      "bytes": 211
+    },
+    {
+      "path": "_extensions/Afonenko-Course-Tools/course-core/deferred-assignments.lua",
+      "sha256": "c37d5a54977595250c9eae7535dca6d6da4e32e03c18595e080c2135aaf76fe5",
+      "bytes": 99
+    },
+    {
+      "path": "_extensions/Afonenko-Course-Tools/course-core/entrypoints/preview.ts",
+      "sha256": "4aa819fc23dd7a5a137b504649031aa431704f8380cdd6be0fe80f33bfbaf192",
+      "bytes": 6470
+    },
+    {
+      "path": "_extensions/Afonenko-Course-Tools/course-core/visibility.lua",
+      "sha256": "eb3facdce8d6d34dbd2980200abe5b28a593008e53a4c052b7ea1ca3a54af04f",
+      "bytes": 14391
+    },
+    {
+      "path": "_extensions/Afonenko-Course-Tools/course-navigation/_extension.yml",
+      "sha256": "3f99c26556f4078143abe91f9fed8791c13436fc9b2f182171d3382b6921a4d1",
+      "bytes": 189
+    },
+    {
+      "path": "_extensions/Afonenko-Course-Tools/course-presentation/_extension.yml",
+      "sha256": "e142df5e8e6e5d4179e74d18f729a70c85badd038bb8757e37be526a58395935",
+      "bytes": 178
+    },
+    {
+      "path": "catalog/index.qmd",
+      "sha256": "9f39081ceb74e571fc666f770bd1c874db670958d26be8e7838e862a53734ad1",
+      "bytes": 5750
+    },
+    {
+      "path": "docs/plans/2026-10-08-implementation.md",
+      "sha256": "dc8535fcf4e07353814701a020015cc274620f017a6ddb0e56dc89853003bfdb",
+      "bytes": 30105
+    },
+    {
+      "path": "extensions/cloud.qmd",
+      "sha256": "bf5e59b9d4cdcdc4d2cb0615ad0f79fa960f46798a2820534bfd0ff97d3a117c",
+      "bytes": 4111
+    },
+    {
+      "path": "extensions/course.qmd",
+      "sha256": "fa7c864f7dde3db898067380793685efe2b977fa7116c151c3d2d693417b05b9",
+      "bytes": 2781
+    },
+    {
+      "path": "guide/answers.qmd",
+      "sha256": "7bf5dd2e469e18af02c4cda9f46805f12c069f96bcba51db01175722a4ac449b",
+      "bytes": 7506
+    },
+    {
+      "path": "guide/assessments.qmd",
+      "sha256": "dcf7faa3448b3e507eca0c9fc0810c27b9fa435d788daced8e850ea893385321",
+      "bytes": 10654
+    },
+    {
+      "path": "guide/exercises.qmd",
+      "sha256": "acc8cc8a3093a4a08a223ca6aa499b4dfcd2509b7a19e6892897285e26caf5bd",
+      "bytes": 6236
+    },
+    {
+      "path": "guide/export.qmd",
+      "sha256": "0b6c8008c6e8d27ae3288bd72bedb7809be9a3a38634d9bbeef691c3b706dbdb",
+      "bytes": 11579
+    },
+    {
+      "path": "guide/index.qmd",
+      "sha256": "12705b074c2c8750ea9ca4fbade68c8c426a0996de369663373976af8ff74c0a",
+      "bytes": 3616
+    },
+    {
+      "path": "guide/model.qmd",
+      "sha256": "3d512e13f7106052e19ad12baa824a73706e8d01448f9ade1ab750fd16589149",
+      "bytes": 5134
+    },
+    {
+      "path": "guide/presentation.qmd",
+      "sha256": "a4d7a48db252b5fecf9858d9f0274a414331634d3fb8dd83d251345b0a962e6e",
+      "bytes": 4634
+    },
+    {
+      "path": "guide/profiles.qmd",
+      "sha256": "66fea337c229cecab8bc54feed4004fd1691314be644339e5c57273bfad2c722",
+      "bytes": 6566
+    },
+    {
+      "path": "guide/roles.qmd",
+      "sha256": "7e2e072c6368545e46c99b27266ea583a4484ee510825cc7d33633ed14b1184f",
+      "bytes": 7603
+    },
+    {
+      "path": "guide/solutions.qmd",
+      "sha256": "d281a6ed529afafc45a7386a8903a4ea57ec9f3438f4b172db4028d55c13bfed",
+      "bytes": 5106
+    },
+    {
+      "path": "guide/specifications.qmd",
+      "sha256": "44406c3c7145c1db57daa814f5c58a128755b9041d7e769aa50a05bd0a6825f9",
+      "bytes": 5566
+    },
+    {
+      "path": "guide/start.qmd",
+      "sha256": "53ee42f10d2ba2447f828c9a1a3f232f85e0bd2742be64af17252090d76704fe",
+      "bytes": 3612
+    },
+    {
+      "path": "guide/windows.qmd",
+      "sha256": "3cb78f78c3dea8981cb271ae21410e47aa40f24322c235ec8c3ea5ad9f069221",
+      "bytes": 3981
+    },
+    {
+      "path": "index.qmd",
+      "sha256": "c3972f41cade5b11874368f468fdca92bf34be3cd42bd2bde6ee3b2e090729f3",
+      "bytes": 2691
+    },
+    {
+      "path": "reference/diagnostics.qmd",
+      "sha256": "19b3a36068921e63eb5bfe0f2c9d10e1e4f428c04f573aa1f20303bd5d9ce55e",
+      "bytes": 5838
+    },
+    {
+      "path": "spec/index.md",
+      "sha256": "3dd7bd830a8e6a794b767460a5a15de0a21dcfd4efb8e73829ad40ee89aeb63e",
+      "bytes": 3843
+    },
+    {
+      "path": "spec/site.md",
+      "sha256": "df20583869fcfba14b41be6c0ae6cbfb214c7b7a3a90ff49c3ecf5156db56f4f",
+      "bytes": 3009
+    },
+    {
+      "path": "tests/ready-assets.json",
+      "sha256": "6cc5f203aaf4d7b1bf435ce84fc0624c8d198d26a36a10888149f56f237a971d",
+      "bytes": 78715
+    }
+  ],
+  "installed63EveryPathAndByteEqualsTaggedCore": true,
+  "vendorSHA256": {
+    "course-core/_extension.yml": "4d044049d39413e4ba49c2fb5395834d031ce6faed2476dcf1ea795fd1058464",
+    "course-core/assessment.lua": "2760af9ca845d6335f5bea3613239e529191ec0feb767895455462573c04e1f7",
+    "course-core/body-export/answer.cue": "7b43dc04f33375cd2271a3f5008b4e69b733f51b6dce78ebe2986cad1ae766a9",
+    "course-core/body-export/answer.ts": "e7f281d5f8cf21a3e8d310de8df510dc5ae9c09ce5d1ad63016096d50048c37a",
+    "course-core/body-export/collect.ts": "8657fd5489d67be010b7eaa1cd63fdfd74ddcf57409f16a8dfafa02a1dfaff87",
+    "course-core/body-export/model.ts": "377f24ab4015bcf8b9a1fa66262eb90b4e6d14c0e0d583d3617d7dfa4d8adc7b",
+    "course-core/body-export/package.cue": "1ae9b23cdaa857e46a9b624b6c433b9b7e187df253bd77ed47d4c28d0770b7ac",
+    "course-core/body-export/producer.ts": "f9604cb679d0fc1e142c4d5c2cfafc47d27021f3bc84fac42b1096e9aeac2b37",
+    "course-core/body-export/vendor/libraries.js": "855b5ea8964f035162297f567bc06ea199f4c5d2f57869105d11331e0cb2b1e0",
+    "course-core/body-export/vendor/uuid-LICENSE": "beaa6b04fb82e41dd2ad679e19e27953afb5999b1abbb455b6564e78ebfeb332",
+    "course-core/body-export/vendor/yaml-LICENSE": "5bba27375d93e9119f76c1015f7672cf9ad5f70952296e0842fb2243d6376869",
+    "course-core/contract-vocabulary.json": "083a025e9b8c3a2373ed5f66e5e7b7b767b00e3e0d531a570b6886c5cae012b5",
+    "course-core/contract.json": "d5a1a0524cd8ce9810b0b60ffbf0030bb5a98e9d743e9554dc79c125ea999258",
+    "course-core/deferred-assignments.lua": "c37d5a54977595250c9eae7535dca6d6da4e32e03c18595e080c2135aaf76fe5",
+    "course-core/diagnostics.lua": "d365a740ff03f6a89d1fb5d92b2cc44d4d6a4f0a6630f4e681718f060820d2a9",
+    "course-core/domain/assemble.ts": "0bec9ffbb9dcab78e3c922dcdb0015ded59136b63c97530b05e8d1fc8222905a",
+    "course-core/domain/diagnostics.ts": "dc6a7df1d7fc956b218ccc638e1ac8890952d268fe6b3016b5d3776ce53652f1",
+    "course-core/domain/model.ts": "d7222c7e6d9b7442fffa3caf3bd05c463aba92bc911d9227e70795e2ff65e9b2",
+    "course-core/domain/release.ts": "1a3ce9e58255c4383f25d517fca209f2cdb71c0fd79f2449483949d73b78fdaf",
+    "course-core/domain/vocabulary.ts": "2328884e2c16f16a856144b41fc056bec372cf7023f45467a9395ccccc8ff61c",
+    "course-core/entrypoints/check.ts": "32a3b8b7c6b628fe1de9e91f71bd199f03848baf18cb69e68781269958975d08",
+    "course-core/entrypoints/diagnostics.ts": "1465d0e32857b0d60f385a9cac8f20887dc7cbefd11c68347031a97dd771d42c",
+    "course-core/entrypoints/export.ts": "ec0851cef592eec196924bae58221dcace0257a15ac804836be9dfbbd3d27de8",
+    "course-core/entrypoints/post.ts": "af88ba177d27107107781152c677e44207a4bf15675f20ef250d1050524760d3",
+    "course-core/entrypoints/pre.ts": "c0178a37902c4e874a26214cf30d2326f5283d08a1744212cfbcbfd9b44b83f4",
+    "course-core/entrypoints/preview.ts": "4aa819fc23dd7a5a137b504649031aa431704f8380cdd6be0fe80f33bfbaf192",
+    "course-core/exercises.lua": "4226462930ecc21e4e76e3f328fc982d3530fb5a5b39a24743b041d118a68357",
+    "course-core/filter.lua": "de95eaf1531fb2290890a17b91a5ee1e72603cd6b1b14bb7cadee3f50d3147a3",
+    "course-core/grading.lua": "469a02ef3b98e32650966603f58fade3d9867fba2ed81637293358537c0e330e",
+    "course-core/infrastructure/adapters.ts": "3da4d14f48354f58e512354fc8f899021152ff7f267a1fa52a4827fee272f84d",
+    "course-core/infrastructure/files.ts": "c3df309c9e9bb951e3e55e7897010dff25de672304154e9e32daca2a2d4b1faf",
+    "course-core/infrastructure/native-run.ts": "3707855f1f22b30c0d36e24f21d7559a7a68671d7b3d7d09356703a831b3a00a",
+    "course-core/infrastructure/process.ts": "a00287fadcd56d86a3612f24accf390c10172bf67f970567a14f3d98baf75120",
+    "course-core/infrastructure/resources.ts": "2b6135d61732713f734f447c51238d7ebd220f3a7d2f53ecad442d61a5f4847d",
+    "course-core/infrastructure/validate.ts": "0e7c26d551f0f5e33750e62b5d328cea99d6584102856e67a9abc557fdbd5b2f",
+    "course-core/native-adapters.lua": "7ba19d54b08e6413791aade2786bbb3e3854442dae1ded3954cde7f71d6f8565",
+    "course-core/native-answers.lua": "d222ce59c0a62705951ffa727b84155712308b34d8728777229a39f7dfa4e630",
+    "course-core/native-document.lua": "583dd1e1ae6b73ca4051e3e3f7e56022c034dc7a31186da7589d4df92bf32357",
+    "course-core/native-resources.lua": "b6fe7a2e27261e62d28bd5a07c0ed7b41254a62b145a4d18b73216330f80e033",
+    "course-core/output.lua": "dd53f65bc8e9f625228a05a7d6dcbbec6ddaaef200e9bd46c378f99047500ff3",
+    "course-core/pedagogy/collect.lua": "4eacb846bc07247011b6734cab1b399d74be6867fe1f16fd030974d5720e5e01",
+    "course-core/pedagogy/contract.lua": "56d074700d497afe2f3b3e5f04048c5771395e7783c51a42c4cdeb65c9d1bf75",
+    "course-core/spec/core.cue": "c5501db51137bb363e89fe535541c81df7b571ce3ca424e1c552353a0361abc8",
+    "course-core/visibility.lua": "eb3facdce8d6d34dbd2980200abe5b28a593008e53a4c052b7ea1ca3a54af04f",
+    "course-core/vocabulary.lua": "dffbb20d41fca739b3edbb187692b5058d42f6384bbbd371de0557d7dd51027f",
+    "course-navigation/README.md": "3753760aa99e05361ebb2e7d53e3b076c1058754ab1df237097d1dc82fbb60d0",
+    "course-navigation/_extension.yml": "3f99c26556f4078143abe91f9fed8791c13436fc9b2f182171d3382b6921a4d1",
+    "course-navigation/navigation/model.js": "e0346ce2271b08425f95381ff312e3cafb06bae82e398dc064fef65d22b3b441",
+    "course-navigation/navigation/navigation.css": "bb97d9489248926bd58ddf8f80eeecd640dd522e291803aa408c10675f5b3cf5",
+    "course-navigation/navigation/plugin.js": "9f876b520009729b816009da8bd5217ce781009d87f49695ceaee1e1ba33d042",
+    "course-navigation/navigation/plugin.yml": "76edcd070b0e97d9d6c73a0957184125244cbb98fbc12303a881eeb3fe9f6eba",
+    "course-navigation/navigation/ui.js": "5937e50e98612efd898cb9f254c44fe81db8ca089370e2a9e5c94b72e9f0d866",
+    "course-presentation/_extension.yml": "e142df5e8e6e5d4179e74d18f729a70c85badd038bb8757e37be526a58395935",
+    "course-presentation/disclosure.js": "83fcce0f4a30a864b836bc4917c488420b5865314eeee21a6d6dea744665765c",
+    "course-presentation/filter.lua": "f2399846d0b1842857dc7c4deac8f8d09b042f1987de51737a80df504111d490",
+    "course-presentation/html-dependency.json": "8309a429a6f929a001a71369b98251c80a380afb2a4205a9494366cc78bf0861",
+    "course-presentation/modules/answers.lua": "30b0acad3a08bd4be5ab5e39192b52cfb65e5a736f05639bfa26639b1ee88906",
+    "course-presentation/modules/config.lua": "614905cc3d99d200a3b495133a447f734352c4679dc23da826b69eba2ce10d6d",
+    "course-presentation/modules/metadata.lua": "441267354ebfb4d4a5af4048ef0c261352cd5a93a85d6f1823f823e25eacd8fa",
+    "course-presentation/modules/vocabulary.json": "083a025e9b8c3a2373ed5f66e5e7b7b767b00e3e0d531a570b6886c5cae012b5",
+    "course-presentation/modules/vocabulary.lua": "a538d30c46804f016d92f1c6bbb57a3ddd25f0947bea9bb17dbb52cc43ee517e",
+    "course-presentation/presentation.css": "a51eab093ac2bed4144a3f3d56fac77eba52805ead7c1ef6c95436724bc9af9e",
+    "course-presentation/presentation.js": "55a13bf5f7c8f131ed2977258d7b91a027d5ae216ca3f16d80f27c342606015a"
+  },
+  "coreArchiveSHA256": "fe90b587569891455694836a48385d102960e906e07f2011c1f28092d4455ae4",
+  "coreArchiveBytes": 2783070,
+  "coreArchive107EveryFileAndBUILDMatchesManifest": true,
+  "sevenOtherManifestRecordsUnchanged": true,
+  "readyGroups": [
+    {
+      "group": "core",
+      "files": 107,
+      "sourceRef": "v4.0.1",
+      "sourceSHA": "a9a439bd6e6498806d4d4943efd71232e70170be",
+      "recordUnchangedFromBaseline": false,
+      "archiveSHA256": "fe90b587569891455694836a48385d102960e906e07f2011c1f28092d4455ae4"
+    },
+    {
+      "group": "composition",
+      "files": 130,
+      "sourceRef": "v5.0.0",
+      "sourceSHA": "215309b5c41669e56a857a1bc3e4f7f2ce782c5f",
+      "recordUnchangedFromBaseline": true,
+      "archiveSHA256": "713620d92f6a6baafcf118ec0a0b6c0be95e801a84ae14fcbdca1aa4f94314c5"
+    },
+    {
+      "group": "qrc",
+      "files": 188,
+      "sourceRef": "v3.0.0",
+      "sourceSHA": "559583805a514ae8a244b6ea4cb5124867064024",
+      "recordUnchangedFromBaseline": true,
+      "archiveSHA256": "7052934f30ecfd08bbe70b028cf4ee2c21db13e142c30590e50f889f945e2b53"
+    },
+    {
+      "group": "print",
+      "files": 26,
+      "sourceRef": "v0.3.0",
+      "sourceSHA": "00c51f7342da376e85027a925dd9f1207783f924",
+      "recordUnchangedFromBaseline": true,
+      "archiveSHA256": "76635e7759ecd22d3da3126c56b6c0a181ae7a1e2322ff407b2af6da6ad4e99c"
+    },
+    {
+      "group": "prairielearn",
+      "files": 35,
+      "sourceRef": "v3.0.0",
+      "sourceSHA": "b9821b5b62863b7e1ae380a4c1a0a0bef855f8ba",
+      "recordUnchangedFromBaseline": true,
+      "archiveSHA256": "aed0fe92cd465eb7842a8fd6d95f3c537bd36feee2accb3c9c6b2e79fcc20198"
+    },
+    {
+      "group": "moodle",
+      "files": 21,
+      "sourceRef": "v0.3.0",
+      "sourceSHA": "60ce53d0d52a93e66ca545f2a6cd96f97f09d1e6",
+      "recordUnchangedFromBaseline": true,
+      "archiveSHA256": "8c441aab45c3b2e30ff10c3ceaea301aea9fb5f7a832a7a6ced3afbdb9513030"
+    },
+    {
+      "group": "cloud",
+      "files": 22,
+      "sourceRef": "v3.0.0",
+      "sourceSHA": "552612450b093b0cff2e33187a1cb5b9234c050a",
+      "recordUnchangedFromBaseline": true,
+      "archiveSHA256": "fcce34efff234b1a8a476a7127a9cc608f5cd02f35e16e6072b48449b0f77eac"
+    },
+    {
+      "group": "external",
+      "files": 20,
+      "sourceRef": "v3.0.0",
+      "sourceSHA": "559583805a514ae8a244b6ea4cb5124867064024",
+      "recordUnchangedFromBaseline": true,
+      "archiveSHA256": "eb7509fdb50340d1dea7c73b233001082e926a2688d4337f3aaac7e844124795"
+    }
+  ],
+  "totalReadyFilesEachConsumerCopy": 549,
+  "protectedHarnessWorkflowConfig": [
+    ".github/dependabot.yml",
+    ".github/workflows/pages.yml",
+    "_quarto.yml",
+    "tests/fetch.py",
+    "tests/guide-examples.py",
+    "tests/site.cjs"
+  ],
+  "literalQmdPages": 28,
+  "fencedBlocks": 95,
+  "changedFences": [
+    {
+      "path": "extensions/course.qmd",
+      "fenceIndex": 0,
+      "onlyCoreShellPinChanged": true
+    },
+    {
+      "path": "guide/presentation.qmd",
+      "fenceIndex": 0,
+      "onlyCoreShellPinChanged": true
+    },
+    {
+      "path": "guide/start.qmd",
+      "fenceIndex": 3,
+      "onlyCoreShellPinChanged": true
+    }
+  ],
+  "nativeCommandsReviewed": [
+    {
+      "label": "install",
+      "exitCode": 0,
+      "log": "/tmp/template-core-patch-20261008/install.log"
+    },
+    {
+      "label": "fetch",
+      "exitCode": 0,
+      "log": "/tmp/template-core-patch-20261008/fetch.log"
+    },
+    {
+      "label": "render",
+      "exitCode": 0,
+      "log": "/tmp/template-core-patch-20261008/render.log"
+    },
+    {
+      "label": "check",
+      "exitCode": 0,
+      "log": "/tmp/template-core-patch-20261008/check.log"
+    },
+    {
+      "label": "fetch-regression",
+      "exitCode": 0,
+      "log": "/tmp/template-core-patch-20261008/fetch-regression.log"
+    }
+  ],
+  "diffCheck": "PASS",
+  "sourceEdits": 0,
+  "nativeRendersOrSuitesRepeated": 0,
+  "pendingReleaseGates": [
+    "commit and PR",
+    "PR/main CI",
+    "clean-main repeat",
+    "native Task publish and exact gh-pages/live proof"
+  ],
+  "tagged28GitPathsActualObjectsVerified": [
+    {
+      "repo": "quarto-course",
+      "tag": "demo-20261008-1",
+      "sourceSHA": "a9a439bd6e6498806d4d4943efd71232e70170be",
+      "path": "examples/course",
+      "gitObjectType": "tree"
+    },
+    {
+      "repo": "quarto-course",
+      "tag": "v4.0.1",
+      "sourceSHA": "a9a439bd6e6498806d4d4943efd71232e70170be",
+      "path": "docs/body-export.md",
+      "gitObjectType": "blob"
+    },
+    {
+      "repo": "quarto-course",
+      "tag": "v4.0.1",
+      "sourceSHA": "a9a439bd6e6498806d4d4943efd71232e70170be",
+      "path": "docs/diagnostics.md",
+      "gitObjectType": "blob"
+    },
+    {
+      "repo": "quarto-course",
+      "tag": "v4.0.1",
+      "sourceSHA": "a9a439bd6e6498806d4d4943efd71232e70170be",
+      "path": "docs/native-run.md",
+      "gitObjectType": "blob"
+    },
+    {
+      "repo": "quarto-course",
+      "tag": "v4.0.1",
+      "sourceSHA": "a9a439bd6e6498806d4d4943efd71232e70170be",
+      "path": "spec/index.md",
+      "gitObjectType": "blob"
+    },
+    {
+      "repo": "quarto-course",
+      "tag": "v4.0.1",
+      "sourceSHA": "a9a439bd6e6498806d4d4943efd71232e70170be",
+      "path": "spec/learning-elements.md",
+      "gitObjectType": "blob"
+    },
+    {
+      "repo": "quarto-course",
+      "tag": "v4.0.1",
+      "sourceSHA": "a9a439bd6e6498806d4d4943efd71232e70170be",
+      "path": "spec/visibility.md",
+      "gitObjectType": "blob"
+    },
+    {
+      "repo": "quarto-course-cloud",
+      "tag": "demo-20261008",
+      "sourceSHA": "552612450b093b0cff2e33187a1cb5b9234c050a",
+      "path": "examples/course",
+      "gitObjectType": "tree"
+    },
+    {
+      "repo": "quarto-course-cloud",
+      "tag": "v3.0.0",
+      "sourceSHA": "552612450b093b0cff2e33187a1cb5b9234c050a",
+      "path": "docs/diagnostics.md",
+      "gitObjectType": "blob"
+    },
+    {
+      "repo": "quarto-course-cloud",
+      "tag": "v3.0.0",
+      "sourceSHA": "552612450b093b0cff2e33187a1cb5b9234c050a",
+      "path": "spec/index.md",
+      "gitObjectType": "blob"
+    },
+    {
+      "repo": "quarto-course-moodle",
+      "tag": "demo-20261008",
+      "sourceSHA": "60ce53d0d52a93e66ca545f2a6cd96f97f09d1e6",
+      "path": "examples/questions",
+      "gitObjectType": "tree"
+    },
+    {
+      "repo": "quarto-course-moodle",
+      "tag": "v0.3.0",
+      "sourceSHA": "60ce53d0d52a93e66ca545f2a6cd96f97f09d1e6",
+      "path": "docs/diagnostics.md",
+      "gitObjectType": "blob"
+    },
+    {
+      "repo": "quarto-course-moodle",
+      "tag": "v0.3.0",
+      "sourceSHA": "60ce53d0d52a93e66ca545f2a6cd96f97f09d1e6",
+      "path": "spec/index.md",
+      "gitObjectType": "blob"
+    },
+    {
+      "repo": "quarto-course-prairielearn",
+      "tag": "demo-20261008",
+      "sourceSHA": "b9821b5b62863b7e1ae380a4c1a0a0bef855f8ba",
+      "path": "examples/java-gradle",
+      "gitObjectType": "tree"
+    },
+    {
+      "repo": "quarto-course-prairielearn",
+      "tag": "v3.0.0",
+      "sourceSHA": "b9821b5b62863b7e1ae380a4c1a0a0bef855f8ba",
+      "path": "docs/diagnostics.md",
+      "gitObjectType": "blob"
+    },
+    {
+      "repo": "quarto-course-prairielearn",
+      "tag": "v3.0.0",
+      "sourceSHA": "b9821b5b62863b7e1ae380a4c1a0a0bef855f8ba",
+      "path": "spec/index.md",
+      "gitObjectType": "blob"
+    },
+    {
+      "repo": "quarto-course-print",
+      "tag": "demo-20261008",
+      "sourceSHA": "00c51f7342da376e85027a925dd9f1207783f924",
+      "path": "examples/paper",
+      "gitObjectType": "tree"
+    },
+    {
+      "repo": "quarto-course-print",
+      "tag": "v0.3.0",
+      "sourceSHA": "00c51f7342da376e85027a925dd9f1207783f924",
+      "path": "docs/diagnostics.md",
+      "gitObjectType": "blob"
+    },
+    {
+      "repo": "quarto-course-print",
+      "tag": "v0.3.0",
+      "sourceSHA": "00c51f7342da376e85027a925dd9f1207783f924",
+      "path": "spec/index.md",
+      "gitObjectType": "blob"
+    },
+    {
+      "repo": "quarto-project-download",
+      "tag": "v2.0.0",
+      "sourceSHA": "ee5ae76255d265ad7c7f43a765bc061ffc8eec75",
+      "path": "docs/diagnostics.md",
+      "gitObjectType": "blob"
+    },
+    {
+      "repo": "quarto-project-download",
+      "tag": "v2.0.0",
+      "sourceSHA": "ee5ae76255d265ad7c7f43a765bc061ffc8eec75",
+      "path": "spec/index.md",
+      "gitObjectType": "blob"
+    },
+    {
+      "repo": "quarto-project-publish",
+      "tag": "demo-20261008",
+      "sourceSHA": "215309b5c41669e56a857a1bc3e4f7f2ce782c5f",
+      "path": "examples/course",
+      "gitObjectType": "tree"
+    },
+    {
+      "repo": "quarto-project-publish",
+      "tag": "v5.0.0",
+      "sourceSHA": "215309b5c41669e56a857a1bc3e4f7f2ce782c5f",
+      "path": "docs/diagnostics.md",
+      "gitObjectType": "blob"
+    },
+    {
+      "repo": "quarto-project-publish",
+      "tag": "v5.0.0",
+      "sourceSHA": "215309b5c41669e56a857a1bc3e4f7f2ce782c5f",
+      "path": "spec/index.md",
+      "gitObjectType": "blob"
+    },
+    {
+      "repo": "quarto-reference-catalog",
+      "tag": "demo-20261008",
+      "sourceSHA": "559583805a514ae8a244b6ea4cb5124867064024",
+      "path": "examples/course",
+      "gitObjectType": "tree"
+    },
+    {
+      "repo": "quarto-reference-catalog",
+      "tag": "demo-20261008",
+      "sourceSHA": "559583805a514ae8a244b6ea4cb5124867064024",
+      "path": "examples/external",
+      "gitObjectType": "tree"
+    },
+    {
+      "repo": "quarto-reference-catalog",
+      "tag": "v3.0.0",
+      "sourceSHA": "559583805a514ae8a244b6ea4cb5124867064024",
+      "path": "docs/diagnostics.md",
+      "gitObjectType": "blob"
+    },
+    {
+      "repo": "quarto-reference-catalog",
+      "tag": "v3.0.0",
+      "sourceSHA": "559583805a514ae8a244b6ea4cb5124867064024",
+      "path": "spec/index.md",
+      "gitObjectType": "blob"
+    }
+  ]
+}

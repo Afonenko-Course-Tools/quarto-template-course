@@ -1,0 +1,587 @@
+{
+  "status": "passed",
+  "kind": "syntax/help/non-mutating inspect and rejection checks only",
+  "scriptSha256": {
+    "build-verified-demo.py": "d260dd4ffc529d1f46a192feb8d29aa0bc1d7dc5e1b49ff2ec269697cc379e00",
+    "publish-verified-release.py": "cc9e10ee18f585725708a5410c4f41187980e81ece7202c6dfcbcdab07f8df02"
+  },
+  "checks": [
+    {
+      "check": "AST syntax",
+      "script": "build-verified-demo.py",
+      "ok": true
+    },
+    {
+      "check": "help",
+      "script": "build-verified-demo.py",
+      "ok": true
+    },
+    {
+      "check": "AST syntax",
+      "script": "publish-verified-release.py",
+      "ok": true
+    },
+    {
+      "check": "help",
+      "script": "publish-verified-release.py",
+      "ok": true
+    },
+    {
+      "check": "non-mutating inspect",
+      "group": "core",
+      "ok": true,
+      "operation": {
+        "group": "core",
+        "producer": "Afonenko-Course-Tools/quarto-course",
+        "commit": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "folder": "examples/course",
+        "output": "_book-full",
+        "kind": "task",
+        "installs": [
+          [
+            ".",
+            "quarto-course"
+          ],
+          [
+            "slides",
+            "quarto-course"
+          ]
+        ],
+        "releases": {
+          "quarto-course": {
+            "tag": "v4.0.0",
+            "commit": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          }
+        },
+        "expectedBuildDependencies": {
+          "quarto-course": "v4.0.0"
+        },
+        "expectedExtensionVersion": null,
+        "quarto": "1.9.38"
+      }
+    },
+    {
+      "check": "non-mutating inspect",
+      "group": "composition",
+      "ok": true,
+      "operation": {
+        "group": "composition",
+        "producer": "Afonenko-Course-Tools/quarto-project-publish",
+        "commit": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "folder": "examples/course",
+        "output": "_site",
+        "kind": "task",
+        "installs": [
+          [
+            ".",
+            "quarto-project-publish"
+          ],
+          [
+            ".",
+            "quarto-reference-catalog"
+          ],
+          [
+            "book",
+            "quarto-reference-catalog"
+          ],
+          [
+            "materials",
+            "quarto-reference-catalog"
+          ]
+        ],
+        "releases": {
+          "quarto-project-publish": {
+            "tag": "v5.0.0",
+            "commit": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          },
+          "quarto-reference-catalog": {
+            "tag": "v3.0.0",
+            "commit": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          }
+        },
+        "expectedBuildDependencies": {
+          "quarto-project-publish": "v5.0.0",
+          "quarto-reference-catalog": "v3.0.0"
+        },
+        "expectedExtensionVersion": null,
+        "quarto": "1.9.38"
+      }
+    },
+    {
+      "check": "non-mutating inspect",
+      "group": "qrc",
+      "ok": true,
+      "operation": {
+        "group": "qrc",
+        "producer": "Afonenko-Course-Tools/quarto-reference-catalog",
+        "commit": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "folder": "examples/course",
+        "output": "_site",
+        "kind": "task",
+        "installs": [
+          [
+            ".",
+            "quarto-reference-catalog"
+          ],
+          [
+            ".",
+            "quarto-project-publish"
+          ],
+          [
+            "book",
+            "quarto-reference-catalog"
+          ],
+          [
+            "lectures",
+            "quarto-reference-catalog"
+          ],
+          [
+            "practice",
+            "quarto-reference-catalog"
+          ]
+        ],
+        "releases": {
+          "quarto-project-publish": {
+            "tag": "v5.0.0",
+            "commit": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          },
+          "quarto-reference-catalog": {
+            "tag": "v3.0.0",
+            "commit": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          }
+        },
+        "expectedBuildDependencies": {
+          "quarto-reference-catalog": "v3.0.0",
+          "quarto-project-publish": "v5.0.0"
+        },
+        "expectedExtensionVersion": null,
+        "quarto": "1.9.38"
+      }
+    },
+    {
+      "check": "non-mutating inspect",
+      "group": "external",
+      "ok": true,
+      "operation": {
+        "group": "external",
+        "producer": "Afonenko-Course-Tools/quarto-reference-catalog",
+        "commit": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "folder": "examples/external",
+        "output": "_site",
+        "kind": "task",
+        "installs": [
+          [
+            ".",
+            "quarto-reference-catalog"
+          ]
+        ],
+        "releases": {
+          "quarto-reference-catalog": {
+            "tag": "v3.0.0",
+            "commit": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          }
+        },
+        "expectedBuildDependencies": {
+          "quarto-reference-catalog": "v3.0.0"
+        },
+        "expectedExtensionVersion": null,
+        "quarto": "1.9.38"
+      }
+    },
+    {
+      "check": "non-mutating inspect",
+      "group": "print",
+      "ok": true,
+      "operation": {
+        "group": "print",
+        "producer": "Afonenko-Course-Tools/quarto-course-print",
+        "commit": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "folder": "examples/paper",
+        "output": "_site",
+        "kind": "script",
+        "installs": [
+          [
+            "bank",
+            "quarto-course"
+          ],
+          [
+            ".",
+            "quarto-course-print"
+          ]
+        ],
+        "releases": {
+          "quarto-course": {
+            "tag": "v4.0.0",
+            "commit": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          },
+          "quarto-course-print": {
+            "tag": "v0.3.0",
+            "commit": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          }
+        },
+        "expectedBuildDependencies": {
+          "quarto-course": "4.0.0"
+        },
+        "expectedExtensionVersion": "0.3.0",
+        "quarto": "1.9.38"
+      }
+    },
+    {
+      "check": "non-mutating inspect",
+      "group": "moodle",
+      "ok": true,
+      "operation": {
+        "group": "moodle",
+        "producer": "Afonenko-Course-Tools/quarto-course-moodle",
+        "commit": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "folder": "examples/questions",
+        "output": "_site",
+        "kind": "script",
+        "installs": [
+          [
+            "bank",
+            "quarto-course"
+          ],
+          [
+            ".",
+            "quarto-course-moodle"
+          ]
+        ],
+        "releases": {
+          "quarto-course": {
+            "tag": "v4.0.0",
+            "commit": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          },
+          "quarto-course-moodle": {
+            "tag": "v0.3.0",
+            "commit": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          }
+        },
+        "expectedBuildDependencies": {
+          "quarto-course": "4.0.0"
+        },
+        "expectedExtensionVersion": "0.3.0",
+        "quarto": "1.9.38"
+      }
+    },
+    {
+      "check": "non-mutating inspect",
+      "group": "prairielearn",
+      "ok": true,
+      "operation": {
+        "group": "prairielearn",
+        "producer": "Afonenko-Course-Tools/quarto-course-prairielearn",
+        "commit": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "folder": "examples/java-gradle",
+        "output": "_site",
+        "kind": "script",
+        "installs": [
+          [
+            "bank",
+            "quarto-course"
+          ],
+          [
+            "bank",
+            "quarto-course-prairielearn"
+          ]
+        ],
+        "releases": {
+          "quarto-course": {
+            "tag": "v4.0.0",
+            "commit": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          },
+          "quarto-course-prairielearn": {
+            "tag": "v3.0.0",
+            "commit": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          }
+        },
+        "expectedBuildDependencies": {
+          "quarto-course": "4.0.0"
+        },
+        "expectedExtensionVersion": "3.0.0",
+        "quarto": "1.9.38"
+      }
+    },
+    {
+      "check": "non-mutating inspect",
+      "group": "cloud",
+      "ok": true,
+      "operation": {
+        "group": "cloud",
+        "producer": "Afonenko-Course-Tools/quarto-course-cloud",
+        "commit": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "folder": "examples/course",
+        "output": "_book/full",
+        "kind": "script",
+        "installs": [
+          [
+            ".",
+            "quarto-course"
+          ],
+          [
+            ".",
+            "quarto-course-cloud"
+          ]
+        ],
+        "releases": {
+          "quarto-course": {
+            "tag": "v4.0.0",
+            "commit": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          },
+          "quarto-course-cloud": {
+            "tag": "v3.0.0",
+            "commit": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          }
+        },
+        "expectedBuildDependencies": {
+          "quarto-course": "4.0.0"
+        },
+        "expectedExtensionVersion": "3.0.0",
+        "quarto": "1.9.38"
+      }
+    },
+    {
+      "check": "non-mutating extension inspect",
+      "repo": "quarto-course",
+      "ok": true,
+      "operation": {
+        "producer": "Afonenko-Course-Tools/quarto-course",
+        "tag": "v4.0.0",
+        "commit": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "kind": "extension",
+        "demos": {},
+        "plannedVersion": "4.0.0"
+      }
+    },
+    {
+      "check": "non-mutating extension inspect",
+      "repo": "quarto-project-publish",
+      "ok": true,
+      "operation": {
+        "producer": "Afonenko-Course-Tools/quarto-project-publish",
+        "tag": "v5.0.0",
+        "commit": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "kind": "extension",
+        "demos": {},
+        "plannedVersion": "5.0.0"
+      }
+    },
+    {
+      "check": "non-mutating extension inspect",
+      "repo": "quarto-reference-catalog",
+      "ok": true,
+      "operation": {
+        "producer": "Afonenko-Course-Tools/quarto-reference-catalog",
+        "tag": "v3.0.0",
+        "commit": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "kind": "extension",
+        "demos": {},
+        "plannedVersion": "3.0.0"
+      }
+    },
+    {
+      "check": "non-mutating extension inspect",
+      "repo": "quarto-course-print",
+      "ok": true,
+      "operation": {
+        "producer": "Afonenko-Course-Tools/quarto-course-print",
+        "tag": "v0.3.0",
+        "commit": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "kind": "extension",
+        "demos": {},
+        "plannedVersion": "0.3.0"
+      }
+    },
+    {
+      "check": "non-mutating extension inspect",
+      "repo": "quarto-course-moodle",
+      "ok": true,
+      "operation": {
+        "producer": "Afonenko-Course-Tools/quarto-course-moodle",
+        "tag": "v0.3.0",
+        "commit": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "kind": "extension",
+        "demos": {},
+        "plannedVersion": "0.3.0"
+      }
+    },
+    {
+      "check": "non-mutating extension inspect",
+      "repo": "quarto-course-prairielearn",
+      "ok": true,
+      "operation": {
+        "producer": "Afonenko-Course-Tools/quarto-course-prairielearn",
+        "tag": "v3.0.0",
+        "commit": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "kind": "extension",
+        "demos": {},
+        "plannedVersion": "3.0.0"
+      }
+    },
+    {
+      "check": "non-mutating extension inspect",
+      "repo": "quarto-course-cloud",
+      "ok": true,
+      "operation": {
+        "producer": "Afonenko-Course-Tools/quarto-course-cloud",
+        "tag": "v3.0.0",
+        "commit": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "kind": "extension",
+        "demos": {},
+        "plannedVersion": "3.0.0"
+      }
+    },
+    {
+      "check": "non-mutating extension inspect",
+      "repo": "quarto-project-download",
+      "ok": true,
+      "operation": {
+        "producer": "Afonenko-Course-Tools/quarto-project-download",
+        "tag": "v2.0.0",
+        "commit": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "kind": "extension",
+        "demos": {},
+        "plannedVersion": "2.0.0"
+      }
+    },
+    {
+      "check": "non-mutating demo inspect",
+      "repo": "quarto-course",
+      "ok": true,
+      "operation": {
+        "producer": "Afonenko-Course-Tools/quarto-course",
+        "tag": "demo-20261008",
+        "commit": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "kind": "ready-demos",
+        "demos": {
+          "core": "/tmp/course-release-20261008/receipts/builds/core/READY-PLACEHOLDER"
+        },
+        "plannedVersion": "4.0.0"
+      }
+    },
+    {
+      "check": "non-mutating demo inspect",
+      "repo": "quarto-project-publish",
+      "ok": true,
+      "operation": {
+        "producer": "Afonenko-Course-Tools/quarto-project-publish",
+        "tag": "demo-20261008",
+        "commit": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "kind": "ready-demos",
+        "demos": {
+          "composition": "/tmp/course-release-20261008/receipts/builds/composition/READY-PLACEHOLDER"
+        },
+        "plannedVersion": "5.0.0"
+      }
+    },
+    {
+      "check": "non-mutating demo inspect",
+      "repo": "quarto-reference-catalog",
+      "ok": true,
+      "operation": {
+        "producer": "Afonenko-Course-Tools/quarto-reference-catalog",
+        "tag": "demo-20261008",
+        "commit": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "kind": "ready-demos",
+        "demos": {
+          "qrc": "/tmp/course-release-20261008/receipts/builds/qrc/READY-PLACEHOLDER",
+          "external": "/tmp/course-release-20261008/receipts/builds/external/READY-PLACEHOLDER"
+        },
+        "plannedVersion": "3.0.0"
+      }
+    },
+    {
+      "check": "non-mutating demo inspect",
+      "repo": "quarto-course-print",
+      "ok": true,
+      "operation": {
+        "producer": "Afonenko-Course-Tools/quarto-course-print",
+        "tag": "demo-20261008",
+        "commit": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "kind": "ready-demos",
+        "demos": {
+          "print": "/tmp/course-release-20261008/receipts/builds/print/READY-PLACEHOLDER"
+        },
+        "plannedVersion": "0.3.0"
+      }
+    },
+    {
+      "check": "non-mutating demo inspect",
+      "repo": "quarto-course-moodle",
+      "ok": true,
+      "operation": {
+        "producer": "Afonenko-Course-Tools/quarto-course-moodle",
+        "tag": "demo-20261008",
+        "commit": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "kind": "ready-demos",
+        "demos": {
+          "moodle": "/tmp/course-release-20261008/receipts/builds/moodle/READY-PLACEHOLDER"
+        },
+        "plannedVersion": "0.3.0"
+      }
+    },
+    {
+      "check": "non-mutating demo inspect",
+      "repo": "quarto-course-prairielearn",
+      "ok": true,
+      "operation": {
+        "producer": "Afonenko-Course-Tools/quarto-course-prairielearn",
+        "tag": "demo-20261008",
+        "commit": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "kind": "ready-demos",
+        "demos": {
+          "prairielearn": "/tmp/course-release-20261008/receipts/builds/prairielearn/READY-PLACEHOLDER"
+        },
+        "plannedVersion": "3.0.0"
+      }
+    },
+    {
+      "check": "non-mutating demo inspect",
+      "repo": "quarto-course-cloud",
+      "ok": true,
+      "operation": {
+        "producer": "Afonenko-Course-Tools/quarto-course-cloud",
+        "tag": "demo-20261008",
+        "commit": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "kind": "ready-demos",
+        "demos": {
+          "cloud": "/tmp/course-release-20261008/receipts/builds/cloud/READY-PLACEHOLDER"
+        },
+        "plannedVersion": "3.0.0"
+      }
+    },
+    {
+      "check": "non-mutating rejection",
+      "args": [
+        "core",
+        "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "--release",
+        "quarto-course=v3.0.2@aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "--quarto-version",
+        "1.9.38",
+        "--inspect"
+      ],
+      "ok": true,
+      "stderr": "RuntimeError: Unexpected planned release: quarto-course=v3.0.2@aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+    },
+    {
+      "check": "non-mutating rejection",
+      "args": [
+        "core",
+        "abcd",
+        "--release",
+        "quarto-course=v4.0.0@aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "--quarto-version",
+        "1.9.38",
+        "--inspect"
+      ],
+      "ok": true,
+      "stderr": "RuntimeError: Invalid producer SHA"
+    },
+    {
+      "check": "non-mutating incomplete QRC rejection",
+      "ok": true,
+      "stderr": "RuntimeError: Supply all fixed producer demo groups together"
+    }
+  ]
+}

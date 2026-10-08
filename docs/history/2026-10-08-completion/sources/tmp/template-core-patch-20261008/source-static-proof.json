@@ -1,0 +1,511 @@
+{
+  "capturedAt": "2026-10-08T05:40:47.715413+00:00",
+  "base": "8b050033b594eeae4270ca6f55f12a1d6e8f1243",
+  "HEAD": "8b050033b594eeae4270ca6f55f12a1d6e8f1243",
+  "branch": "fix/core-student-link-guide-pins-20261008",
+  "changedPaths": [
+    "README.md",
+    "Taskfile.yml",
+    "catalog/index.qmd",
+    "docs/plans/2026-10-08-implementation.md",
+    "extensions/cloud.qmd",
+    "extensions/course.qmd",
+    "guide/answers.qmd",
+    "guide/assessments.qmd",
+    "guide/exercises.qmd",
+    "guide/export.qmd",
+    "guide/index.qmd",
+    "guide/model.qmd",
+    "guide/presentation.qmd",
+    "guide/profiles.qmd",
+    "guide/roles.qmd",
+    "guide/solutions.qmd",
+    "guide/specifications.qmd",
+    "guide/start.qmd",
+    "guide/windows.qmd",
+    "index.qmd",
+    "reference/diagnostics.qmd",
+    "spec/index.md",
+    "spec/site.md"
+  ],
+  "preparedDiffSHA256": "e802a46fe7a15089b946ee3e2eedf85480cc628a60fb8f475d48df59484bbe73",
+  "manifestFullBytesUnchangedSHA256": "46c909a8f38d7aed58189542cff4e1c3c59691179f2292ccd16fb9bbf91e6b3c",
+  "vendor": [
+    {
+      "path": "_extensions/Afonenko-Course-Tools/course-core/_extension.yml",
+      "sha256": "f7d691101c6303458716a8fd1b191c1366405aac0331a062c3fe08cabd87b1ee",
+      "matchesBase": true
+    },
+    {
+      "path": "_extensions/Afonenko-Course-Tools/course-core/assessment.lua",
+      "sha256": "2760af9ca845d6335f5bea3613239e529191ec0feb767895455462573c04e1f7",
+      "matchesBase": true
+    },
+    {
+      "path": "_extensions/Afonenko-Course-Tools/course-core/body-export/answer.cue",
+      "sha256": "7b43dc04f33375cd2271a3f5008b4e69b733f51b6dce78ebe2986cad1ae766a9",
+      "matchesBase": true
+    },
+    {
+      "path": "_extensions/Afonenko-Course-Tools/course-core/body-export/answer.ts",
+      "sha256": "e7f281d5f8cf21a3e8d310de8df510dc5ae9c09ce5d1ad63016096d50048c37a",
+      "matchesBase": true
+    },
+    {
+      "path": "_extensions/Afonenko-Course-Tools/course-core/body-export/collect.ts",
+      "sha256": "8657fd5489d67be010b7eaa1cd63fdfd74ddcf57409f16a8dfafa02a1dfaff87",
+      "matchesBase": true
+    },
+    {
+      "path": "_extensions/Afonenko-Course-Tools/course-core/body-export/model.ts",
+      "sha256": "377f24ab4015bcf8b9a1fa66262eb90b4e6d14c0e0d583d3617d7dfa4d8adc7b",
+      "matchesBase": true
+    },
+    {
+      "path": "_extensions/Afonenko-Course-Tools/course-core/body-export/package.cue",
+      "sha256": "1ae9b23cdaa857e46a9b624b6c433b9b7e187df253bd77ed47d4c28d0770b7ac",
+      "matchesBase": true
+    },
+    {
+      "path": "_extensions/Afonenko-Course-Tools/course-core/body-export/producer.ts",
+      "sha256": "f9604cb679d0fc1e142c4d5c2cfafc47d27021f3bc84fac42b1096e9aeac2b37",
+      "matchesBase": true
+    },
+    {
+      "path": "_extensions/Afonenko-Course-Tools/course-core/body-export/vendor/libraries.js",
+      "sha256": "855b5ea8964f035162297f567bc06ea199f4c5d2f57869105d11331e0cb2b1e0",
+      "matchesBase": true
+    },
+    {
+      "path": "_extensions/Afonenko-Course-Tools/course-core/body-export/vendor/uuid-LICENSE",
+      "sha256": "beaa6b04fb82e41dd2ad679e19e27953afb5999b1abbb455b6564e78ebfeb332",
+      "matchesBase": true
+    },
+    {
+      "path": "_extensions/Afonenko-Course-Tools/course-core/body-export/vendor/yaml-LICENSE",
+      "sha256": "5bba27375d93e9119f76c1015f7672cf9ad5f70952296e0842fb2243d6376869",
+      "matchesBase": true
+    },
+    {
+      "path": "_extensions/Afonenko-Course-Tools/course-core/contract-vocabulary.json",
+      "sha256": "083a025e9b8c3a2373ed5f66e5e7b7b767b00e3e0d531a570b6886c5cae012b5",
+      "matchesBase": true
+    },
+    {
+      "path": "_extensions/Afonenko-Course-Tools/course-core/contract.json",
+      "sha256": "d5a1a0524cd8ce9810b0b60ffbf0030bb5a98e9d743e9554dc79c125ea999258",
+      "matchesBase": true
+    },
+    {
+      "path": "_extensions/Afonenko-Course-Tools/course-core/diagnostics.lua",
+      "sha256": "d365a740ff03f6a89d1fb5d92b2cc44d4d6a4f0a6630f4e681718f060820d2a9",
+      "matchesBase": true
+    },
+    {
+      "path": "_extensions/Afonenko-Course-Tools/course-core/domain/assemble.ts",
+      "sha256": "0bec9ffbb9dcab78e3c922dcdb0015ded59136b63c97530b05e8d1fc8222905a",
+      "matchesBase": true
+    },
+    {
+      "path": "_extensions/Afonenko-Course-Tools/course-core/domain/diagnostics.ts",
+      "sha256": "dc6a7df1d7fc956b218ccc638e1ac8890952d268fe6b3016b5d3776ce53652f1",
+      "matchesBase": true
+    },
+    {
+      "path": "_extensions/Afonenko-Course-Tools/course-core/domain/model.ts",
+      "sha256": "d7222c7e6d9b7442fffa3caf3bd05c463aba92bc911d9227e70795e2ff65e9b2",
+      "matchesBase": true
+    },
+    {
+      "path": "_extensions/Afonenko-Course-Tools/course-core/domain/release.ts",
+      "sha256": "1a3ce9e58255c4383f25d517fca209f2cdb71c0fd79f2449483949d73b78fdaf",
+      "matchesBase": true
+    },
+    {
+      "path": "_extensions/Afonenko-Course-Tools/course-core/domain/vocabulary.ts",
+      "sha256": "2328884e2c16f16a856144b41fc056bec372cf7023f45467a9395ccccc8ff61c",
+      "matchesBase": true
+    },
+    {
+      "path": "_extensions/Afonenko-Course-Tools/course-core/entrypoints/check.ts",
+      "sha256": "32a3b8b7c6b628fe1de9e91f71bd199f03848baf18cb69e68781269958975d08",
+      "matchesBase": true
+    },
+    {
+      "path": "_extensions/Afonenko-Course-Tools/course-core/entrypoints/diagnostics.ts",
+      "sha256": "1465d0e32857b0d60f385a9cac8f20887dc7cbefd11c68347031a97dd771d42c",
+      "matchesBase": true
+    },
+    {
+      "path": "_extensions/Afonenko-Course-Tools/course-core/entrypoints/export.ts",
+      "sha256": "ec0851cef592eec196924bae58221dcace0257a15ac804836be9dfbbd3d27de8",
+      "matchesBase": true
+    },
+    {
+      "path": "_extensions/Afonenko-Course-Tools/course-core/entrypoints/post.ts",
+      "sha256": "af88ba177d27107107781152c677e44207a4bf15675f20ef250d1050524760d3",
+      "matchesBase": true
+    },
+    {
+      "path": "_extensions/Afonenko-Course-Tools/course-core/entrypoints/pre.ts",
+      "sha256": "c0178a37902c4e874a26214cf30d2326f5283d08a1744212cfbcbfd9b44b83f4",
+      "matchesBase": true
+    },
+    {
+      "path": "_extensions/Afonenko-Course-Tools/course-core/entrypoints/preview.ts",
+      "sha256": "914930643b82f5b0291335b44dd9b37e23eb63afa5e34daa3f4c0ba57aee3aa0",
+      "matchesBase": true
+    },
+    {
+      "path": "_extensions/Afonenko-Course-Tools/course-core/exercises.lua",
+      "sha256": "4226462930ecc21e4e76e3f328fc982d3530fb5a5b39a24743b041d118a68357",
+      "matchesBase": true
+    },
+    {
+      "path": "_extensions/Afonenko-Course-Tools/course-core/filter.lua",
+      "sha256": "de95eaf1531fb2290890a17b91a5ee1e72603cd6b1b14bb7cadee3f50d3147a3",
+      "matchesBase": true
+    },
+    {
+      "path": "_extensions/Afonenko-Course-Tools/course-core/grading.lua",
+      "sha256": "469a02ef3b98e32650966603f58fade3d9867fba2ed81637293358537c0e330e",
+      "matchesBase": true
+    },
+    {
+      "path": "_extensions/Afonenko-Course-Tools/course-core/infrastructure/adapters.ts",
+      "sha256": "3da4d14f48354f58e512354fc8f899021152ff7f267a1fa52a4827fee272f84d",
+      "matchesBase": true
+    },
+    {
+      "path": "_extensions/Afonenko-Course-Tools/course-core/infrastructure/files.ts",
+      "sha256": "c3df309c9e9bb951e3e55e7897010dff25de672304154e9e32daca2a2d4b1faf",
+      "matchesBase": true
+    },
+    {
+      "path": "_extensions/Afonenko-Course-Tools/course-core/infrastructure/native-run.ts",
+      "sha256": "3707855f1f22b30c0d36e24f21d7559a7a68671d7b3d7d09356703a831b3a00a",
+      "matchesBase": true
+    },
+    {
+      "path": "_extensions/Afonenko-Course-Tools/course-core/infrastructure/process.ts",
+      "sha256": "a00287fadcd56d86a3612f24accf390c10172bf67f970567a14f3d98baf75120",
+      "matchesBase": true
+    },
+    {
+      "path": "_extensions/Afonenko-Course-Tools/course-core/infrastructure/resources.ts",
+      "sha256": "2b6135d61732713f734f447c51238d7ebd220f3a7d2f53ecad442d61a5f4847d",
+      "matchesBase": true
+    },
+    {
+      "path": "_extensions/Afonenko-Course-Tools/course-core/infrastructure/validate.ts",
+      "sha256": "0e7c26d551f0f5e33750e62b5d328cea99d6584102856e67a9abc557fdbd5b2f",
+      "matchesBase": true
+    },
+    {
+      "path": "_extensions/Afonenko-Course-Tools/course-core/native-adapters.lua",
+      "sha256": "7ba19d54b08e6413791aade2786bbb3e3854442dae1ded3954cde7f71d6f8565",
+      "matchesBase": true
+    },
+    {
+      "path": "_extensions/Afonenko-Course-Tools/course-core/native-answers.lua",
+      "sha256": "d222ce59c0a62705951ffa727b84155712308b34d8728777229a39f7dfa4e630",
+      "matchesBase": true
+    },
+    {
+      "path": "_extensions/Afonenko-Course-Tools/course-core/native-document.lua",
+      "sha256": "583dd1e1ae6b73ca4051e3e3f7e56022c034dc7a31186da7589d4df92bf32357",
+      "matchesBase": true
+    },
+    {
+      "path": "_extensions/Afonenko-Course-Tools/course-core/native-resources.lua",
+      "sha256": "b6fe7a2e27261e62d28bd5a07c0ed7b41254a62b145a4d18b73216330f80e033",
+      "matchesBase": true
+    },
+    {
+      "path": "_extensions/Afonenko-Course-Tools/course-core/output.lua",
+      "sha256": "dd53f65bc8e9f625228a05a7d6dcbbec6ddaaef200e9bd46c378f99047500ff3",
+      "matchesBase": true
+    },
+    {
+      "path": "_extensions/Afonenko-Course-Tools/course-core/pedagogy/collect.lua",
+      "sha256": "4eacb846bc07247011b6734cab1b399d74be6867fe1f16fd030974d5720e5e01",
+      "matchesBase": true
+    },
+    {
+      "path": "_extensions/Afonenko-Course-Tools/course-core/pedagogy/contract.lua",
+      "sha256": "56d074700d497afe2f3b3e5f04048c5771395e7783c51a42c4cdeb65c9d1bf75",
+      "matchesBase": true
+    },
+    {
+      "path": "_extensions/Afonenko-Course-Tools/course-core/spec/core.cue",
+      "sha256": "c5501db51137bb363e89fe535541c81df7b571ce3ca424e1c552353a0361abc8",
+      "matchesBase": true
+    },
+    {
+      "path": "_extensions/Afonenko-Course-Tools/course-core/visibility.lua",
+      "sha256": "d0f48368d129873e0e5836d8199a1686c73fb2bc138b5cf216122728d285b6bc",
+      "matchesBase": true
+    },
+    {
+      "path": "_extensions/Afonenko-Course-Tools/course-core/vocabulary.lua",
+      "sha256": "dffbb20d41fca739b3edbb187692b5058d42f6384bbbd371de0557d7dd51027f",
+      "matchesBase": true
+    },
+    {
+      "path": "_extensions/Afonenko-Course-Tools/course-navigation/README.md",
+      "sha256": "3753760aa99e05361ebb2e7d53e3b076c1058754ab1df237097d1dc82fbb60d0",
+      "matchesBase": true
+    },
+    {
+      "path": "_extensions/Afonenko-Course-Tools/course-navigation/_extension.yml",
+      "sha256": "88eabfaf509c272f1aa40e138b77ddb2ce0943067a55b023c088b73e19455e92",
+      "matchesBase": true
+    },
+    {
+      "path": "_extensions/Afonenko-Course-Tools/course-navigation/navigation/model.js",
+      "sha256": "e0346ce2271b08425f95381ff312e3cafb06bae82e398dc064fef65d22b3b441",
+      "matchesBase": true
+    },
+    {
+      "path": "_extensions/Afonenko-Course-Tools/course-navigation/navigation/navigation.css",
+      "sha256": "bb97d9489248926bd58ddf8f80eeecd640dd522e291803aa408c10675f5b3cf5",
+      "matchesBase": true
+    },
+    {
+      "path": "_extensions/Afonenko-Course-Tools/course-navigation/navigation/plugin.js",
+      "sha256": "9f876b520009729b816009da8bd5217ce781009d87f49695ceaee1e1ba33d042",
+      "matchesBase": true
+    },
+    {
+      "path": "_extensions/Afonenko-Course-Tools/course-navigation/navigation/plugin.yml",
+      "sha256": "76edcd070b0e97d9d6c73a0957184125244cbb98fbc12303a881eeb3fe9f6eba",
+      "matchesBase": true
+    },
+    {
+      "path": "_extensions/Afonenko-Course-Tools/course-navigation/navigation/ui.js",
+      "sha256": "5937e50e98612efd898cb9f254c44fe81db8ca089370e2a9e5c94b72e9f0d866",
+      "matchesBase": true
+    },
+    {
+      "path": "_extensions/Afonenko-Course-Tools/course-presentation/_extension.yml",
+      "sha256": "90d321014fa141da75fb65af16d67cf828a476aa391d1e80b4e64ca382aa9901",
+      "matchesBase": true
+    },
+    {
+      "path": "_extensions/Afonenko-Course-Tools/course-presentation/disclosure.js",
+      "sha256": "83fcce0f4a30a864b836bc4917c488420b5865314eeee21a6d6dea744665765c",
+      "matchesBase": true
+    },
+    {
+      "path": "_extensions/Afonenko-Course-Tools/course-presentation/filter.lua",
+      "sha256": "f2399846d0b1842857dc7c4deac8f8d09b042f1987de51737a80df504111d490",
+      "matchesBase": true
+    },
+    {
+      "path": "_extensions/Afonenko-Course-Tools/course-presentation/html-dependency.json",
+      "sha256": "8309a429a6f929a001a71369b98251c80a380afb2a4205a9494366cc78bf0861",
+      "matchesBase": true
+    },
+    {
+      "path": "_extensions/Afonenko-Course-Tools/course-presentation/modules/answers.lua",
+      "sha256": "30b0acad3a08bd4be5ab5e39192b52cfb65e5a736f05639bfa26639b1ee88906",
+      "matchesBase": true
+    },
+    {
+      "path": "_extensions/Afonenko-Course-Tools/course-presentation/modules/config.lua",
+      "sha256": "614905cc3d99d200a3b495133a447f734352c4679dc23da826b69eba2ce10d6d",
+      "matchesBase": true
+    },
+    {
+      "path": "_extensions/Afonenko-Course-Tools/course-presentation/modules/metadata.lua",
+      "sha256": "441267354ebfb4d4a5af4048ef0c261352cd5a93a85d6f1823f823e25eacd8fa",
+      "matchesBase": true
+    },
+    {
+      "path": "_extensions/Afonenko-Course-Tools/course-presentation/modules/vocabulary.json",
+      "sha256": "083a025e9b8c3a2373ed5f66e5e7b7b767b00e3e0d531a570b6886c5cae012b5",
+      "matchesBase": true
+    },
+    {
+      "path": "_extensions/Afonenko-Course-Tools/course-presentation/modules/vocabulary.lua",
+      "sha256": "a538d30c46804f016d92f1c6bbb57a3ddd25f0947bea9bb17dbb52cc43ee517e",
+      "matchesBase": true
+    },
+    {
+      "path": "_extensions/Afonenko-Course-Tools/course-presentation/presentation.css",
+      "sha256": "a51eab093ac2bed4144a3f3d56fac77eba52805ead7c1ef6c95436724bc9af9e",
+      "matchesBase": true
+    },
+    {
+      "path": "_extensions/Afonenko-Course-Tools/course-presentation/presentation.js",
+      "sha256": "55a13bf5f7c8f131ed2977258d7b91a027d5ae216ca3f16d80f27c342606015a",
+      "matchesBase": true
+    }
+  ],
+  "protectedHarnessConfigPathsUnchanged": [
+    ".github/dependabot.yml",
+    ".github/workflows/pages.yml",
+    "_quarto.yml",
+    "tests/fetch.py",
+    "tests/guide-examples.py",
+    "tests/ready-assets.json",
+    "tests/site.cjs"
+  ],
+  "literalGuideBlocks": [
+    {
+      "path": "catalog/index.qmd",
+      "blocks": 0,
+      "unchangedExceptInstallationPin": true
+    },
+    {
+      "path": "extensions/cloud.qmd",
+      "blocks": 5,
+      "unchangedExceptInstallationPin": true
+    },
+    {
+      "path": "extensions/course.qmd",
+      "blocks": 3,
+      "unchangedExceptInstallationPin": true
+    },
+    {
+      "path": "extensions/download.qmd",
+      "blocks": 2,
+      "unchangedExceptInstallationPin": true
+    },
+    {
+      "path": "extensions/index.qmd",
+      "blocks": 0,
+      "unchangedExceptInstallationPin": true
+    },
+    {
+      "path": "extensions/moodle.qmd",
+      "blocks": 3,
+      "unchangedExceptInstallationPin": true
+    },
+    {
+      "path": "extensions/prairielearn.qmd",
+      "blocks": 2,
+      "unchangedExceptInstallationPin": true
+    },
+    {
+      "path": "extensions/print.qmd",
+      "blocks": 2,
+      "unchangedExceptInstallationPin": true
+    },
+    {
+      "path": "extensions/publisher.qmd",
+      "blocks": 2,
+      "unchangedExceptInstallationPin": true
+    },
+    {
+      "path": "extensions/reference-catalog.qmd",
+      "blocks": 2,
+      "unchangedExceptInstallationPin": true
+    },
+    {
+      "path": "guide/answers.qmd",
+      "blocks": 5,
+      "unchangedExceptInstallationPin": true
+    },
+    {
+      "path": "guide/assessments.qmd",
+      "blocks": 6,
+      "unchangedExceptInstallationPin": true
+    },
+    {
+      "path": "guide/composition.qmd",
+      "blocks": 8,
+      "unchangedExceptInstallationPin": true
+    },
+    {
+      "path": "guide/exercises.qmd",
+      "blocks": 5,
+      "unchangedExceptInstallationPin": true
+    },
+    {
+      "path": "guide/export.qmd",
+      "blocks": 8,
+      "unchangedExceptInstallationPin": true
+    },
+    {
+      "path": "guide/index.qmd",
+      "blocks": 0,
+      "unchangedExceptInstallationPin": true
+    },
+    {
+      "path": "guide/model.qmd",
+      "blocks": 5,
+      "unchangedExceptInstallationPin": true
+    },
+    {
+      "path": "guide/presentation.qmd",
+      "blocks": 6,
+      "unchangedExceptInstallationPin": true
+    },
+    {
+      "path": "guide/profiles.qmd",
+      "blocks": 8,
+      "unchangedExceptInstallationPin": true
+    },
+    {
+      "path": "guide/roles.qmd",
+      "blocks": 8,
+      "unchangedExceptInstallationPin": true
+    },
+    {
+      "path": "guide/solutions.qmd",
+      "blocks": 3,
+      "unchangedExceptInstallationPin": true
+    },
+    {
+      "path": "guide/specifications.qmd",
+      "blocks": 0,
+      "unchangedExceptInstallationPin": true
+    },
+    {
+      "path": "guide/start.qmd",
+      "blocks": 6,
+      "unchangedExceptInstallationPin": true
+    },
+    {
+      "path": "guide/windows.qmd",
+      "blocks": 2,
+      "unchangedExceptInstallationPin": true
+    },
+    {
+      "path": "index.qmd",
+      "blocks": 0,
+      "unchangedExceptInstallationPin": true
+    },
+    {
+      "path": "reference/diagnostics.qmd",
+      "blocks": 0,
+      "unchangedExceptInstallationPin": true
+    },
+    {
+      "path": "reference/index.qmd",
+      "blocks": 0,
+      "unchangedExceptInstallationPin": true
+    },
+    {
+      "path": "reference/source.qmd",
+      "blocks": 4,
+      "unchangedExceptInstallationPin": true
+    }
+  ],
+  "qmdFiles": 28,
+  "fencedBlocks": 95,
+  "taskDelta": "exactly Core install pin and core demo URL",
+  "otherSevenCatalogRowsByteEqual": true,
+  "allEightManifestGroupsUntouched": true,
+  "readOnlyDiffCheck": "PASS",
+  "futureAvailability": "pending; no new tool tag/sourceSHA/archive/filemap fabricated",
+  "notRun": [
+    "task install",
+    "task fetch",
+    "task render",
+    "task check",
+    "python3 tests/fetch.py"
+  ],
+  "noCommit": true
+}

@@ -1,0 +1,15 @@
+{
+  "label": "fetch",
+  "command": [
+    "task",
+    "fetch"
+  ],
+  "cwd": "/home/tolya/course-tools/quarto-template-core-patch-20261008",
+  "started": "2026-10-08T06:13:44.849400+00:00",
+  "finished": "2026-10-08T06:14:05.056801+00:00",
+  "exitCode": 0,
+  "log": "/tmp/template-core-patch-20261008/fetch.log",
+  "cue": "/home/tolya/course-tools/local-tools/cue/cue",
+  "task": "/home/tolya/course-tools/local-tools/task/task",
+  "cache": "/tmp/template-core-patch-20261008/cache"
+}

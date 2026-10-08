@@ -1,0 +1,14 @@
+{
+  "label": "render",
+  "command": [
+    "task",
+    "render"
+  ],
+  "started": "2026-10-08T04:05:31.549736+00:00",
+  "finished": "2026-10-08T04:06:04.456340+00:00",
+  "exitCode": 0,
+  "log": "/tmp/template-release-finalize-20261008/render.log",
+  "cue": "/home/tolya/course-tools/local-tools/cue/cue",
+  "task": "/home/tolya/course-tools/local-tools/task/task",
+  "cache": "/tmp/template-release-finalize-20261008/cache"
+}

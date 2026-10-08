@@ -1,0 +1,198 @@
+[
+  {
+    "repo": "quarto-course",
+    "tag": "demo-20261008-1",
+    "sourceSHA": "a9a439bd6e6498806d4d4943efd71232e70170be",
+    "path": "examples/course",
+    "gitObjectType": "tree"
+  },
+  {
+    "repo": "quarto-course",
+    "tag": "v4.0.1",
+    "sourceSHA": "a9a439bd6e6498806d4d4943efd71232e70170be",
+    "path": "docs/body-export.md",
+    "gitObjectType": "blob"
+  },
+  {
+    "repo": "quarto-course",
+    "tag": "v4.0.1",
+    "sourceSHA": "a9a439bd6e6498806d4d4943efd71232e70170be",
+    "path": "docs/diagnostics.md",
+    "gitObjectType": "blob"
+  },
+  {
+    "repo": "quarto-course",
+    "tag": "v4.0.1",
+    "sourceSHA": "a9a439bd6e6498806d4d4943efd71232e70170be",
+    "path": "docs/native-run.md",
+    "gitObjectType": "blob"
+  },
+  {
+    "repo": "quarto-course",
+    "tag": "v4.0.1",
+    "sourceSHA": "a9a439bd6e6498806d4d4943efd71232e70170be",
+    "path": "spec/index.md",
+    "gitObjectType": "blob"
+  },
+  {
+    "repo": "quarto-course",
+    "tag": "v4.0.1",
+    "sourceSHA": "a9a439bd6e6498806d4d4943efd71232e70170be",
+    "path": "spec/learning-elements.md",
+    "gitObjectType": "blob"
+  },
+  {
+    "repo": "quarto-course",
+    "tag": "v4.0.1",
+    "sourceSHA": "a9a439bd6e6498806d4d4943efd71232e70170be",
+    "path": "spec/visibility.md",
+    "gitObjectType": "blob"
+  },
+  {
+    "repo": "quarto-course-cloud",
+    "tag": "demo-20261008",
+    "sourceSHA": "552612450b093b0cff2e33187a1cb5b9234c050a",
+    "path": "examples/course",
+    "gitObjectType": "tree"
+  },
+  {
+    "repo": "quarto-course-cloud",
+    "tag": "v3.0.0",
+    "sourceSHA": "552612450b093b0cff2e33187a1cb5b9234c050a",
+    "path": "docs/diagnostics.md",
+    "gitObjectType": "blob"
+  },
+  {
+    "repo": "quarto-course-cloud",
+    "tag": "v3.0.0",
+    "sourceSHA": "552612450b093b0cff2e33187a1cb5b9234c050a",
+    "path": "spec/index.md",
+    "gitObjectType": "blob"
+  },
+  {
+    "repo": "quarto-course-moodle",
+    "tag": "demo-20261008",
+    "sourceSHA": "60ce53d0d52a93e66ca545f2a6cd96f97f09d1e6",
+    "path": "examples/questions",
+    "gitObjectType": "tree"
+  },
+  {
+    "repo": "quarto-course-moodle",
+    "tag": "v0.3.0",
+    "sourceSHA": "60ce53d0d52a93e66ca545f2a6cd96f97f09d1e6",
+    "path": "docs/diagnostics.md",
+    "gitObjectType": "blob"
+  },
+  {
+    "repo": "quarto-course-moodle",
+    "tag": "v0.3.0",
+    "sourceSHA": "60ce53d0d52a93e66ca545f2a6cd96f97f09d1e6",
+    "path": "spec/index.md",
+    "gitObjectType": "blob"
+  },
+  {
+    "repo": "quarto-course-prairielearn",
+    "tag": "demo-20261008",
+    "sourceSHA": "b9821b5b62863b7e1ae380a4c1a0a0bef855f8ba",
+    "path": "examples/java-gradle",
+    "gitObjectType": "tree"
+  },
+  {
+    "repo": "quarto-course-prairielearn",
+    "tag": "v3.0.0",
+    "sourceSHA": "b9821b5b62863b7e1ae380a4c1a0a0bef855f8ba",
+    "path": "docs/diagnostics.md",
+    "gitObjectType": "blob"
+  },
+  {
+    "repo": "quarto-course-prairielearn",
+    "tag": "v3.0.0",
+    "sourceSHA": "b9821b5b62863b7e1ae380a4c1a0a0bef855f8ba",
+    "path": "spec/index.md",
+    "gitObjectType": "blob"
+  },
+  {
+    "repo": "quarto-course-print",
+    "tag": "demo-20261008",
+    "sourceSHA": "00c51f7342da376e85027a925dd9f1207783f924",
+    "path": "examples/paper",
+    "gitObjectType": "tree"
+  },
+  {
+    "repo": "quarto-course-print",
+    "tag": "v0.3.0",
+    "sourceSHA": "00c51f7342da376e85027a925dd9f1207783f924",
+    "path": "docs/diagnostics.md",
+    "gitObjectType": "blob"
+  },
+  {
+    "repo": "quarto-course-print",
+    "tag": "v0.3.0",
+    "sourceSHA": "00c51f7342da376e85027a925dd9f1207783f924",
+    "path": "spec/index.md",
+    "gitObjectType": "blob"
+  },
+  {
+    "repo": "quarto-project-download",
+    "tag": "v2.0.0",
+    "sourceSHA": "ee5ae76255d265ad7c7f43a765bc061ffc8eec75",
+    "path": "docs/diagnostics.md",
+    "gitObjectType": "blob"
+  },
+  {
+    "repo": "quarto-project-download",
+    "tag": "v2.0.0",
+    "sourceSHA": "ee5ae76255d265ad7c7f43a765bc061ffc8eec75",
+    "path": "spec/index.md",
+    "gitObjectType": "blob"
+  },
+  {
+    "repo": "quarto-project-publish",
+    "tag": "demo-20261008",
+    "sourceSHA": "215309b5c41669e56a857a1bc3e4f7f2ce782c5f",
+    "path": "examples/course",
+    "gitObjectType": "tree"
+  },
+  {
+    "repo": "quarto-project-publish",
+    "tag": "v5.0.0",
+    "sourceSHA": "215309b5c41669e56a857a1bc3e4f7f2ce782c5f",
+    "path": "docs/diagnostics.md",
+    "gitObjectType": "blob"
+  },
+  {
+    "repo": "quarto-project-publish",
+    "tag": "v5.0.0",
+    "sourceSHA": "215309b5c41669e56a857a1bc3e4f7f2ce782c5f",
+    "path": "spec/index.md",
+    "gitObjectType": "blob"
+  },
+  {
+    "repo": "quarto-reference-catalog",
+    "tag": "demo-20261008",
+    "sourceSHA": "559583805a514ae8a244b6ea4cb5124867064024",
+    "path": "examples/course",
+    "gitObjectType": "tree"
+  },
+  {
+    "repo": "quarto-reference-catalog",
+    "tag": "demo-20261008",
+    "sourceSHA": "559583805a514ae8a244b6ea4cb5124867064024",
+    "path": "examples/external",
+    "gitObjectType": "tree"
+  },
+  {
+    "repo": "quarto-reference-catalog",
+    "tag": "v3.0.0",
+    "sourceSHA": "559583805a514ae8a244b6ea4cb5124867064024",
+    "path": "docs/diagnostics.md",
+    "gitObjectType": "blob"
+  },
+  {
+    "repo": "quarto-reference-catalog",
+    "tag": "v3.0.0",
+    "sourceSHA": "559583805a514ae8a244b6ea4cb5124867064024",
+    "path": "spec/index.md",
+    "gitObjectType": "blob"
+  }
+]

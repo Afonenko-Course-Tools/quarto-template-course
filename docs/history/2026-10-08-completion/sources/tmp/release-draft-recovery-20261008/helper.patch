@@ -1,0 +1,69 @@
+--- /tmp/release-draft-recovery-20261008/publish-before.py	2026-10-08 06:03:12.185593248 +0300
++++ /tmp/course-release-20261008/publish-verified-release.py	2026-10-08 06:04:00.997852685 +0300
+@@ -19,6 +19,28 @@
+  result=subprocess.run(['gh','api',endpoint],capture_output=True,text=True)
+  if result.returncode==0: raise RuntimeError('Existing tag/release will never be overwritten: '+endpoint)
+  require('HTTP 404' in result.stderr,'Could not establish absence: '+result.stderr)
++def matching_releases(remote,tag):
++ pages=json.loads(get(['gh','api','repos/'+remote+'/releases','--paginate','--slurp']))
++ return [release for page in pages for release in page if release.get('tag_name')==tag]
++def find_draft(remote,tag,commit):
++ matches=matching_releases(remote,tag)
++ require(len(matches)==1,'Expected exactly one release with intended draft tag')
++ draft=matches[0]
++ require(draft.get('draft') is True and draft.get('target_commitish')==commit,'Draft target mismatch')
++ draft=json.loads(get(['gh','api','repos/'+remote+'/releases/'+str(draft['id'])]))
++ require(draft.get('draft') is True and draft.get('tag_name')==tag and draft.get('target_commitish')==commit,'Draft identity changed')
++ return draft
++def verify_downloads(remote,draft,assets):
++ require(sorted(asset['name'] for asset in draft['assets'])==sorted(f.name for f in assets),'Draft asset set differs')
++ with tempfile.TemporaryDirectory(prefix='release-verify-20261008-') as temp:
++  for asset in draft['assets']:
++   local=next(f for f in assets if f.name==asset['name'])
++   require(asset.get('state')=='uploaded' and asset.get('size')==local.stat().st_size,'Draft asset state/size mismatch')
++   require(asset.get('digest')=='sha256:'+sha(local),'Draft asset digest mismatch')
++   downloaded=Path(temp)/local.name
++   with downloaded.open('wb') as stream:
++    run(['gh','api','repos/'+remote+'/releases/assets/'+str(asset['id']),'-H','Accept: application/octet-stream'],stdout=stream)
++   require(downloaded.stat().st_size==local.stat().st_size and sha(downloaded)==sha(local),'Downloaded hash/size differs: '+local.name)
+ def main():
+  p=argparse.ArgumentParser(description=__doc__)
+  p.add_argument('repo',choices=VERSIONS);p.add_argument('tag');p.add_argument('commit',help='Caller verified clean merged main 40-hex SHA')
+@@ -44,6 +66,7 @@
+  require(json.loads(get(['gh','api','repos/'+remote+'/immutable-releases'])).get('enabled') is True,'Repository immutable releases must be enabled')
+  require(subprocess.run(['git','show-ref','--verify','--quiet','refs/tags/'+a.tag],cwd=repo).returncode==1,'Existing local tag prohibited')
+  absent('repos/'+remote+'/git/ref/tags/'+a.tag);absent('repos/'+remote+'/releases/tags/'+a.tag)
++ require(not matching_releases(remote,a.tag),'Existing draft/release will never be overwritten')
+  out=a.evidence.resolve()/'releases'/a.repo/a.tag
+  require(not out.exists(),'Fresh operation evidence required; never overwrite an earlier attempt')
+  out.mkdir(parents=True)
+@@ -95,20 +118,22 @@
+  clean(repo,a.commit)
+  # Repeat absence immediately before the first remote mutation; no clobber/update paths exist.
+  absent('repos/'+remote+'/git/ref/tags/'+a.tag);absent('repos/'+remote+'/releases/tags/'+a.tag)
++ require(not matching_releases(remote,a.tag),'Existing draft/release will never be overwritten')
+  latest='false' if demos else 'true'
+  run(['gh','release','create',a.tag,*map(str,assets),'--repo',remote,'--target',a.commit,'--draft','--latest='+latest,'--title',a.repo+' '+a.tag,'--notes-file',str(notes)])
+- draft=json.loads(get(['gh','api','repos/'+remote+'/releases/tags/'+a.tag]));require(draft.get('draft') is True and draft.get('target_commitish')==a.commit,'Draft target mismatch')
++ draft=find_draft(remote,a.tag,a.commit)
+  require(sorted(asset['name'] for asset in draft['assets'])==sorted(f.name for f in assets),'Draft asset set differs')
+  (out/'draft.json').write_text(json.dumps(draft,indent=2)+'\n')
+- with tempfile.TemporaryDirectory(prefix='release-verify-20261008-') as temp:
+-  run(['gh','release','download',a.tag,'--repo',remote,'--dir',temp])
+-  require(sorted(f.name for f in Path(temp).iterdir())==sorted(f.name for f in assets),'Downloaded asset set differs')
+-  for f in assets: require(sha(f)==sha(Path(temp)/f.name),'Downloaded hash differs: '+f.name)
++ verify_downloads(remote,draft,assets)
+  (out/'download-verified.json').write_text(json.dumps({f.name:{'sha256':sha(f),'bytes':f.stat().st_size} for f in assets},indent=2)+'\n')
+- run(['gh','release','edit',a.tag,'--repo',remote,'--draft=false','--latest='+latest])
++ clean(repo,a.commit)
++ current=find_draft(remote,a.tag,a.commit);require(current==draft,'Draft metadata changed after download verification')
++ require(json.loads(get(['gh','api','repos/'+remote+'/immutable-releases'])).get('enabled') is True,'Immutable releases setting changed')
++ absent('repos/'+remote+'/git/ref/tags/'+a.tag)
++ run(['gh','api','--method','PATCH','repos/'+remote+'/releases/'+str(draft['id']),'-F','draft=false','-f','make_latest='+latest],stdout=subprocess.DEVNULL)
+  release=json.loads(get(['gh','api','repos/'+remote+'/releases/tags/'+a.tag]))
+  require(release.get('immutable') is True and release.get('draft') is False,'Immutable publication not confirmed')
+- require(release.get('target_commitish')==a.commit,'Published source mismatch')
++ require(release.get('id')==draft['id'] and release.get('tag_name')==a.tag and release.get('target_commitish')==a.commit,'Published source/identity mismatch')
+  (out/'published.json').write_text(json.dumps(release,indent=2)+'\n')
+  print('PUBLISHED',release['html_url'],flush=True)
+ if __name__=='__main__': main()

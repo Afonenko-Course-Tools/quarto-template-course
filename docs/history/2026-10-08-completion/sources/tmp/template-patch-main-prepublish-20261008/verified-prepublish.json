@@ -1,0 +1,109 @@
+{
+  "verifiedAt": "2026-10-08T06:38:45.633489+00:00",
+  "sourceMainSHA": "52316a762da3a9c054b5ac6a7a89620e46c7c150",
+  "tree": "7ab56f79f57452207bbd1c44f85fca2635381c08",
+  "PR": "https://github.com/Afonenko-Course-Tools/quarto-template-course/pull/19",
+  "CI": "https://github.com/Afonenko-Course-Tools/quarto-template-course/actions/runs/37737745573",
+  "CIConclusion": "success",
+  "commands": [
+    {
+      "label": "install",
+      "command": [
+        "task",
+        "install"
+      ],
+      "cwd": "/home/tolya/course-tools/quarto-template-course",
+      "started": "2026-10-08T06:33:23.412587+00:00",
+      "finished": "2026-10-08T06:33:27.680788+00:00",
+      "exitCode": 0,
+      "log": "/tmp/template-patch-main-prepublish-20261008/install.log",
+      "cue": "/home/tolya/course-tools/local-tools/cue/cue",
+      "task": "/home/tolya/course-tools/local-tools/task/task",
+      "cache": "/tmp/template-patch-main-prepublish-20261008/cache"
+    },
+    {
+      "label": "fetch",
+      "command": [
+        "task",
+        "fetch"
+      ],
+      "cwd": "/home/tolya/course-tools/quarto-template-course",
+      "started": "2026-10-08T06:34:05.925666+00:00",
+      "finished": "2026-10-08T06:34:23.772053+00:00",
+      "exitCode": 0,
+      "log": "/tmp/template-patch-main-prepublish-20261008/fetch.log",
+      "cue": "/home/tolya/course-tools/local-tools/cue/cue",
+      "task": "/home/tolya/course-tools/local-tools/task/task",
+      "cache": "/tmp/template-patch-main-prepublish-20261008/cache"
+    },
+    {
+      "label": "render",
+      "command": [
+        "task",
+        "render"
+      ],
+      "cwd": "/home/tolya/course-tools/quarto-template-course",
+      "started": "2026-10-08T06:35:12.742605+00:00",
+      "finished": "2026-10-08T06:35:49.958878+00:00",
+      "exitCode": 0,
+      "log": "/tmp/template-patch-main-prepublish-20261008/render.log",
+      "cue": "/home/tolya/course-tools/local-tools/cue/cue",
+      "task": "/home/tolya/course-tools/local-tools/task/task",
+      "cache": "/tmp/template-patch-main-prepublish-20261008/cache"
+    },
+    {
+      "label": "check",
+      "command": [
+        "task",
+        "check"
+      ],
+      "cwd": "/home/tolya/course-tools/quarto-template-course",
+      "started": "2026-10-08T06:36:05.741959+00:00",
+      "finished": "2026-10-08T06:37:47.149249+00:00",
+      "exitCode": 0,
+      "log": "/tmp/template-patch-main-prepublish-20261008/check.log",
+      "cue": "/home/tolya/course-tools/local-tools/cue/cue",
+      "task": "/home/tolya/course-tools/local-tools/task/task",
+      "cache": "/tmp/template-patch-main-prepublish-20261008/cache"
+    },
+    {
+      "label": "fetch-regression",
+      "command": [
+        "python3",
+        "tests/fetch.py"
+      ],
+      "cwd": "/home/tolya/course-tools/quarto-template-course",
+      "started": "2026-10-08T06:37:55.495383+00:00",
+      "finished": "2026-10-08T06:37:58.358344+00:00",
+      "exitCode": 0,
+      "log": "/tmp/template-patch-main-prepublish-20261008/fetch-regression.log",
+      "cue": "/home/tolya/course-tools/local-tools/cue/cue",
+      "task": "/home/tolya/course-tools/local-tools/task/task",
+      "cache": "/tmp/template-patch-main-prepublish-20261008/cache"
+    }
+  ],
+  "orderedCommandsAllExit0": true,
+  "cleanMain": true,
+  "allTrackedSourceHashesEqualMergedMain": true,
+  "installedCoreSourceSHA": "a9a439bd6e6498806d4d4943efd71232e70170be",
+  "installedCoreFileCount": 63,
+  "installedEveryPathByteMatchesTag": true,
+  "totalReadyFiles": 549,
+  "allReadyCopiedMapsVerified": true,
+  "siteHTMLPages": 61,
+  "siteLocalLinks": 2459,
+  "siteFileCount": 599,
+  "siteHashesAfterGuideAndFetchTestsEqualBefore": true,
+  "literalGuideNativeSuite": "PASS",
+  "fetchRegression": "PASS",
+  "diffCheck": "PASS",
+  "completedSessions": [
+    59352,
+    27691,
+    9256,
+    27514,
+    1786
+  ],
+  "pendingSessions": [],
+  "publication": "not started yet; exact existing native Task publish next"
+}

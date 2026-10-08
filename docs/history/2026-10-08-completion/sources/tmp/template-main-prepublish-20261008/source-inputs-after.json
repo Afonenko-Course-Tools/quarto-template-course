@@ -1,0 +1,557 @@
+{
+  ".github/dependabot.yml": {
+    "bytes": 112,
+    "sha256": "eada67e1b7f73d16a4c240ede6193c4852a2b0887e678a23dc7a3462810502e7",
+    "mtimeNs": 1791023353525666551
+  },
+  ".github/workflows/pages.yml": {
+    "bytes": 1487,
+    "sha256": "2c2ddc4999aace57aca1da4ca338015e18e7ae5300cd2e679bc4fa27e6a73781",
+    "mtimeNs": 1791433977770842188
+  },
+  ".gitignore": {
+    "bytes": 828,
+    "sha256": "7a0dbd851b7487a6e2fb87416d6b4cdfd20e0251cb0745abd8a52602d60e54a6",
+    "mtimeNs": 1791320994456022279
+  },
+  "README.md": {
+    "bytes": 6517,
+    "sha256": "a1805ef57812c09bea44f65a42d0f3dc089646212a32b354fecae5ab8befad1e",
+    "mtimeNs": 1791433977770842188
+  },
+  "Taskfile.yml": {
+    "bytes": 4670,
+    "sha256": "36b9057ef2bcb0745ea648e4404f3478be4779bf4c651ef0954ee7205ed580f0",
+    "mtimeNs": 1791433977770842188
+  },
+  "UPSTREAM.md": {
+    "bytes": 2350,
+    "sha256": "4100c0c6c0d28aa5729c6fd151705c4d29946c9496e15be1c5c69e63cb662fce",
+    "mtimeNs": 1791433977770842188
+  },
+  "_extensions/Afonenko-Course-Tools/course-core/_extension.yml": {
+    "bytes": 152,
+    "sha256": "f7d691101c6303458716a8fd1b191c1366405aac0331a062c3fe08cabd87b1ee",
+    "mtimeNs": 1791434266656594759
+  },
+  "_extensions/Afonenko-Course-Tools/course-core/assessment.lua": {
+    "bytes": 4601,
+    "sha256": "2760af9ca845d6335f5bea3613239e529191ec0feb767895455462573c04e1f7",
+    "mtimeNs": 1791434266656712883
+  },
+  "_extensions/Afonenko-Course-Tools/course-core/body-export/answer.cue": {
+    "bytes": 1050,
+    "sha256": "7b43dc04f33375cd2271a3f5008b4e69b733f51b6dce78ebe2986cad1ae766a9",
+    "mtimeNs": 1791434266656934401
+  },
+  "_extensions/Afonenko-Course-Tools/course-core/body-export/answer.ts": {
+    "bytes": 4470,
+    "sha256": "e7f281d5f8cf21a3e8d310de8df510dc5ae9c09ce5d1ad63016096d50048c37a",
+    "mtimeNs": 1791434266657042374
+  },
+  "_extensions/Afonenko-Course-Tools/course-core/body-export/collect.ts": {
+    "bytes": 12963,
+    "sha256": "8657fd5489d67be010b7eaa1cd63fdfd74ddcf57409f16a8dfafa02a1dfaff87",
+    "mtimeNs": 1791434266657154688
+  },
+  "_extensions/Afonenko-Course-Tools/course-core/body-export/model.ts": {
+    "bytes": 1294,
+    "sha256": "377f24ab4015bcf8b9a1fa66262eb90b4e6d14c0e0d583d3617d7dfa4d8adc7b",
+    "mtimeNs": 1791434266657283724
+  },
+  "_extensions/Afonenko-Course-Tools/course-core/body-export/package.cue": {
+    "bytes": 2351,
+    "sha256": "1ae9b23cdaa857e46a9b624b6c433b9b7e187df253bd77ed47d4c28d0770b7ac",
+    "mtimeNs": 1791434266657391131
+  },
+  "_extensions/Afonenko-Course-Tools/course-core/body-export/producer.ts": {
+    "bytes": 13920,
+    "sha256": "f9604cb679d0fc1e142c4d5c2cfafc47d27021f3bc84fac42b1096e9aeac2b37",
+    "mtimeNs": 1791434266657496944
+  },
+  "_extensions/Afonenko-Course-Tools/course-core/body-export/vendor/libraries.js": {
+    "bytes": 99955,
+    "sha256": "855b5ea8964f035162297f567bc06ea199f4c5d2f57869105d11331e0cb2b1e0",
+    "mtimeNs": 1791434266657756773
+  },
+  "_extensions/Afonenko-Course-Tools/course-core/body-export/vendor/uuid-LICENSE": {
+    "bytes": 1109,
+    "sha256": "beaa6b04fb82e41dd2ad679e19e27953afb5999b1abbb455b6564e78ebfeb332",
+    "mtimeNs": 1791434266657903048
+  },
+  "_extensions/Afonenko-Course-Tools/course-core/body-export/vendor/yaml-LICENSE": {
+    "bytes": 738,
+    "sha256": "5bba27375d93e9119f76c1015f7672cf9ad5f70952296e0842fb2243d6376869",
+    "mtimeNs": 1791434266658023954
+  },
+  "_extensions/Afonenko-Course-Tools/course-core/contract-vocabulary.json": {
+    "bytes": 2406,
+    "sha256": "083a025e9b8c3a2373ed5f66e5e7b7b767b00e3e0d531a570b6886c5cae012b5",
+    "mtimeNs": 1791434266658136823
+  },
+  "_extensions/Afonenko-Course-Tools/course-core/contract.json": {
+    "bytes": 76,
+    "sha256": "d5a1a0524cd8ce9810b0b60ffbf0030bb5a98e9d743e9554dc79c125ea999258",
+    "mtimeNs": 1791434266658269540
+  },
+  "_extensions/Afonenko-Course-Tools/course-core/diagnostics.lua": {
+    "bytes": 1228,
+    "sha256": "d365a740ff03f6a89d1fb5d92b2cc44d4d6a4f0a6630f4e681718f060820d2a9",
+    "mtimeNs": 1791434266658374347
+  },
+  "_extensions/Afonenko-Course-Tools/course-core/domain/assemble.ts": {
+    "bytes": 4526,
+    "sha256": "0bec9ffbb9dcab78e3c922dcdb0015ded59136b63c97530b05e8d1fc8222905a",
+    "mtimeNs": 1791434266658582706
+  },
+  "_extensions/Afonenko-Course-Tools/course-core/domain/diagnostics.ts": {
+    "bytes": 946,
+    "sha256": "dc6a7df1d7fc956b218ccc638e1ac8890952d268fe6b3016b5d3776ce53652f1",
+    "mtimeNs": 1791434266658692689
+  },
+  "_extensions/Afonenko-Course-Tools/course-core/domain/model.ts": {
+    "bytes": 3815,
+    "sha256": "d7222c7e6d9b7442fffa3caf3bd05c463aba92bc911d9227e70795e2ff65e9b2",
+    "mtimeNs": 1791434266658798765
+  },
+  "_extensions/Afonenko-Course-Tools/course-core/domain/release.ts": {
+    "bytes": 8402,
+    "sha256": "1a3ce9e58255c4383f25d517fca209f2cdb71c0fd79f2449483949d73b78fdaf",
+    "mtimeNs": 1791434266658904064
+  },
+  "_extensions/Afonenko-Course-Tools/course-core/domain/vocabulary.ts": {
+    "bytes": 923,
+    "sha256": "2328884e2c16f16a856144b41fc056bec372cf7023f45467a9395ccccc8ff61c",
+    "mtimeNs": 1791434266659237704
+  },
+  "_extensions/Afonenko-Course-Tools/course-core/entrypoints/check.ts": {
+    "bytes": 1253,
+    "sha256": "32a3b8b7c6b628fe1de9e91f71bd199f03848baf18cb69e68781269958975d08",
+    "mtimeNs": 1791434266659457255
+  },
+  "_extensions/Afonenko-Course-Tools/course-core/entrypoints/diagnostics.ts": {
+    "bytes": 789,
+    "sha256": "1465d0e32857b0d60f385a9cac8f20887dc7cbefd11c68347031a97dd771d42c",
+    "mtimeNs": 1791434266659566536
+  },
+  "_extensions/Afonenko-Course-Tools/course-core/entrypoints/export.ts": {
+    "bytes": 2187,
+    "sha256": "ec0851cef592eec196924bae58221dcace0257a15ac804836be9dfbbd3d27de8",
+    "mtimeNs": 1791434266659677054
+  },
+  "_extensions/Afonenko-Course-Tools/course-core/entrypoints/post.ts": {
+    "bytes": 1255,
+    "sha256": "af88ba177d27107107781152c677e44207a4bf15675f20ef250d1050524760d3",
+    "mtimeNs": 1791434266659799753
+  },
+  "_extensions/Afonenko-Course-Tools/course-core/entrypoints/pre.ts": {
+    "bytes": 138,
+    "sha256": "c0178a37902c4e874a26214cf30d2326f5283d08a1744212cfbcbfd9b44b83f4",
+    "mtimeNs": 1791434266659914796
+  },
+  "_extensions/Afonenko-Course-Tools/course-core/entrypoints/preview.ts": {
+    "bytes": 6029,
+    "sha256": "914930643b82f5b0291335b44dd9b37e23eb63afa5e34daa3f4c0ba57aee3aa0",
+    "mtimeNs": 1791434266660022085
+  },
+  "_extensions/Afonenko-Course-Tools/course-core/exercises.lua": {
+    "bytes": 1968,
+    "sha256": "4226462930ecc21e4e76e3f328fc982d3530fb5a5b39a24743b041d118a68357",
+    "mtimeNs": 1791434266660130377
+  },
+  "_extensions/Afonenko-Course-Tools/course-core/filter.lua": {
+    "bytes": 8524,
+    "sha256": "de95eaf1531fb2290890a17b91a5ee1e72603cd6b1b14bb7cadee3f50d3147a3",
+    "mtimeNs": 1791434266660241373
+  },
+  "_extensions/Afonenko-Course-Tools/course-core/grading.lua": {
+    "bytes": 2008,
+    "sha256": "469a02ef3b98e32650966603f58fade3d9867fba2ed81637293358537c0e330e",
+    "mtimeNs": 1791434266660365664
+  },
+  "_extensions/Afonenko-Course-Tools/course-core/infrastructure/adapters.ts": {
+    "bytes": 3657,
+    "sha256": "3da4d14f48354f58e512354fc8f899021152ff7f267a1fa52a4827fee272f84d",
+    "mtimeNs": 1791434266660595655
+  },
+  "_extensions/Afonenko-Course-Tools/course-core/infrastructure/files.ts": {
+    "bytes": 3197,
+    "sha256": "c3df309c9e9bb951e3e55e7897010dff25de672304154e9e32daca2a2d4b1faf",
+    "mtimeNs": 1791434266660710730
+  },
+  "_extensions/Afonenko-Course-Tools/course-core/infrastructure/native-run.ts": {
+    "bytes": 15409,
+    "sha256": "3707855f1f22b30c0d36e24f21d7559a7a68671d7b3d7d09356703a831b3a00a",
+    "mtimeNs": 1791434266660823985
+  },
+  "_extensions/Afonenko-Course-Tools/course-core/infrastructure/process.ts": {
+    "bytes": 1274,
+    "sha256": "a00287fadcd56d86a3612f24accf390c10172bf67f970567a14f3d98baf75120",
+    "mtimeNs": 1791434266660944044
+  },
+  "_extensions/Afonenko-Course-Tools/course-core/infrastructure/resources.ts": {
+    "bytes": 13162,
+    "sha256": "2b6135d61732713f734f447c51238d7ebd220f3a7d2f53ecad442d61a5f4847d",
+    "mtimeNs": 1791434266661055365
+  },
+  "_extensions/Afonenko-Course-Tools/course-core/infrastructure/validate.ts": {
+    "bytes": 1730,
+    "sha256": "0e7c26d551f0f5e33750e62b5d328cea99d6584102856e67a9abc557fdbd5b2f",
+    "mtimeNs": 1791434266661184258
+  },
+  "_extensions/Afonenko-Course-Tools/course-core/native-adapters.lua": {
+    "bytes": 1496,
+    "sha256": "7ba19d54b08e6413791aade2786bbb3e3854442dae1ded3954cde7f71d6f8565",
+    "mtimeNs": 1791434266661321066
+  },
+  "_extensions/Afonenko-Course-Tools/course-core/native-answers.lua": {
+    "bytes": 5609,
+    "sha256": "d222ce59c0a62705951ffa727b84155712308b34d8728777229a39f7dfa4e630",
+    "mtimeNs": 1791434266661442550
+  },
+  "_extensions/Afonenko-Course-Tools/course-core/native-document.lua": {
+    "bytes": 14593,
+    "sha256": "583dd1e1ae6b73ca4051e3e3f7e56022c034dc7a31186da7589d4df92bf32357",
+    "mtimeNs": 1791434266661553260
+  },
+  "_extensions/Afonenko-Course-Tools/course-core/native-resources.lua": {
+    "bytes": 3579,
+    "sha256": "b6fe7a2e27261e62d28bd5a07c0ed7b41254a62b145a4d18b73216330f80e033",
+    "mtimeNs": 1791434266661670333
+  },
+  "_extensions/Afonenko-Course-Tools/course-core/output.lua": {
+    "bytes": 5162,
+    "sha256": "dd53f65bc8e9f625228a05a7d6dcbbec6ddaaef200e9bd46c378f99047500ff3",
+    "mtimeNs": 1791434266661778412
+  },
+  "_extensions/Afonenko-Course-Tools/course-core/pedagogy/collect.lua": {
+    "bytes": 4082,
+    "sha256": "4eacb846bc07247011b6734cab1b399d74be6867fe1f16fd030974d5720e5e01",
+    "mtimeNs": 1791434266661995045
+  },
+  "_extensions/Afonenko-Course-Tools/course-core/pedagogy/contract.lua": {
+    "bytes": 7979,
+    "sha256": "56d074700d497afe2f3b3e5f04048c5771395e7783c51a42c4cdeb65c9d1bf75",
+    "mtimeNs": 1791434266662109665
+  },
+  "_extensions/Afonenko-Course-Tools/course-core/spec/core.cue": {
+    "bytes": 6402,
+    "sha256": "c5501db51137bb363e89fe535541c81df7b571ce3ca424e1c552353a0361abc8",
+    "mtimeNs": 1791434266662331192
+  },
+  "_extensions/Afonenko-Course-Tools/course-core/visibility.lua": {
+    "bytes": 13002,
+    "sha256": "d0f48368d129873e0e5836d8199a1686c73fb2bc138b5cf216122728d285b6bc",
+    "mtimeNs": 1791434266662443686
+  },
+  "_extensions/Afonenko-Course-Tools/course-core/vocabulary.lua": {
+    "bytes": 370,
+    "sha256": "dffbb20d41fca739b3edbb187692b5058d42f6384bbbd371de0557d7dd51027f",
+    "mtimeNs": 1791434266662562160
+  },
+  "_extensions/Afonenko-Course-Tools/course-navigation/README.md": {
+    "bytes": 6741,
+    "sha256": "3753760aa99e05361ebb2e7d53e3b076c1058754ab1df237097d1dc82fbb60d0",
+    "mtimeNs": 1791434266664008122
+  },
+  "_extensions/Afonenko-Course-Tools/course-navigation/_extension.yml": {
+    "bytes": 189,
+    "sha256": "88eabfaf509c272f1aa40e138b77ddb2ce0943067a55b023c088b73e19455e92",
+    "mtimeNs": 1791434266664129510
+  },
+  "_extensions/Afonenko-Course-Tools/course-navigation/navigation/model.js": {
+    "bytes": 3853,
+    "sha256": "e0346ce2271b08425f95381ff312e3cafb06bae82e398dc064fef65d22b3b441",
+    "mtimeNs": 1791434266664353893
+  },
+  "_extensions/Afonenko-Course-Tools/course-navigation/navigation/navigation.css": {
+    "bytes": 11335,
+    "sha256": "bb97d9489248926bd58ddf8f80eeecd640dd522e291803aa408c10675f5b3cf5",
+    "mtimeNs": 1791434266664470296
+  },
+  "_extensions/Afonenko-Course-Tools/course-navigation/navigation/plugin.js": {
+    "bytes": 5432,
+    "sha256": "9f876b520009729b816009da8bd5217ce781009d87f49695ceaee1e1ba33d042",
+    "mtimeNs": 1791434266664587610
+  },
+  "_extensions/Afonenko-Course-Tools/course-navigation/navigation/plugin.yml": {
+    "bytes": 168,
+    "sha256": "76edcd070b0e97d9d6c73a0957184125244cbb98fbc12303a881eeb3fe9f6eba",
+    "mtimeNs": 1791434266664701432
+  },
+  "_extensions/Afonenko-Course-Tools/course-navigation/navigation/ui.js": {
+    "bytes": 15488,
+    "sha256": "5937e50e98612efd898cb9f254c44fe81db8ca089370e2a9e5c94b72e9f0d866",
+    "mtimeNs": 1791434266664809764
+  },
+  "_extensions/Afonenko-Course-Tools/course-presentation/_extension.yml": {
+    "bytes": 178,
+    "sha256": "90d321014fa141da75fb65af16d67cf828a476aa391d1e80b4e64ca382aa9901",
+    "mtimeNs": 1791434266665328122
+  },
+  "_extensions/Afonenko-Course-Tools/course-presentation/disclosure.js": {
+    "bytes": 3158,
+    "sha256": "83fcce0f4a30a864b836bc4917c488420b5865314eeee21a6d6dea744665765c",
+    "mtimeNs": 1791434266665448735
+  },
+  "_extensions/Afonenko-Course-Tools/course-presentation/filter.lua": {
+    "bytes": 2121,
+    "sha256": "f2399846d0b1842857dc7c4deac8f8d09b042f1987de51737a80df504111d490",
+    "mtimeNs": 1791434266665559895
+  },
+  "_extensions/Afonenko-Course-Tools/course-presentation/html-dependency.json": {
+    "bytes": 671,
+    "sha256": "8309a429a6f929a001a71369b98251c80a380afb2a4205a9494366cc78bf0861",
+    "mtimeNs": 1791434266665666470
+  },
+  "_extensions/Afonenko-Course-Tools/course-presentation/modules/answers.lua": {
+    "bytes": 1732,
+    "sha256": "30b0acad3a08bd4be5ab5e39192b52cfb65e5a736f05639bfa26639b1ee88906",
+    "mtimeNs": 1791434266665877912
+  },
+  "_extensions/Afonenko-Course-Tools/course-presentation/modules/config.lua": {
+    "bytes": 2159,
+    "sha256": "614905cc3d99d200a3b495133a447f734352c4679dc23da826b69eba2ce10d6d",
+    "mtimeNs": 1791434266665988588
+  },
+  "_extensions/Afonenko-Course-Tools/course-presentation/modules/metadata.lua": {
+    "bytes": 2669,
+    "sha256": "441267354ebfb4d4a5af4048ef0c261352cd5a93a85d6f1823f823e25eacd8fa",
+    "mtimeNs": 1791434266666098115
+  },
+  "_extensions/Afonenko-Course-Tools/course-presentation/modules/vocabulary.json": {
+    "bytes": 2406,
+    "sha256": "083a025e9b8c3a2373ed5f66e5e7b7b767b00e3e0d531a570b6886c5cae012b5",
+    "mtimeNs": 1791434266666207316
+  },
+  "_extensions/Afonenko-Course-Tools/course-presentation/modules/vocabulary.lua": {
+    "bytes": 220,
+    "sha256": "a538d30c46804f016d92f1c6bbb57a3ddd25f0947bea9bb17dbb52cc43ee517e",
+    "mtimeNs": 1791434266666322952
+  },
+  "_extensions/Afonenko-Course-Tools/course-presentation/presentation.css": {
+    "bytes": 6711,
+    "sha256": "a51eab093ac2bed4144a3f3d56fac77eba52805ead7c1ef6c95436724bc9af9e",
+    "mtimeNs": 1791434266666429234
+  },
+  "_extensions/Afonenko-Course-Tools/course-presentation/presentation.js": {
+    "bytes": 6085,
+    "sha256": "55a13bf5f7c8f131ed2977258d7b91a027d5ae216ca3f16d80f27c342606015a",
+    "mtimeNs": 1791434266666538205
+  },
+  "_quarto.yml": {
+    "bytes": 2145,
+    "sha256": "e3b58f8b009e9599b5657eee2ea8da9e272911f6c2ba92be7cb9a92df31cf0d6",
+    "mtimeNs": 1791433977773842204
+  },
+  "assets/public.txt": {
+    "bytes": 137,
+    "sha256": "33ff6dcc7c22dfcc13582293e694a655b55c395e130e32dcceb39f01bf8d0d5f",
+    "mtimeNs": 1791319727896081609
+  },
+  "catalog/index.qmd": {
+    "bytes": 5700,
+    "sha256": "0cdfaa41ed4d37e643b2a34335b42bf1523c758bec90d732dc5129349a64daa0",
+    "mtimeNs": 1791433977773842204
+  },
+  "docs/history/2026-10-08/README.md": {
+    "bytes": 5733,
+    "sha256": "7a4718f122c79a4c7c98ae4222cf3135329726802a460bc2f5cdafc57efbcfe5",
+    "mtimeNs": 1791433977773842204
+  },
+  "docs/history/2026-10-08/inventory.json": {
+    "bytes": 15404,
+    "sha256": "d6a37af2ccace5bd8d21f80a23279f2d49451a16c5d2d74d9f10edba23d3e3a0",
+    "mtimeNs": 1791433977773842204
+  },
+  "docs/history/2026-10-08/open-prs.json": {
+    "bytes": 3,
+    "sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+    "mtimeNs": 1791433977773842204
+  },
+  "docs/history/2026-10-08/provenance.json": {
+    "bytes": 7711,
+    "sha256": "8590e3b268d3e0d979b71341371e81d0edd3f4225893d056305afe331caeaab8",
+    "mtimeNs": 1791433977773842204
+  },
+  "docs/history/2026-10-08/releases.json": {
+    "bytes": 113,
+    "sha256": "5fde397c861872edbab54503f14fa8d126b5fa0d99dd4150a5bd03cdeb5e00a6",
+    "mtimeNs": 1791433977773842204
+  },
+  "docs/history/2026-10-08/remote-heads.txt": {
+    "bytes": 57,
+    "sha256": "a8bc6ffdf0d2ac8857e5a6d2c4798432ec3461109dddd423e29293914a66cc47",
+    "mtimeNs": 1791433977773842204
+  },
+  "docs/plans/2026-10-08-implementation.md": {
+    "bytes": 24583,
+    "sha256": "f2dddebac6a38bb524a829675c0dabf58bb093cc7e79100d3c327570eefd17aa",
+    "mtimeNs": 1791433977773842204
+  },
+  "extensions/cloud.qmd": {
+    "bytes": 4111,
+    "sha256": "69b7e027043baaf55a1bfbca1ff6727e72c517b6d6527c2d4214937d5417e7b5",
+    "mtimeNs": 1791433977773842204
+  },
+  "extensions/course.qmd": {
+    "bytes": 2781,
+    "sha256": "64d1d44725cb48395de162176203793bf9b7ca0bbc8599a8eb9cf90ad4d87223",
+    "mtimeNs": 1791433977773842204
+  },
+  "extensions/download.qmd": {
+    "bytes": 2147,
+    "sha256": "e3a8b02552453bc63bcfe3ff0f80a66f547dae35c1fa841260384961783c51b5",
+    "mtimeNs": 1791433977773842204
+  },
+  "extensions/index.qmd": {
+    "bytes": 2150,
+    "sha256": "e6b69f0a53e7965c63f01487281828c3193ef5514a7da1ff0034daba3bb552bb",
+    "mtimeNs": 1791433977773842204
+  },
+  "extensions/moodle.qmd": {
+    "bytes": 1861,
+    "sha256": "be16fc0586cc7a12c497183d554ed0d8eefeb5b44a32143d365b49ca8c0705c0",
+    "mtimeNs": 1791433977773842204
+  },
+  "extensions/prairielearn.qmd": {
+    "bytes": 2012,
+    "sha256": "4885c51008517c460173e6a94744e159ec699de6ee717dae7f24838667d7d40c",
+    "mtimeNs": 1791433977774842209
+  },
+  "extensions/print.qmd": {
+    "bytes": 1903,
+    "sha256": "b92316972ad3f88299e31520d8e932905b684ea29f0237ad7baba005e01fa8d3",
+    "mtimeNs": 1791433977774842209
+  },
+  "extensions/publisher.qmd": {
+    "bytes": 1892,
+    "sha256": "11037302ee033fe19fe3ca4a106958bc811c088e0c895149799fc2bc9fbaae78",
+    "mtimeNs": 1791433977774842209
+  },
+  "extensions/reference-catalog.qmd": {
+    "bytes": 2128,
+    "sha256": "36dbceea8869a1af2b6ac1d4ae274109db134bbad2372d14581047d8ae85d02c",
+    "mtimeNs": 1791433977774842209
+  },
+  "guide/answers.qmd": {
+    "bytes": 7506,
+    "sha256": "0654769e26628c496d1ea0f1ad5f49aa7c87ba946c8f6ce9217ab01cbc837f6e",
+    "mtimeNs": 1791433977774842209
+  },
+  "guide/assessments.qmd": {
+    "bytes": 10654,
+    "sha256": "d9bce70c57d22b9383090478fb1a51f07452b86117826907896478062683eeae",
+    "mtimeNs": 1791433977774842209
+  },
+  "guide/composition.qmd": {
+    "bytes": 8307,
+    "sha256": "95f8b2fa9456c58a73cce9f0cdd0108821259c10edc8a9e51881d7d1140a6ffc",
+    "mtimeNs": 1791433977774842209
+  },
+  "guide/exercises.qmd": {
+    "bytes": 6236,
+    "sha256": "1c953b687e0ce437d16969038d0ddb56eaedfd7c441d012ad8dc936fe877335f",
+    "mtimeNs": 1791433977774842209
+  },
+  "guide/export.qmd": {
+    "bytes": 11579,
+    "sha256": "760f9d2f9fe31b58f757f8ae0e4b315df43d42b638f84b54c789dec7244df1fa",
+    "mtimeNs": 1791433977774842209
+  },
+  "guide/index.qmd": {
+    "bytes": 3624,
+    "sha256": "a503b21d958844914c5154ba8d53bc6a1022a4d12d1429046865bf53d2905b5c",
+    "mtimeNs": 1791433977774842209
+  },
+  "guide/model.qmd": {
+    "bytes": 5140,
+    "sha256": "547df871e3482685ce9af673e93b165fddf26cc30a02f1903df580eb30acd06a",
+    "mtimeNs": 1791433977774842209
+  },
+  "guide/presentation.qmd": {
+    "bytes": 4634,
+    "sha256": "720abe30dc9194b0eb7142b6dac969cc631a44f9d65098d30c69a27db36b1e43",
+    "mtimeNs": 1791433977774842209
+  },
+  "guide/profiles.qmd": {
+    "bytes": 6566,
+    "sha256": "e4a9ca4b91dd47ed6485447a3bc452f61283c8ca11d9e488038c3923abb922cc",
+    "mtimeNs": 1791433977774842209
+  },
+  "guide/roles.qmd": {
+    "bytes": 7603,
+    "sha256": "17c4122cef95da11d0ec922b305ff563f2ce8fae7ba300a9c3d40e1bb4f46bbe",
+    "mtimeNs": 1791433977774842209
+  },
+  "guide/solutions.qmd": {
+    "bytes": 5106,
+    "sha256": "cb1e912d17f75afb12096e3faa350cfac159e7702f9466791ada94841cfc13fd",
+    "mtimeNs": 1791433977774842209
+  },
+  "guide/specifications.qmd": {
+    "bytes": 5503,
+    "sha256": "b89611eb6d89a3b3c01725a80bd8fdf1af2ddd58ae3a881d31b55757208f58bd",
+    "mtimeNs": 1791433977774842209
+  },
+  "guide/start.qmd": {
+    "bytes": 3612,
+    "sha256": "74fbe7b873f37eb236db342181a99bcb07695deb0365dfbd7cf09acc1a2755de",
+    "mtimeNs": 1791433977774842209
+  },
+  "guide/windows.qmd": {
+    "bytes": 3981,
+    "sha256": "a7864a3f3656f270634061dcdc91b547b24a851654a089cd36e152d89c05837b",
+    "mtimeNs": 1791433977774842209
+  },
+  "index.qmd": {
+    "bytes": 2725,
+    "sha256": "5e2f1a40d52fefea0cfe27e336595096dd00800725ec08fa585401b7d6504163",
+    "mtimeNs": 1791433977774842209
+  },
+  "reference/diagnostics.qmd": {
+    "bytes": 5838,
+    "sha256": "e67e849e497748ad3daa8fdf959a4d6f581903adbfebf2a75c504b734542d49e",
+    "mtimeNs": 1791433977775842215
+  },
+  "reference/index.qmd": {
+    "bytes": 998,
+    "sha256": "afc52cffc0d2302b150fe9266f6a026df67973e662ba14e33a35f536624d2014",
+    "mtimeNs": 1791433977776328998
+  },
+  "reference/source.qmd": {
+    "bytes": 3510,
+    "sha256": "8c62f48eb665a8f75e1cb2b82997687b95a6de629487a670306b624cfb01fb6a",
+    "mtimeNs": 1791433977776328998
+  },
+  "spec/index.md": {
+    "bytes": 3701,
+    "sha256": "dc0105af3d11a6b85ef6e75ca462be1852aee50f0743e9c0d1ef942b150e8f9a",
+    "mtimeNs": 1791433977776328998
+  },
+  "spec/site.md": {
+    "bytes": 3028,
+    "sha256": "19be52737be805554263db10b088b81777355c08d005381bba4871064ae03b16",
+    "mtimeNs": 1791433977776454331
+  },
+  "tests/fetch.py": {
+    "bytes": 4474,
+    "sha256": "da2d72fac295617ad87ae49045817f391c6d40b4cecdf8d0f7cc6adb4c604fd1",
+    "mtimeNs": 1791433977776454331
+  },
+  "tests/guide-examples.py": {
+    "bytes": 8904,
+    "sha256": "5a5b55ba37072805464dfb728553f57248ca5572270e58db34ef8ea3f22911df",
+    "mtimeNs": 1791433977776454331
+  },
+  "tests/ready-assets.json": {
+    "bytes": 78713,
+    "sha256": "46c909a8f38d7aed58189542cff4e1c3c59691179f2292ccd16fb9bbf91e6b3c",
+    "mtimeNs": 1791433977776454331
+  },
+  "tests/site.cjs": {
+    "bytes": 10199,
+    "sha256": "fce383b9f5e4bb410fd87d69c3c70033bdf7eb6e8a96e97cc047470ee4485af5",
+    "mtimeNs": 1791433977776454331
+  }
+}

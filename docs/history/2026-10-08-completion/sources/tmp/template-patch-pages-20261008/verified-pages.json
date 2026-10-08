@@ -1,0 +1,191 @@
+{
+  "sourceMainSHA": "52316a762da3a9c054b5ac6a7a89620e46c7c150",
+  "ghPagesSHA": "8dc11b599406f65af420aef39babdb15375df61b",
+  "publishedEveryFileByteEqual": true,
+  "fileCount": 599,
+  "extraNativeFiles": [
+    ".nojekyll"
+  ],
+  "pages": {
+    "url": "https://api.github.com/repos/Afonenko-Course-Tools/quarto-template-course/pages",
+    "status": "built",
+    "cname": null,
+    "custom_404": false,
+    "html_url": "https://afonenko-course-tools.github.io/quarto-template-course/",
+    "build_type": "legacy",
+    "source": {
+      "branch": "gh-pages",
+      "path": "/"
+    },
+    "public": true,
+    "protected_domain_state": null,
+    "pending_domain_unverified_at": null,
+    "https_enforced": true
+  },
+  "build": {
+    "url": "https://api.github.com/repos/Afonenko-Course-Tools/quarto-template-course/pages/builds/1268606936",
+    "status": "built",
+    "error": {
+      "message": null
+    },
+    "pusher": {
+      "login": "AfonenkoA",
+      "id": 72708332,
+      "node_id": "MDQ6VXNlcjcyNzA4MzMy",
+      "avatar_url": "https://avatars.githubusercontent.com/u/72708332?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/AfonenkoA",
+      "html_url": "https://github.com/AfonenkoA",
+      "followers_url": "https://api.github.com/users/AfonenkoA/followers",
+      "following_url": "https://api.github.com/users/AfonenkoA/following{/other_user}",
+      "gists_url": "https://api.github.com/users/AfonenkoA/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/AfonenkoA/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/AfonenkoA/subscriptions",
+      "organizations_url": "https://api.github.com/users/AfonenkoA/orgs",
+      "repos_url": "https://api.github.com/users/AfonenkoA/repos",
+      "events_url": "https://api.github.com/users/AfonenkoA/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/AfonenkoA/received_events",
+      "type": "User",
+      "user_view_type": "public",
+      "site_admin": false
+    },
+    "commit": "8dc11b599406f65af420aef39babdb15375df61b",
+    "duration": 24819,
+    "created_at": "2026-10-08T06:42:04Z",
+    "updated_at": "2026-10-08T06:42:28Z"
+  },
+  "liveChecks": [
+    {
+      "path": "index.html",
+      "status": 200,
+      "sha256": "b7e3277954341e8e5ae6e33936ce181094cdba2a38aa0f6f025d82e9be9a15aa",
+      "bytes": 47915
+    },
+    {
+      "path": "guide/exercises.html",
+      "status": 200,
+      "sha256": "9545840509cf9f24dc8b03290511098a58ccab62c35b6c9800ad1d3f997c2c9a",
+      "bytes": 65218
+    },
+    {
+      "path": "catalog/index.html",
+      "status": 200,
+      "sha256": "f26b5faf0eb3f78fac0ce1524fa74fc71d847be1e575e12663d5f0ddd87ef7a0",
+      "bytes": 57927
+    },
+    {
+      "path": "search.json",
+      "status": 200,
+      "sha256": "219e1616add965427af39847a722c2652d2a445d0e42038e204a928075aa7edd",
+      "bytes": 155185
+    },
+    {
+      "path": "examples/core/BUILD.json",
+      "status": 200,
+      "sha256": "62f79ad8acf8afaadcecd11f7f7213b4dab466f8eb60599c5acc34044143048a",
+      "bytes": 298
+    },
+    {
+      "path": "examples/core/index.html",
+      "status": 200,
+      "sha256": "da40fb024185002f98a1014863615b4a9c5ade70e18cfe349c4c760718640867",
+      "bytes": 35930
+    },
+    {
+      "path": "examples/composition/BUILD.json",
+      "status": 200,
+      "sha256": "cd88d708ff4368ed1a5ffa9a9ae359fbefdc5ff7d9ce19425ac17d8e234af7fb",
+      "bytes": 358
+    },
+    {
+      "path": "examples/composition/index.html",
+      "status": 200,
+      "sha256": "c38bdbb798e32b1e95e93856dc225a3425a7690b686d6119033dbe7959d266ef",
+      "bytes": 26810
+    },
+    {
+      "path": "examples/qrc/BUILD.json",
+      "status": 200,
+      "sha256": "164d8f2b70d5270c7578d0d349e8e52b58a12bef9d1c796ae6ddc6d78bb12e2e",
+      "bytes": 360
+    },
+    {
+      "path": "examples/qrc/index.html",
+      "status": 200,
+      "sha256": "88c8c9e5840ee46d0b52669930702bd6735d79f56d0a0ddd56f936f17b16dc90",
+      "bytes": 24693
+    },
+    {
+      "path": "examples/print/BUILD.json",
+      "status": 200,
+      "sha256": "62ef1ad286f07de04643cca290fdbd7961861acaa2c45d9ad7bc9b72d5134270",
+      "bytes": 342
+    },
+    {
+      "path": "examples/print/index.html",
+      "status": 200,
+      "sha256": "f9c6fe43968700c15315932f2a0a032e040dc3da1a3c6ad8d636a875c535994e",
+      "bytes": 20375
+    },
+    {
+      "path": "examples/print/artifacts/ordinary.pdf",
+      "status": 200,
+      "sha256": "8ca36d701956677c917208605359d8527f7756077abe316c020e9a9a6d6afcff",
+      "bytes": 23791
+    },
+    {
+      "path": "examples/prairielearn/BUILD.json",
+      "status": 200,
+      "sha256": "2f4953c375ab277c7ad2abdf3cd5370e43981d9327a172aa78e6529b7c8b3106",
+      "bytes": 349
+    },
+    {
+      "path": "examples/prairielearn/index.html",
+      "status": 200,
+      "sha256": "a81c1159d0fe32a9371c363964f0e5a259485a6212a9e13666de76c8ff99cb42",
+      "bytes": 21566
+    },
+    {
+      "path": "examples/moodle/BUILD.json",
+      "status": 200,
+      "sha256": "e1a3d453b387b88dd40911eabf114412f7629b8b0e460fdd4132e177931c59e4",
+      "bytes": 343
+    },
+    {
+      "path": "examples/moodle/index.html",
+      "status": 200,
+      "sha256": "356572bd229a5455a7e6ada65e194cd10d184baa9447b0a65d2c83890d1e3dc6",
+      "bytes": 20530
+    },
+    {
+      "path": "examples/moodle/artifacts/variant-a.xml",
+      "status": 200,
+      "sha256": "f87362b887e9c5cd992946a5e58da1f08658f9ffa6a58aa44766af5eefeeaf0c",
+      "bytes": 2982
+    },
+    {
+      "path": "examples/cloud/BUILD.json",
+      "status": 200,
+      "sha256": "a2502b41b9ecadcec81a5f6131b1a4ee783ebbd1bce67b286241f0480b622b23",
+      "bytes": 342
+    },
+    {
+      "path": "examples/cloud/index.html",
+      "status": 200,
+      "sha256": "056025aa0a70f692462f8dcf3353bde982a2497ee3ae42a0722a2db405148da0",
+      "bytes": 24325
+    },
+    {
+      "path": "examples/external/BUILD.json",
+      "status": 200,
+      "sha256": "27ee2060488baf784c90c3073e2d3c3051c16653dcbcd95bff23f0ffcd45ab42",
+      "bytes": 320
+    },
+    {
+      "path": "examples/external/index.html",
+      "status": 200,
+      "sha256": "4e18782301c9b485ed47f74ab139e4f79a6f64a35cffbe1382bccc1f390504af",
+      "bytes": 26645
+    }
+  ]
+}

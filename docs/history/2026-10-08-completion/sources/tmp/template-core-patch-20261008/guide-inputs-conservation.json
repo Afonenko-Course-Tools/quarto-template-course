@@ -1,0 +1,147 @@
+{
+  "baseline": "8b050033b594eeae4270ca6f55f12a1d6e8f1243",
+  "qmdPages": 28,
+  "fencedBlocks": 95,
+  "files": [
+    {
+      "path": "catalog/index.qmd",
+      "fencedBlocks": 0,
+      "unchangedExceptThreeShellInstallationPins": true
+    },
+    {
+      "path": "extensions/cloud.qmd",
+      "fencedBlocks": 5,
+      "unchangedExceptThreeShellInstallationPins": true
+    },
+    {
+      "path": "extensions/course.qmd",
+      "fencedBlocks": 3,
+      "unchangedExceptThreeShellInstallationPins": true
+    },
+    {
+      "path": "extensions/download.qmd",
+      "fencedBlocks": 2,
+      "unchangedExceptThreeShellInstallationPins": true
+    },
+    {
+      "path": "extensions/index.qmd",
+      "fencedBlocks": 0,
+      "unchangedExceptThreeShellInstallationPins": true
+    },
+    {
+      "path": "extensions/moodle.qmd",
+      "fencedBlocks": 3,
+      "unchangedExceptThreeShellInstallationPins": true
+    },
+    {
+      "path": "extensions/prairielearn.qmd",
+      "fencedBlocks": 2,
+      "unchangedExceptThreeShellInstallationPins": true
+    },
+    {
+      "path": "extensions/print.qmd",
+      "fencedBlocks": 2,
+      "unchangedExceptThreeShellInstallationPins": true
+    },
+    {
+      "path": "extensions/publisher.qmd",
+      "fencedBlocks": 2,
+      "unchangedExceptThreeShellInstallationPins": true
+    },
+    {
+      "path": "extensions/reference-catalog.qmd",
+      "fencedBlocks": 2,
+      "unchangedExceptThreeShellInstallationPins": true
+    },
+    {
+      "path": "guide/answers.qmd",
+      "fencedBlocks": 5,
+      "unchangedExceptThreeShellInstallationPins": true
+    },
+    {
+      "path": "guide/assessments.qmd",
+      "fencedBlocks": 6,
+      "unchangedExceptThreeShellInstallationPins": true
+    },
+    {
+      "path": "guide/composition.qmd",
+      "fencedBlocks": 8,
+      "unchangedExceptThreeShellInstallationPins": true
+    },
+    {
+      "path": "guide/exercises.qmd",
+      "fencedBlocks": 5,
+      "unchangedExceptThreeShellInstallationPins": true
+    },
+    {
+      "path": "guide/export.qmd",
+      "fencedBlocks": 8,
+      "unchangedExceptThreeShellInstallationPins": true
+    },
+    {
+      "path": "guide/index.qmd",
+      "fencedBlocks": 0,
+      "unchangedExceptThreeShellInstallationPins": true
+    },
+    {
+      "path": "guide/model.qmd",
+      "fencedBlocks": 5,
+      "unchangedExceptThreeShellInstallationPins": true
+    },
+    {
+      "path": "guide/presentation.qmd",
+      "fencedBlocks": 6,
+      "unchangedExceptThreeShellInstallationPins": true
+    },
+    {
+      "path": "guide/profiles.qmd",
+      "fencedBlocks": 8,
+      "unchangedExceptThreeShellInstallationPins": true
+    },
+    {
+      "path": "guide/roles.qmd",
+      "fencedBlocks": 8,
+      "unchangedExceptThreeShellInstallationPins": true
+    },
+    {
+      "path": "guide/solutions.qmd",
+      "fencedBlocks": 3,
+      "unchangedExceptThreeShellInstallationPins": true
+    },
+    {
+      "path": "guide/specifications.qmd",
+      "fencedBlocks": 0,
+      "unchangedExceptThreeShellInstallationPins": true
+    },
+    {
+      "path": "guide/start.qmd",
+      "fencedBlocks": 6,
+      "unchangedExceptThreeShellInstallationPins": true
+    },
+    {
+      "path": "guide/windows.qmd",
+      "fencedBlocks": 2,
+      "unchangedExceptThreeShellInstallationPins": true
+    },
+    {
+      "path": "index.qmd",
+      "fencedBlocks": 0,
+      "unchangedExceptThreeShellInstallationPins": true
+    },
+    {
+      "path": "reference/diagnostics.qmd",
+      "fencedBlocks": 0,
+      "unchangedExceptThreeShellInstallationPins": true
+    },
+    {
+      "path": "reference/index.qmd",
+      "fencedBlocks": 0,
+      "unchangedExceptThreeShellInstallationPins": true
+    },
+    {
+      "path": "reference/source.qmd",
+      "fencedBlocks": 4,
+      "unchangedExceptThreeShellInstallationPins": true
+    }
+  ]
+}

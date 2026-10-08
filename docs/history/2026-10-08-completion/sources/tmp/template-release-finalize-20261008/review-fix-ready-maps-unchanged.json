@@ -1,0 +1,8 @@
+{
+  "base": "28d5053b54551b44fcd4b996225211d7573d1578",
+  "filesPerCopy": 549,
+  "groups": 8,
+  "actualExamplesAndSiteAndDownloadedTreesMatchPinnedMaps": true,
+  "manifestSha256": "46c909a8f38d7aed58189542cff4e1c3c59691179f2292ccd16fb9bbf91e6b3c",
+  "vendorPinsHarnessConfigDiff": "empty"
+}

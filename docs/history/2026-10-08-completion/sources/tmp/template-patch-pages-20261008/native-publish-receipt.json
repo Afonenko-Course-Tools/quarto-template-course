@@ -1,0 +1,46 @@
+{
+  "capturedAt": "2026-10-08T06:43:24.525001+00:00",
+  "command": [
+    "task",
+    "publish"
+  ],
+  "nativePublishCommand": [
+    "quarto",
+    "publish",
+    "gh-pages",
+    "--no-render"
+  ],
+  "TTYConfirmation": "Yes, preauthorized existing-site update",
+  "exitCode": 0,
+  "sourceMainSHA": "52316a762da3a9c054b5ac6a7a89620e46c7c150",
+  "ghPagesSHA": "8dc11b599406f65af420aef39babdb15375df61b",
+  "actualRemoteRefs": {
+    "main": {
+      "ref": "refs/heads/main",
+      "node_id": "REF_kwDOUovpva9yZWZzL2hlYWRzL21haW4",
+      "url": "https://api.github.com/repos/Afonenko-Course-Tools/quarto-template-course/git/refs/heads/main",
+      "object": {
+        "sha": "52316a762da3a9c054b5ac6a7a89620e46c7c150",
+        "type": "commit",
+        "url": "https://api.github.com/repos/Afonenko-Course-Tools/quarto-template-course/git/commits/52316a762da3a9c054b5ac6a7a89620e46c7c150"
+      }
+    },
+    "gh-pages": {
+      "ref": "refs/heads/gh-pages",
+      "node_id": "REF_kwDOUovpvbNyZWZzL2hlYWRzL2doLXBhZ2Vz",
+      "url": "https://api.github.com/repos/Afonenko-Course-Tools/quarto-template-course/git/refs/heads/gh-pages",
+      "object": {
+        "sha": "8dc11b599406f65af420aef39babdb15375df61b",
+        "type": "commit",
+        "url": "https://api.github.com/repos/Afonenko-Course-Tools/quarto-template-course/git/commits/8dc11b599406f65af420aef39babdb15375df61b"
+      }
+    }
+  },
+  "log": "/tmp/template-patch-pages-20261008/native-publish.log",
+  "logSHA256": "7cc5a5d61cf526b3e335cc11bac5000c85375f695ece2e9c13ae52345f82649d",
+  "BROWSER": "true",
+  "CUE": "/home/tolya/course-tools/local-tools/cue/cue",
+  "TaskMandatoryChecks": "site61HTML/2459links and literal guide suite PASS",
+  "sourceMainClean": true,
+  "completedSession": 9749
+}

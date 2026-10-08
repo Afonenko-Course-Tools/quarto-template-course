@@ -1,0 +1,339 @@
+{
+  "head": "28d5053b54551b44fcd4b996225211d7573d1578",
+  "branch": "feat/authoring-model-20261008",
+  "basePreparedGuide": "15df3cdc6da055e55eecb55da618555b6f2184b8",
+  "clean": true,
+  "localStage14": "PASS; awaiting independent review, CI and merge",
+  "commands": [
+    {
+      "label": "install",
+      "command": [
+        "task",
+        "install"
+      ],
+      "started": "2026-10-08T04:04:00.697604+00:00",
+      "finished": "2026-10-08T04:04:04.811391+00:00",
+      "exitCode": 0,
+      "log": "/tmp/template-release-finalize-20261008/install.log",
+      "cue": "/home/tolya/course-tools/local-tools/cue/cue",
+      "task": "/home/tolya/course-tools/local-tools/task/task",
+      "cache": "/tmp/template-release-finalize-20261008/cache"
+    },
+    {
+      "label": "fetch",
+      "command": [
+        "task",
+        "fetch"
+      ],
+      "started": "2026-10-08T04:04:43.512669+00:00",
+      "finished": "2026-10-08T04:05:04.293993+00:00",
+      "exitCode": 0,
+      "log": "/tmp/template-release-finalize-20261008/fetch.log",
+      "cue": "/home/tolya/course-tools/local-tools/cue/cue",
+      "task": "/home/tolya/course-tools/local-tools/task/task",
+      "cache": "/tmp/template-release-finalize-20261008/cache"
+    },
+    {
+      "label": "render",
+      "command": [
+        "task",
+        "render"
+      ],
+      "started": "2026-10-08T04:05:31.549736+00:00",
+      "finished": "2026-10-08T04:06:04.456340+00:00",
+      "exitCode": 0,
+      "log": "/tmp/template-release-finalize-20261008/render.log",
+      "cue": "/home/tolya/course-tools/local-tools/cue/cue",
+      "task": "/home/tolya/course-tools/local-tools/task/task",
+      "cache": "/tmp/template-release-finalize-20261008/cache"
+    },
+    {
+      "label": "check",
+      "command": [
+        "task",
+        "check"
+      ],
+      "started": "2026-10-08T04:06:18.199978+00:00",
+      "finished": "2026-10-08T04:07:49.118645+00:00",
+      "exitCode": 0,
+      "log": "/tmp/template-release-finalize-20261008/check.log",
+      "cue": "/home/tolya/course-tools/local-tools/cue/cue",
+      "task": "/home/tolya/course-tools/local-tools/task/task",
+      "cache": "/tmp/template-release-finalize-20261008/cache"
+    },
+    {
+      "label": "fetch-regression",
+      "command": [
+        "python3",
+        "tests/fetch.py"
+      ],
+      "started": "2026-10-08T04:08:20.643690+00:00",
+      "finished": "2026-10-08T04:08:23.178743+00:00",
+      "exitCode": 0,
+      "log": "/tmp/template-release-finalize-20261008/fetch-regression.log",
+      "cue": "/home/tolya/course-tools/local-tools/cue/cue",
+      "task": "/home/tolya/course-tools/local-tools/task/task",
+      "cache": "/tmp/template-release-finalize-20261008/cache"
+    }
+  ],
+  "diffCheck": "PASS",
+  "publishedAssets": [
+    {
+      "group": "core",
+      "archive": "/tmp/template-release-finalize-20261008/published/core/course.tar.gz",
+      "tree": "/tmp/template-release-finalize-20261008/published/core/tree",
+      "archiveBytes": 2781236,
+      "archiveSha256": "78d8146305ffda06123939e084091f75ce804195a66c4f2570f1c90998db92fb",
+      "sourceSHA": "d58494171e3020957b64ed229cbc8537751e3beb",
+      "sourceRef": "v4.0.0",
+      "files": 107,
+      "releaseId": 406390398
+    },
+    {
+      "group": "composition",
+      "archive": "/tmp/template-release-finalize-20261008/published/composition/composite-course.tar.gz",
+      "tree": "/tmp/template-release-finalize-20261008/published/composition/tree",
+      "archiveBytes": 3441003,
+      "archiveSha256": "713620d92f6a6baafcf118ec0a0b6c0be95e801a84ae14fcbdca1aa4f94314c5",
+      "sourceSHA": "215309b5c41669e56a857a1bc3e4f7f2ce782c5f",
+      "sourceRef": "v5.0.0",
+      "files": 130,
+      "releaseId": 406396300
+    },
+    {
+      "group": "qrc",
+      "archive": "/tmp/template-release-finalize-20261008/published/qrc/catalog-cross-project.tar.gz",
+      "tree": "/tmp/template-release-finalize-20261008/published/qrc/tree",
+      "archiveBytes": 5450438,
+      "archiveSha256": "7052934f30ecfd08bbe70b028cf4ee2c21db13e142c30590e50f889f945e2b53",
+      "sourceSHA": "559583805a514ae8a244b6ea4cb5124867064024",
+      "sourceRef": "v3.0.0",
+      "files": 188,
+      "releaseId": 406396314
+    },
+    {
+      "group": "print",
+      "archive": "/tmp/template-release-finalize-20261008/published/print/paper.tar.gz",
+      "tree": "/tmp/template-release-finalize-20261008/published/print/tree",
+      "archiveBytes": 440649,
+      "archiveSha256": "76635e7759ecd22d3da3126c56b6c0a181ae7a1e2322ff407b2af6da6ad4e99c",
+      "sourceSHA": "00c51f7342da376e85027a925dd9f1207783f924",
+      "sourceRef": "v0.3.0",
+      "files": 26,
+      "releaseId": 406393277
+    },
+    {
+      "group": "prairielearn",
+      "archive": "/tmp/template-release-finalize-20261008/published/prairielearn/java-gradle.tar.gz",
+      "tree": "/tmp/template-release-finalize-20261008/published/prairielearn/tree",
+      "archiveBytes": 371533,
+      "archiveSha256": "aed0fe92cd465eb7842a8fd6d95f3c537bd36feee2accb3c9c6b2e79fcc20198",
+      "sourceSHA": "b9821b5b62863b7e1ae380a4c1a0a0bef855f8ba",
+      "sourceRef": "v3.0.0",
+      "files": 35,
+      "releaseId": 406393651
+    },
+    {
+      "group": "moodle",
+      "archive": "/tmp/template-release-finalize-20261008/published/moodle/moodle-questions.tar.gz",
+      "tree": "/tmp/template-release-finalize-20261008/published/moodle/tree",
+      "archiveBytes": 369109,
+      "archiveSha256": "8c441aab45c3b2e30ff10c3ceaea301aea9fb5f7a832a7a6ced3afbdb9513030",
+      "sourceSHA": "60ce53d0d52a93e66ca545f2a6cd96f97f09d1e6",
+      "sourceRef": "v0.3.0",
+      "files": 21,
+      "releaseId": 406393237
+    },
+    {
+      "group": "cloud",
+      "archive": "/tmp/template-release-finalize-20261008/published/cloud/cloud.tar.gz",
+      "tree": "/tmp/template-release-finalize-20261008/published/cloud/tree",
+      "archiveBytes": 370989,
+      "archiveSha256": "fcce34efff234b1a8a476a7127a9cc608f5cd02f35e16e6072b48449b0f77eac",
+      "sourceSHA": "552612450b093b0cff2e33187a1cb5b9234c050a",
+      "sourceRef": "v3.0.0",
+      "files": 22,
+      "releaseId": 406396299
+    },
+    {
+      "group": "external",
+      "archive": "/tmp/template-release-finalize-20261008/published/external/external-catalog.tar.gz",
+      "tree": "/tmp/template-release-finalize-20261008/published/external/tree",
+      "archiveBytes": 369947,
+      "archiveSha256": "eb7509fdb50340d1dea7c73b233001082e926a2688d4337f3aaac7e844124795",
+      "sourceSHA": "559583805a514ae8a244b6ea4cb5124867064024",
+      "sourceRef": "v3.0.0",
+      "files": 20,
+      "releaseId": 406396314
+    }
+  ],
+  "vendorSourceSHA": "d58494171e3020957b64ed229cbc8537751e3beb",
+  "nativeVendorAll62CommittedExact": true,
+  "manifestSha256": "46c909a8f38d7aed58189542cff4e1c3c59691179f2292ccd16fb9bbf91e6b3c",
+  "site": {
+    "documentationPages": 28,
+    "totalHtmlPages": 61,
+    "localLinks": 2459,
+    "completeOpaqueResourceCopy": true
+  },
+  "literalGuide": "PASS installed Core4 student/full, both solutions, all12roles, four works, five forms, selected public/teacher Body, time+fractional+partial omission",
+  "fetchRegression": "PASS actual Task/curl/tar Unicode/spaces refusal and preservation cases",
+  "toolTags": [
+    {
+      "repo": "quarto-course",
+      "tag": "v4.0.0",
+      "commit": "d58494171e3020957b64ed229cbc8537751e3beb",
+      "releaseId": 406364109,
+      "immutable": true,
+      "publishedAt": "2026-10-08T03:08:10Z",
+      "releaseURL": "https://github.com/Afonenko-Course-Tools/quarto-course/releases/tag/v4.0.0",
+      "cleanMain": true
+    },
+    {
+      "repo": "quarto-project-publish",
+      "tag": "v5.0.0",
+      "commit": "215309b5c41669e56a857a1bc3e4f7f2ce782c5f",
+      "releaseId": 406382948,
+      "immutable": true,
+      "publishedAt": "2026-10-08T03:31:31Z",
+      "releaseURL": "https://github.com/Afonenko-Course-Tools/quarto-project-publish/releases/tag/v5.0.0",
+      "cleanMain": true
+    },
+    {
+      "repo": "quarto-reference-catalog",
+      "tag": "v3.0.0",
+      "commit": "559583805a514ae8a244b6ea4cb5124867064024",
+      "releaseId": 406387910,
+      "immutable": true,
+      "publishedAt": "2026-10-08T03:41:11Z",
+      "releaseURL": "https://github.com/Afonenko-Course-Tools/quarto-reference-catalog/releases/tag/v3.0.0",
+      "cleanMain": true
+    },
+    {
+      "repo": "quarto-course-print",
+      "tag": "v0.3.0",
+      "commit": "00c51f7342da376e85027a925dd9f1207783f924",
+      "releaseId": 406377923,
+      "immutable": true,
+      "publishedAt": "2026-10-08T03:25:05Z",
+      "releaseURL": "https://github.com/Afonenko-Course-Tools/quarto-course-print/releases/tag/v0.3.0",
+      "cleanMain": true
+    },
+    {
+      "repo": "quarto-course-moodle",
+      "tag": "v0.3.0",
+      "commit": "60ce53d0d52a93e66ca545f2a6cd96f97f09d1e6",
+      "releaseId": 406378560,
+      "immutable": true,
+      "publishedAt": "2026-10-08T03:25:09Z",
+      "releaseURL": "https://github.com/Afonenko-Course-Tools/quarto-course-moodle/releases/tag/v0.3.0",
+      "cleanMain": true
+    },
+    {
+      "repo": "quarto-course-prairielearn",
+      "tag": "v3.0.0",
+      "commit": "b9821b5b62863b7e1ae380a4c1a0a0bef855f8ba",
+      "releaseId": 406379321,
+      "immutable": true,
+      "publishedAt": "2026-10-08T03:26:11Z",
+      "releaseURL": "https://github.com/Afonenko-Course-Tools/quarto-course-prairielearn/releases/tag/v3.0.0",
+      "cleanMain": true
+    },
+    {
+      "repo": "quarto-course-cloud",
+      "tag": "v3.0.0",
+      "commit": "552612450b093b0cff2e33187a1cb5b9234c050a",
+      "releaseId": 406379295,
+      "immutable": true,
+      "publishedAt": "2026-10-08T03:26:09Z",
+      "releaseURL": "https://github.com/Afonenko-Course-Tools/quarto-course-cloud/releases/tag/v3.0.0",
+      "cleanMain": true
+    },
+    {
+      "repo": "quarto-project-download",
+      "tag": "v2.0.0",
+      "commit": "ee5ae76255d265ad7c7f43a765bc061ffc8eec75",
+      "releaseId": 406380812,
+      "immutable": true,
+      "publishedAt": "2026-10-08T03:28:22Z",
+      "releaseURL": "https://github.com/Afonenko-Course-Tools/quarto-project-download/releases/tag/v2.0.0",
+      "cleanMain": true
+    }
+  ],
+  "reviewedPaths": [
+    "README.md",
+    "Taskfile.yml",
+    "_extensions/Afonenko-Course-Tools/course-core/_extension.yml",
+    "_extensions/Afonenko-Course-Tools/course-core/assessment.lua",
+    "_extensions/Afonenko-Course-Tools/course-core/body-export/collect.ts",
+    "_extensions/Afonenko-Course-Tools/course-core/body-export/model.ts",
+    "_extensions/Afonenko-Course-Tools/course-core/body-export/package.cue",
+    "_extensions/Afonenko-Course-Tools/course-core/body-export/producer.ts",
+    "_extensions/Afonenko-Course-Tools/course-core/contract-vocabulary.json",
+    "_extensions/Afonenko-Course-Tools/course-core/domain/assemble.ts",
+    "_extensions/Afonenko-Course-Tools/course-core/domain/model.ts",
+    "_extensions/Afonenko-Course-Tools/course-core/domain/release.ts",
+    "_extensions/Afonenko-Course-Tools/course-core/domain/vocabulary.ts",
+    "_extensions/Afonenko-Course-Tools/course-core/entrypoints/post.ts",
+    "_extensions/Afonenko-Course-Tools/course-core/entrypoints/preview.ts",
+    "_extensions/Afonenko-Course-Tools/course-core/exercises.lua",
+    "_extensions/Afonenko-Course-Tools/course-core/filter.lua",
+    "_extensions/Afonenko-Course-Tools/course-core/infrastructure/native-run.ts",
+    "_extensions/Afonenko-Course-Tools/course-core/infrastructure/resources.ts",
+    "_extensions/Afonenko-Course-Tools/course-core/infrastructure/validate.ts",
+    "_extensions/Afonenko-Course-Tools/course-core/native-adapters.lua",
+    "_extensions/Afonenko-Course-Tools/course-core/native-answers.lua",
+    "_extensions/Afonenko-Course-Tools/course-core/native-document.lua",
+    "_extensions/Afonenko-Course-Tools/course-core/output.lua",
+    "_extensions/Afonenko-Course-Tools/course-core/pedagogy/collect.lua",
+    "_extensions/Afonenko-Course-Tools/course-core/pedagogy/contract.lua",
+    "_extensions/Afonenko-Course-Tools/course-core/spec/core.cue",
+    "_extensions/Afonenko-Course-Tools/course-core/visibility.lua",
+    "_extensions/Afonenko-Course-Tools/course-navigation/_extension.yml",
+    "_extensions/Afonenko-Course-Tools/course-presentation/_extension.yml",
+    "_extensions/Afonenko-Course-Tools/course-presentation/filter.lua",
+    "_extensions/Afonenko-Course-Tools/course-presentation/modules/config.lua",
+    "_extensions/Afonenko-Course-Tools/course-presentation/modules/metadata.lua",
+    "_extensions/Afonenko-Course-Tools/course-presentation/modules/vocabulary.json",
+    "_extensions/Afonenko-Course-Tools/course-presentation/presentation.css",
+    "catalog/index.qmd",
+    "docs/plans/2026-10-08-implementation.md",
+    "extensions/cloud.qmd",
+    "extensions/course.qmd",
+    "extensions/download.qmd",
+    "extensions/index.qmd",
+    "extensions/moodle.qmd",
+    "extensions/prairielearn.qmd",
+    "extensions/print.qmd",
+    "extensions/publisher.qmd",
+    "extensions/reference-catalog.qmd",
+    "guide/answers.qmd",
+    "guide/assessments.qmd",
+    "guide/composition.qmd",
+    "guide/exercises.qmd",
+    "guide/export.qmd",
+    "guide/index.qmd",
+    "guide/model.qmd",
+    "guide/presentation.qmd",
+    "guide/profiles.qmd",
+    "guide/roles.qmd",
+    "guide/solutions.qmd",
+    "guide/specifications.qmd",
+    "guide/start.qmd",
+    "guide/windows.qmd",
+    "index.qmd",
+    "reference/diagnostics.qmd",
+    "spec/index.md",
+    "spec/site.md",
+    "tests/ready-assets.json"
+  ],
+  "sourceLinks": {
+    "verifiedTaggedGitPaths": 28,
+    "report": "/tmp/template-release-finalize-20261008/tagged-links-verified.json"
+  },
+  "browserQA": "unverified: IAB unavailable; CUA browser inventory empty; local server terminated",
+  "publication": "not performed by this agent; native Task gh-pages path preserved",
+  "externalMutation": "no push, PR, merge, Pages or branch cleanup",
+  "allOwnedExecSessionsCompleted": true,
+  "diff": "/tmp/template-release-finalize-20261008/step14-final.diff"
+}
