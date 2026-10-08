@@ -228,3 +228,20 @@ Browser QA не подтверждён: CUA вернул unavailable для IAB 
 search/resources проверяются после штатной публикации. Пользовательские
 worktrees сохранены; push/PR/merge/Pages/branch cleanup этим исполнителем
 не выполнялись. Следующий gate — независимое review/CI и чистый merged main.
+
+## Исправление финального review — 8 октября 2026
+
+По независимому review `28d5053…` исправлены два оставшихся подготовительных
+абзаца: каталог сообщает текущие восемь `demo-20261008` групп и соответствие
+source/tool tags одной producer ревизии; введение Presentation относит
+банковскую политику к уже выпущенному Core 4.0.0. Изменены только prose этих
+двух QMD и этот журнал.
+
+Повторные `task render`, полный `node tests/site.cjs` и `git diff --check`
+прошли: 61 HTML / 2459 локальных ссылок. Все 549 ready файлов совпадают в
+manifest, `examples/`, `_site/examples/` и скачанных деревьях. Fenced blocks
+всех 27 тематических страниц и literal guide inputs равны `28d5053…`;
+pins/manifest/harness/vendor/config не менялись, поэтому прежний фактический
+native guide PASS остаётся применимым без повторения широкой suite.
+Машинные proofs/receipts — `review-fix-*.json` в ранее указанном `/tmp`.
+Следующий gate — bounded re-review нового HEAD тем же reviewer, затем CI/merge.
