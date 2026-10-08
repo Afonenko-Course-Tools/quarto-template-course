@@ -1,66 +1,130 @@
 ---
-title: Student и full
+title: Student, full и функциональные профили
 ---
 
-После [настройки банка](model.qmd) задайте состав версий штатными профилями Quarto.
-Core подключается как описано в [первом документе](start.qmd); профили не требуют отдельного расширения.
+Для курса публикуйте student, а full собирайте отдельно для преподавателя.
+Демонстрации и эта документация используют full: их материал подготовлен для
+публичного показа. Политика банка определена [Core 4.0.0](specifications.qmd).
 
-У полноценного курса публикуется student. Full собирается локально для решений,
-закрытых комментариев и контрольных файлов. У демонстраций и документации
-по умолчанию full: их материалы специально подготовлены для публичного показа.
+## Разделите аудитории {#audience-profiles}
 
 ```yaml
+# _quarto.yml выбранной книги
 profile:
   default: student
   group:
     - [student, full]
 ```
 
-Quarto добавляет главы профиля к базовому `book.chapters`. Короткий список
-в student не удаляет контрольные из полного базового списка. Для независимых
-составов оставьте базу без `book.chapters` и задайте полный список в каждом
-профильном файле.
-
-Другой вариант — общие главы в базе и дополнительные контрольные только в full.
-Так устроены демонстрационные банки Print, Moodle и PrairieLearn. База при этом
-содержит только главы, доступные студенту.
-
 ```yaml
 # _quarto-student.yml
-course: {view: student}
-book:
-  chapters: [index.qmd, topics/checksum.qmd, labs/checksum.qmd]
+project:
+  output-dir: _book-student
+course:
+  view: student
 ```
 
 ```yaml
 # _quarto-full.yml
-course: {view: full}
-book:
-  chapters: [index.qmd, topics/checksum.qmd, labs/checksum.qmd, controls/tasks.qmd, controls/variant-01.qmd]
+project:
+  output-dir: _book-full
+course:
+  view: full
 ```
 
-Для условного содержимого используйте нативную форму
-`.content-visible when-profile="full"`. Условия файлов и ресурсов должны
-соответствовать друг другу: отсутствие QMD в student не исключает вложения,
-попавшие под широкий resources glob. Исключите `_site-full`, локальные LMS-пакеты
-и закрытые каталоги из ресурсов открытого сайта.
+View согласуется с аудиторным профилем. Включённый банк удаляет restricted
+условия, их решения и ссылки назначений из student. Обычная open задача остаётся
+без решения; open demonstration с фактическим решением показывает оба.
+Full позволяет читать все условия и решения. Роль control сама текст не скрывает.
+Вне банка обычные exr/exm/sol не получают такую приватность автоматически.
 
-Тип задания `control` не скрывает его автоматически. Student/full определяют
-состав сайта; экспорт выбранной работы получает полные исходники банка независимо
-от опубликованной проекции. Общие заметки презентации не помещаются в full-only блоки.
+## Управляйте составом нативно {#profile-composition}
 
-## Соберите выбранную версию
+Нативное условное содержимое:
+
+```qmd
+::: {.content-visible when-profile="full"}
+Дополнительный материал преподавателя.
+:::
+```
+
+Используйте `.content-visible/.content-hidden`, `when-profile/unless-profile`.
+Условия формата и метаданных тоже остаются механизмами Quarto; отдельного
+авторского языка условий Course нет. Скрытый ошибочный банковский ключ
+по-прежнему проверяется до проекции.
+
+Quarto добавляет главы профиля к базовому `book.chapters`. Короткий список
+student не удаляет закрытые главы из полной базы. Для независимых составов
+уберите главы из базы и задайте полный список в каждом профильном файле:
+
+```yaml
+# _quarto-student.yml: дополнение к настройкам выше
+book:
+  chapters: [index.qmd, bank/integrity.qmd, works/lab.qmd, works/seminar.qmd, works/practical.qmd, works/test.qmd]
+```
+
+```yaml
+# _quarto-full.yml: дополнение к настройкам выше
+book:
+  chapters: [index.qmd, bank/integrity.qmd, works/lab.qmd, works/seminar.qmd, works/practical.qmd, works/test.qmd, teacher.qmd]
+```
+
+Файл банка можно включить в student: restricted тела удаляет Core.
+Preview practical/test остаётся общедоступным на страницах работ.
+Банк для экспорта не ограничивается HTML chapters.
+
+## Сохраните исходники и ресурсы отдельно {#source-privacy}
+
+Удаление AST не редактирует исходный QMD для нативного Source. В student
+банковского HTML отключите встроенный исходник и не добавляйте сырой QMD
+в code-links:
+
+```yaml
+# _quarto-student.yml
+format:
+  html:
+    code-tools:
+      source: false
+    keep-source: false
+project:
+  resources:
+    - '!_book-full/**'
+    - '!_generated/**'
+    - '!teacher/**'
+    - '!projects/**'
+    - '!**/*.qmd'
+```
+
+Это дополнение к настройкам профиля, а не второй project блок в том же файле:
+объедините output-dir и resources в одну карту. Выбирайте положительные
+публичные каталоги ресурсов своего курса; исключения выше показывают
+типовые закрытые области. Наличие gitignore, отсутствие главы или ссылки
+не запрещает native копирование широким resources glob.
+
+Full output, teacher JSON, решения, notes, reference и закрытые tests не
+должны попадать в student HTML, search, QRC, ресурсы и ZIP. Обычная внешняя
+ссылка на открытый GitHub допустима: она отдельно публикует source в репозитории.
+Source modal и локальный raw QMD — другой канал, который проверяют фактически.
+[Download](composition.qmd#download-resources) не выдаёт закрытые partitions.
+
+## Функциональные профили и форматы {#functional-profiles}
+
+Профиль `java`, `review` или иной авторский профиль выбирает материал независимо
+от student/full. Нативный формат выбирается `--to html`, `--to revealjs`,
+`--to pdf` или `--to typst`; ограничения Quarto book сохраняются.
 
 ```sh
-quarto render --profile student --fail-if-warnings
-quarto render --profile full --fail-if-warnings
+quarto render --profile student,java --to html
+quarto render --profile full,java --to html
 ```
 
-Первая команда собирает публичный состав; вторая — полный состав для локальной
-работы преподавателя. Задайте разные `project.output-dir` в профильных файлах,
-например `_site` и `_site-full`, чтобы результаты не заменяли друг друга.
-Полный каталог исключите из ресурсов открытой версии.
+Внутренний [экспорт выбранной работы](export.qmd) получает полные исходники
+и принимает функциональные профили, например `--profile java,review`.
+Student/full в его CLI не передаются. Условие аудитории на целой задаче или
+работе не исключает её из исходного выбора; внутреннее full-only содержимое
+задачи остаётся отделено от participant части.
 
-Законченный пример состава находится в [каталоге](../catalog/index.qmd).
-Штатная работа профилей описана в [руководстве Quarto](https://quarto.org/docs/projects/profiles.html).
-Следующий шаг — [экспорт выбранной работы](export.qmd).
+Для публичных самостоятельных проектов задайте `fail-if-warnings: true`.
+Внутренний source JSON pass имеет отдельную политику предупреждений и не
+меняет постоянные настройки сайта. Частичный preview не подтверждает
+полную текущую модель или [итог времени](assessments.qmd#assessment-time).

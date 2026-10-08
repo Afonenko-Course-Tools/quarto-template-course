@@ -7,7 +7,7 @@ Cloud проверяет метаданные заданий с шагами и 
 ## Установка и подключение
 
 ```sh
-quarto add Afonenko-Course-Tools/quarto-course-cloud@v2.1.1 --no-prompt
+quarto add Afonenko-Course-Tools/quarto-course-cloud@v3.0.0 --no-prompt
 ```
 
 Установите Cloud вместе с Core в проект банка. Полная конфигурация VM и корректные действия находятся в группе Cloud; для сбора фактов подключите Core pre/post hooks как на [странице Course](course.qmd),
@@ -28,9 +28,57 @@ course:
 filters: [course-core, course-cloud]
 ```
 
+## Опишите задачу и VM
+
+В области [явного банка](../guide/exercises.qmd) Core 4.0.0:
+
+````qmd
+:::: {#exr-service difficulty="introductory" time="20" target="cloud"}
+## Состояние службы
+
+### Проверка состояния {.cloud-step key="state"}
+
+Создайте файл `/home/ubuntu/service-state.txt` со строкой `ready`.
+
+```{.sh .cloud-action phase="check" vm="host"}
+test -f /home/ubuntu/service-state.txt
+```
+::::
+````
+
+На отдельной странице работы объявите VM и назначение:
+
+````qmd
+---
+assessment:
+  id: service-lab
+  kind: lab
+cloud:
+  virtual-machines:
+    host:
+      template: ubuntu-host
+---
+
+# Работа со службой {#sec-service-lab}
+
+::: {.task-items}
+1. @exr-service
+:::
+````
+
+Это минимальное описание: template должен существовать в вашей среде.
+Каждый cloud-step имеет уникальный key и check для каждой используемой VM.
+У cloud-action обязательны язык, phase, vm и ровно один источник: inline
+код или `file="/projects/service/check.sh"` текущего проекта. Фазы check,
+solution, pre-step, post-step относятся к шагу; prepare — к работе.
+Подключение VM и действия остаются контрактом Cloud. Его cloud-step —
+специальный шаг адаптера; последовательность обычного занятия оформляется
+Markdown-заголовками.
+
 ## Результат и ограничения
 
-Рендер не создаёт виртуальные машины и не выполняет облачные действия. Проверка локальных путей и CUE-метаданных не подтверждает работоспособность облачной инфраструктуры. Имена VM и action остаются авторскими идентификаторами.
+Cloud не потребляет Body. Рендер не создаёт виртуальные машины и не выполняет
+облачные действия; экспорт `_produced.yaml` в этой поставке не реализован. Проверка локальных путей и CUE-метаданных не подтверждает работоспособность облачной инфраструктуры. Имена VM и action остаются авторскими идентификаторами.
 
 Продолжите с [руководством по сценарию](../guide/model.qmd).
 [Каталог готовых групп](../catalog/index.qmd) связывает результат, исходную папку

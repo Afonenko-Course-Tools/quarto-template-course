@@ -20,6 +20,8 @@ project:
   - '!README.md'
   preview:
     watch-inputs: false
+quarto-required: ">=1.11.5"
+fail-if-warnings: true
 profile:
   default: full
 course:
@@ -59,10 +61,17 @@ website:
       - guide/index.qmd
       - guide/start.qmd
       - guide/model.qmd
+      - guide/exercises.qmd
+      - guide/solutions.qmd
+      - guide/roles.qmd
+      - guide/assessments.qmd
+      - guide/answers.qmd
       - guide/profiles.qmd
       - guide/composition.qmd
       - guide/presentation.qmd
       - guide/export.qmd
+      - guide/windows.qmd
+      - guide/specifications.qmd
     - section: Расширения
       contents:
       - extensions/index.qmd

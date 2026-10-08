@@ -2,51 +2,91 @@
 title: Экспорт выбранной работы
 ---
 
-Экспорт получает задания одной работы из полной исходной книги банка.
-Публиковать full-сайт или заранее собирать его HTML не требуется. Выбор
-student/full определяет сайт для читателя; функциональные профили по-прежнему
-влияют на исходники выбранной работы.
+Экспорт получает назначения одной работы из полной исходной книги банка.
+Публикация full HTML для него не требуется. Назначения и restricted
+выдача определены [контрактом Core 4.0.0](specifications.qmd).
 
-## Подготовьте пакет Core
+## Выберите корень, книгу и работу {#selected-source-export}
 
-Установите [Course](../extensions/course.qmd) в книгу банка, задайте
-`course.id` в корне курса и `assessment.id` на странице работы. Имена ниже
-соответствуют примеру из [руководства по банку](model.qmd): книга находится
-в `task`, ID работы — `checksum-lab`.
-
-Из корня курса выполните:
+В [сценарии руководства](model.qmd) логический корень объявляет
+`course.id: integrity-course`; native book находится в `task`, задачи включены
+явным `exercise-bank`, работа имеет `assessment.id: checksum-lab`.
+Из **корня курса** выполните команду по фактически установленному пути Core:
 
 ```sh
 quarto run task/_extensions/Afonenko-Course-Tools/course-core/entrypoints/export.ts --book task --work checksum-lab --output _generated/checksum.json
 ```
 
-Core создаст полный `_generated/checksum.json` и публичный
-`_generated/checksum.public.json`. В публичном пакете нет закрытого ключа,
-решения и grading-notes. Условия контрольных заданий сохраняются. Для
-функционального профиля добавьте `--profile FEATURE` с именем вашего профиля.
+`--book .` подходит, если корень сам является книгой банка.
+Функциональные варианты выбираются отдельно: `--profile java,review`.
+CLI требует одну книгу, одну работу и путь `.json`; student/full не передаются.
 
-Внутренний JSON-проход читает полный исходный вход и допускает нативные
-предупреждения согласно своему контракту. Это отдельная операция от строгой
-публичной сборки. Неверное выбранное задание по-прежнему отклоняется.
-Неназначенные задания не обязаны поддерживать выбранный адаптер.
+Публичный native source input включает задачи и работы выбранного проекта,
+в том числе QMD вне опубликованных chapters. Вложенные самостоятельные
+проекты с собственным `_quarto.yml` не входят. Quarto выполняет include,
+вычисления, shortcodes и функциональные профили; дополнительного Markdown
+парсера или предварительного full HTML нет. Неназначенная задача может
+не поддерживаться выбранным адаптером.
 
-## Печатная раздатка
+Внутренний JSON pass использует `--fail-if-warnings=false`: native
+предупреждение по междокументной ссылке само по себе не меняет exit 0 на отказ.
+После прохода Core проверяет актуальную модель, выбор и возможности Body.
+Публичные renders сохраняют свою строгую конфигурацию.
 
-Установите [Print](../extensions/print.qmd) в корень курса, затем передайте
-публичный пакет и полный ключ работы:
+## Прочитайте состав пакета {#body-contract}
+
+Создаются `_generated/checksum.json` для преподавательского потребителя и
+соседний `_generated/checksum.public.json` для участника. Исключите `_generated`
+из веб-ресурсов. Schema остаётся `course-body-package-v1`.
+
+| Поле | Смысл |
+| --- | --- |
+| question `owner`, `id`, `key`, `source` | Владелец, местный ID, квалифицированный ключ и источник |
+| `visibility: public` | Безопасная часть выдачи участнику |
+| `statementVisibility: open|restricted` | Публикация условия на сайте |
+| `purpose?`, `hasPublicSolution` | Факты текущего native прохода для проверки demonstration назначения |
+| `answerType`, `condition`, `publicAnswer` | Тип ответа, выбранное условие и публичные поля |
+| teacher `closedKey`, `solution`, `gradingNotes` | Отдельные закрытые поля |
+| work `items`, `assignments`, `theoryTime?` | Порядок, свойства назначений и время теории |
+
+Ключи `works.items` и `assignments` **совпадают** и квалифицированы одинаково:
+`integrity-course/exr-collision`. Значение назначения содержит
+`{stage?, requirement, workMode}`. Core локальная модель использует местные
+`exr-*` ключи; transport не является вторым авторским синтаксисом.
+
+Экспортируются только выбранные условия, поля ответа и их ресурсы.
+Заголовок/ID работы сохраняются в метаданных. Preview, внешние заголовки
+этапов и окружающая проза исключаются; внутренние заголовки условия остаются.
+Обычная ссылка на разбор не выбирает его. Demonstration stage требует решения,
+сохранившегося в публичной native проекции этого JSON-прохода; доступность в
+ранее собранном HTML не подставляется. [Переносимая форма](solutions.qmd#solution-native-witness)
+не ставит when-format/when-meta на контейнер решения. QRC предоставляет адрес ссылки,
+без импорта чужого тела.
+
+Restricted означает запрет открытой веб-публикации, но разрешает выбранную
+выдачу условия участнику. Public guards ключей, solution, gradingNotes,
+source/service ресурсов сохраняются. Не переименовывайте partitions
+публичных ресурсов в open/restricted: это другая граница.
+
+## Получите PDF-раздатку {#print-export}
+
+Установите [Print](../extensions/print.qmd) в корень курса, передайте participant
+пакет, полный ключ выбранной работы и новый каталог результата:
 
 ```sh
 quarto run _extensions/Afonenko-Course-Tools/course-print/entrypoints/export.ts _generated/checksum.public.json integrity-course/checksum-lab _generated/paper
 ```
 
-Будет создан PDF в указанном каталоге. Компиляция требует Pandoc и Typst,
-доступных через Quarto. Print получает публичное условие и проверяет ресурсы
-перед записью результата.
+Print создаёт **PDF** через Pandoc/Typst из Quarto. Необязательный четвёртый
+аргумент — JSON оформления заголовка. В practical/test пакет содержит
+restricted назначения; публичный разбор из preview в PDF не попадает.
+Поддерживаемые [формы ответа](answers.qmd#answer-support) печатаются без ключей.
+Байты вложений, hash и безопасные targets проверяются до записи результата.
 
-## Вопросы Moodle
+## Получите Moodle XML {#moodle-export}
 
-Установите [Moodle](../extensions/moodle.qmd). Для поддерживаемых ответов
-подготовьте `binding.json`:
+Установите [Moodle](../extensions/moodle.qmd). Для manual/single-choice
+сохраните `binding.json` с явными настройками:
 
 ```json
 {"defaultGrade": 1, "shuffle": false}
@@ -56,22 +96,84 @@ quarto run _extensions/Afonenko-Course-Tools/course-print/entrypoints/export.ts 
 quarto run _extensions/Afonenko-Course-Tools/course-moodle/entrypoints/export.ts _generated/checksum.json binding.json _generated/questions.xml
 ```
 
-XML содержит вопросы. Он не создаёт деятельность «Тест», правила доступа
-или попытки. Тип ответа должен поддерживаться текущим адаптером; импорт и
-работу в реальной LMS проверяют отдельно. Полный банк для этого сценария
-есть в [каталоге](../catalog/index.qmd).
+Manual становится essay; single-choice получает teacher ключ и доли 100/0.
+`defaultGrade` — положительное конечное число, `shuffle` — boolean.
+Numeric/multipart/matching отклоняются. Solution и grading notes не входят
+в questiontext; вложения используют `@@PLUGINFILE@@` после проверки bytes/hash.
+XML создаёт банк вопросов. Тест, расписание, попытки, доступ и подтверждённый
+импорт в реальный Moodle настраиваются отдельно.
 
-## Поставка PrairieLearn
+## Подготовьте PrairieLearn с внешней проверкой {#prairielearn-export}
 
-Установите [PrairieLearn](../extensions/prairielearn.qmd) в банк вместе с Core.
-Bindings явно связывают каждый выбранный вопрос с платформенными настройками:
+Установите [PrairieLearn](../extensions/prairielearn.qmd) вместе с Core в банк.
+Для упражнения нужны ведущий заголовок, явный проект и собственные
+платформенные настройки. Раскладка проекта:
 
-```sh
-quarto run task/_extensions/Afonenko-Course-Tools/course-prairielearn/entrypoints/export.ts . task checksum-lab binding.json _generated/pl
+```text
+projects/java-digest/
+  student/     # стартовые файлы участника
+  tests/       # закрытые проверки
+  reference/   # авторский вариант, не поставляется
 ```
 
-Эта команда подходит для банка с поддерживаемыми PL-заданиями и корректным
-`questions` binding. Законченная [Java/Gradle-группа](../catalog/index.qmd)
-содержит bindings, стартовые файлы и проверки. Локальное выполнение Gradle
-подтверждает её assertions; совместимость контейнера и запуск на сервере PL
-проверяются отдельно. Единой платформенно независимой формулы оценки нет.
+Каждый выбранный вопрос получает binding по **местному** ID `q.id`;
+это отдельная карта платформы, не qualified assignments:
+
+```json
+{
+  "questions": {
+    "exr-java-digest": {
+      "topic": "Java",
+      "files": ["Digest.java"],
+      "externalGradingOptions": {
+        "image": "YOUR_VERIFIED_GRADER_IMAGE",
+        "entrypoint": ["sh", "/grade/tests/grade.sh"],
+        "timeout": 60,
+        "enableNetworking": false
+      }
+    }
+  }
+}
+```
+
+Замените `YOUR_VERIFIED_GRADER_IMAGE` реальным проверенным образом вашей
+установки. `topic` задаёт тему; `files` — принимаемые файлы ответа,
+которые должны соответствовать выбранному стартовому проекту и проверкам. Опциональные `entrypoint`, `timeout`, `enableNetworking`,
+`environment` задаются явно по контракту адаптера.
+
+```sh
+quarto run task/_extensions/Afonenko-Course-Tools/course-prairielearn/entrypoints/export.ts . task java-lab binding.json _generated/pl
+```
+
+Поставка создаёт нативные вопросы `gradingMethod: External`, participant
+`question.html`, `clientFilesQuestion` из student и приватные tests.
+Reference не поставляется. Forms Core не превращаются автоматически
+во встроенные PL numeric/choice вопросы.
+
+Если работе нужны PL правила, подключите их явно:
+
+```yaml
+assessment:
+  id: java-lab
+  kind: lab
+  prairielearn:
+    attempts: 3
+    pass: {at-least: 1}
+    assignment: {mode: assessment-id}
+```
+
+Все назначения такой работы должны соответствовать target PrairieLearn.
+Attempts/pass/assignment описывают платформенную семантику; обязательность
+общего назначения не заменяется суммой баллов. Экспорт вопросов не создаёт
+activity и не назначает пользователей. Режим assessment-id получает устойчивую
+метку из course.id и assessment.id; применение метки — отдельное действие PL.
+[Java/Gradle-группа](../catalog/index.qmd) содержит bindings, student, reference
+и настоящие локальные assertions. Они не подтверждают запуск image на сервере.
+
+## Cloud остаётся моделью действий {#cloud-model}
+
+[Cloud](../extensions/cloud.qmd) получает локальную модель Core и проверяет
+VM, cloud-step и cloud-action. Он не потребляет Body и не запускает VM,
+команды или экспорт `_produced.yaml`. Для него render и полная проверка
+свежего результата подтверждают структуру, а инфраструктурное исполнение
+проверяют в целевой среде отдельно.

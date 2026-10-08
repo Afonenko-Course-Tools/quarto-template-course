@@ -6,16 +6,22 @@ title: Каталог готовых примеров
 целую исходную папку группы по ссылке в той же строке и выполните команды
 её README. Соседние файлы, конфигурации и ресурсы являются частью примера.
 
+::: {.callout-note}
+Восемь готовых групп закреплены на неизменяемых выпусках `demo-20261008`.
+Исходники каждой группы соответствуют тегу её инструмента на том же producer SHA.
+[Версии и спецификации](../guide/specifications.qmd) связывают примеры с выпущенными правилами.
+:::
+
 | Группа и задача | Средство | Готовый результат | Целая папка исходников | Зависимости для сборки и исполнения |
 | --- | --- | --- | --- | --- |
-| Модель и представление: Банк, работа и одна презентация | [course](../extensions/course.qmd) | [Открыть](../examples/core/index.html) | [GitHub](https://github.com/Afonenko-Course-Tools/quarto-course/tree/demo-20261007-ru1/examples/course) | Quarto и CUE; Chromium для проверки печати |
-| Составной сайт: Book и HTML/Reveal в общем сайте | [publisher](../extensions/publisher.qmd) | [Открыть](../examples/composition/index.html) | [GitHub](https://github.com/Afonenko-Course-Tools/quarto-project-publish/tree/demo-20261007-ru1/examples/course) | Quarto и Task для сценария группы |
-| Межпроектные ссылки: Переходы книги, лекций и практики | [reference-catalog](../extensions/reference-catalog.qmd) | [Открыть](../examples/qrc/index.html) | [GitHub](https://github.com/Afonenko-Course-Tools/quarto-reference-catalog/tree/demo-20261007-ru1/examples/course) | Quarto и Task |
-| Печатные работы: Раздатки и варианты PDF | [print](../extensions/print.qmd) | [Открыть](../examples/print/index.html) | [GitHub](https://github.com/Afonenko-Course-Tools/quarto-course-print/tree/demo-20261007-ru2/examples/paper) | Quarto/Pandoc/Typst для PDF |
-| PrairieLearn: Поставка Java-вопросов и локальные проверки | [prairielearn](../extensions/prairielearn.qmd) | [Открыть](../examples/prairielearn/index.html) | [GitHub](https://github.com/Afonenko-Course-Tools/quarto-course-prairielearn/tree/demo-20261007-ru1/examples/java-gradle) | Quarto, CUE; Java/Gradle для исполнения |
-| Moodle: HTML банка и XML вопросов | [moodle](../extensions/moodle.qmd) | [Открыть](../examples/moodle/index.html) | [GitHub](https://github.com/Afonenko-Course-Tools/quarto-course-moodle/tree/demo-20261007-ru2/examples/questions) | Quarto для экспорта; Moodle для импорта |
-| Cloud: Метаданные задания с шагами и VM | [cloud](../extensions/cloud.qmd) | [Открыть](../examples/cloud/index.html) | [GitHub](https://github.com/Afonenko-Course-Tools/quarto-course-cloud/tree/demo-20261007-ru1/examples/course) | Quarto/CUE для модели; облачная среда отдельно |
-| Внешние ссылки: Переходы к документации Quarto | [reference-catalog](../extensions/reference-catalog.qmd) | [Открыть](../examples/external/index.html) | [GitHub](https://github.com/Afonenko-Course-Tools/quarto-reference-catalog/tree/demo-20261007-ru1/examples/external) | Quarto для рендера; сеть для внешних ссылок |
+| Модель и представление: Банк, работа и одна презентация | [course](../extensions/course.qmd) | [Открыть](../examples/core/index.html) | [GitHub](https://github.com/Afonenko-Course-Tools/quarto-course/tree/demo-20261008/examples/course) | Quarto и CUE; Chromium для проверки печати |
+| Составной сайт: Book и HTML/Reveal в общем сайте | [publisher](../extensions/publisher.qmd) | [Открыть](../examples/composition/index.html) | [GitHub](https://github.com/Afonenko-Course-Tools/quarto-project-publish/tree/demo-20261008/examples/course) | Quarto и Task для сценария группы |
+| Межпроектные ссылки: Переходы книги, лекций и практики | [reference-catalog](../extensions/reference-catalog.qmd) | [Открыть](../examples/qrc/index.html) | [GitHub](https://github.com/Afonenko-Course-Tools/quarto-reference-catalog/tree/demo-20261008/examples/course) | Quarto и Task |
+| Печатные работы: Раздатки и варианты PDF | [print](../extensions/print.qmd) | [Открыть](../examples/print/index.html) | [GitHub](https://github.com/Afonenko-Course-Tools/quarto-course-print/tree/demo-20261008/examples/paper) | Quarto/Pandoc/Typst для PDF |
+| PrairieLearn: Поставка Java-вопросов и локальные проверки | [prairielearn](../extensions/prairielearn.qmd) | [Открыть](../examples/prairielearn/index.html) | [GitHub](https://github.com/Afonenko-Course-Tools/quarto-course-prairielearn/tree/demo-20261008/examples/java-gradle) | Quarto, CUE; Java/Gradle для исполнения |
+| Moodle: HTML банка и XML вопросов | [moodle](../extensions/moodle.qmd) | [Открыть](../examples/moodle/index.html) | [GitHub](https://github.com/Afonenko-Course-Tools/quarto-course-moodle/tree/demo-20261008/examples/questions) | Quarto для экспорта; Moodle для импорта |
+| Cloud: Метаданные задания с шагами и VM | [cloud](../extensions/cloud.qmd) | [Открыть](../examples/cloud/index.html) | [GitHub](https://github.com/Afonenko-Course-Tools/quarto-course-cloud/tree/demo-20261008/examples/course) | Quarto/CUE для модели; облачная среда отдельно |
+| Внешние ссылки: Переходы к документации Quarto | [reference-catalog](../extensions/reference-catalog.qmd) | [Открыть](../examples/external/index.html) | [GitHub](https://github.com/Afonenko-Course-Tools/quarto-reference-catalog/tree/demo-20261008/examples/external) | Quarto для рендера; сеть для внешних ссылок |
 
 Для просмотра HTML достаточно браузера, PDF — программы просмотра PDF.
 Нужные версии расширений закреплены в README группы и её `BUILD.json`.

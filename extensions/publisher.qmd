@@ -7,7 +7,7 @@ Publisher собирает самостоятельные Quarto-проекты 
 ## Установка и подключение
 
 ```sh
-quarto add Afonenko-Course-Tools/quarto-project-publish@v4.0.1 --no-prompt
+quarto add Afonenko-Course-Tools/quarto-project-publish@v5.0.0 --no-prompt
 ```
 
 В корне подключите `course-site/entrypoints/pre.ts` и `post.ts`. В каждой части последним post-hook подключите корневой `collect.ts`. Полная конфигурация и правильные относительные пути приведены в руководстве по составной сборке.

@@ -1,0 +1,52 @@
+---
+title: Версии и спецификации владельцев
+---
+
+Руководство объясняет авторские действия. Нормативные правила принадлежат
+владельцам инструментов и читаются на том же Git ref, что установленный код.
+
+## Выпущенные версии {#guide-status}
+
+Руководство описывает модель Core `v4.0.0` и выпуски потребителей из таблицы
+ниже. В `Taskfile.yml` закреплены этот bundle и восемь готовых групп
+`demo-20261008` семи производителей. Архивные SHA-256, полный BUILD и hashes
+каждого файла проверяются по `tests/ready-assets.json`; producer source каждой
+группы соответствует своему tool tag на том же Git SHA.
+
+`current` означает правила выбранного ref; `accepted-next` — принятое изменение;
+`implementation-in-progress` — внедрение в рабочей ветке; `unreleased` — код
+после последнего опубликованного выпуска. Исторический план и старый успешный
+render не подтверждают текущий контракт или дерево.
+
+## Найдите владельца правила {#owner-contracts}
+
+| Правило | Владелец и актуальный индекс | Последний закреплённый выпуск |
+| --- | --- | --- |
+| Банк, роли, решения, работы, время, student/full, Body | [Core / Presentation / Navigation](https://github.com/Afonenko-Course-Tools/quarto-course/blob/v4.0.0/spec/index.md) | [Core v4.0.0](https://github.com/Afonenko-Course-Tools/quarto-course/tree/v4.0.0) |
+| Составной native сайт и current outputs | [Publisher](https://github.com/Afonenko-Course-Tools/quarto-project-publish/blob/v5.0.0/spec/index.md) | [v5.0.0](https://github.com/Afonenko-Course-Tools/quarto-project-publish/tree/v5.0.0) |
+| Адресные ссылки и каталог целей | [QRC](https://github.com/Afonenko-Course-Tools/quarto-reference-catalog/blob/v3.0.0/spec/index.md) | [v3.0.0](https://github.com/Afonenko-Course-Tools/quarto-reference-catalog/tree/v3.0.0) |
+| Participant PDF и guards публичного пакета | [Print](https://github.com/Afonenko-Course-Tools/quarto-course-print/blob/v0.3.0/spec/index.md) | [v0.3.0](https://github.com/Afonenko-Course-Tools/quarto-course-print/tree/v0.3.0) |
+| Teacher XML manual/single-choice | [Moodle](https://github.com/Afonenko-Course-Tools/quarto-course-moodle/blob/v0.3.0/spec/index.md) | [v0.3.0](https://github.com/Afonenko-Course-Tools/quarto-course-moodle/tree/v0.3.0) |
+| Внешняя проверка, bindings и PL-поставка | [PrairieLearn](https://github.com/Afonenko-Course-Tools/quarto-course-prairielearn/blob/v3.0.0/spec/index.md) | [v3.0.0](https://github.com/Afonenko-Course-Tools/quarto-course-prairielearn/tree/v3.0.0) |
+| VM, шаги и действия Cloud | [Cloud](https://github.com/Afonenko-Course-Tools/quarto-course-cloud/blob/v3.0.0/spec/index.md) | [v3.0.0](https://github.com/Afonenko-Course-Tools/quarto-course-cloud/tree/v3.0.0) |
+| Явные материалы и безопасные ZIP | [Download](https://github.com/Afonenko-Course-Tools/quarto-project-download/blob/v2.0.0/spec/index.md) | [v2.0.0](https://github.com/Afonenko-Course-Tools/quarto-project-download/tree/v2.0.0) |
+
+Индексы в таблице относятся к указанным выпускам. Изменения `main` после них
+могут быть unreleased; проверяйте поведение по точному тегу своей установки.
+Минимальная текущая линия — Quarto 1.11.5 и CUE 0.17.1.
+
+## Сопоставьте руководство и результат {#contract-evidence}
+
+Модель определена в действующих тематических спецификациях Core:
+[банк, решения и работы](https://github.com/Afonenko-Course-Tools/quarto-course/blob/v4.0.0/spec/learning-elements.md),
+[видимость](https://github.com/Afonenko-Course-Tools/quarto-course/blob/v4.0.0/spec/visibility.md),
+[Body](https://github.com/Afonenko-Course-Tools/quarto-course/blob/v4.0.0/docs/body-export.md) и
+[NativeRun](https://github.com/Afonenko-Course-Tools/quarto-course/blob/v4.0.0/docs/native-run.md).
+Индекс также связывает Presentation и diagnostics. Адаптер определяет свои
+поля и поддерживаемые формы; README и пример объясняют запуск.
+
+Готовая группа в [каталоге](../catalog/index.qmd) берётся из неизменяемого
+producer Release. Её `BUILD.json` сообщает commit, зависимости и чистоту source;
+проверка архива и файлов связывает её с закреплённым выпуском. Локальное
+исполнение Java, создание XML/PDF и импорт в реальную платформу — разные
+результаты. Не переносите подтверждение одного на остальные.

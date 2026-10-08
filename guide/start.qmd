@@ -2,7 +2,7 @@
 title: Первый документ
 ---
 
-Установите Quarto и создайте папку курса. Для первой страницы достаточно
+Установите Quarto не ниже **1.11.5** и создайте папку курса. Для первой страницы достаточно
 файла `index.qmd`:
 
 ````qmd
@@ -51,7 +51,7 @@ website:
 Core, Presentation и Navigation устанавливаются одним выпуском:
 
 ```sh
-quarto add Afonenko-Course-Tools/quarto-course@v3.0.2 --no-prompt
+quarto add Afonenko-Course-Tools/quarto-course@v4.0.0 --no-prompt
 ```
 
 Команда помещает компоненты в `_extensions/Afonenko-Course-Tools/`.
@@ -61,9 +61,12 @@ quarto add Afonenko-Course-Tools/quarto-course@v3.0.2 --no-prompt
 filters: [course-core, course-presentation]
 ```
 
+Команда устанавливает банковскую модель [Core 4.0.0](specifications.qmd).
+Обычный документ ниже не включает банк.
+
 Core проверяет указанные учебные метаданные. Presentation оформляет учебные
-блоки и раскрывает подсказки и решения. Для обычного рендера `course.id`,
-`course-role` и `difficulty` не обязательны. Presentation можно подключить
+блоки и раскрывает подсказки и решения. Вне `exercise-bank: true` обычные `exr`, `exm`, `sol` сохраняют Quarto-смысл;
+`course.id`, банковские difficulty/time и политика условия для них не нужны. Presentation можно подключить
 самостоятельно: `filters: [course-presentation]`.
 
 ```sh

@@ -17,6 +17,9 @@ jobs:
       - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # node runtime
         with:
           node-version: '22'
+      - uses: cue-lang/setup-cue@b0e30e540a2dae47304ebf16586a5b2db023b61c # v2.0.0
+        with:
+          version: v0.17.1
       - name: Installed documentation and ready demos
         run: |
           cd "$RUNNER_TEMP"

@@ -7,7 +7,7 @@ Moodle экспортирует поддерживаемые вопросы из
 ## Установка и подключение
 
 ```sh
-quarto add Afonenko-Course-Tools/quarto-course-moodle@v0.2.1 --no-prompt
+quarto add Afonenko-Course-Tools/quarto-course-moodle@v0.3.0 --no-prompt
 ```
 
 Сохраните JSON настроек как `binding.json`. `defaultGrade` задаёт положительную оценку вопроса, `shuffle` — перемешивание вариантов. XML записывается после успешной проверки и преобразования содержимого Pandoc.
