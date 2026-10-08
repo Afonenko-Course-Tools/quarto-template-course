@@ -441,10 +441,10 @@ lang: ru
 <section id="добавьте-учебные-средства" class="level2">
 <h2 class="anchored" data-anchor-id="добавьте-учебные-средства">Добавьте учебные средства</h2>
 <p>Core, Presentation и Navigation устанавливаются одним выпуском:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">quarto</span> add Afonenko-Course-Tools/quarto-course@v4.0.0 <span class="at">--no-prompt</span></span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">quarto</span> add Afonenko-Course-Tools/quarto-course@v4.0.1 <span class="at">--no-prompt</span></span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Команда помещает компоненты в <code>_extensions/Afonenko-Course-Tools/</code>. Установка делает их доступными; нужное поведение включается в конфигурации:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">filters</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="at">course-core</span><span class="kw">,</span><span class="at"> course-presentation</span><span class="kw">]</span></span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
-<p>Команда устанавливает банковскую модель <a href="../guide/specifications.html">Core 4.0.0</a>. Обычный документ ниже не включает банк.</p>
+<p>Команда устанавливает банковскую модель <a href="../guide/specifications.html">Core 4.0.1</a>. Обычный документ ниже не включает банк.</p>
 <p>Core проверяет указанные учебные метаданные. Presentation оформляет учебные блоки и раскрывает подсказки и решения. Вне <code>exercise-bank: true</code> обычные <code>exr</code>, <code>exm</code>, <code>sol</code> сохраняют Quarto-смысл; <code>course.id</code>, банковские difficulty/time и политика условия для них не нужны. Presentation можно подключить самостоятельно: <code>filters: [course-presentation]</code>.</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="ex">quarto</span> render <span class="at">--fail-if-warnings</span></span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Это штатная сборка Quarto с отказом при предупреждениях. Для постоянного режима можно задать <code>fail-if-warnings: true</code> в конфигурации проекта. У самостоятельных подпроектов настройка задаётся отдельно — подробнее в <a href="../guide/composition.html">составной сборке</a>.</p>
@@ -972,7 +972,7 @@ lang: ru
 <span id="cb7-51"><a href="#cb7-51" aria-hidden="true" tabindex="-1"></a>Core, Presentation и Navigation устанавливаются одним выпуском:</span>
 <span id="cb7-52"><a href="#cb7-52" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-53"><a href="#cb7-53" aria-hidden="true" tabindex="-1"></a><span class="in">```sh</span></span>
-<span id="cb7-54"><a href="#cb7-54" aria-hidden="true" tabindex="-1"></a><span class="ex">quarto</span> add Afonenko-Course-Tools/quarto-course@v4.0.0 <span class="at">--no-prompt</span></span>
+<span id="cb7-54"><a href="#cb7-54" aria-hidden="true" tabindex="-1"></a><span class="ex">quarto</span> add Afonenko-Course-Tools/quarto-course@v4.0.1 <span class="at">--no-prompt</span></span>
 <span id="cb7-55"><a href="#cb7-55" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb7-56"><a href="#cb7-56" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-57"><a href="#cb7-57" aria-hidden="true" tabindex="-1"></a>Команда помещает компоненты в <span class="in">`_extensions/Afonenko-Course-Tools/`</span>.</span>
@@ -982,7 +982,7 @@ lang: ru
 <span id="cb7-61"><a href="#cb7-61" aria-hidden="true" tabindex="-1"></a><span class="fu">filters</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="at">course-core</span><span class="kw">,</span><span class="at"> course-presentation</span><span class="kw">]</span></span>
 <span id="cb7-62"><a href="#cb7-62" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb7-63"><a href="#cb7-63" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-64"><a href="#cb7-64" aria-hidden="true" tabindex="-1"></a>Команда устанавливает банковскую модель <span class="co">[</span><span class="ot">Core 4.0.0</span><span class="co">](specifications.qmd)</span>.</span>
+<span id="cb7-64"><a href="#cb7-64" aria-hidden="true" tabindex="-1"></a>Команда устанавливает банковскую модель <span class="co">[</span><span class="ot">Core 4.0.1</span><span class="co">](specifications.qmd)</span>.</span>
 <span id="cb7-65"><a href="#cb7-65" aria-hidden="true" tabindex="-1"></a>Обычный документ ниже не включает банк.</span>
 <span id="cb7-66"><a href="#cb7-66" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-67"><a href="#cb7-67" aria-hidden="true" tabindex="-1"></a>Core проверяет указанные учебные метаданные. Presentation оформляет учебные</span>

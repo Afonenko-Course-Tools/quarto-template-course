@@ -416,7 +416,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Руководство объясняет авторские действия. Нормативные правила принадлежат владельцам инструментов и читаются на том же Git ref, что установленный код.</p>
 <section id="guide-status" class="level2">
 <h2 class="anchored" data-anchor-id="guide-status">Выпущенные версии</h2>
-<p>Руководство описывает модель Core <code>v4.0.0</code> и выпуски потребителей из таблицы ниже. В <code>Taskfile.yml</code> закреплены этот bundle и восемь готовых групп <code>demo-20261008</code> семи производителей. Архивные SHA-256, полный BUILD и hashes каждого файла проверяются по <code>tests/ready-assets.json</code>; producer source каждой группы соответствует своему tool tag на том же Git SHA.</p>
+<p>Руководство закрепляет Core <code>v4.0.1</code> и версии потребителей из таблицы ниже. Авторская модель, схемы и Body API сохраняют контракт Core 4.0.0. В <code>Taskfile.yml</code> Core закреплён на <code>demo-20261008-1</code>, остальные семь групп используют <code>demo-20261008</code>. Архивные SHA-256, полный BUILD и hashes каждого файла проверяются по <code>tests/ready-assets.json</code>; producer source каждой группы соответствует своему tool tag на том же Git SHA.</p>
 <p><code>current</code> означает правила выбранного ref; <code>accepted-next</code> — принятое изменение; <code>implementation-in-progress</code> — внедрение в рабочей ветке; <code>unreleased</code> — код после последнего опубликованного выпуска. Исторический план и старый успешный render не подтверждают текущий контракт или дерево.</p>
 </section>
 <section id="owner-contracts" class="level2">
@@ -426,14 +426,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <tr class="header">
 <th>Правило</th>
 <th>Владелец и актуальный индекс</th>
-<th>Последний закреплённый выпуск</th>
+<th>Закреплённая версия</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
 <td>Банк, роли, решения, работы, время, student/full, Body</td>
-<td><a href="https://github.com/Afonenko-Course-Tools/quarto-course/blob/v4.0.0/spec/index.md">Core / Presentation / Navigation</a></td>
-<td><a href="https://github.com/Afonenko-Course-Tools/quarto-course/tree/v4.0.0">Core v4.0.0</a></td>
+<td><a href="https://github.com/Afonenko-Course-Tools/quarto-course/blob/v4.0.1/spec/index.md">Core / Presentation / Navigation</a></td>
+<td><a href="https://github.com/Afonenko-Course-Tools/quarto-course/tree/v4.0.1">Core v4.0.1</a></td>
 </tr>
 <tr class="even">
 <td>Составной native сайт и current outputs</td>
@@ -476,7 +476,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="contract-evidence" class="level2">
 <h2 class="anchored" data-anchor-id="contract-evidence">Сопоставьте руководство и результат</h2>
-<p>Модель определена в действующих тематических спецификациях Core: <a href="https://github.com/Afonenko-Course-Tools/quarto-course/blob/v4.0.0/spec/learning-elements.md">банк, решения и работы</a>, <a href="https://github.com/Afonenko-Course-Tools/quarto-course/blob/v4.0.0/spec/visibility.md">видимость</a>, <a href="https://github.com/Afonenko-Course-Tools/quarto-course/blob/v4.0.0/docs/body-export.md">Body</a> и <a href="https://github.com/Afonenko-Course-Tools/quarto-course/blob/v4.0.0/docs/native-run.md">NativeRun</a>. Индекс также связывает Presentation и diagnostics. Адаптер определяет свои поля и поддерживаемые формы; README и пример объясняют запуск.</p>
+<p>Модель определена в действующих тематических спецификациях Core: <a href="https://github.com/Afonenko-Course-Tools/quarto-course/blob/v4.0.1/spec/learning-elements.md">банк, решения и работы</a>, <a href="https://github.com/Afonenko-Course-Tools/quarto-course/blob/v4.0.1/spec/visibility.md">видимость</a>, <a href="https://github.com/Afonenko-Course-Tools/quarto-course/blob/v4.0.1/docs/body-export.md">Body</a> и <a href="https://github.com/Afonenko-Course-Tools/quarto-course/blob/v4.0.1/docs/native-run.md">NativeRun</a>. Индекс также связывает Presentation и diagnostics. Адаптер определяет свои поля и поддерживаемые формы; README и пример объясняют запуск.</p>
 <p>Готовая группа в <a href="../catalog/index.html">каталоге</a> берётся из неизменяемого producer Release. Её <code>BUILD.json</code> сообщает commit, зависимости и чистоту source; проверка архива и файлов связывает её с закреплённым выпуском. Локальное исполнение Java, создание XML/PDF и импорт в реальную платформу — разные результаты. Не переносите подтверждение одного на остальные.</p>
 
 
@@ -957,49 +957,50 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="fu">## Выпущенные версии {#guide-status}</span></span>
 <span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>Руководство описывает модель Core <span class="in">`v4.0.0`</span> и выпуски потребителей из таблицы</span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>ниже. В <span class="in">`Taskfile.yml`</span> закреплены этот bundle и восемь готовых групп</span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="in">`demo-20261008`</span> семи производителей. Архивные SHA-256, полный BUILD и hashes</span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>каждого файла проверяются по <span class="in">`tests/ready-assets.json`</span>; producer source каждой</span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>группы соответствует своему tool tag на том же Git SHA.</span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="in">`current`</span> означает правила выбранного ref; <span class="in">`accepted-next`</span> — принятое изменение;</span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="in">`implementation-in-progress`</span> — внедрение в рабочей ветке; <span class="in">`unreleased`</span> — код</span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>после последнего опубликованного выпуска. Исторический план и старый успешный</span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>render не подтверждают текущий контракт или дерево.</span>
-<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a><span class="fu">## Найдите владельца правила {#owner-contracts}</span></span>
-<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Правило <span class="pp">|</span> Владелец и актуальный индекс <span class="pp">|</span> Последний закреплённый выпуск <span class="pp">|</span></span>
-<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a><span class="pp">| ---</span> <span class="pp">| ---</span> <span class="pp">| ---</span> <span class="pp">|</span></span>
-<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Банк, роли, решения, работы, время, student/full, Body <span class="pp">|</span> <span class="co">[</span><span class="ot">Core / Presentation / Navigation</span><span class="co">](https://github.com/Afonenko-Course-Tools/quarto-course/blob/v4.0.0/spec/index.md)</span> <span class="pp">|</span> <span class="co">[</span><span class="ot">Core v4.0.0</span><span class="co">](https://github.com/Afonenko-Course-Tools/quarto-course/tree/v4.0.0)</span> <span class="pp">|</span></span>
-<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Составной native сайт и current outputs <span class="pp">|</span> <span class="co">[</span><span class="ot">Publisher</span><span class="co">](https://github.com/Afonenko-Course-Tools/quarto-project-publish/blob/v5.0.0/spec/index.md)</span> <span class="pp">|</span> <span class="co">[</span><span class="ot">v5.0.0</span><span class="co">](https://github.com/Afonenko-Course-Tools/quarto-project-publish/tree/v5.0.0)</span> <span class="pp">|</span></span>
-<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Адресные ссылки и каталог целей <span class="pp">|</span> <span class="co">[</span><span class="ot">QRC</span><span class="co">](https://github.com/Afonenko-Course-Tools/quarto-reference-catalog/blob/v3.0.0/spec/index.md)</span> <span class="pp">|</span> <span class="co">[</span><span class="ot">v3.0.0</span><span class="co">](https://github.com/Afonenko-Course-Tools/quarto-reference-catalog/tree/v3.0.0)</span> <span class="pp">|</span></span>
-<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Participant PDF и guards публичного пакета <span class="pp">|</span> <span class="co">[</span><span class="ot">Print</span><span class="co">](https://github.com/Afonenko-Course-Tools/quarto-course-print/blob/v0.3.0/spec/index.md)</span> <span class="pp">|</span> <span class="co">[</span><span class="ot">v0.3.0</span><span class="co">](https://github.com/Afonenko-Course-Tools/quarto-course-print/tree/v0.3.0)</span> <span class="pp">|</span></span>
-<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Teacher XML manual/single-choice <span class="pp">|</span> <span class="co">[</span><span class="ot">Moodle</span><span class="co">](https://github.com/Afonenko-Course-Tools/quarto-course-moodle/blob/v0.3.0/spec/index.md)</span> <span class="pp">|</span> <span class="co">[</span><span class="ot">v0.3.0</span><span class="co">](https://github.com/Afonenko-Course-Tools/quarto-course-moodle/tree/v0.3.0)</span> <span class="pp">|</span></span>
-<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Внешняя проверка, bindings и PL-поставка <span class="pp">|</span> <span class="co">[</span><span class="ot">PrairieLearn</span><span class="co">](https://github.com/Afonenko-Course-Tools/quarto-course-prairielearn/blob/v3.0.0/spec/index.md)</span> <span class="pp">|</span> <span class="co">[</span><span class="ot">v3.0.0</span><span class="co">](https://github.com/Afonenko-Course-Tools/quarto-course-prairielearn/tree/v3.0.0)</span> <span class="pp">|</span></span>
-<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> VM, шаги и действия Cloud <span class="pp">|</span> <span class="co">[</span><span class="ot">Cloud</span><span class="co">](https://github.com/Afonenko-Course-Tools/quarto-course-cloud/blob/v3.0.0/spec/index.md)</span> <span class="pp">|</span> <span class="co">[</span><span class="ot">v3.0.0</span><span class="co">](https://github.com/Afonenko-Course-Tools/quarto-course-cloud/tree/v3.0.0)</span> <span class="pp">|</span></span>
-<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Явные материалы и безопасные ZIP <span class="pp">|</span> <span class="co">[</span><span class="ot">Download</span><span class="co">](https://github.com/Afonenko-Course-Tools/quarto-project-download/blob/v2.0.0/spec/index.md)</span> <span class="pp">|</span> <span class="co">[</span><span class="ot">v2.0.0</span><span class="co">](https://github.com/Afonenko-Course-Tools/quarto-project-download/tree/v2.0.0)</span> <span class="pp">|</span></span>
-<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a>Индексы в таблице относятся к указанным выпускам. Изменения <span class="in">`main`</span> после них</span>
-<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a>могут быть unreleased; проверяйте поведение по точному тегу своей установки.</span>
-<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a>Минимальная текущая линия — Quarto 1.11.5 и CUE 0.17.1.</span>
-<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a><span class="fu">## Сопоставьте руководство и результат {#contract-evidence}</span></span>
-<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a>Модель определена в действующих тематических спецификациях Core:</span>
-<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">банк, решения и работы</span><span class="co">](https://github.com/Afonenko-Course-Tools/quarto-course/blob/v4.0.0/spec/learning-elements.md)</span>,</span>
-<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">видимость</span><span class="co">](https://github.com/Afonenko-Course-Tools/quarto-course/blob/v4.0.0/spec/visibility.md)</span>,</span>
-<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">Body</span><span class="co">](https://github.com/Afonenko-Course-Tools/quarto-course/blob/v4.0.0/docs/body-export.md)</span> и</span>
-<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">NativeRun</span><span class="co">](https://github.com/Afonenko-Course-Tools/quarto-course/blob/v4.0.0/docs/native-run.md)</span>.</span>
-<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a>Индекс также связывает Presentation и diagnostics. Адаптер определяет свои</span>
-<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a>поля и поддерживаемые формы; README и пример объясняют запуск.</span>
-<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a>Готовая группа в <span class="co">[</span><span class="ot">каталоге</span><span class="co">](../catalog/index.qmd)</span> берётся из неизменяемого</span>
-<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a>producer Release. Её <span class="in">`BUILD.json`</span> сообщает commit, зависимости и чистоту source;</span>
-<span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a>проверка архива и файлов связывает её с закреплённым выпуском. Локальное</span>
-<span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a>исполнение Java, создание XML/PDF и импорт в реальную платформу — разные</span>
-<span id="cb1-52"><a href="#cb1-52" aria-hidden="true" tabindex="-1"></a>результаты. Не переносите подтверждение одного на остальные.</span></code></pre></div><button title="Скопировать текст" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>Руководство закрепляет Core <span class="in">`v4.0.1`</span> и версии потребителей из таблицы ниже.</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>Авторская модель, схемы и Body API сохраняют контракт Core 4.0.0.</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>В <span class="in">`Taskfile.yml`</span> Core закреплён на <span class="in">`demo-20261008-1`</span>, остальные семь</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>групп используют <span class="in">`demo-20261008`</span>. Архивные SHA-256, полный BUILD и hashes</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>каждого файла проверяются по <span class="in">`tests/ready-assets.json`</span>; producer source каждой</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>группы соответствует своему tool tag на том же Git SHA.</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="in">`current`</span> означает правила выбранного ref; <span class="in">`accepted-next`</span> — принятое изменение;</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="in">`implementation-in-progress`</span> — внедрение в рабочей ветке; <span class="in">`unreleased`</span> — код</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>после последнего опубликованного выпуска. Исторический план и старый успешный</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>render не подтверждают текущий контракт или дерево.</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a><span class="fu">## Найдите владельца правила {#owner-contracts}</span></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Правило <span class="pp">|</span> Владелец и актуальный индекс <span class="pp">|</span> Закреплённая версия <span class="pp">|</span></span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a><span class="pp">| ---</span> <span class="pp">| ---</span> <span class="pp">| ---</span> <span class="pp">|</span></span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Банк, роли, решения, работы, время, student/full, Body <span class="pp">|</span> <span class="co">[</span><span class="ot">Core / Presentation / Navigation</span><span class="co">](https://github.com/Afonenko-Course-Tools/quarto-course/blob/v4.0.1/spec/index.md)</span> <span class="pp">|</span> <span class="co">[</span><span class="ot">Core v4.0.1</span><span class="co">](https://github.com/Afonenko-Course-Tools/quarto-course/tree/v4.0.1)</span> <span class="pp">|</span></span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Составной native сайт и current outputs <span class="pp">|</span> <span class="co">[</span><span class="ot">Publisher</span><span class="co">](https://github.com/Afonenko-Course-Tools/quarto-project-publish/blob/v5.0.0/spec/index.md)</span> <span class="pp">|</span> <span class="co">[</span><span class="ot">v5.0.0</span><span class="co">](https://github.com/Afonenko-Course-Tools/quarto-project-publish/tree/v5.0.0)</span> <span class="pp">|</span></span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Адресные ссылки и каталог целей <span class="pp">|</span> <span class="co">[</span><span class="ot">QRC</span><span class="co">](https://github.com/Afonenko-Course-Tools/quarto-reference-catalog/blob/v3.0.0/spec/index.md)</span> <span class="pp">|</span> <span class="co">[</span><span class="ot">v3.0.0</span><span class="co">](https://github.com/Afonenko-Course-Tools/quarto-reference-catalog/tree/v3.0.0)</span> <span class="pp">|</span></span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Participant PDF и guards публичного пакета <span class="pp">|</span> <span class="co">[</span><span class="ot">Print</span><span class="co">](https://github.com/Afonenko-Course-Tools/quarto-course-print/blob/v0.3.0/spec/index.md)</span> <span class="pp">|</span> <span class="co">[</span><span class="ot">v0.3.0</span><span class="co">](https://github.com/Afonenko-Course-Tools/quarto-course-print/tree/v0.3.0)</span> <span class="pp">|</span></span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Teacher XML manual/single-choice <span class="pp">|</span> <span class="co">[</span><span class="ot">Moodle</span><span class="co">](https://github.com/Afonenko-Course-Tools/quarto-course-moodle/blob/v0.3.0/spec/index.md)</span> <span class="pp">|</span> <span class="co">[</span><span class="ot">v0.3.0</span><span class="co">](https://github.com/Afonenko-Course-Tools/quarto-course-moodle/tree/v0.3.0)</span> <span class="pp">|</span></span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Внешняя проверка, bindings и PL-поставка <span class="pp">|</span> <span class="co">[</span><span class="ot">PrairieLearn</span><span class="co">](https://github.com/Afonenko-Course-Tools/quarto-course-prairielearn/blob/v3.0.0/spec/index.md)</span> <span class="pp">|</span> <span class="co">[</span><span class="ot">v3.0.0</span><span class="co">](https://github.com/Afonenko-Course-Tools/quarto-course-prairielearn/tree/v3.0.0)</span> <span class="pp">|</span></span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> VM, шаги и действия Cloud <span class="pp">|</span> <span class="co">[</span><span class="ot">Cloud</span><span class="co">](https://github.com/Afonenko-Course-Tools/quarto-course-cloud/blob/v3.0.0/spec/index.md)</span> <span class="pp">|</span> <span class="co">[</span><span class="ot">v3.0.0</span><span class="co">](https://github.com/Afonenko-Course-Tools/quarto-course-cloud/tree/v3.0.0)</span> <span class="pp">|</span></span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Явные материалы и безопасные ZIP <span class="pp">|</span> <span class="co">[</span><span class="ot">Download</span><span class="co">](https://github.com/Afonenko-Course-Tools/quarto-project-download/blob/v2.0.0/spec/index.md)</span> <span class="pp">|</span> <span class="co">[</span><span class="ot">v2.0.0</span><span class="co">](https://github.com/Afonenko-Course-Tools/quarto-project-download/tree/v2.0.0)</span> <span class="pp">|</span></span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a>Индексы в таблице относятся к указанным выпускам. Изменения <span class="in">`main`</span> после них</span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a>могут быть unreleased; проверяйте поведение по точному тегу своей установки.</span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a>Минимальная текущая линия — Quarto 1.11.5 и CUE 0.17.1.</span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a><span class="fu">## Сопоставьте руководство и результат {#contract-evidence}</span></span>
+<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a>Модель определена в действующих тематических спецификациях Core:</span>
+<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">банк, решения и работы</span><span class="co">](https://github.com/Afonenko-Course-Tools/quarto-course/blob/v4.0.1/spec/learning-elements.md)</span>,</span>
+<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">видимость</span><span class="co">](https://github.com/Afonenko-Course-Tools/quarto-course/blob/v4.0.1/spec/visibility.md)</span>,</span>
+<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">Body</span><span class="co">](https://github.com/Afonenko-Course-Tools/quarto-course/blob/v4.0.1/docs/body-export.md)</span> и</span>
+<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">NativeRun</span><span class="co">](https://github.com/Afonenko-Course-Tools/quarto-course/blob/v4.0.1/docs/native-run.md)</span>.</span>
+<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a>Индекс также связывает Presentation и diagnostics. Адаптер определяет свои</span>
+<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a>поля и поддерживаемые формы; README и пример объясняют запуск.</span>
+<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a>Готовая группа в <span class="co">[</span><span class="ot">каталоге</span><span class="co">](../catalog/index.qmd)</span> берётся из неизменяемого</span>
+<span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a>producer Release. Её <span class="in">`BUILD.json`</span> сообщает commit, зависимости и чистоту source;</span>
+<span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a>проверка архива и файлов связывает её с закреплённым выпуском. Локальное</span>
+<span id="cb1-52"><a href="#cb1-52" aria-hidden="true" tabindex="-1"></a>исполнение Java, создание XML/PDF и импорт в реальную платформу — разные</span>
+<span id="cb1-53"><a href="#cb1-53" aria-hidden="true" tabindex="-1"></a>результаты. Не переносите подтверждение одного на остальные.</span></code></pre></div><button title="Скопировать текст" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 

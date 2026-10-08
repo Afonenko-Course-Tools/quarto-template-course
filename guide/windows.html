@@ -422,7 +422,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="windows-course-fixes" class="level2">
 <h2 class="anchored" data-anchor-id="windows-course-fixes">Сравнение путей и временный JSON CUE</h2>
-<p>В Core <strong>4.0.0</strong> сравнения NativeRun нормализуют разделители Windows путей, сохраняя исходный путь для IO. Временный JSON CUE создаётся внутри projectRoot и удаляется после проверки. Проект на другом диске относительно TEMP допустим после этого патча: например, курс в <code>D:\Cybersecurity</code>, TEMP на <code>C:</code>. Проверка временного файла не должна объявлять его выходом за банк только из-за другого диска. Исправление входит в закреплённый <code>v4.0.0</code>; фактическое исполнение конкретного проекта в Windows проверяйте в своей сессии.</p>
+<p>В Core сравнения NativeRun нормализуют разделители Windows путей, сохраняя исходный путь для IO. Временный JSON CUE создаётся внутри projectRoot и удаляется после проверки. Проект на другом диске относительно TEMP допустим после этого патча: например, курс в <code>D:\Cybersecurity</code>, TEMP на <code>C:</code>. Проверка временного файла не должна объявлять его выходом за банк только из-за другого диска. Исправление сохраняется в закреплённом <code>v4.0.1</code>; фактическое исполнение конкретного проекта в Windows проверяйте в своей сессии.</p>
 <p>Если команда отказала, сохраните имя средства, код завершения и исходные stdout/stderr. Сравните фактическую версию Core с <a href="../reference/diagnostics.html">его диагностикой</a>. Позиция временного JSON не является строкой исходного QMD.</p>
 </section>
 <section id="windows-recover-encode" class="level2">
@@ -926,12 +926,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a><span class="fu">## Сравнение путей и временный JSON CUE {#windows-course-fixes}</span></span>
 <span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a>В Core **4.0.0** сравнения NativeRun нормализуют разделители Windows путей,</span>
+<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a>В Core сравнения NativeRun нормализуют разделители Windows путей,</span>
 <span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a>сохраняя исходный путь для IO. Временный JSON CUE создаётся внутри projectRoot</span>
 <span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a>и удаляется после проверки. Проект на другом диске относительно TEMP допустим после этого</span>
 <span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a>патча: например, курс в <span class="in">`D:\Cybersecurity`</span>, TEMP на <span class="in">`C:`</span>. Проверка временного</span>
 <span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a>файла не должна объявлять его выходом за банк только из-за другого диска.</span>
-<span id="cb3-31"><a href="#cb3-31" aria-hidden="true" tabindex="-1"></a>Исправление входит в закреплённый <span class="in">`v4.0.0`</span>; фактическое исполнение конкретного</span>
+<span id="cb3-31"><a href="#cb3-31" aria-hidden="true" tabindex="-1"></a>Исправление сохраняется в закреплённом <span class="in">`v4.0.1`</span>; фактическое исполнение конкретного</span>
 <span id="cb3-32"><a href="#cb3-32" aria-hidden="true" tabindex="-1"></a>проекта в Windows проверяйте в своей сессии.</span>
 <span id="cb3-33"><a href="#cb3-33" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-34"><a href="#cb3-34" aria-hidden="true" tabindex="-1"></a>Если команда отказала, сохраните имя средства, код завершения и исходные</span>

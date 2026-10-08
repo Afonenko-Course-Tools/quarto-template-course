@@ -1,9 +1,9 @@
 {
   "producer": "Afonenko-Course-Tools/quarto-course",
-  "commit": "d58494171e3020957b64ed229cbc8537751e3beb",
+  "commit": "a9a439bd6e6498806d4d4943efd71232e70170be",
   "sourceDirty": false,
   "dependencies": {
-    "quarto-course": "v4.0.0",
+    "quarto-course": "v4.0.1",
     "quarto": "1.11.5"
   },
   "projection": "full",
