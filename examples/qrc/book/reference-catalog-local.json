@@ -1,0 +1,291 @@
+{
+  "schema": "quarto-reference-catalog",
+  "generator": {
+    "quarto": "1.11.5"
+  },
+  "targets": {
+    "book:alg-demo": {
+      "namespace": "book",
+      "id": "alg-demo",
+      "page": "topics/objects.html",
+      "fragment": "alg-demo",
+      "labelHtml": "alg.&nbsp;<span>1.1</span>",
+      "numberHtml": "<span>1.1</span>",
+      "label": "alg. 1.1",
+      "number": "1.1"
+    },
+    "book:cau-demo": {
+      "namespace": "book",
+      "id": "cau-demo",
+      "page": "topics/objects.html",
+      "fragment": "cau-demo",
+      "labelHtml": "Caution&nbsp;<span>1.1</span>",
+      "numberHtml": "<span>1.1</span>",
+      "label": "Caution 1.1",
+      "number": "1.1"
+    },
+    "book:cnj-demo": {
+      "namespace": "book",
+      "id": "cnj-demo",
+      "page": "topics/objects.html",
+      "fragment": "cnj-demo",
+      "labelHtml": "Гипотеза&nbsp;<span>1.1</span>",
+      "numberHtml": "<span>1.1</span>",
+      "label": "Гипотеза 1.1",
+      "number": "1.1"
+    },
+    "book:cor-demo": {
+      "namespace": "book",
+      "id": "cor-demo",
+      "page": "topics/objects.html",
+      "fragment": "cor-demo",
+      "labelHtml": "Следствие&nbsp;<span>1.1</span>",
+      "numberHtml": "<span>1.1</span>",
+      "label": "Следствие 1.1",
+      "number": "1.1"
+    },
+    "book:def-demo": {
+      "namespace": "book",
+      "id": "def-demo",
+      "page": "topics/objects.html",
+      "fragment": "def-demo",
+      "labelHtml": "Определение&nbsp;<span>1.1</span>",
+      "numberHtml": "<span>1.1</span>",
+      "label": "Определение 1.1",
+      "number": "1.1"
+    },
+    "book:eq-appendix": {
+      "namespace": "book",
+      "id": "eq-appendix",
+      "page": "appendix.html",
+      "fragment": "eq-appendix",
+      "labelHtml": "Уравнение&nbsp;<span>A.1</span>",
+      "numberHtml": "<span>A.1</span>",
+      "label": "Уравнение A.1",
+      "number": "A.1"
+    },
+    "book:eq-demo": {
+      "namespace": "book",
+      "id": "eq-demo",
+      "page": "topics/objects.html",
+      "fragment": "eq-demo",
+      "labelHtml": "Уравнение&nbsp;<span>1.1</span>",
+      "numberHtml": "<span>1.1</span>",
+      "label": "Уравнение 1.1",
+      "number": "1.1"
+    },
+    "book:exm-demo": {
+      "namespace": "book",
+      "id": "exm-demo",
+      "page": "topics/objects.html",
+      "fragment": "exm-demo",
+      "labelHtml": "Пример&nbsp;<span>1.1</span>",
+      "numberHtml": "<span>1.1</span>",
+      "label": "Пример 1.1",
+      "number": "1.1"
+    },
+    "book:exr-demo": {
+      "namespace": "book",
+      "id": "exr-demo",
+      "page": "topics/objects.html",
+      "fragment": "exr-demo",
+      "labelHtml": "Упражнение&nbsp;<span>1.1</span>",
+      "numberHtml": "<span>1.1</span>",
+      "label": "Упражнение 1.1",
+      "number": "1.1"
+    },
+    "book:fig-demo": {
+      "namespace": "book",
+      "id": "fig-demo",
+      "page": "topics/objects.html",
+      "fragment": "fig-demo",
+      "labelHtml": "Рисунок&nbsp;<span>1.I</span>",
+      "numberHtml": "<span>1.I</span>",
+      "label": "Рисунок 1.I",
+      "number": "1.I"
+    },
+    "book:fig-left": {
+      "namespace": "book",
+      "id": "fig-left",
+      "page": "topics/objects.html",
+      "fragment": "fig-left",
+      "labelHtml": "Рисунок&nbsp;<span>1.II (a)</span>",
+      "numberHtml": "<span>1.II (a)</span>",
+      "label": "Рисунок 1.II (a)",
+      "number": "1.II (a)"
+    },
+    "book:fig-panel": {
+      "namespace": "book",
+      "id": "fig-panel",
+      "page": "topics/objects.html",
+      "fragment": "fig-panel",
+      "labelHtml": "Рисунок&nbsp;<span>1.II</span>",
+      "numberHtml": "<span>1.II</span>",
+      "label": "Рисунок 1.II",
+      "number": "1.II"
+    },
+    "book:fig-right": {
+      "namespace": "book",
+      "id": "fig-right",
+      "page": "topics/objects.html",
+      "fragment": "fig-right",
+      "labelHtml": "Рисунок&nbsp;<span>1.II (b)</span>",
+      "numberHtml": "<span>1.II (b)</span>",
+      "label": "Рисунок 1.II (b)",
+      "number": "1.II (b)"
+    },
+    "book:imp-demo": {
+      "namespace": "book",
+      "id": "imp-demo",
+      "page": "topics/objects.html",
+      "fragment": "imp-demo",
+      "labelHtml": "Important&nbsp;<span>1.1</span>",
+      "numberHtml": "<span>1.1</span>",
+      "label": "Important 1.1",
+      "number": "1.1"
+    },
+    "book:lem-demo": {
+      "namespace": "book",
+      "id": "lem-demo",
+      "page": "topics/objects.html",
+      "fragment": "lem-demo",
+      "labelHtml": "Лемма&nbsp;<span>1.1</span>",
+      "numberHtml": "<span>1.1</span>",
+      "label": "Лемма 1.1",
+      "number": "1.1"
+    },
+    "book:lst-demo": {
+      "namespace": "book",
+      "id": "lst-demo",
+      "page": "topics/objects.html",
+      "fragment": "lst-demo",
+      "labelHtml": "Список&nbsp;<span>1.1</span>",
+      "numberHtml": "<span>1.1</span>",
+      "label": "Список 1.1",
+      "number": "1.1"
+    },
+    "book:nte-demo": {
+      "namespace": "book",
+      "id": "nte-demo",
+      "page": "topics/objects.html",
+      "fragment": "nte-demo",
+      "labelHtml": "Note&nbsp;<span>1.1</span>",
+      "numberHtml": "<span>1.1</span>",
+      "label": "Note 1.1",
+      "number": "1.1"
+    },
+    "book:prp-demo": {
+      "namespace": "book",
+      "id": "prp-demo",
+      "page": "topics/objects.html",
+      "fragment": "prp-demo",
+      "labelHtml": "Утверждение&nbsp;<span>1.1</span>",
+      "numberHtml": "<span>1.1</span>",
+      "label": "Утверждение 1.1",
+      "number": "1.1"
+    },
+    "book:rem-demo": {
+      "namespace": "book",
+      "id": "rem-demo",
+      "page": "topics/objects.html",
+      "fragment": "rem-demo",
+      "labelHtml": "Remark&nbsp;<span>1.1</span>",
+      "numberHtml": "<span>1.1</span>",
+      "label": "Remark 1.1",
+      "number": "1.1"
+    },
+    "book:sec-appendix": {
+      "namespace": "book",
+      "id": "sec-appendix",
+      "page": "appendix.html",
+      "fragment": "sec-appendix",
+      "labelHtml": "<span>Приложение A</span>",
+      "numberHtml": "<span>A</span>",
+      "label": "Приложение A",
+      "number": "A",
+      "title": "Приложение A — Дополнение"
+    },
+    "book:sec-intro": {
+      "namespace": "book",
+      "id": "sec-intro",
+      "page": "index.html",
+      "fragment": "sec-intro",
+      "labelHtml": "Введение",
+      "numberHtml": "",
+      "label": "Введение",
+      "number": "",
+      "title": "Введение"
+    },
+    "book:sec-objects": {
+      "namespace": "book",
+      "id": "sec-objects",
+      "page": "topics/objects.html",
+      "fragment": "sec-objects",
+      "labelHtml": "<span>Глава 1</span>",
+      "numberHtml": "<span>1</span>",
+      "label": "Глава 1",
+      "number": "1",
+      "title": "Объекты для перекрёстных ссылок"
+    },
+    "book:sol-demo": {
+      "namespace": "book",
+      "id": "sol-demo",
+      "page": "topics/objects.html",
+      "fragment": "sol-demo",
+      "labelHtml": "Solution&nbsp;<span>1.1</span>",
+      "numberHtml": "<span>1.1</span>",
+      "label": "Solution 1.1",
+      "number": "1.1"
+    },
+    "book:tbl-demo": {
+      "namespace": "book",
+      "id": "tbl-demo",
+      "page": "topics/objects.html",
+      "fragment": "tbl-demo",
+      "labelHtml": "Таблица&nbsp;<span>1.1</span>",
+      "numberHtml": "<span>1.1</span>",
+      "label": "Таблица 1.1",
+      "number": "1.1"
+    },
+    "book:thm-demo": {
+      "namespace": "book",
+      "id": "thm-demo",
+      "page": "topics/objects.html",
+      "fragment": "thm-demo",
+      "labelHtml": "Теорема&nbsp;<span>1.1</span>",
+      "numberHtml": "<span>1.1</span>",
+      "label": "Теорема 1.1",
+      "number": "1.1"
+    },
+    "book:tip-demo": {
+      "namespace": "book",
+      "id": "tip-demo",
+      "page": "topics/objects.html",
+      "fragment": "tip-demo",
+      "labelHtml": "Tip&nbsp;<span>1.1</span>",
+      "numberHtml": "<span>1.1</span>",
+      "label": "Tip 1.1",
+      "number": "1.1"
+    },
+    "book:vid-demo": {
+      "namespace": "book",
+      "id": "vid-demo",
+      "page": "topics/objects.html",
+      "fragment": "vid-demo",
+      "labelHtml": "Видео&nbsp;<span>1.1</span>",
+      "numberHtml": "<span>1.1</span>",
+      "label": "Видео 1.1",
+      "number": "1.1"
+    },
+    "book:wrn-demo": {
+      "namespace": "book",
+      "id": "wrn-demo",
+      "page": "topics/objects.html",
+      "fragment": "wrn-demo",
+      "labelHtml": "Warning&nbsp;<span>1.1</span>",
+      "numberHtml": "<span>1.1</span>",
+      "label": "Warning 1.1",
+      "number": "1.1"
+    }
+  }
+}

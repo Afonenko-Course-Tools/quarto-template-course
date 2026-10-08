@@ -1,0 +1,27 @@
+{
+  "course": "demo-java-gradle",
+  "release": "native",
+  "works": [
+    {
+      "owner": "demo-java-gradle",
+      "id": "sec-variant-a",
+      "key": "demo-java-gradle/sec-variant-a",
+      "source": "variant-a.qmd",
+      "kind": "test",
+      "title": "Вариант А",
+      "items": [
+        "demo-java-gradle/exr-clamp"
+      ],
+      "assignments": {
+        "demo-java-gradle/exr-clamp": {
+          "requirement": "required",
+          "stage": "classroom",
+          "workMode": "individual"
+        }
+      }
+    }
+  ],
+  "questions": [
+    "demo-java-gradle/exr-clamp"
+  ]
+}

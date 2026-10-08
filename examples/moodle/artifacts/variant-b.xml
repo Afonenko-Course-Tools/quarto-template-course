@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<quiz>
+  <question type="multichoice">
+    <name>
+      <text>demo-moodle/exr-choice</text>
+    </name>
+    <idnumber>demo-moodle/exr-choice</idnumber>
+    <defaultgrade>1</defaultgrade>
+    <penalty>0</penalty>
+    <questiontext format="html">
+      <text>&lt;p&gt;&lt;span class="theorem-title"&gt;&lt;strong&gt;Упражнение 7 (Выберите
+протокол)&lt;/strong&gt;&lt;/span&gt; Выберите протокол защищённой передачи
+данных.&lt;/p&gt;
+</text>
+    </questiontext>
+    <single>true</single>
+    <shuffleanswers>0</shuffleanswers>
+    <answernumbering>abc</answernumbering>
+    <answer fraction="0" format="html">
+      <text>HTTP
+</text>
+    </answer>
+    <answer fraction="100" format="html">
+      <text>TLS
+</text>
+    </answer>
+    <answer fraction="0" format="html">
+      <text>FTP
+</text>
+    </answer>
+  </question>
+  <question type="essay">
+    <name>
+      <text>demo-moodle/exr-control</text>
+    </name>
+    <idnumber>demo-moodle/exr-control</idnumber>
+    <defaultgrade>1</defaultgrade>
+    <penalty>0</penalty>
+    <questiontext format="html">
+      <text>&lt;p&gt;&lt;span class="theorem-title"&gt;&lt;strong&gt;Упражнение 2 (Объясните границу
+доступа)&lt;/strong&gt;&lt;/span&gt; Объясните, почему публичный комплект студента
+не содержит эталонные решения.&lt;/p&gt;
+</text>
+    </questiontext>
+    <responseformat>editor</responseformat>
+    <responserequired>1</responserequired>
+    <responsefieldlines>8</responsefieldlines>
+    <attachments>0</attachments>
+    <attachmentsrequired>0</attachmentsrequired>
+  </question>
+</quiz>

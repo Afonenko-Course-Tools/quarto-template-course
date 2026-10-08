@@ -1,0 +1,12 @@
+{
+  "sourceRepository": "Afonenko-Course-Tools/quarto-course-print",
+  "commit": "00c51f7342da376e85027a925dd9f1207783f924",
+  "sourceDirty": false,
+  "extensionVersion": "0.3.0",
+  "dependencies": {
+    "quarto-course": "4.0.0"
+  },
+  "projection": "full",
+  "verification": "local installed native build",
+  "livePlatformVerified": false
+}

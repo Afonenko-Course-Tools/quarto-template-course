@@ -1,0 +1,43 @@
+{
+  "schema": "quarto-reference-catalog",
+  "generator": {
+    "quarto": "1.11.5"
+  },
+  "targets": {
+    "lectures:fig-demo": {
+      "namespace": "lectures",
+      "id": "fig-demo",
+      "page": "01/lecture-memory.html",
+      "fragment": "fig-demo",
+      "slide": "sec-memory",
+      "labelHtml": "Рисунок&nbsp;1",
+      "numberHtml": "1",
+      "label": "Рисунок 1",
+      "number": "1"
+    },
+    "lectures:sec-contracts": {
+      "namespace": "lectures",
+      "id": "sec-contracts",
+      "page": "01/lecture-memory.html",
+      "fragment": "sec-contracts",
+      "slide": "sec-contracts",
+      "labelHtml": "Контракт программы",
+      "numberHtml": "",
+      "label": "Контракт программы",
+      "number": "",
+      "title": "Контракт программы"
+    },
+    "lectures:sec-memory": {
+      "namespace": "lectures",
+      "id": "sec-memory",
+      "page": "01/lecture-memory.html",
+      "fragment": "sec-memory",
+      "slide": "sec-memory",
+      "labelHtml": "Хранение объектов",
+      "numberHtml": "",
+      "label": "Хранение объектов",
+      "number": "",
+      "title": "Хранение объектов"
+    }
+  }
+}

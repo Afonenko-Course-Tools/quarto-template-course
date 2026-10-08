@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<quiz>
+  <question type="essay">
+    <name>
+      <text>demo-moodle/exr-manual</text>
+    </name>
+    <idnumber>demo-moodle/exr-manual</idnumber>
+    <defaultgrade>1</defaultgrade>
+    <penalty>0</penalty>
+    <questiontext format="html">
+      <text>&lt;p&gt;&lt;span class="theorem-title"&gt;&lt;strong&gt;Упражнение 6 (Объясните защиту
+данных)&lt;/strong&gt;&lt;/span&gt; Объясните, как формула
+&lt;math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"&gt;&lt;semantics&gt;&lt;mrow&gt;&lt;msup&gt;&lt;mi&gt;x&lt;/mi&gt;&lt;mn&gt;2&lt;/mn&gt;&lt;/msup&gt;&lt;mo&gt;+&lt;/mo&gt;&lt;mn&gt;1&lt;/mn&gt;&lt;/mrow&gt;&lt;annotation encoding="application/x-tex"&gt;x^2 + 1&lt;/annotation&gt;&lt;/semantics&gt;&lt;/math&gt;
+может использоваться в учебной модели обработки данных. Сопоставьте
+значения в таблице.&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Вход&lt;/th&gt;
+&lt;th&gt;Результат&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;1&lt;/td&gt;
+&lt;td&gt;2&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;a href="@@PLUGINFILE@@/data.txt"&gt;Учебные данные&lt;/a&gt;.&lt;/p&gt;
+&lt;figure&gt;
+&lt;img src="@@PLUGINFILE@@/dot.png" alt="Схема" /&gt;
+&lt;figcaption aria-hidden="true"&gt;Схема&lt;/figcaption&gt;
+&lt;/figure&gt;
+</text>
+      <file name="data.txt" path="//" encoding="base64">0KPRh9C10LHQvdGL0LUg0LfQvdCw0YfQtdC90LjRjyDQtNC70Y8g0LLRi9GA0LDQttC10L3QuNGPIHjCsiArIDE6CnggPSAxLCDRgNC10LfRg9C70YzRgtCw0YIgPSAyCnggPSAyLCDRgNC10LfRg9C70YzRgtCw0YIgPSA1Cg==</file>
+      <file name="dot.png" path="//" encoding="base64">iVBORw0KGgoAAAANSUhEUgAAAAwAAAAMCAIAAADZF8uwAAAAE0lEQVR4nGOwaJhPEDGMKhqMigAhtcDx4hYylgAAAABJRU5ErkJggg==</file>
+    </questiontext>
+    <responseformat>editor</responseformat>
+    <responserequired>1</responserequired>
+    <responsefieldlines>8</responsefieldlines>
+    <attachments>0</attachments>
+    <attachmentsrequired>0</attachmentsrequired>
+  </question>
+  <question type="essay">
+    <name>
+      <text>demo-moodle/exr-control</text>
+    </name>
+    <idnumber>demo-moodle/exr-control</idnumber>
+    <defaultgrade>1</defaultgrade>
+    <penalty>0</penalty>
+    <questiontext format="html">
+      <text>&lt;p&gt;&lt;span class="theorem-title"&gt;&lt;strong&gt;Упражнение 2 (Объясните границу
+доступа)&lt;/strong&gt;&lt;/span&gt; Объясните, почему публичный комплект студента
+не содержит эталонные решения.&lt;/p&gt;
+</text>
+    </questiontext>
+    <responseformat>editor</responseformat>
+    <responserequired>1</responserequired>
+    <responsefieldlines>8</responsefieldlines>
+    <attachments>0</attachments>
+    <attachmentsrequired>0</attachmentsrequired>
+  </question>
+</quiz>

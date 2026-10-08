@@ -1,0 +1,19 @@
+{
+  "uuid": "377557f7-453f-554b-9e14-eb09a10ae182",
+  "type": "v3",
+  "title": "exr-control",
+  "topic": "Java",
+  "gradingMethod": "External",
+  "singleVariant": true,
+  "showCorrectAnswer": false,
+  "partialCredit": false,
+  "externalGradingOptions": {
+    "image": "docker.io/library/gradle:9.1.0-jdk25",
+    "entrypoint": [
+      "sh",
+      "/grade/tests/grade.sh"
+    ],
+    "timeout": 60,
+    "enableNetworking": false
+  }
+}

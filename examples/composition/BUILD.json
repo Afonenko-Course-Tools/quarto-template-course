@@ -1,0 +1,15 @@
+{
+  "producer": "Afonenko-Course-Tools/quarto-project-publish",
+  "commit": "215309b5c41669e56a857a1bc3e4f7f2ce782c5f",
+  "sourceDirty": false,
+  "dependencies": {
+    "quarto-project-publish": "v5.0.0",
+    "quarto-reference-catalog": "v3.0.0",
+    "quarto": "1.11.5"
+  },
+  "projection": "full",
+  "commands": [
+    "task install",
+    "task render"
+  ]
+}

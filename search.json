@@ -1,0 +1,1160 @@
+[
+  {
+    "objectID": "catalog/index.html",
+    "href": "catalog/index.html",
+    "title": "Каталог готовых примеров",
+    "section": "",
+    "text": "Откройте готовый результат, чтобы познакомиться с возможностью. Затем получите целую исходную папку группы по ссылке в той же строке и выполните команды её README. Соседние файлы, конфигурации и ресурсы являются частью примера.\n\n\n\n\n\n\nУведомление\n\n\n\nВосемь готовых групп закреплены на неизменяемых выпусках demo-20261008. Исходники каждой группы соответствуют тегу её инструмента на том же producer SHA. Версии и спецификации связывают примеры с выпущенными правилами.\n\n\n\n\n\nГруппа и задача\nСредство\nГотовый результат\nЦелая папка исходников\nЗависимости для сборки и исполнения\n\n\n\n\nМодель и представление: Банк, работа и одна презентация\ncourse\nОткрыть\nGitHub\nQuarto и CUE; Chromium для проверки печати\n\n\nСоставной сайт: Book и HTML/Reveal в общем сайте\npublisher\nОткрыть\nGitHub\nQuarto и Task для сценария группы\n\n\nМежпроектные ссылки: Переходы книги, лекций и практики\nreference-catalog\nОткрыть\nGitHub\nQuarto и Task\n\n\nПечатные работы: Раздатки и варианты PDF\nprint\nОткрыть\nGitHub\nQuarto/Pandoc/Typst для PDF\n\n\nPrairieLearn: Поставка Java-вопросов и локальные проверки\nprairielearn\nОткрыть\nGitHub\nQuarto, CUE; Java/Gradle для исполнения\n\n\nMoodle: HTML банка и XML вопросов\nmoodle\nОткрыть\nGitHub\nQuarto для экспорта; Moodle для импорта\n\n\nCloud: Метаданные задания с шагами и VM\ncloud\nОткрыть\nGitHub\nQuarto/CUE для модели; облачная среда отдельно\n\n\nВнешние ссылки: Переходы к документации Quarto\nreference-catalog\nОткрыть\nGitHub\nQuarto для рендера; сеть для внешних ссылок\n\n\n\nДля просмотра HTML достаточно браузера, PDF — программы просмотра PDF. Нужные версии расширений закреплены в README группы и её BUILD.json. Java/Gradle, LMS и Cloud не устанавливаются при просмотре этой документации. Успешный локальный экспорт не подтверждает обмен с реальной платформой.\nГотовые группы намеренно показывают full: их решения и заметки подготовлены для публичной демонстрации. В полноценном курсе student и full разделяют открытый и полный состав.\nВнутренние ссылки готовых групп локальны. Внешний QRC-каталог использует подготовленный адресный снимок документации Quarto; его переходы ведут на официальный сайт. Исходник текущего документа открывается штатным Quarto source-действием, а вся папка примера берётся из GitHub.\nТекст учебных примеров исключён из центрального поиска. Поиск здесь охватывает руководство, справочник, страницы средств и описания групп. Сопровождающий явно получает закреплённые архивы через Task; рендер сайта не пересобирает производителей.",
+    "crumbs": [
+      "Руководство",
+      "Примеры",
+      "Каталог готовых примеров"
+    ]
+  },
+  {
+    "objectID": "reference/index.html",
+    "href": "reference/index.html",
+    "title": "Справочник",
+    "section": "",
+    "text": "Руководство вводит средства по задаче. Здесь собраны настройки, которые полезно быстро найти при работе с готовым курсом.\n\nПросмотр исходников: штатные Code Tools, ссылки репозитория и ссылки на сопутствующие файлы.\nДиагностика: устойчивые ID, доступный контекст и переход к подробным справочникам владельцев.\n\nСтраницы расширений содержат установку, активацию и ограничения конкретного компонента. Каталог показывает проверенные группы с исходниками и готовыми результатами.",
+    "crumbs": [
+      "Руководство",
+      "Справочник",
+      "Справочник"
+    ]
+  },
+  {
+    "objectID": "extensions/reference-catalog.html",
+    "href": "extensions/reference-catalog.html",
+    "title": "QRC — ссылки между проектами",
+    "section": "",
+    "text": "QRC связывает объекты из разных публикаций по namespace и нативному ID. Нумерацию и подписи внутри документа по-прежнему задаёт Quarto. Каталог нужен, когда ссылка должна пережить различие путей книги и презентации.",
+    "crumbs": [
+      "Руководство",
+      "Расширения",
+      "QRC — ссылки между проектами"
+    ]
+  },
+  {
+    "objectID": "extensions/reference-catalog.html#установка-и-подключение",
+    "href": "extensions/reference-catalog.html#установка-и-подключение",
+    "title": "QRC — ссылки между проектами",
+    "section": "Установка и подключение",
+    "text": "Установка и подключение\nquarto add Afonenko-Course-Tools/quarto-reference-catalog@v3.0.0 --no-prompt\nNamespace задаётся для каждого самостоятельного проекта. Если сборкой управляет Publisher, post-hook QRC идёт перед course-site/entrypoints/collect.ts. Ссылка @theory:sec-checksum выбирает объект sec-checksum из namespace theory. Объект должен быть объявлен в опубликованном каталоге.\nfilters: [reference-catalog]\nreference-catalog:\n  namespace: theory\nproject:\n  post-render: _extensions/Afonenko-Course-Tools/reference-catalog/entrypoints/post.ts",
+    "crumbs": [
+      "Руководство",
+      "Расширения",
+      "QRC — ссылки между проектами"
+    ]
+  },
+  {
+    "objectID": "extensions/reference-catalog.html#результат-и-ограничения",
+    "href": "extensions/reference-catalog.html#результат-и-ограничения",
+    "title": "QRC — ссылки между проектами",
+    "section": "Результат и ограничения",
+    "text": "Результат и ограничения\nLocal-обработка может отложить внешний переход до общей публикации; full требует разрешённых целей. Импортированный каталог с base-url может вести на внешнюю публикацию даже при локальном просмотре. Ссылка QRC не включает условие в экспорт работы.\nПродолжите с руководством по сценарию. Каталог готовых групп связывает результат, исходную папку и требования для просмотра, рендера и исполнения. Собственные ID описаны в справочнике диагностики.",
+    "crumbs": [
+      "Руководство",
+      "Расширения",
+      "QRC — ссылки между проектами"
+    ]
+  },
+  {
+    "objectID": "extensions/print.html",
+    "href": "extensions/print.html",
+    "title": "Print — печатные работы",
+    "section": "",
+    "text": "Print превращает публичный пакет выбранной работы в PDF-раздатку. Назначения и порядок берутся из Core; Print проверяет поддерживаемое содержимое и ресурсы перед компиляцией.",
+    "crumbs": [
+      "Руководство",
+      "Расширения",
+      "Print — печатные работы"
+    ]
+  },
+  {
+    "objectID": "extensions/print.html#установка-и-подключение",
+    "href": "extensions/print.html#установка-и-подключение",
+    "title": "Print — печатные работы",
+    "section": "Установка и подключение",
+    "text": "Установка и подключение\nquarto add Afonenko-Course-Tools/quarto-course-print@v0.3.0 --no-prompt\nПодготовьте публичный Body-пакет Core, укажите полный ключ работы и каталог результата. Необязательный четвёртый аргумент задаёт JSON заголовка. Команда возвращает сведения о созданном PDF. Доступны Pandoc и Typst из поставки Quarto.\nquarto run _extensions/Afonenko-Course-Tools/course-print/entrypoints/export.ts _generated/checksum.public.json integrity-course/checksum-lab _generated/paper",
+    "crumbs": [
+      "Руководство",
+      "Расширения",
+      "Print — печатные работы"
+    ]
+  },
+  {
+    "objectID": "extensions/print.html#результат-и-ограничения",
+    "href": "extensions/print.html#результат-и-ограничения",
+    "title": "Print — печатные работы",
+    "section": "Результат и ограничения",
+    "text": "Результат и ограничения\nПринимается публичный пакет без закрытого ключа и решений. Неподдерживаемый AST, недопустимые ссылки и несовпадение hash отклоняются до создания PDF. Print не задаёт баллы или попытки платформы.\nПродолжите с руководством по сценарию. Каталог готовых групп связывает результат, исходную папку и требования для просмотра, рендера и исполнения. Собственные ID описаны в справочнике диагностики.",
+    "crumbs": [
+      "Руководство",
+      "Расширения",
+      "Print — печатные работы"
+    ]
+  },
+  {
+    "objectID": "extensions/moodle.html",
+    "href": "extensions/moodle.html",
+    "title": "Moodle — экспорт вопросов",
+    "section": "",
+    "text": "Moodle экспортирует поддерживаемые вопросы из полного пакета Core в XML. Закрытый ключ используется при построении ответа, а публичное условие становится текстом вопроса.",
+    "crumbs": [
+      "Руководство",
+      "Расширения",
+      "Moodle — экспорт вопросов"
+    ]
+  },
+  {
+    "objectID": "extensions/moodle.html#установка-и-подключение",
+    "href": "extensions/moodle.html#установка-и-подключение",
+    "title": "Moodle — экспорт вопросов",
+    "section": "Установка и подключение",
+    "text": "Установка и подключение\nquarto add Afonenko-Course-Tools/quarto-course-moodle@v0.3.0 --no-prompt\nСохраните JSON настроек как binding.json. defaultGrade задаёт положительную оценку вопроса, shuffle — перемешивание вариантов. XML записывается после успешной проверки и преобразования содержимого Pandoc.\n{\"defaultGrade\": 1, \"shuffle\": false}\nquarto run _extensions/Afonenko-Course-Tools/course-moodle/entrypoints/export.ts _generated/checksum.json binding.json _generated/questions.xml",
+    "crumbs": [
+      "Руководство",
+      "Расширения",
+      "Moodle — экспорт вопросов"
+    ]
+  },
+  {
+    "objectID": "extensions/moodle.html#результат-и-ограничения",
+    "href": "extensions/moodle.html#результат-и-ограничения",
+    "title": "Moodle — экспорт вопросов",
+    "section": "Результат и ограничения",
+    "text": "Результат и ограничения\nТекущий адаптер поддерживает manual и single-choice. XML не создаёт деятельность «Тест», расписание, попытки или доступ студентов. Успешный экспорт не подтверждает импорт в реальную LMS.\nПродолжите с руководством по сценарию. Каталог готовых групп связывает результат, исходную папку и требования для просмотра, рендера и исполнения. Собственные ID описаны в справочнике диагностики.",
+    "crumbs": [
+      "Руководство",
+      "Расширения",
+      "Moodle — экспорт вопросов"
+    ]
+  },
+  {
+    "objectID": "extensions/download.html",
+    "href": "extensions/download.html",
+    "title": "Download — материалы проекта",
+    "section": "",
+    "text": "Download создаёт ZIP явно выбранных материалов: например, данных семинара или стартового проекта. Самостоятельный сценарий не требует Core, CUE или адаптера оценивания.",
+    "crumbs": [
+      "Руководство",
+      "Расширения",
+      "Download — материалы проекта"
+    ]
+  },
+  {
+    "objectID": "extensions/download.html#установка-и-подключение",
+    "href": "extensions/download.html#установка-и-подключение",
+    "title": "Download — материалы проекта",
+    "section": "Установка и подключение",
+    "text": "Установка и подключение\nquarto add Afonenko-Course-Tools/quarto-project-download@v2.0.0 --no-prompt\nВ QMD вставьте shortcode {{&lt; project-download seminar-data text=\"Скачать данные семинара\" &gt;}}. После quarto render ссылка ведёт к архиву разрешённых файлов. Начальный / в path означает корень проекта. include, exclude, profiles и gitignore уточняют отбор.\nproject:\n  type: website\n  resources: [\"!materials/**\"]\n  pre-render: _extensions/Afonenko-Course-Tools/project-download/entrypoints/pre.ts\n  post-render: _extensions/Afonenko-Course-Tools/project-download/entrypoints/post.ts\nfilters: [project-download]\nproject-download:\n  resources:\n    seminar-data:\n      path: /materials/observations\n      include: [\"**/*.csv\", \"**/*.md\"]",
+    "crumbs": [
+      "Руководство",
+      "Расширения",
+      "Download — материалы проекта"
+    ]
+  },
+  {
+    "objectID": "extensions/download.html#результат-и-ограничения",
+    "href": "extensions/download.html#результат-и-ограничения",
+    "title": "Download — материалы проекта",
+    "section": "Результат и ограничения",
+    "text": "Результат и ограничения\nАрхив создаётся по видимому запросу. Профиль ресурса не скрывает shortcode автоматически. Исходники Quarto и закрытые reference/solution не становятся публичными материалами. Скачивание ZIP и просмотр QMD — отдельные действия.\nПродолжите с руководством по сценарию. Каталог готовых групп связывает результат, исходную папку и требования для просмотра, рендера и исполнения. Собственные ID описаны в справочнике диагностики.",
+    "crumbs": [
+      "Руководство",
+      "Расширения",
+      "Download — материалы проекта"
+    ]
+  },
+  {
+    "objectID": "extensions/cloud.html",
+    "href": "extensions/cloud.html",
+    "title": "Cloud — модель облачного задания",
+    "section": "",
+    "text": "Cloud проверяет метаданные заданий с шагами и действиями на объявленных виртуальных машинах. Core извлекает факты, а правила адаптера проверяют связь упражнений, шагов и VM.",
+    "crumbs": [
+      "Руководство",
+      "Расширения",
+      "Cloud — модель облачного задания"
+    ]
+  },
+  {
+    "objectID": "extensions/cloud.html#установка-и-подключение",
+    "href": "extensions/cloud.html#установка-и-подключение",
+    "title": "Cloud — модель облачного задания",
+    "section": "Установка и подключение",
+    "text": "Установка и подключение\nquarto add Afonenko-Course-Tools/quarto-course-cloud@v3.0.0 --no-prompt\nУстановите Cloud вместе с Core в проект банка. Полная конфигурация VM и корректные действия находятся в группе Cloud; для сбора фактов подключите Core pre/post hooks как на странице Course, настройте профиль full и выполните:\nquarto render --profile full --fail-if-warnings\nquarto run _extensions/Afonenko-Course-Tools/course-core/entrypoints/check.ts . full\nРендер создаёт HTML и факты документов. Вторая команда проверяет связи всего проекта, включая назначения и объявленные VM, и записывает модель _generated/course-spec/course.json.\ncourse:\n  adapters: [cloud]\nfilters: [course-core, course-cloud]",
+    "crumbs": [
+      "Руководство",
+      "Расширения",
+      "Cloud — модель облачного задания"
+    ]
+  },
+  {
+    "objectID": "extensions/cloud.html#опишите-задачу-и-vm",
+    "href": "extensions/cloud.html#опишите-задачу-и-vm",
+    "title": "Cloud — модель облачного задания",
+    "section": "Опишите задачу и VM",
+    "text": "Опишите задачу и VM\nВ области явного банка Core 4.0.0:\n:::: {#exr-service difficulty=\"introductory\" time=\"20\" target=\"cloud\"}\n## Состояние службы\n\n### Проверка состояния {.cloud-step key=\"state\"}\n\nСоздайте файл `/home/ubuntu/service-state.txt` со строкой `ready`.\n\n```{.sh .cloud-action phase=\"check\" vm=\"host\"}\ntest -f /home/ubuntu/service-state.txt\n```\n::::\nНа отдельной странице работы объявите VM и назначение:\n---\nassessment:\n  id: service-lab\n  kind: lab\ncloud:\n  virtual-machines:\n    host:\n      template: ubuntu-host\n---\n\n# Работа со службой {#sec-service-lab}\n\n::: {.task-items}\n1. @exr-service\n:::\nЭто минимальное описание: template должен существовать в вашей среде. Каждый cloud-step имеет уникальный key и check для каждой используемой VM. У cloud-action обязательны язык, phase, vm и ровно один источник: inline код или file=\"/projects/service/check.sh\" текущего проекта. Фазы check, solution, pre-step, post-step относятся к шагу; prepare — к работе. Подключение VM и действия остаются контрактом Cloud. Его cloud-step — специальный шаг адаптера; последовательность обычного занятия оформляется Markdown-заголовками.",
+    "crumbs": [
+      "Руководство",
+      "Расширения",
+      "Cloud — модель облачного задания"
+    ]
+  },
+  {
+    "objectID": "extensions/cloud.html#результат-и-ограничения",
+    "href": "extensions/cloud.html#результат-и-ограничения",
+    "title": "Cloud — модель облачного задания",
+    "section": "Результат и ограничения",
+    "text": "Результат и ограничения\nCloud не потребляет Body. Рендер не создаёт виртуальные машины и не выполняет облачные действия; экспорт _produced.yaml в этой поставке не реализован. Проверка локальных путей и CUE-метаданных не подтверждает работоспособность облачной инфраструктуры. Имена VM и action остаются авторскими идентификаторами.\nПродолжите с руководством по сценарию. Каталог готовых групп связывает результат, исходную папку и требования для просмотра, рендера и исполнения. Собственные ID описаны в справочнике диагностики.",
+    "crumbs": [
+      "Руководство",
+      "Расширения",
+      "Cloud — модель облачного задания"
+    ]
+  },
+  {
+    "objectID": "guide/start.html",
+    "href": "guide/start.html",
+    "title": "Первый документ",
+    "section": "",
+    "text": "Установите Quarto не ниже 1.11.5 и создайте папку курса. Для первой страницы достаточно файла index.qmd:\nРядом появится index.html с условием упражнения. Ссылка @exr-checksum в этом документе использует штатную перекрёстную ссылку Quarto. Для просмотра во время редактирования запустите quarto preview index.qmd.",
+    "crumbs": [
+      "Руководство",
+      "Первый документ"
+    ]
+  },
+  {
+    "objectID": "guide/start.html#выберите-проект",
+    "href": "guide/start.html#выберите-проект",
+    "title": "Первый документ",
+    "section": "Выберите проект",
+    "text": "Выберите проект\nДля нескольких страниц создайте _quarto.yml рядом с index.qmd:\nproject:\n  type: website\n  output-dir: _site\nformat: html\nlang: ru\nwebsite:\n  title: Контроль целостности\nquarto render соберёт сайт в _site. Для последовательного учебника используйте project.type: book, задайте book.title и перечислите файлы в book.chapters. Презентация — обычный документ с format: revealjs; её настройка разобрана в руководстве по презентации.",
+    "crumbs": [
+      "Руководство",
+      "Первый документ"
+    ]
+  },
+  {
+    "objectID": "guide/start.html#добавьте-учебные-средства",
+    "href": "guide/start.html#добавьте-учебные-средства",
+    "title": "Первый документ",
+    "section": "Добавьте учебные средства",
+    "text": "Добавьте учебные средства\nCore, Presentation и Navigation устанавливаются одним выпуском:\nquarto add Afonenko-Course-Tools/quarto-course@v4.0.0 --no-prompt\nКоманда помещает компоненты в _extensions/Afonenko-Course-Tools/. Установка делает их доступными; нужное поведение включается в конфигурации:\nfilters: [course-core, course-presentation]\nКоманда устанавливает банковскую модель Core 4.0.0. Обычный документ ниже не включает банк.\nCore проверяет указанные учебные метаданные. Presentation оформляет учебные блоки и раскрывает подсказки и решения. Вне exercise-bank: true обычные exr, exm, sol сохраняют Quarto-смысл; course.id, банковские difficulty/time и политика условия для них не нужны. Presentation можно подключить самостоятельно: filters: [course-presentation].\nquarto render --fail-if-warnings\nЭто штатная сборка Quarto с отказом при предупреждениях. Для постоянного режима можно задать fail-if-warnings: true в конфигурации проекта. У самостоятельных подпроектов настройка задаётся отдельно — подробнее в составной сборке.\nПосмотрите небольшой законченный курс, затем перейдите к банку и назначениям. Просмотр исходного документа настраивается нативными Code Tools.",
+    "crumbs": [
+      "Руководство",
+      "Первый документ"
+    ]
+  },
+  {
+    "objectID": "guide/solutions.html",
+    "href": "guide/solutions.html",
+    "title": "Решения и публичные разборы",
+    "section": "",
+    "text": "Сначала решите, нужна ли ссылка на разбор. В модели Core 4.0.0 есть две формы связи; у канонической задачи остаётся один контейнер решения.",
+    "crumbs": [
+      "Руководство",
+      "Решения и публичные разборы"
+    ]
+  },
+  {
+    "objectID": "guide/solutions.html#solution-suffix",
+    "href": "guide/solutions.html#solution-suffix",
+    "title": "Решения и публичные разборы",
+    "section": "Именованное решение для ссылки",
+    "text": "Именованное решение для ссылки\nОбъявите задачу и решение в одном QMD с одинаковым суффиксом:\n::: {#exr-lab-1 difficulty=\"introductory\" time=\"20\"}\nВычислите контрольную сумму полученного файла.\n:::\n\n::: {#sol-lab-1}\nВыберите алгоритм, вычислите сумму и сравните её с доверенным значением.\n:::\n\n::: {.content-visible when-profile=\"full\"}\nПосле выполнения можно обратиться к @sol-lab-1.\n:::\nСвязь exr-lab-1 → sol-lab-1 не требует дополнительного атрибута. В обычной open задаче student получает условие без решения; full видит оба. Ссылку на закрытый разбор не помещайте в открытый текст. Course-атрибут for у банковского решения больше не поддерживается.",
+    "crumbs": [
+      "Руководство",
+      "Решения и публичные разборы"
+    ]
+  },
+  {
+    "objectID": "guide/solutions.html#solution-nested",
+    "href": "guide/solutions.html#solution-nested",
+    "title": "Решения и публичные разборы",
+    "section": "Вложенное решение без ссылки",
+    "text": "Вложенное решение без ссылки\nИспользуйте .solution внутри задачи, когда отдельный ID не нужен:\n:::: {#exr-checksum-demo difficulty=\"introductory\" time=\"10\" course-role=\"demonstration\"}\nПокажите, как изменение одного байта влияет на контрольную сумму.\n\n::: {.solution}\nВычислим SHA-256 исходного файла, изменим один байт и повторим вычисление.\nРазличие сумм обнаруживает изменение.\n:::\n::::\nПри open из метаданных банка это публичный разбор: student и full видят условие и решение. Именно роль demonstration открывает решение. Обычная open задача, роль standalone блока или stage demonstration сами такого права не дают.",
+    "crumbs": [
+      "Руководство",
+      "Решения и публичные разборы"
+    ]
+  },
+  {
+    "objectID": "guide/solutions.html#solution-rules",
+    "href": "guide/solutions.html#solution-rules",
+    "title": "Решения и публичные разборы",
+    "section": "Сохраните однозначную связь",
+    "text": "Сохраните однозначную связь\nОдин связанный контейнер может содержать несколько подходов:\n::: {#sol-lab-1}\n### Через командную строку\nВычислите сумму штатной утилитой.\n\n### Через программу\nПрочитайте файл как байты и примените тот же алгоритм.\n:::\nЭто замена содержимого решения из первого примера, а не второе объявление того же ID. Сирота sol-*, две подходящие пары, дубли и одновременно именованное и вложенное решение одной канонической задачи отклоняются.\nВ HTML Presentation сворачивает доступное решение; в Reveal использует details, в PDF/Typst показывает его статически. Профиль Core сначала определяет доступность, а затем Presentation оформляет оставшееся содержимое. Подсказка .callout-tip имеет свой смысл; допустимое for подсказки не меняет правило связи решения. Подробнее — представление.",
+    "crumbs": [
+      "Руководство",
+      "Решения и публичные разборы"
+    ]
+  },
+  {
+    "objectID": "guide/solutions.html#solution-native-witness",
+    "href": "guide/solutions.html#solution-native-witness",
+    "title": "Решения и публичные разборы",
+    "section": "Сделайте разбор переносимым для экспорта",
+    "text": "Сделайте разбор переносимым для экспорта\nДля demonstration, которую назначаете в экспортируемую работу, рекомендуются обычный suffix-контейнер или вложенная .solution без when-format/when-meta на самом контейнере решения. Такое решение переносится вместе с условием через выбранный native writer.\nФорматное условие может оставить решение в HTML, но убрать его из публичной проекции исходного JSON-прохода. Тогда demonstration stage при экспорте честно отклоняется: требуется фактическое публичное решение текущей операции. Ранее собранный HTML не доказывает доступность в JSON. Дополнительный полный render, чтение старого результата или отдельный поиск решения не выполняются.",
+    "crumbs": [
+      "Руководство",
+      "Решения и публичные разборы"
+    ]
+  },
+  {
+    "objectID": "guide/profiles.html",
+    "href": "guide/profiles.html",
+    "title": "Student, full и функциональные профили",
+    "section": "",
+    "text": "Для курса публикуйте student, а full собирайте отдельно для преподавателя. Демонстрации и эта документация используют full: их материал подготовлен для публичного показа. Политика банка определена Core 4.0.0.",
+    "crumbs": [
+      "Руководство",
+      "Student, full и функциональные профили"
+    ]
+  },
+  {
+    "objectID": "guide/profiles.html#audience-profiles",
+    "href": "guide/profiles.html#audience-profiles",
+    "title": "Student, full и функциональные профили",
+    "section": "Разделите аудитории",
+    "text": "Разделите аудитории\n# _quarto.yml выбранной книги\nprofile:\n  default: student\n  group:\n    - [student, full]\n# _quarto-student.yml\nproject:\n  output-dir: _book-student\ncourse:\n  view: student\n# _quarto-full.yml\nproject:\n  output-dir: _book-full\ncourse:\n  view: full\nView согласуется с аудиторным профилем. Включённый банк удаляет restricted условия, их решения и ссылки назначений из student. Обычная open задача остаётся без решения; open demonstration с фактическим решением показывает оба. Full позволяет читать все условия и решения. Роль control сама текст не скрывает. Вне банка обычные exr/exm/sol не получают такую приватность автоматически.",
+    "crumbs": [
+      "Руководство",
+      "Student, full и функциональные профили"
+    ]
+  },
+  {
+    "objectID": "guide/profiles.html#profile-composition",
+    "href": "guide/profiles.html#profile-composition",
+    "title": "Student, full и функциональные профили",
+    "section": "Управляйте составом нативно",
+    "text": "Управляйте составом нативно\nНативное условное содержимое:\n::: {.content-visible when-profile=\"full\"}\nДополнительный материал преподавателя.\n:::\nИспользуйте .content-visible/.content-hidden, when-profile/unless-profile. Условия формата и метаданных тоже остаются механизмами Quarto; отдельного авторского языка условий Course нет. Скрытый ошибочный банковский ключ по-прежнему проверяется до проекции.\nQuarto добавляет главы профиля к базовому book.chapters. Короткий список student не удаляет закрытые главы из полной базы. Для независимых составов уберите главы из базы и задайте полный список в каждом профильном файле:\n# _quarto-student.yml: дополнение к настройкам выше\nbook:\n  chapters: [index.qmd, bank/integrity.qmd, works/lab.qmd, works/seminar.qmd, works/practical.qmd, works/test.qmd]\n# _quarto-full.yml: дополнение к настройкам выше\nbook:\n  chapters: [index.qmd, bank/integrity.qmd, works/lab.qmd, works/seminar.qmd, works/practical.qmd, works/test.qmd, teacher.qmd]\nФайл банка можно включить в student: restricted тела удаляет Core. Preview practical/test остаётся общедоступным на страницах работ. Банк для экспорта не ограничивается HTML chapters.",
+    "crumbs": [
+      "Руководство",
+      "Student, full и функциональные профили"
+    ]
+  },
+  {
+    "objectID": "guide/profiles.html#source-privacy",
+    "href": "guide/profiles.html#source-privacy",
+    "title": "Student, full и функциональные профили",
+    "section": "Сохраните исходники и ресурсы отдельно",
+    "text": "Сохраните исходники и ресурсы отдельно\nУдаление AST не редактирует исходный QMD для нативного Source. В student банковского HTML отключите встроенный исходник и не добавляйте сырой QMD в code-links:\n# _quarto-student.yml\nformat:\n  html:\n    code-tools:\n      source: false\n    keep-source: false\nproject:\n  resources:\n    - '!_book-full/**'\n    - '!_generated/**'\n    - '!teacher/**'\n    - '!projects/**'\n    - '!**/*.qmd'\nЭто дополнение к настройкам профиля, а не второй project блок в том же файле: объедините output-dir и resources в одну карту. Выбирайте положительные публичные каталоги ресурсов своего курса; исключения выше показывают типовые закрытые области. Наличие gitignore, отсутствие главы или ссылки не запрещает native копирование широким resources glob.\nFull output, teacher JSON, решения, notes, reference и закрытые tests не должны попадать в student HTML, search, QRC, ресурсы и ZIP. Обычная внешняя ссылка на открытый GitHub допустима: она отдельно публикует source в репозитории. Source modal и локальный raw QMD — другой канал, который проверяют фактически. Download не выдаёт закрытые partitions.",
+    "crumbs": [
+      "Руководство",
+      "Student, full и функциональные профили"
+    ]
+  },
+  {
+    "objectID": "guide/profiles.html#functional-profiles",
+    "href": "guide/profiles.html#functional-profiles",
+    "title": "Student, full и функциональные профили",
+    "section": "Функциональные профили и форматы",
+    "text": "Функциональные профили и форматы\nПрофиль java, review или иной авторский профиль выбирает материал независимо от student/full. Нативный формат выбирается --to html, --to revealjs, --to pdf или --to typst; ограничения Quarto book сохраняются.\nquarto render --profile student,java --to html\nquarto render --profile full,java --to html\nВнутренний экспорт выбранной работы получает полные исходники и принимает функциональные профили, например --profile java,review. Student/full в его CLI не передаются. Условие аудитории на целой задаче или работе не исключает её из исходного выбора; внутреннее full-only содержимое задачи остаётся отделено от participant части.\nДля публичных самостоятельных проектов задайте fail-if-warnings: true. Внутренний source JSON pass имеет отдельную политику предупреждений и не меняет постоянные настройки сайта. Частичный preview не подтверждает полную текущую модель или итог времени.",
+    "crumbs": [
+      "Руководство",
+      "Student, full и функциональные профили"
+    ]
+  },
+  {
+    "objectID": "guide/model.html",
+    "href": "guide/model.html",
+    "title": "Модель курса",
+    "section": "",
+    "text": "Если одно условие используется в разных занятиях, объявите его в банке, а на страницах работ назначайте местные задачи. Модель определена в Core 4.0.0: версия и владелец правил.",
+    "crumbs": [
+      "Руководство",
+      "Модель курса"
+    ]
+  },
+  {
+    "objectID": "guide/model.html#bank-layout",
+    "href": "guide/model.html#bank-layout",
+    "title": "Модель курса",
+    "section": "Разделите книгу, задачи и работы",
+    "text": "Разделите книгу, задачи и работы\nВ примере логический корень курса содержит _quarto.yml с экспортным ID:\ncourse:\n  id: integrity-course\nСамостоятельная книга task содержит свои _quarto.yml, index.qmd, каталог bank с условиями и каталог works со страницами работ. Установите bundle Course в task. Здесь приведены пути стандартной установки GitHub; у локальной установки проверьте фактический каталог владельца.\n# task/_quarto.yml\nproject:\n  type: book\n  output-dir: _book\n  pre-render: _extensions/Afonenko-Course-Tools/course-core/entrypoints/pre.ts\n  post-render: _extensions/Afonenko-Course-Tools/course-core/entrypoints/post.ts\nbook:\n  title: Банк и работы по целостности данных\n  chapters:\n    - index.qmd\n    - bank/integrity.qmd\n    - works/lab.qmd\n    - works/seminar.qmd\n    - works/practical.qmd\n    - works/test.qmd\nfilters: [course-core, course-presentation]\nformat: html\nlang: ru\nfail-if-warnings: true\nВключите банк только в области задач:\n# task/bank/_metadata.yml\nexercise-bank: true\nexercise-statement-visibility: open\nРаботы рядом в works остаются вне этой области. book, имя папки task, course.id и выбор --book task банк сами не включают. Quarto наследует метаданные _metadata.yml; Core использует получившуюся декларацию.",
+    "crumbs": [
+      "Руководство",
+      "Модель курса"
+    ]
+  },
+  {
+    "objectID": "guide/model.html#declare-assign",
+    "href": "guide/model.html#declare-assign",
+    "title": "Модель курса",
+    "section": "Объявите и назначьте задачу",
+    "text": "Объявите и назначьте задачу\nВ task/bank/integrity.qmd:\n# Целостность данных {#sec-integrity}\n\n::: {#exr-checksum difficulty=\"introductory\" time=\"20\"}\nВычислите SHA-256 файла до и после изменения одного байта.\nОбъясните полученный результат.\n:::\n\n::: {#sol-checksum}\nКонтрольные суммы различаются. Сравнение обнаруживает изменение файла,\nно само по себе не устанавливает, кто его изменил.\n:::\nВ task/works/lab.qmd:\n---\nassessment:\n  kind: lab\n---\n\n# Лабораторная по контрольным суммам {#sec-checksum-lab}\n\n::: {.task-items}\n1. @exr-checksum\n:::\nОдна QMD описывает одну работу. При отсутствии assessment.id её ID берётся из существующего chapter-id либо первого заголовка; здесь это sec-checksum-lab. Для независимого от заголовка ключа добавьте assessment.id: checksum-lab. kind задаётся явно.\nВ student видны открытое условие и ссылка работы, но решение скрыто. В full видны условие и решение. Экспорт выбирает условие этой задачи и поля ответа в порядке назначения; окружающий текст работы не становится условием. Автоматического дублирования богатого тела на странице работы нет.",
+    "crumbs": [
+      "Руководство",
+      "Модель курса"
+    ]
+  },
+  {
+    "objectID": "guide/model.html#course-identity",
+    "href": "guide/model.html#course-identity",
+    "title": "Модель курса",
+    "section": "Сохраните идентичность",
+    "text": "Сохраните идентичность\ncourse.id задаётся в логическом корне один раз. Экспортный ключ задачи — integrity-course/exr-checksum; ключ работы с явным ID — integrity-course/checksum-lab. Переименование файла не меняет эти ключи. Местные ID задач и работ должны быть уникальны в выбранном native book-проекте.\nУ него одна экспортная идентичность. Вложенный каталог со своим _quarto.yml является самостоятельным проектом и не пополняет банк. QRC переносит адресные ссылки между публикациями; чужое условие через такую ссылку не становится членом работы и не импортируется в экспорт.\nДальше выберите задачи и политику условия, решения, работы и поля ответа.",
+    "crumbs": [
+      "Руководство",
+      "Модель курса"
+    ]
+  },
+  {
+    "objectID": "guide/export.html",
+    "href": "guide/export.html",
+    "title": "Экспорт выбранной работы",
+    "section": "",
+    "text": "Экспорт получает назначения одной работы из полной исходной книги банка. Публикация full HTML для него не требуется. Назначения и restricted выдача определены контрактом Core 4.0.0.",
+    "crumbs": [
+      "Руководство",
+      "Экспорт выбранной работы"
+    ]
+  },
+  {
+    "objectID": "guide/export.html#selected-source-export",
+    "href": "guide/export.html#selected-source-export",
+    "title": "Экспорт выбранной работы",
+    "section": "Выберите корень, книгу и работу",
+    "text": "Выберите корень, книгу и работу\nВ сценарии руководства логический корень объявляет course.id: integrity-course; native book находится в task, задачи включены явным exercise-bank, работа имеет assessment.id: checksum-lab. Из корня курса выполните команду по фактически установленному пути Core:\nquarto run task/_extensions/Afonenko-Course-Tools/course-core/entrypoints/export.ts --book task --work checksum-lab --output _generated/checksum.json\n--book . подходит, если корень сам является книгой банка. Функциональные варианты выбираются отдельно: --profile java,review. CLI требует одну книгу, одну работу и путь .json; student/full не передаются.\nПубличный native source input включает задачи и работы выбранного проекта, в том числе QMD вне опубликованных chapters. Вложенные самостоятельные проекты с собственным _quarto.yml не входят. Quarto выполняет include, вычисления, shortcodes и функциональные профили; дополнительного Markdown парсера или предварительного full HTML нет. Неназначенная задача может не поддерживаться выбранным адаптером.\nВнутренний JSON pass использует --fail-if-warnings=false: native предупреждение по междокументной ссылке само по себе не меняет exit 0 на отказ. После прохода Core проверяет актуальную модель, выбор и возможности Body. Публичные renders сохраняют свою строгую конфигурацию.",
+    "crumbs": [
+      "Руководство",
+      "Экспорт выбранной работы"
+    ]
+  },
+  {
+    "objectID": "guide/export.html#body-contract",
+    "href": "guide/export.html#body-contract",
+    "title": "Экспорт выбранной работы",
+    "section": "Прочитайте состав пакета",
+    "text": "Прочитайте состав пакета\nСоздаются _generated/checksum.json для преподавательского потребителя и соседний _generated/checksum.public.json для участника. Исключите _generated из веб-ресурсов. Schema остаётся course-body-package-v1.\n\n\n\n\n\n\n\nПоле\nСмысл\n\n\n\n\nquestion owner, id, key, source\nВладелец, местный ID, квалифицированный ключ и источник\n\n\nvisibility: public\nБезопасная часть выдачи участнику\n\n\nstatementVisibility: open|restricted\nПубликация условия на сайте\n\n\npurpose?, hasPublicSolution\nФакты текущего native прохода для проверки demonstration назначения\n\n\nanswerType, condition, publicAnswer\nТип ответа, выбранное условие и публичные поля\n\n\nteacher closedKey, solution, gradingNotes\nОтдельные закрытые поля\n\n\nwork items, assignments, theoryTime?\nПорядок, свойства назначений и время теории\n\n\n\nКлючи works.items и assignments совпадают и квалифицированы одинаково: integrity-course/exr-collision. Значение назначения содержит {stage?, requirement, workMode}. Core локальная модель использует местные exr-* ключи; transport не является вторым авторским синтаксисом.\nЭкспортируются только выбранные условия, поля ответа и их ресурсы. Заголовок/ID работы сохраняются в метаданных. Preview, внешние заголовки этапов и окружающая проза исключаются; внутренние заголовки условия остаются. Обычная ссылка на разбор не выбирает его. Demonstration stage требует решения, сохранившегося в публичной native проекции этого JSON-прохода; доступность в ранее собранном HTML не подставляется. Переносимая форма не ставит when-format/when-meta на контейнер решения. QRC предоставляет адрес ссылки, без импорта чужого тела.\nRestricted означает запрет открытой веб-публикации, но разрешает выбранную выдачу условия участнику. Public guards ключей, solution, gradingNotes, source/service ресурсов сохраняются. Не переименовывайте partitions публичных ресурсов в open/restricted: это другая граница.",
+    "crumbs": [
+      "Руководство",
+      "Экспорт выбранной работы"
+    ]
+  },
+  {
+    "objectID": "guide/export.html#print-export",
+    "href": "guide/export.html#print-export",
+    "title": "Экспорт выбранной работы",
+    "section": "Получите PDF-раздатку",
+    "text": "Получите PDF-раздатку\nУстановите Print в корень курса, передайте participant пакет, полный ключ выбранной работы и новый каталог результата:\nquarto run _extensions/Afonenko-Course-Tools/course-print/entrypoints/export.ts _generated/checksum.public.json integrity-course/checksum-lab _generated/paper\nPrint создаёт PDF через Pandoc/Typst из Quarto. Необязательный четвёртый аргумент — JSON оформления заголовка. В practical/test пакет содержит restricted назначения; публичный разбор из preview в PDF не попадает. Поддерживаемые формы ответа печатаются без ключей. Байты вложений, hash и безопасные targets проверяются до записи результата.",
+    "crumbs": [
+      "Руководство",
+      "Экспорт выбранной работы"
+    ]
+  },
+  {
+    "objectID": "guide/export.html#moodle-export",
+    "href": "guide/export.html#moodle-export",
+    "title": "Экспорт выбранной работы",
+    "section": "Получите Moodle XML",
+    "text": "Получите Moodle XML\nУстановите Moodle. Для manual/single-choice сохраните binding.json с явными настройками:\n{\"defaultGrade\": 1, \"shuffle\": false}\nquarto run _extensions/Afonenko-Course-Tools/course-moodle/entrypoints/export.ts _generated/checksum.json binding.json _generated/questions.xml\nManual становится essay; single-choice получает teacher ключ и доли 100/0. defaultGrade — положительное конечное число, shuffle — boolean. Numeric/multipart/matching отклоняются. Solution и grading notes не входят в questiontext; вложения используют @@PLUGINFILE@@ после проверки bytes/hash. XML создаёт банк вопросов. Тест, расписание, попытки, доступ и подтверждённый импорт в реальный Moodle настраиваются отдельно.",
+    "crumbs": [
+      "Руководство",
+      "Экспорт выбранной работы"
+    ]
+  },
+  {
+    "objectID": "guide/export.html#prairielearn-export",
+    "href": "guide/export.html#prairielearn-export",
+    "title": "Экспорт выбранной работы",
+    "section": "Подготовьте PrairieLearn с внешней проверкой",
+    "text": "Подготовьте PrairieLearn с внешней проверкой\nУстановите PrairieLearn вместе с Core в банк. Для упражнения нужны ведущий заголовок, явный проект и собственные платформенные настройки. Раскладка проекта:\nprojects/java-digest/\n  student/     # стартовые файлы участника\n  tests/       # закрытые проверки\n  reference/   # авторский вариант, не поставляется\nКаждый выбранный вопрос получает binding по местному ID q.id; это отдельная карта платформы, не qualified assignments:\n{\n  \"questions\": {\n    \"exr-java-digest\": {\n      \"topic\": \"Java\",\n      \"files\": [\"Digest.java\"],\n      \"externalGradingOptions\": {\n        \"image\": \"YOUR_VERIFIED_GRADER_IMAGE\",\n        \"entrypoint\": [\"sh\", \"/grade/tests/grade.sh\"],\n        \"timeout\": 60,\n        \"enableNetworking\": false\n      }\n    }\n  }\n}\nЗамените YOUR_VERIFIED_GRADER_IMAGE реальным проверенным образом вашей установки. topic задаёт тему; files — принимаемые файлы ответа, которые должны соответствовать выбранному стартовому проекту и проверкам. Опциональные entrypoint, timeout, enableNetworking, environment задаются явно по контракту адаптера.\nquarto run task/_extensions/Afonenko-Course-Tools/course-prairielearn/entrypoints/export.ts . task java-lab binding.json _generated/pl\nПоставка создаёт нативные вопросы gradingMethod: External, participant question.html, clientFilesQuestion из student и приватные tests. Reference не поставляется. Forms Core не превращаются автоматически во встроенные PL numeric/choice вопросы.\nЕсли работе нужны PL правила, подключите их явно:\nassessment:\n  id: java-lab\n  kind: lab\n  prairielearn:\n    attempts: 3\n    pass: {at-least: 1}\n    assignment: {mode: assessment-id}\nВсе назначения такой работы должны соответствовать target PrairieLearn. Attempts/pass/assignment описывают платформенную семантику; обязательность общего назначения не заменяется суммой баллов. Экспорт вопросов не создаёт activity и не назначает пользователей. Режим assessment-id получает устойчивую метку из course.id и assessment.id; применение метки — отдельное действие PL. Java/Gradle-группа содержит bindings, student, reference и настоящие локальные assertions. Они не подтверждают запуск image на сервере.",
+    "crumbs": [
+      "Руководство",
+      "Экспорт выбранной работы"
+    ]
+  },
+  {
+    "objectID": "guide/export.html#cloud-model",
+    "href": "guide/export.html#cloud-model",
+    "title": "Экспорт выбранной работы",
+    "section": "Cloud остаётся моделью действий",
+    "text": "Cloud остаётся моделью действий\nCloud получает локальную модель Core и проверяет VM, cloud-step и cloud-action. Он не потребляет Body и не запускает VM, команды или экспорт _produced.yaml. Для него render и полная проверка свежего результата подтверждают структуру, а инфраструктурное исполнение проверяют в целевой среде отдельно.",
+    "crumbs": [
+      "Руководство",
+      "Экспорт выбранной работы"
+    ]
+  },
+  {
+    "objectID": "guide/composition.html",
+    "href": "guide/composition.html",
+    "title": "Составной сайт",
+    "section": "",
+    "text": "Когда теория, банк и презентации являются самостоятельными Quarto-проектами, Publisher собирает их результаты в общий сайт. Он сохраняет конфигурацию каждой части и размещает её по пути папки. QRC отдельно отвечает за ссылки между публикациями; для самой составной сборки каталог ссылок не обязателен.",
+    "crumbs": [
+      "Руководство",
+      "Составной сайт"
+    ]
+  },
+  {
+    "objectID": "guide/composition.html#установите-сборщик",
+    "href": "guide/composition.html#установите-сборщик",
+    "title": "Составной сайт",
+    "section": "Установите сборщик",
+    "text": "Установите сборщик\nВ корне сайта выполните:\nquarto add Afonenko-Course-Tools/quarto-project-publish@v5.0.0 --no-prompt\nСоздайте корневой _quarto.yml:\nproject:\n  type: website\n  output-dir: _site\n  render: [index.qmd]\n  pre-render: _extensions/Afonenko-Course-Tools/course-site/entrypoints/pre.ts\n  post-render: _extensions/Afonenko-Course-Tools/course-site/entrypoints/post.ts\nwebsite:\n  title: Учебный курс\nformat: html\nlang: ru\nsubprojects: [theory, task]\nУ theory и task должны быть свои _quarto.yml. Например, книга теории:\nproject:\n  type: book\n  output-dir: _book\n  post-render: ../_extensions/Afonenko-Course-Tools/course-site/entrypoints/collect.ts\nbook:\n  title: Теория\n  chapters: [index.qmd]\nformat: html\nlang: ru\nПоследним post-hook каждой части подключите корневой collect.ts. Если часть уже использует Core или QRC, их post-hooks идут перед ним. Пути здесь рассчитаны для части на один уровень ниже корня.\nquarto render --profile student\nВ _site/theory/ и _site/task/ появятся актуальные результаты частей. Путь a/slides публикуется как a/slides/; переименование папки меняет URL. Один выбранный веб-формат документа может быть HTML или Reveal. PDF и другие форматы собираются отдельно с учётом обычных ограничений Quarto book.",
+    "crumbs": [
+      "Руководство",
+      "Составной сайт"
+    ]
+  },
+  {
+    "objectID": "guide/composition.html#предупреждения-частей",
+    "href": "guide/composition.html#предупреждения-частей",
+    "title": "Составной сайт",
+    "section": "Предупреждения частей",
+    "text": "Предупреждения частей\nКорневой CLI --fail-if-warnings не передаётся автоматически отдельным процессам рендера. Для публичной сборки задайте штатное fail-if-warnings: true в каждом самостоятельном проекте либо подключите общий файл через metadata-files. Предупреждение дочернего проекта тогда останавливает сборку до выдачи итогового результата.",
+    "crumbs": [
+      "Руководство",
+      "Составной сайт"
+    ]
+  },
+  {
+    "objectID": "guide/composition.html#qrc-addresses",
+    "href": "guide/composition.html#qrc-addresses",
+    "title": "Составной сайт",
+    "section": "Свяжите материалы",
+    "text": "Свяжите материалы\nЕсли нужны ссылки между книгой и слайдами, установите QRC в соответствующие проекты и задайте их пространства имён. Namespace ссылки, путь публикации и course.id решают разные задачи. Готовый пример book и HTML/Reveal показывает hooks и локальные переходы целиком.\nВ книге теории ссылка остаётся адресной:\nСначала выполните упражнение @task:exr-checksum.\nДля внешней опубликованной библиотеки можно подключить адресный снимок:\nreference-catalog:\n  namespace: theory\n  imports:\n    handbook:\n      source: references/handbook.json\n      namespace: handbook\n      base-url: https://example.org/handbook/\nЗамените адрес и JSON реальным каталогом владельца. @handbook:sec-integrity перейдёт к его опубликованной цели. Namespace не равен пути размещения или course.id; импорт не копирует условие, ресурсы или чужие задания в банк. Для student QRC получает текущие публичные outputs: restricted цель и её текст в каталог и поиск не входят. Full разрешает текущие full цели. Локальная отсрочка ссылки не создаёт фиктивный href; строгий full требует доступной цели.",
+    "crumbs": [
+      "Руководство",
+      "Составной сайт"
+    ]
+  },
+  {
+    "objectID": "guide/composition.html#resource-ownership",
+    "href": "guide/composition.html#resource-ownership",
+    "title": "Составной сайт",
+    "section": "Сохраните ресурсное владение",
+    "text": "Сохраните ресурсное владение\nРисунок или ссылка условия относятся к своему native документу и владельцу. При selected экспорте Core отбирает текущие разрешённые ресурсы, проверяет реальный путь, байты и SHA-256 и переносит их под безопасные targets пакета. Адаптер не открывает заново producer effectiveBase. Относительный ресурс чужой публикации не становится местным ресурсом только из-за QRC ссылки.\nPublisher размещает готовые outputs частей, сохраняя их конфигурации. Самостоятельная вложенная книга не становится частью банка соседней книги. Полные output каталоги, _generated, source и закрытые проекты исключите из публичных project.resources — профили и приватность.",
+    "crumbs": [
+      "Руководство",
+      "Составной сайт"
+    ]
+  },
+  {
+    "objectID": "guide/composition.html#download-resources",
+    "href": "guide/composition.html#download-resources",
+    "title": "Составной сайт",
+    "section": "Выдайте публичные материалы ZIP",
+    "text": "Выдайте публичные материалы ZIP\nDownload работает и без Core/CUE. Явно разрешите каталог данных, подключите его hooks и фильтр:\nproject:\n  type: website\n  resources: ['!materials/**']\n  pre-render: _extensions/Afonenko-Course-Tools/project-download/entrypoints/pre.ts\n  post-render: _extensions/Afonenko-Course-Tools/project-download/entrypoints/post.ts\nfilters: [project-download]\nproject-download:\n  resources:\n    seminar-data:\n      path: /materials/observations\n      include: ['**/*.csv', '**/*.md']\n      exclude: ['drafts/**']\n      gitignore: true\nВ QMD запросите архив:\n{{&lt; project-download seminar-data text=\"Скачать данные семинара\" &gt;}}\nНачальный / означает корень текущего проекта. ZIP появляется по видимому после проекции запросу; profiles ресурса разрешает запрос, но не скрывает сам shortcode. Оберните его нативным условием профиля, если нужно скрыть ссылку.\nДля стартового проекта канонической задачи существующий мост включается явно project-download: {course-model: true}. Он получает текущую native модель и выбирает только &lt;project&gt;/student. Teacher tests, reference/solution, QMD, metadata и build-входы в публичный ZIP не входят. Restricted задача student заявки не оставляет. Participant public пакет Print/PL сам по себе не разрешает публиковать ZIP на сайте.\nПосле full → student проверяйте HTML, search, QRC, ресурсы и ZIP текущего выхода. Download очищает только собственные прежние archives/requests этого output; другие outputs и чужие ZIP сохраняет. Сохранённый course.json не доказывает актуальность. Скачивание архива и просмотр исходного QMD остаются отдельными действиями.",
+    "crumbs": [
+      "Руководство",
+      "Составной сайт"
+    ]
+  },
+  {
+    "objectID": "guide/answers.html",
+    "href": "guide/answers.html",
+    "title": "Поля ответа и закрытые ключи",
+    "section": "",
+    "text": "Выберите форму ответа по смыслу задачи и возможностям потребителя. Разметка ниже относится к Core 4.0.0; банк уже включён, а каждая показанная задача имеет собственные difficulty/time и open default.",
+    "crumbs": [
+      "Руководство",
+      "Поля ответа и закрытые ключи"
+    ]
+  },
+  {
+    "objectID": "guide/answers.html#answer-manual",
+    "href": "guide/answers.html#answer-manual",
+    "title": "Поля ответа и закрытые ключи",
+    "section": "Текстовый ответ manual",
+    "text": "Текстовый ответ manual\n:::: {#exr-explain difficulty=\"introductory\" time=\"10\"}\nОбъясните, почему контрольная сумма не устанавливает автора файла.\n\n```{.yaml .answer-spec}\ntype: manual\nsubmission: text\n```\n\n::: {.grading-notes}\nВ ответе должны быть разделены целостность данных и подтверждение авторства.\n:::\n::::\nПубличная проекция содержит условие и поле «Ответ:». Преподавательские заметки извлекаются отдельно. Если специальный ответ не объявлен, Body использует manual с текстовым полем по умолчанию. Для явной структуры удобно оставить answer-spec.",
+    "crumbs": [
+      "Руководство",
+      "Поля ответа и закрытые ключи"
+    ]
+  },
+  {
+    "objectID": "guide/answers.html#answer-single-choice",
+    "href": "guide/answers.html#answer-single-choice",
+    "title": "Поля ответа и закрытые ключи",
+    "section": "Один вариант single-choice",
+    "text": "Один вариант single-choice\n:::: {#exr-choose difficulty=\"introductory\" time=\"5\"}\nЧто подтверждает совпадение суммы с доверенным эталоном?\n\n::: {.answer type=\"single-choice\"}\n- [Совпадение проверяемых данных]{.correct}\n- Авторство отправителя\n- Наличие резервной копии\n:::\n::::\nНужны один BulletList, не менее двух вариантов и ровно одна .correct отметка на Span. Все варианты публичны; маркер правильного ответа скрывается и превращается в closedKey.correct. Этот индекс использует нумерацию с нуля во внутреннем payload; автор пишет отметку, а не индекс вручную.",
+    "crumbs": [
+      "Руководство",
+      "Поля ответа и закрытые ключи"
+    ]
+  },
+  {
+    "objectID": "guide/answers.html#answer-numeric",
+    "href": "guide/answers.html#answer-numeric",
+    "title": "Поля ответа и закрытые ключи",
+    "section": "Число numeric",
+    "text": "Число numeric\n:::: {#exr-size difficulty=\"introductory\" time=\"5\"}\nСколько байтов занимает 256-битный результат?\n\n```{.yaml .answer-spec}\ntype: numeric\nkey:\n  value: 32\n  tolerance:\n    absolute: 0\n```\n::::\nУчастник получает пустое поле «Ответ:». Значение и абсолютный допуск остаются ключом. Допуск должен быть неотрицательным числом; для приближённого значения можно явно указать, например absolute: 0.1.",
+    "crumbs": [
+      "Руководство",
+      "Поля ответа и закрытые ключи"
+    ]
+  },
+  {
+    "objectID": "guide/answers.html#answer-multipart",
+    "href": "guide/answers.html#answer-multipart",
+    "title": "Поля ответа и закрытые ключи",
+    "section": "Несколько частей multipart",
+    "text": "Несколько частей multipart\n:::: {#exr-parts difficulty=\"intermediate\" time=\"15\"}\nУкажите размер результата и объясните, что проверяет его сравнение.\n\n```{.yaml .answer-spec}\ntype: multipart\nparts:\n  - name: size\n    label: Размер в байтах\n    type: numeric\n    key: {value: 32, tolerance: {absolute: 0}}\n  - name: explanation\n    label: Объяснение\n    type: manual\n    submission: text\n```\n::::\nПоддерживаются части manual и numeric. У каждой уникальное name в форме ^[a-z][a-z0-9-]*$ и непустая авторская label. Метки и поля ответа публичны; numeric ключи остаются закрытыми. Авторские метки Core не переводит.",
+    "crumbs": [
+      "Руководство",
+      "Поля ответа и закрытые ключи"
+    ]
+  },
+  {
+    "objectID": "guide/answers.html#answer-matching",
+    "href": "guide/answers.html#answer-matching",
+    "title": "Поля ответа и закрытые ключи",
+    "section": "Соответствия matching",
+    "text": "Соответствия matching\n:::: {#exr-match difficulty=\"intermediate\" time=\"10\"}\nСопоставьте средство с его основным назначением.\n\n```{.yaml .answer-spec}\ntype: matching\nprompts:\n  - Контрольная сумма\n  - Цифровая подпись\noptions:\n  - Проверка целостности\n  - Подтверждение авторства\n  - Хранение резервной копии\nkey:\n  pairs:\n    Контрольная сумма: Проверка целостности\n    Цифровая подпись: Подтверждение авторства\n```\n::::\nPrompts и options — непустые списки уникальных непустых строк. Ключ покрывает каждый prompt, ссылается только на известные options и не добавляет чужих prompts. Лишний вариант возможен. Участник получает условия, варианты и поле «Соответствия:»; пары ключа не выдаются.",
+    "crumbs": [
+      "Руководство",
+      "Поля ответа и закрытые ключи"
+    ]
+  },
+  {
+    "objectID": "guide/answers.html#answer-support",
+    "href": "guide/answers.html#answer-support",
+    "title": "Поля ответа и закрытые ключи",
+    "section": "Выберите поддерживаемый потребитель",
+    "text": "Выберите поддерживаемый потребитель\n\n\n\n\n\n\n\n\n\nФорма Core\nPrint\nMoodle\nPrairieLearn текущей линии\n\n\n\n\nmanual\nПечатное поле\nessay\nЧерез программный проект с External grading\n\n\nsingle-choice\nВарианты без correct\nmultichoice с teacher ключом\nНе отдельный встроенный choice-экспорт\n\n\nnumeric\nПечатное поле\nОтклоняется\nНе отдельный встроенный numeric-экспорт\n\n\nmultipart\nПоля частей\nОтклоняется\nНе отдельный встроенный multipart-экспорт\n\n\nmatching\nУсловия, варианты и поле соответствий\nОтклоняется\nНе отдельный встроенный matching-экспорт\n\n\n\nPrairieLearn поставляет нативные вопросы с внешней проверкой: явный project, binding, стартовые файлы и закрытые tests. Наличие формы Core само по себе не создаёт встроенный PL-вопрос соответствующего типа. Cloud проверяет свою модель VM/действий и не является потребителем Body ответов.",
+    "crumbs": [
+      "Руководство",
+      "Поля ответа и закрытые ключи"
+    ]
+  },
+  {
+    "objectID": "guide/answers.html#answer-privacy",
+    "href": "guide/answers.html#answer-privacy",
+    "title": "Поля ответа и закрытые ключи",
+    "section": "Сохраните границу payload",
+    "text": "Сохраните границу payload\ncondition и publicAnswer предназначены участнику. closedKey, solution и gradingNotes находятся отдельно в teacher пакете и отсутствуют в .public.json. Print/PrairieLearn получают participant-safe условие и ресурсы; Moodle использует нужный ему teacher ключ по своему контракту. visibility: public Body означает безопасную выдачу участнику, а statementVisibility: open|restricted — публикацию условия на сайте.\nНе используйте answer-spec или grading-notes как обычный текст условия. Ключи и исходный YAML проверяются до student проекции, включая удаляемые restricted задачи. Публичный source modal исходной банковской страницы может раскрыть скрытый YAML — настройте исходники и ресурсы.",
+    "crumbs": [
+      "Руководство",
+      "Поля ответа и закрытые ключи"
+    ]
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Инструменты учебного курса Quarto",
+    "section": "",
+    "text": "Эти расширения помогают собрать учебный курс из обычных документов Quarto: книги с заданиями, презентации, материалы занятий и страницы работ. Вы пишете условие один раз, назначаете его в нужные работы и выбираете способ публикации или экспорта. Форматы документов, перекрёстные ссылки и профили остаются средствами Quarto.\nНачните с руководства, если создаёте курс или выбираете средство для существующего проекта. Первый документ можно подготовить без банка и без настройки экспорта. Затем добавляйте нужные возможности."
+  },
+  {
+    "objectID": "index.html#выберите-задачу",
+    "href": "index.html#выберите-задачу",
+    "title": "Инструменты учебного курса Quarto",
+    "section": "Выберите задачу",
+    "text": "Выберите задачу\n\n\n\nЗадача\nПродолжение\n\n\n\n\nОформить задания и назначить их в работы\nЗадачи банка и работы\n\n\nРазделить состав публичной и полной версии\nПрофили student и full\n\n\nИспользовать одну презентацию на занятии и дома\nПрезентация\n\n\nОбъединить самостоятельные проекты\nСоставной сайт\n\n\nПолучить раздатку или вопросы для платформы\nЭкспорт работы\n\n\n\nСтраницы расширений объясняют их настройки и границы. Справочник помогает настроить просмотр исходников и найти пояснение диагностики. В каталоге можно открыть готовый результат и получить целую папку соответствующего примера."
+  },
+  {
+    "objectID": "guide/assessments.html",
+    "href": "guide/assessments.html",
+    "title": "Работы, назначения и время",
+    "section": "",
+    "text": "Состав работы — упорядоченные местные ссылки на банк. Один QMD описывает одну лабораторную, семинар, практическую или контрольную работу. Ниже — контракт Core 4.0.0.",
+    "crumbs": [
+      "Руководство",
+      "Работы, назначения и время"
+    ]
+  },
+  {
+    "objectID": "guide/assessments.html#scenario-bank",
+    "href": "guide/assessments.html#scenario-bank",
+    "title": "Работы, назначения и время",
+    "section": "Подготовьте общий банк для сценариев",
+    "text": "Подготовьте общий банк для сценариев\nПримеры используют книгу task с bank/_metadata.yml:\nexercise-bank: true\nexercise-statement-visibility: open\nВ bank/integrity.qmd поместите условия и решения:\n# Целостность данных {#sec-integrity}\n\n:::: {#exr-checksum difficulty=\"introductory\" time=\"10\" course-role=\"demonstration\"}\nПокажите изменение SHA-256 после замены одного байта.\n\n::: {.solution}\nСначала вычислим исходную сумму, затем изменим байт и повторим вычисление.\n:::\n::::\n\n::: {#exr-collision difficulty=\"intermediate\" time=\"25\"}\nОбъясните отличие случайной коллизии от намеренного подбора.\n:::\n\n::: {#sol-collision}\nСлучайное совпадение возникает без выбранной цели; намеренный подбор\nищет входы с требуемым совпадением.\n:::\n\n::: {#exr-repair difficulty=\"advanced\" time=\"40\"}\nПредложите проверку повреждённого архива при наличии резервных данных.\n:::\n\n::: {#sol-repair}\nСравните доступные копии с доверенным эталоном и восстановите проверенную копию.\n:::\n\n::: {#exr-integrity-variant difficulty=\"intermediate\" time=\"30\" statement-visibility=\"restricted\"}\n## Проверка журнала\nКакие изменения журнала можно обнаружить по сохранённым контрольным суммам?\n:::\n\n::: {#sol-integrity-variant}\nМожно обнаружить изменение тех данных, для которых сохранён доверенный эталон.\n:::\nStudent видит три открытых условия и решение checksum; restricted условие и остальные решения скрыты. Full видит все условия и решения.",
+    "crumbs": [
+      "Руководство",
+      "Работы, назначения и время"
+    ]
+  },
+  {
+    "objectID": "guide/assessments.html#lab-scenario",
+    "href": "guide/assessments.html#lab-scenario",
+    "title": "Работы, назначения и время",
+    "section": "Лабораторная без stage",
+    "text": "Лабораторная без stage\nДля лабораторной по программированию без разделения по месту выполнения создайте works/lab.qmd:\n---\nassessment:\n  id: checksum-lab\n  kind: lab\n---\n\n# Лабораторная по контрольным суммам {#sec-checksum-lab}\n\n::: {course-role=\"deliverables\"}\nСдайте программу сравнения сумм и объяснение выбранного алгоритма.\n:::\n\n::: {.task-items}\n1. @exr-collision\n2. [@exr-repair]{requirement=\"optional\" work-mode=\"individual\"}\n:::\nStage может отсутствовать: скрытого classroom нет. Вид lab не задаёт платформу или оценку. Student/full показывают ссылки на оба открытых условия; доступ к решениям определяется банком. Экспорт содержит collision, repair и их поля ответа, но не внешнее описание сдачи.",
+    "crumbs": [
+      "Руководство",
+      "Работы, назначения и время"
+    ]
+  },
+  {
+    "objectID": "guide/assessments.html#seminar-scenario",
+    "href": "guide/assessments.html#seminar-scenario",
+    "title": "Работы, назначения и время",
+    "section": "Семинар с тремя этапами",
+    "text": "Семинар с тремя этапами\nВ works/seminar.qmd используйте название и ID первого заголовка:\n---\nassessment:\n  kind: seminar\n  theory-time: 15\n---\n\n# Семинар по целостности данных {#sec-integrity-seminar}\n\n## Разбор с преподавателем\n\n::: {.task-items stage=\"demonstration\"}\n1. @exr-checksum\n:::\n\n## В аудитории\n\n::: {.task-items stage=\"classroom\"}\n1. [@exr-collision]{work-mode=\"pair\"}\n:::\n\n## После занятия\n\n::: {.task-items stage=\"homework\"}\n1. [@exr-repair]{requirement=\"optional\" work-mode=\"group\"}\n:::\nID работы здесь sec-integrity-seminar; вместо него можно явно задать assessment.id: integrity-seminar или использовать существующий chapter-id. Несколько списков объединяются в порядке документа: checksum, collision, repair. Заголовки — штатный способ описать последовательность занятия.\nНа Span ссылки requirement=\"required|optional\" и work-mode=\"individual|pair|group\" задают конкретное назначение. Defaults — required/individual. Stage задаётся всему списку и не выводится из заголовка. Каждый пункт содержит одну местную ссылку. Повтор задачи в пределах одной работы отклоняется; в разных работах её можно назначать снова.\nДля demonstration обязательны три факта банка: открытое условие, роль demonstration и фактическое публичное решение. Удаление любого из них делает первое назначение ошибкой. Stage не открывает закрытое решение. Проверяется фактическая публичная проекция текущей операции: решение, видимое в прежнем HTML, может отсутствовать в исходном JSON из-за when-format/when-meta. Для экспортируемого разбора используйте переносимый контейнер решения.\nStudent/full показывают состав семинара; student видит публичный разбор checksum. Экспорт содержит три условия в том же порядке, без внешних заголовков этапов и без решений. Внутренний заголовок самой задачи сохраняется.",
+    "crumbs": [
+      "Руководство",
+      "Работы, назначения и время"
+    ]
+  },
+  {
+    "objectID": "guide/assessments.html#practical-scenario",
+    "href": "guide/assessments.html#practical-scenario",
+    "title": "Работы, назначения и время",
+    "section": "Практическая на распечатках рядом с lab",
+    "text": "Практическая на распечатках рядом с lab\nЭто отдельный QMD works/practical.qmd с собственным видом работы:\n---\nassessment:\n  id: integrity-practical\n  kind: practical\n---\n\n# Практическая работа на распечатках {#sec-integrity-practical}\n\n::: {.assessment-preview}\nРабота проводится в аудитории. Перед занятием изучите разбор @exr-checksum.\nПонадобится объяснить причины, а не только записать итоговый ответ.\n:::\n\n::: {.task-items stage=\"classroom\"}\n1. @exr-integrity-variant\n:::\nВ practical назначаются только restricted задачи. Student показывает название и preview без закрытой ссылки назначения; full также позволяет перейти к полному условию и решению. Выбранный participant-экспорт выдаёт только integrity-variant с полем ответа. Открытый разбор, preview и его ресурсы в раздатку не включаются. PDF — способ выдачи, а practical — вид работы.",
+    "crumbs": [
+      "Руководство",
+      "Работы, назначения и время"
+    ]
+  },
+  {
+    "objectID": "guide/assessments.html#test-scenario",
+    "href": "guide/assessments.html#test-scenario",
+    "title": "Работы, назначения и время",
+    "section": "Контрольная и экзамен",
+    "text": "Контрольная и экзамен\nВ works/test.qmd:\n---\nassessment:\n  id: integrity-test\n  kind: test\n---\n\n# Контрольная по целостности данных {#sec-integrity-test}\n\n::: {.assessment-preview}\nПроверяются выбор метода и понимание его ограничений.\nОбразец рассуждения: @exr-checksum.\n:::\n\n::: {.task-items}\n1. @exr-integrity-variant\n:::\nЭкзамен тоже использует kind: test. В test разрешены только restricted назначения; публичные примеры идут обычными ссылками в preview. Student/full и экспорт ведут себя как в practical. .assessment-preview виден на обеих версиях сайта и полностью исключён из экспорта; он не назначает задачи и не меняет политику банка. Отдельного профиля для preview нет.",
+    "crumbs": [
+      "Руководство",
+      "Работы, назначения и время"
+    ]
+  },
+  {
+    "objectID": "guide/assessments.html#assessment-time",
+    "href": "guide/assessments.html#assessment-time",
+    "title": "Работы, назначения и время",
+    "section": "Прочитайте четыре итога времени",
+    "text": "Прочитайте четыре итога времени\n\n\n\nИтог семинара\nРасчёт\nМинуты\n\n\n\n\nЗадачи required\nchecksum + collision\n35\n\n\nЗадачи all\nchecksum + collision + repair\n75\n\n\nЗанятие required\nзадачи required + теория\n50\n\n\nЗанятие all\nзадачи all + теория\n90\n\n\n\nassessment.theory-time: 15 показывается отдельно и добавляется один раз к каждому итогу занятия. Это время теории вне уже учтённых задач. Допустимо положительное конечное число, например theory-time: 7.5; тогда два итога семинара будут 42.5 и 82.5. Собственное time задачи остаётся целым. Demonstration включается в суммы; pair/group их не масштабируют. Обычная ссылка в preview не включает время примера автоматически.\nПолный render/экспорт проверяет состав по полной текущей модели. Частичный render или preview может пропустить недоступный итог либо показать ??. Это повод проверить полный текущий запуск. Частичная сумма, ноль или старый sidecar не заменяют полный итог; дополнительный полный render ради preview не выполняется.\nЭкспорт поясняет разделение participant и teacher пакетов.",
+    "crumbs": [
+      "Руководство",
+      "Работы, назначения и время"
+    ]
+  },
+  {
+    "objectID": "guide/exercises.html",
+    "href": "guide/exercises.html",
+    "title": "Задачи банка и обычные упражнения",
+    "section": "",
+    "text": "Банк нужен для повторного назначения и выбранного экспорта. Обычный exr в книге или на слайде может оставаться обычным объектом Quarto. Ниже — модель Core 4.0.0.",
+    "crumbs": [
+      "Руководство",
+      "Задачи банка и обычные упражнения"
+    ]
+  },
+  {
+    "objectID": "guide/exercises.html#bank-opt-in",
+    "href": "guide/exercises.html#bank-opt-in",
+    "title": "Задачи банка и обычные упражнения",
+    "section": "Явно включите банк",
+    "text": "Явно включите банк\n# task/bank/_metadata.yml\nexercise-bank: true\nexercise-statement-visibility: open\nТолько #exr-* в области exercise-bank: true становится канонической задачей. По умолчанию банк выключен. Имя папки, формат книги и платформа не включают его. У каждой задачи обязательны собственные difficulty и time: introductory, intermediate или advanced; время — положительное целое число минут. Значения страницы или раздела эти поля не заменяют.\n::: {#exr-collision difficulty=\"intermediate\" time=\"25\"}\nОбъясните различие между случайной коллизией и намеренным подбором.\n:::\nРезультат — открытая задача средней сложности на 25 минут. Core отклонит её, если удалить собственное время, указать time=\"0\", дробное время задачи или неизвестную сложность. Оценка времени относится к задаче; работа в паре задаётся позже на назначении.",
+    "crumbs": [
+      "Руководство",
+      "Задачи банка и обычные упражнения"
+    ]
+  },
+  {
+    "objectID": "guide/exercises.html#statement-policy",
+    "href": "guide/exercises.html#statement-policy",
+    "title": "Задачи банка и обычные упражнения",
+    "section": "Выберите публикацию условия",
+    "text": "Выберите публикацию условия\nexercise-statement-visibility в нативных метаданных задаёт политику области. Атрибут statement-visibility конкретной задачи имеет приоритет:\n::: {#exr-integrity-variant difficulty=\"intermediate\" time=\"30\" statement-visibility=\"restricted\" course-role=\"control\"}\nПолучены две версии журнала проверки. Укажите, какие изменения\nможно обнаружить по сохранённым контрольным суммам.\n:::\nЭффективная политика обязательна: без метаданных области и без атрибута задачи объявление отклоняется. Скрытого open или restricted default нет. Роль control обозначает деятельность, но сама условие не скрывает.\n\n\n\n\n\n\n\n\nЗадача\nStudent-сайт\nFull-сайт\n\n\n\n\nopen, обычная\nУсловие; решение скрыто\nУсловие и решение\n\n\nopen, course-role=\"demonstration\", решение есть\nУсловие и решение\nУсловие и решение\n\n\nrestricted\nУсловие, решение и ссылка назначения скрыты\nУсловие и решение\n\n\n\nОткрытое условие не разрешает публиковать решение. Для публичного разбора нужна явная demonstration с решением. Stage работы свойства банковской задачи не меняет. Проверяется текущая декларация, без анализа Git или истории прежних публикаций.\nRestricted условие можно выдать участнику выбранного Print/PrairieLearn экспорта. Это отдельная выдача участнику, а не публикация на открытом сайте; ключ, решение и заметки преподавателя остаются закрытыми.",
+    "crumbs": [
+      "Руководство",
+      "Задачи банка и обычные упражнения"
+    ]
+  },
+  {
+    "objectID": "guide/exercises.html#ordinary-exercise",
+    "href": "guide/exercises.html#ordinary-exercise",
+    "title": "Задачи банка и обычные упражнения",
+    "section": "Оставьте обычное упражнение вне банка",
+    "text": "Оставьте обычное упражнение вне банка\nВ самостоятельной странице, где банк не включён:\n---\ntitle: Обсуждение целостности\nformat: html\n---\n\n::: {#exr-observe}\nКак понять, что файл изменился?\n:::\n\n::: {#exm-digest}\nСравнение хешей — пример проверки целостности.\n:::\n\n::: {#sol-observe}\nСравните текущую сумму с ранее сохранённой доверенной суммой.\n:::\nexr, exm, sol следуют Quarto: банковские difficulty/time и приватность к ним не применяются, в Course они автоматически не включаются. Нативный exm не становится банковской демонстрацией. Если нужно оформление, явно подключите filters: [course-presentation].",
+    "crumbs": [
+      "Руководство",
+      "Задачи банка и обычные упражнения"
+    ]
+  },
+  {
+    "objectID": "guide/exercises.html#exercise-binding",
+    "href": "guide/exercises.html#exercise-binding",
+    "title": "Задачи банка и обычные упражнения",
+    "section": "Добавьте платформенный проект",
+    "text": "Добавьте платформенный проект\nДля программной задачи привязка остаётся явной:\n::: {#exr-java-digest difficulty=\"intermediate\" time=\"45\" statement-visibility=\"restricted\" target=\"prairielearn\" project=\"/projects/java-digest\"}\n## Подсчёт контрольной суммы\n\nДопишите метод подсчёта SHA-256. Стартовые файлы находятся в проекте задачи.\n:::\ntarget и project не включают банк. Адаптер может требовать ведущий заголовок, структуру проекта и собственные настройки. Для PrairieLearn публичные стартовые файлы лежат в student, закрытые проверки — в tests, авторский вариант — в reference; весь каталог не становится веб-ресурсом. Экспорт и ресурсное владение проверяются отдельно.",
+    "crumbs": [
+      "Руководство",
+      "Задачи банка и обычные упражнения"
+    ]
+  },
+  {
+    "objectID": "guide/index.html",
+    "href": "guide/index.html",
+    "title": "Руководство",
+    "section": "",
+    "text": "Начните с результата, который нужен читателю. Страницу, книгу и презентацию создаёт Quarto. Расширения добавляют банк с назначениями, оформление учебных блоков, общий сайт самостоятельных проектов и выбранный экспорт.\n\n\n\n\n\n\nУведомление\n\n\n\nРуководство использует выпущенный Core v4.0.0 и готовые группы demo-20261008. Версии и спецификации дают точные теги остальных инструментов и владельца каждого правила.\n\n\n\n\n\nЧто вы готовите\nЧто использовать\nСледующий шаг\n\n\n\n\nПервую страницу, книгу или слайды\nНативный Quarto; Presentation по желанию\nПервый документ\n\n\nОбщий банк задач\nCore и явный банковский opt-in\nМодель курса, задачи\n\n\nРешение для преподавателя или публичный разбор\nСвязь по суффиксу либо вложенная solution\nРешения\n\n\nЦели, материалы, критерии и учебные акценты\nЯвные course-role\nПедагогические роли\n\n\nЛабораторную, семинар, практическую или контрольную\nОдин QMD работы и списки назначений\nРаботы и время\n\n\nПоле ответа и ключ проверки\nОтвет Core и возможности адаптера\nОтветы\n\n\nОткрытый и полный сайт\nПрофили Quarto и политика условия банка\nStudent и full\n\n\nОдни слайды для аудитории и изучения\nPresentation и Navigation для Reveal\nПрезентация\n\n\nОбщий сайт нескольких книг и слайдов\nPublisher; QRC для адресных ссылок\nСоставной сайт\n\n\nPDF, Moodle XML или поставку PrairieLearn\nCore и выбранный потребитель\nЭкспорт\n\n\nРаботу в Windows\nДокументированные пути и границы обходного решения\nWindows\n\n\n\nДля обычного документа достаточно Quarto. Для текущей модели нужны Quarto не ниже 1.11.5 и CUE 0.17.1 на путях проверок Core/адаптеров. Java/Gradle требуются для исполнения Java-проекта; они не нужны для просмотра готового HTML. Внешняя LMS и облачная среда проверяются отдельно от локального экспорта.\nКаждая страница показывает ситуацию, копируемую разметку и её результат. Каталог дополняет объяснения целыми producer-папками и готовыми результатами. Сопровождение этого сайта описано в README репозитория.",
+    "crumbs": [
+      "Руководство",
+      "Руководство"
+    ]
+  },
+  {
+    "objectID": "guide/presentation.html",
+    "href": "guide/presentation.html",
+    "title": "Одна презентация",
+    "section": "",
+    "text": "Одна презентация подходит для объяснения в аудитории и повторения дома. Presentation оформляет заметки и ответы; Navigation добавляет поиск и переходы Reveal. Core проверяет учебную разметку, если она используется. Обычные слайды ниже не включают банк. Банковская политика Core 4.0.0 действует при явном включении банка.\nCore, Presentation и Navigation устанавливаются одним выпуском:\nВключите фильтры и штатный Reveal-плагин:\nПри обычном открытии общие .notes видны рядом со слайдами, ответы свёрнуты. Кнопка «Аудитория» скрывает заметки и сохраняет открытые ответы. Кнопка «Изучение» возвращает их. Режим действует до перезагрузки; явная ссылка slides.html?course-mode=lecture открывает аудиторный режим.\nПоказ заметок использует API Reveal showNotes; окно по клавише S остаётся штатным. Поиск включает заметки, подсказки и решения. Прямая ссылка и результат поиска раскрывают только цель и её родителей. При печати ответы открываются, заметки исключаются, длинный слайд продолжается на следующих страницах. После обычной печати экранное состояние восстанавливается.\nВ обычных слайдах вне банка авторские ответы публичны. Если явно включён банк, student Reveal применяет ту же statement-visibility и правило demonstration, что книга. Решения банка автоматически на отдельные слайды не переносятся. Общие notes остаются публичными.",
+    "crumbs": [
+      "Руководство",
+      "Одна презентация"
+    ]
+  },
+  {
+    "objectID": "guide/presentation.html#presentation-fragments",
+    "href": "guide/presentation.html#presentation-fragments",
+    "title": "Одна презентация",
+    "section": "Нативные фрагменты и форматы",
+    "text": "Нативные фрагменты и форматы\n::: {.fragment}\nЭтот вывод появляется после очередного перехода Reveal.\n:::\nФрагменты, заголовки слайдов, форматы и PDF остаются средствами Quarto. Для статически раскрытых доступных ответов используйте:\ncourse-presentation:\n  answers: expanded\nHTML оформляет доступное решение штатным сворачиваемым callout; Reveal — details; PDF/Typst/LaTeX сохраняют статическое содержимое. При ?print-pdf открываются ответы, callout, фрагменты и вкладки; notes исключаются. Банковская приватность применяется до оформления и печати.",
+    "crumbs": [
+      "Руководство",
+      "Одна презентация"
+    ]
+  },
+  {
+    "objectID": "guide/presentation.html#соберите-слайды",
+    "href": "guide/presentation.html#соберите-слайды",
+    "title": "Одна презентация",
+    "section": "Соберите слайды",
+    "text": "Соберите слайды\nquarto render slides.qmd --to revealjs --fail-if-warnings\nКоманда создаст slides.html. Откройте его для самостоятельного просмотра или используйте ссылку с ?course-mode=lecture для занятия. Условия, ответы и общие заметки демонстрации намеренно публичны.\nСмотрите готовую презентацию и её исходную папку. Ссылка на QMD слайдов остаётся обычной ссылкой; HTML Code Tools не добавляется к Reveal. Подробнее — в справочнике исходников.",
+    "crumbs": [
+      "Руководство",
+      "Одна презентация"
+    ]
+  },
+  {
+    "objectID": "guide/roles.html",
+    "href": "guide/roles.html",
+    "title": "Педагогические роли",
+    "section": "",
+    "text": "Роль поясняет смысл блока читателю. Она не задаёт баллы, платформу или форму выдачи работы. Примеры относятся к Core 4.0.0; для оформления подключите Presentation, для проверки — Core перед ним.",
+    "crumbs": [
+      "Руководство",
+      "Педагогические роли"
+    ]
+  },
+  {
+    "objectID": "guide/roles.html#role-contexts",
+    "href": "guide/roles.html#role-contexts",
+    "title": "Педагогические роли",
+    "section": "Выберите подходящий контекст",
+    "text": "Выберите подходящий контекст\nНа канонической задаче допустимы роли деятельности: demonstration, discussion, independent-study, control. Остальные роли оформляют обычный Div вокруг или внутри задачи, страницы и описания работы. Все роли можно использовать в самостоятельных смысловых блоках. CSS-класс сам по себе не заменяет course-role.\n\n\n\n\n\n\n\n\nРоль\nКонтекст и рекомендация\nРезультат\n\n\n\n\ndemonstration\nРазбор метода; на банковской задаче — явная демонстрация\nПодпись «Демонстрация»; публичное решение только у open задачи с решением\n\n\ndiscussion\nВопрос группе, standalone Div или задача банка\nПодпись «Обсуждение»\n\n\nobjectives\nНачало темы или работы\nЧитатель видит цели\n\n\nprerequisites\nПеред новым материалом\nВидны необходимые знания\n\n\nreading\nМатериалы темы, ссылки required/optional\nОтделены материалы для изучения\n\n\ntakeaway\nИтог темы или разбора\nВыделен главный вывод\n\n\nlimitation\nПосле описания метода\nЯсна граница применимости\n\n\nmisconception\nРазбор типичной ошибки\nОшибка и объяснение видны рядом\n\n\ncriteria\nОписание работы либо внутренний блок задачи\nЯсны критерии результата\n\n\ndeliverables\nОписание сдаваемых материалов\nЯсно, что сдаёт участник\n\n\nindependent-study\nСамостоятельная деятельность, Div или задача\nЭто роль деятельности; kind работы остаётся lab/seminar/practical/test\n\n\ncontrol\nПроверка освоения, Div или задача банка\nПодпись «Контроль»; публикацию определяет statement-visibility",
+    "crumbs": [
+      "Руководство",
+      "Педагогические роли"
+    ]
+  },
+  {
+    "objectID": "guide/roles.html#activity-roles",
+    "href": "guide/roles.html#activity-roles",
+    "title": "Педагогические роли",
+    "section": "Роли деятельности",
+    "text": "Роли деятельности\nПубличный разбор в банке с open default:\n:::: {#exr-demonstrate difficulty=\"introductory\" time=\"10\" course-role=\"demonstration\"}\nПокажите сравнение двух контрольных сумм.\n\n::: {.solution}\nСравните значения побайтно и зафиксируйте различие.\n:::\n::::\nВопрос для обсуждения:\n::: {#exr-discuss difficulty=\"intermediate\" time=\"15\" course-role=\"discussion\"}\nПочему совпадение суммы не доказывает авторство файла?\n:::\nСамостоятельное изучение:\n::: {#exr-self-study difficulty=\"intermediate\" time=\"25\" course-role=\"independent-study\"}\nСравните два алгоритма по размеру результата и назначению.\n:::\nКонтрольная деятельность:\n::: {#exr-control difficulty=\"advanced\" time=\"30\" course-role=\"control\" statement-visibility=\"restricted\"}\nВыберите достаточный способ проверки целостности для заданной угрозы.\n:::\nУ каждого примера собственные difficulty/time. Для обсуждения вне банка можно взять обычный блок без экспортной задачи:\n::: {course-role=\"discussion\"}\nКаким источникам контрольных сумм вы доверяете и почему?\n:::",
+    "crumbs": [
+      "Руководство",
+      "Педагогические роли"
+    ]
+  },
+  {
+    "objectID": "guide/roles.html#preparation-roles",
+    "href": "guide/roles.html#preparation-roles",
+    "title": "Педагогические роли",
+    "section": "Цели, подготовка и материалы",
+    "text": "Цели, подготовка и материалы\n::: {course-role=\"objectives\"}\nПосле занятия вы сможете проверить целостность файла и объяснить\nограничения такой проверки.\n:::\n\n::: {course-role=\"prerequisites\"}\nНужно уметь читать файл как последовательность байтов и запускать программу.\n:::\n\n::: {course-role=\"reading\" requirement=\"required\"}\nПрочитайте раздел о контрольных суммах до лабораторной.\n:::\n\n::: {course-role=\"reading\" requirement=\"optional\"}\nДополнительно сравните контрольную сумму и цифровую подпись.\n:::\nrequirement здесь характеризует материал для чтения. Обязательность назначения задачи в работе задаётся отдельно на Span ссылки в .task-items.",
+    "crumbs": [
+      "Руководство",
+      "Педагогические роли"
+    ]
+  },
+  {
+    "objectID": "guide/roles.html#explanation-roles",
+    "href": "guide/roles.html#explanation-roles",
+    "title": "Педагогические роли",
+    "section": "Выводы и ограничения",
+    "text": "Выводы и ограничения\n::: {course-role=\"takeaway\"}\nСравнивайте результат с доверенным эталоном.\n:::\n\n::: {course-role=\"limitation\"}\nКонтрольная сумма обнаруживает изменение, но не устанавливает автора.\n:::\n\n::: {course-role=\"misconception\"}\nСовпавшая сумма не означает, что сам источник эталона надёжен.\n:::\nИспользуйте эти блоки рядом с объяснением метода. Они не становятся задачами, не получают банковское время и не входят в состав работы по роли.",
+    "crumbs": [
+      "Руководство",
+      "Педагогические роли"
+    ]
+  },
+  {
+    "objectID": "guide/roles.html#result-roles",
+    "href": "guide/roles.html#result-roles",
+    "title": "Педагогические роли",
+    "section": "Критерии и сдаваемые материалы",
+    "text": "Критерии и сдаваемые материалы\n::: {course-role=\"criteria\"}\nРезультат воспроизводим; объяснение различает целостность и авторство.\n:::\n\n::: {course-role=\"deliverables\"}\nСдайте программу, пример входных данных и краткое объяснение результата.\n:::\nПубличные критерии можно оставить внутри условия. Закрытые инструкции проверки помещайте в .grading-notes внутри задачи — границы ответа. Роль criteria не превращает текст в закрытый ключ.\nДля standalone деятельности Presentation может использовать явно включённые course-pedagogy.document-defaults страницы. В банке такой default не заменяет собственные difficulty/time. Вспомогательные роли цели/материалов/критериев оценку деятельности не наследуют. Полный словарь и контексты принадлежат Core.",
+    "crumbs": [
+      "Руководство",
+      "Педагогические роли"
+    ]
+  },
+  {
+    "objectID": "guide/specifications.html",
+    "href": "guide/specifications.html",
+    "title": "Версии и спецификации владельцев",
+    "section": "",
+    "text": "Руководство объясняет авторские действия. Нормативные правила принадлежат владельцам инструментов и читаются на том же Git ref, что установленный код.",
+    "crumbs": [
+      "Руководство",
+      "Версии и спецификации владельцев"
+    ]
+  },
+  {
+    "objectID": "guide/specifications.html#guide-status",
+    "href": "guide/specifications.html#guide-status",
+    "title": "Версии и спецификации владельцев",
+    "section": "Выпущенные версии",
+    "text": "Выпущенные версии\nРуководство описывает модель Core v4.0.0 и выпуски потребителей из таблицы ниже. В Taskfile.yml закреплены этот bundle и восемь готовых групп demo-20261008 семи производителей. Архивные SHA-256, полный BUILD и hashes каждого файла проверяются по tests/ready-assets.json; producer source каждой группы соответствует своему tool tag на том же Git SHA.\ncurrent означает правила выбранного ref; accepted-next — принятое изменение; implementation-in-progress — внедрение в рабочей ветке; unreleased — код после последнего опубликованного выпуска. Исторический план и старый успешный render не подтверждают текущий контракт или дерево.",
+    "crumbs": [
+      "Руководство",
+      "Версии и спецификации владельцев"
+    ]
+  },
+  {
+    "objectID": "guide/specifications.html#owner-contracts",
+    "href": "guide/specifications.html#owner-contracts",
+    "title": "Версии и спецификации владельцев",
+    "section": "Найдите владельца правила",
+    "text": "Найдите владельца правила\n\n\n\nПравило\nВладелец и актуальный индекс\nПоследний закреплённый выпуск\n\n\n\n\nБанк, роли, решения, работы, время, student/full, Body\nCore / Presentation / Navigation\nCore v4.0.0\n\n\nСоставной native сайт и current outputs\nPublisher\nv5.0.0\n\n\nАдресные ссылки и каталог целей\nQRC\nv3.0.0\n\n\nParticipant PDF и guards публичного пакета\nPrint\nv0.3.0\n\n\nTeacher XML manual/single-choice\nMoodle\nv0.3.0\n\n\nВнешняя проверка, bindings и PL-поставка\nPrairieLearn\nv3.0.0\n\n\nVM, шаги и действия Cloud\nCloud\nv3.0.0\n\n\nЯвные материалы и безопасные ZIP\nDownload\nv2.0.0\n\n\n\nИндексы в таблице относятся к указанным выпускам. Изменения main после них могут быть unreleased; проверяйте поведение по точному тегу своей установки. Минимальная текущая линия — Quarto 1.11.5 и CUE 0.17.1.",
+    "crumbs": [
+      "Руководство",
+      "Версии и спецификации владельцев"
+    ]
+  },
+  {
+    "objectID": "guide/specifications.html#contract-evidence",
+    "href": "guide/specifications.html#contract-evidence",
+    "title": "Версии и спецификации владельцев",
+    "section": "Сопоставьте руководство и результат",
+    "text": "Сопоставьте руководство и результат\nМодель определена в действующих тематических спецификациях Core: банк, решения и работы, видимость, Body и NativeRun. Индекс также связывает Presentation и diagnostics. Адаптер определяет свои поля и поддерживаемые формы; README и пример объясняют запуск.\nГотовая группа в каталоге берётся из неизменяемого producer Release. Её BUILD.json сообщает commit, зависимости и чистоту source; проверка архива и файлов связывает её с закреплённым выпуском. Локальное исполнение Java, создание XML/PDF и импорт в реальную платформу — разные результаты. Не переносите подтверждение одного на остальные.",
+    "crumbs": [
+      "Руководство",
+      "Версии и спецификации владельцев"
+    ]
+  },
+  {
+    "objectID": "guide/windows.html",
+    "href": "guide/windows.html",
+    "title": "Пути и Windows",
+    "section": "",
+    "text": "Для текущей модели базовая версия — Quarto 1.11.5, CUE 0.17.1. Эта страница описывает известные узкие случаи; статус выпуска и свежие проверки владельца важны для конкретной установленной версии.",
+    "crumbs": [
+      "Руководство",
+      "Пути и Windows"
+    ]
+  },
+  {
+    "objectID": "guide/windows.html#windows-paths",
+    "href": "guide/windows.html#windows-paths",
+    "title": "Пути и Windows",
+    "section": "Сохраняйте владельца относительного пути",
+    "text": "Сохраняйте владельца относительного пути\nПуть проекта задания и его ресурсы разрешаются в контексте документированного владельца. Начальный / у project/Download path обозначает корень проекта, а не диск Windows. Обратные слеши в JSON экранируются; в YAML удобно использовать прямые слеши или одинарные кавычки. Пути CLI с пробелами берите в кавычки:\nquarto render \"D:\\Teaching materials\\task\" --profile student\nНе меняйте относительные пути условного рисунка под местоположение TEMP. Core Body и Download сохраняют собственное ресурсное владение.",
+    "crumbs": [
+      "Руководство",
+      "Пути и Windows"
+    ]
+  },
+  {
+    "objectID": "guide/windows.html#windows-course-fixes",
+    "href": "guide/windows.html#windows-course-fixes",
+    "title": "Пути и Windows",
+    "section": "Сравнение путей и временный JSON CUE",
+    "text": "Сравнение путей и временный JSON CUE\nВ Core 4.0.0 сравнения NativeRun нормализуют разделители Windows путей, сохраняя исходный путь для IO. Временный JSON CUE создаётся внутри projectRoot и удаляется после проверки. Проект на другом диске относительно TEMP допустим после этого патча: например, курс в D:\\Cybersecurity, TEMP на C:. Проверка временного файла не должна объявлять его выходом за банк только из-за другого диска. Исправление входит в закреплённый v4.0.0; фактическое исполнение конкретного проекта в Windows проверяйте в своей сессии.\nЕсли команда отказала, сохраните имя средства, код завершения и исходные stdout/stderr. Сравните фактическую версию Core с его диагностикой. Позиция временного JSON не является строкой исходного QMD.",
+    "crumbs": [
+      "Руководство",
+      "Пути и Windows"
+    ]
+  },
+  {
+    "objectID": "guide/windows.html#windows-recover-encode",
+    "href": "guide/windows.html#windows-recover-encode",
+    "title": "Пути и Windows",
+    "section": "Отдельный случай recoverEncode Quarto",
+    "text": "Отдельный случай recoverEncode Quarto\nЕсли в вашей Windows-сессии Quarto 1.11.5 завершается с recoverEncode при кириллическом пути проекта, примените обход для этого upstream случая. Он был зафиксирован отдельно от Course-сравнений и CUE TEMP; текущее воспроизведение в Windows здесь не заявляется. Ранее проверенный временный путь — папка с латинским именем, например D:\\Cybersecurity:\nSet-Location 'D:\\Cybersecurity'\nquarto render --profile student\nПереместите или скопируйте весь проект с его относительными ресурсами, затем повторите исходную команду. Это обход конкретного recoverEncode, а не обещание исправить все проблемы Windows. Проверка Linux-пути с кириллицей в тесте fetch документации также не доказывает работу Windows ветки.",
+    "crumbs": [
+      "Руководство",
+      "Пути и Windows"
+    ]
+  },
+  {
+    "objectID": "extensions/course.html",
+    "href": "extensions/course.html",
+    "title": "Core, Presentation и Navigation",
+    "section": "",
+    "text": "Core проверяет учебные факты и экспортирует выбранную работу. Presentation оформляет учебные блоки и раскрытие ответов. Navigation добавляет поиск, обзор и переходы в Reveal. Они входят в один bundle, но включаются отдельно.",
+    "crumbs": [
+      "Руководство",
+      "Расширения",
+      "Core, Presentation и Navigation"
+    ]
+  },
+  {
+    "objectID": "extensions/course.html#установка-и-подключение",
+    "href": "extensions/course.html#установка-и-подключение",
+    "title": "Core, Presentation и Navigation",
+    "section": "Установка и подключение",
+    "text": "Установка и подключение\nquarto add Afonenko-Course-Tools/quarto-course@v4.0.0 --no-prompt\nДля обычной книги оставьте format: html и уберите revealjs-plugins. Для сбора фактов текущего рендера подключите Core pre/post hooks из course-core/entrypoints/pre.ts и post.ts в project.pre-render и project.post-render; пути при установке из GitHub начинаются с _extensions/Afonenko-Course-Tools/. Экспорт выбранной работы читает исходники банка самостоятельно.\nЧтобы проверить модель всего проекта, настройте профиль full и выполните после успешного рендера:\nquarto render --profile full --fail-if-warnings\nquarto run _extensions/Afonenko-Course-Tools/course-core/entrypoints/check.ts . full\nВторая команда проверяет связи между документами и правила активированных адаптеров, затем записывает _generated/course-spec/course.json. Pre/post hooks сами фиксируют текущий нативный результат, а не заменяют эту полную проверку.\nfilters: [course-core, course-presentation]\nrevealjs-plugins: [course-navigation]\nformat:\n  revealjs:\n    slide-level: 2",
+    "crumbs": [
+      "Руководство",
+      "Расширения",
+      "Core, Presentation и Navigation"
+    ]
+  },
+  {
+    "objectID": "extensions/course.html#результат-и-ограничения",
+    "href": "extensions/course.html#результат-и-ограничения",
+    "title": "Core, Presentation и Navigation",
+    "section": "Результат и ограничения",
+    "text": "Результат и ограничения\nCore не требует course.id при обычном рендере. Для экспорта он нужен. Правила оценивания задаёт выбранная платформа. Core не переносит условия между проектами и не заменяет Markdown-парсер Quarto.\nПродолжите с руководством по сценарию. Каталог готовых групп связывает результат, исходную папку и требования для просмотра, рендера и исполнения. Собственные ID описаны в справочнике диагностики.",
+    "crumbs": [
+      "Руководство",
+      "Расширения",
+      "Core, Presentation и Navigation"
+    ]
+  },
+  {
+    "objectID": "extensions/index.html",
+    "href": "extensions/index.html",
+    "title": "Расширения",
+    "section": "",
+    "text": "Установка делает средство доступным; фильтры, обработчики и CLI включают нужную операцию. Начните с задачи в руководстве, затем выберите подробную страницу средства. Версии и спецификации связывают банковскую разметку и возможности потребителей с закреплёнными выпусками.\n\n\n\nСредство\nКогда нужно\nПодключение\n\n\n\n\nCourse\nБанк, учебные блоки и презентация\nCore/Presentation filters; Navigation Reveal plugin\n\n\nPublisher\nОбщий сайт самостоятельных частей\nКорневые hooks, subprojects, child collect\n\n\nQRC\nСсылки между публикациями\nNamespace, фильтр и post-hook\n\n\nPrint\nPDF-раздатка работы\nCLI с публичным Body-пакетом\n\n\nPrairieLearn\nПоставка PL-вопросов\nCore в банке, CLI и явные bindings\n\n\nMoodle\nXML вопросов\nCLI с полным пакетом и binding\n\n\nCloud\nПроверка облачной модели\nCore и адаптер Cloud\n\n\nDownload\nZIP разрешённых материалов\nФильтр, hooks и shortcode\n\n\n\nОбычный HTML строит Quarto. Просмотр готовых результатов требует браузера; для рендера нужны Quarto и зависимости конкретной группы. Экспорт и исполнение разделены: например, Java/Gradle используются для проверки Java-проекта, а реальная LMS или VM проверяется на целевой платформе отдельно.",
+    "crumbs": [
+      "Руководство",
+      "Расширения",
+      "Расширения"
+    ]
+  },
+  {
+    "objectID": "extensions/prairielearn.html",
+    "href": "extensions/prairielearn.html",
+    "title": "PrairieLearn — поставка вопросов",
+    "section": "",
+    "text": "PrairieLearn получает выбранную работу через установленный Core и создаёт поставку вопросов с явными bindings. Платформенная конфигурация хранится у автора, а не вычисляется из общей формулы оценки.",
+    "crumbs": [
+      "Руководство",
+      "Расширения",
+      "PrairieLearn — поставка вопросов"
+    ]
+  },
+  {
+    "objectID": "extensions/prairielearn.html#установка-и-подключение",
+    "href": "extensions/prairielearn.html#установка-и-подключение",
+    "title": "PrairieLearn — поставка вопросов",
+    "section": "Установка и подключение",
+    "text": "Установка и подключение\nquarto add Afonenko-Course-Tools/quarto-course-prairielearn@v3.0.0 --no-prompt\nДля проверки метаданных подключите адаптер вместе с Core в книге банка. Для экспорта установите оба средства в банк и передайте корень, путь банка, ID работы, binding и каталог результата как описано в руководстве. Группа Java/Gradle содержит законченные стартовые файлы, reference и проверки.\ncourse:\n  adapters: [prairielearn]\nfilters: [course-core, course-prairielearn]",
+    "crumbs": [
+      "Руководство",
+      "Расширения",
+      "PrairieLearn — поставка вопросов"
+    ]
+  },
+  {
+    "objectID": "extensions/prairielearn.html#результат-и-ограничения",
+    "href": "extensions/prairielearn.html#результат-и-ограничения",
+    "title": "PrairieLearn — поставка вопросов",
+    "section": "Результат и ограничения",
+    "text": "Результат и ограничения\nОбычный HTML не запускает Java. Java и Gradle нужны для исполнения демонстрации. Локальные assertions не подтверждают совместимость выбранного контейнера с сервером PrairieLearn; его нужно проверить на целевой установке.\nПродолжите с руководством по сценарию. Каталог готовых групп связывает результат, исходную папку и требования для просмотра, рендера и исполнения. Собственные ID описаны в справочнике диагностики.",
+    "crumbs": [
+      "Руководство",
+      "Расширения",
+      "PrairieLearn — поставка вопросов"
+    ]
+  },
+  {
+    "objectID": "extensions/publisher.html",
+    "href": "extensions/publisher.html",
+    "title": "Publisher — составная публикация",
+    "section": "",
+    "text": "Publisher собирает самостоятельные Quarto-проекты в общий сайт. Каждый подпроект сохраняет свои форматы, профили и ресурсы. Это удобно, когда книга, банк и материалы занятий сопровождаются отдельно.",
+    "crumbs": [
+      "Руководство",
+      "Расширения",
+      "Publisher — составная публикация"
+    ]
+  },
+  {
+    "objectID": "extensions/publisher.html#установка-и-подключение",
+    "href": "extensions/publisher.html#установка-и-подключение",
+    "title": "Publisher — составная публикация",
+    "section": "Установка и подключение",
+    "text": "Установка и подключение\nquarto add Afonenko-Course-Tools/quarto-project-publish@v5.0.0 --no-prompt\nВ корне подключите course-site/entrypoints/pre.ts и post.ts. В каждой части последним post-hook подключите корневой collect.ts. Полная конфигурация и правильные относительные пути приведены в руководстве по составной сборке.\nsubprojects: [theory, task, seminars]",
+    "crumbs": [
+      "Руководство",
+      "Расширения",
+      "Publisher — составная публикация"
+    ]
+  },
+  {
+    "objectID": "extensions/publisher.html#результат-и-ограничения",
+    "href": "extensions/publisher.html#результат-и-ограничения",
+    "title": "Publisher — составная публикация",
+    "section": "Результат и ограничения",
+    "text": "Результат и ограничения\nПути подпроектов определяют адреса публикации; отдельного mount нет. У документа выбирается один веб-формат. CLI-флаг строгости корня не наследуется child render: задайте нативный fail-if-warnings: true в каждой самостоятельной публичной части.\nПродолжите с руководством по сценарию. Каталог готовых групп связывает результат, исходную папку и требования для просмотра, рендера и исполнения. Собственные ID описаны в справочнике диагностики.",
+    "crumbs": [
+      "Руководство",
+      "Расширения",
+      "Publisher — составная публикация"
+    ]
+  },
+  {
+    "objectID": "reference/diagnostics.html",
+    "href": "reference/diagnostics.html",
+    "title": "Диагностика",
+    "section": "",
+    "text": "Собственное сообщение расширения содержит устойчивый ID, русское пояснение и доступный контекст: входной документ, ID объекта, поле, связанное объявление и подсказку. Строки временного JSON, Lua или готового HTML не являются строками QMD. Если QRC показывает позицию HTML, она относится именно к результату рендера.\n\n\n\nКомпонент\nID\nСмысл\nДействие\n\n\n\n\nCore\nCORE.DUPLICATE_EXERCISE, CORE.DUPLICATE_ASSESSMENT\nДва объявления одного ID\nПроверить оба исходных файла и оставить уникальные ID; полный справочник\n\n\nCore\nCORE.UNKNOWN_MEMBER\nНе найден член работы\nСверить items и ID объявления в выбранном банке; полный справочник\n\n\nCore\nANSWER_YAML, ANSWER_INVALID\nНе разобран или не проверен ответ\nИсправить answer-spec; сохранить исходное пояснение parser/CUE; полный справочник\n\n\nPresentation\nPRESENTATION.CONFIG_INVALID, PRESENTATION.FILTER_ORDER_INVALID\nКонфигурация или порядок фильтров\nСверить поле и включить Core перед Presentation; полный справочник\n\n\nPublisher\nSITE.CONFIG_INVALID, SITE.CURRENT_RESULT_MISSING\nКонфигурация или актуальный результат части\nСверить путь проекта, hooks и результат текущего рендера; полный справочник\n\n\nQRC\nQRC.TARGET_UNKNOWN, QRC.TARGET_DUPLICATE\nНе найдена цель или повторён ID\nСверить namespace и обе страницы результата; полный справочник\n\n\nPrint\nADAPTER, PRINT.INPUT_INVALID\nНеподдерживаемый публичный пакет или вход CLI\nСверить вопрос, поле, ресурсы и аргументы команды; полный справочник\n\n\nMoodle\nADAPTER, MOODLE.INPUT_INVALID\nПакет, binding или вход CLI\nСверить тип ответа, выбор и явные настройки; полный справочник\n\n\nPrairieLearn\nADAPTER, PL.INPUT_INVALID\nПакет, binding или вход CLI\nСверить выбранный вопрос и его binding; полный справочник\n\n\nCloud\nCLOUD005_declaredVm, CLOUD.ACTION_SOURCE_INVALID\nНеобъявленная VM или неверный источник действия\nСверить VM и файл действия по контексту; полный справочник\n\n\nDownload\nRESOURCE.PRIVATE_OR_SOURCE, DOWNLOAD.OUTPUT_CONFLICT\nЗакрытый ресурс или конфликт результата\nВыбрать публичный каталог и свободный путь архива; полный справочник\n\n\n\nADAPTER сохраняет своё широкое значение: компонент, вопрос и поле уточняют проверяемый контракт. Именованные CUE-правила, например PL001_externalAssessmentMembers и CLOUD005_declaredVm, остаются CUE ID; они не объявляются aliases собственных runtime ID.\nВнешний отказ сохраняет имя инструмента, код завершения и исходные stdout/stderr. Не заменяйте чужое сообщение предположением об ошибке задания: причиной может быть невозможность запуска Quarto, CUE, Pandoc или Gradle. Неизвестное исключение сохраняет stack для исследования.\nПубличный курс собирайте штатным quarto render --fail-if-warnings. В составном курсе задайте fail-if-warnings: true у каждой самостоятельной публичной части. Внутренний source-проход экспорта Core имеет отдельную политику; он не меняет постоянную конфигурацию авторского сайта. Подробности — в составной сборке и экспорте.",
+    "crumbs": [
+      "Руководство",
+      "Справочник",
+      "Диагностика"
+    ]
+  },
+  {
+    "objectID": "reference/source.html",
+    "href": "reference/source.html",
+    "title": "Просмотр исходников",
+    "section": "",
+    "text": "Quarto может показать исходник текущего HTML-документа или открыть его в репозитории. Выбирайте способ по тому, где читатель должен изучать документ. Получение целой папки примера и скачивание готового PDF — отдельные действия.",
+    "crumbs": [
+      "Руководство",
+      "Справочник",
+      "Просмотр исходников"
+    ]
+  },
+  {
+    "objectID": "reference/source.html#встроенный-исходник",
+    "href": "reference/source.html#встроенный-исходник",
+    "title": "Просмотр исходников",
+    "section": "Встроенный исходник",
+    "text": "Встроенный исходник\nformat:\n  html:\n    code-tools: true\nlang: ru\nШтатное действие открывает встроенный источник текущего документа. Именно эта настройка используется на сайте руководства. Подписи интерфейса задаёт локаль Quarto; расширения не добавляют собственную кнопку или окно. Для выборочной настройки допустима нативная форма code-tools: {source: true}.",
+    "crumbs": [
+      "Руководство",
+      "Справочник",
+      "Просмотр исходников"
+    ]
+  },
+  {
+    "objectID": "reference/source.html#исходник-в-репозитории",
+    "href": "reference/source.html#исходник-в-репозитории",
+    "title": "Просмотр исходников",
+    "section": "Исходник в репозитории",
+    "text": "Исходник в репозитории\nДля website задайте параметры под website:\nwebsite:\n  repo-url: https://github.com/organization/course\n  repo-branch: main\n  repo-subdir: materials\nformat:\n  html:\n    code-tools:\n      source: repo\nrepo-branch выбирает ревизию, repo-subdir — каталог проекта внутри репозитория. Для book эти параметры задаются под book. Если исходник расположен по отдельному адресу, source может быть полным URL:\nformat:\n  html:\n    code-tools:\n      source: https://github.com/organization/course/blob/main/index.qmd\nrepo-actions: [source] — другой штатный способ перехода к исходнику из боковой области страницы. Если он ведёт туда же, что и Code Tools, выберите один способ, чтобы не показывать два одинаковых перехода. repo-url при этом можно сохранить для остальных ссылок репозитория.",
+    "crumbs": [
+      "Руководство",
+      "Справочник",
+      "Просмотр исходников"
+    ]
+  },
+  {
+    "objectID": "reference/source.html#сопутствующие-файлы-и-форматы",
+    "href": "reference/source.html#сопутствующие-файлы-и-форматы",
+    "title": "Просмотр исходников",
+    "section": "Сопутствующие файлы и форматы",
+    "text": "Сопутствующие файлы и форматы\nformat:\n  html:\n    code-links:\n      - text: Папка примера\n        href: https://github.com/organization/course/tree/main/materials\ncode-links показывает обычные ссылки на связанные файлы. Ссылка на папку нужна, когда пример состоит из нескольких QMD, конфигураций и ресурсов. Открытие source одного документа не скачивает всю эту группу.\nHTML Code Tools не обещает такой интерфейс для Reveal или PDF. Для слайдов дайте обычную Markdown-ссылку на QMD или папку группы. Артефакт раздатки свяжите отдельно: [Раздатка](paper.pdf).\nВсе варианты используют механизмы Quarto. Подробнее — в официальном описании Code Tools и ссылок репозитория.",
+    "crumbs": [
+      "Руководство",
+      "Справочник",
+      "Просмотр исходников"
+    ]
+  }
+]

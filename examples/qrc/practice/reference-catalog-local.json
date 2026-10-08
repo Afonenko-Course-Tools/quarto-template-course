@@ -1,0 +1,43 @@
+{
+  "schema": "quarto-reference-catalog",
+  "generator": {
+    "quarto": "1.11.5"
+  },
+  "targets": {
+    "practice:exr-demo": {
+      "namespace": "practice",
+      "id": "exr-demo",
+      "page": "01/tasks.html",
+      "fragment": "exr-demo",
+      "slide": "sec-exercise",
+      "labelHtml": "Упражнение&nbsp;1",
+      "numberHtml": "1",
+      "label": "Упражнение 1",
+      "number": "1"
+    },
+    "practice:sec-exercise": {
+      "namespace": "practice",
+      "id": "sec-exercise",
+      "page": "01/tasks.html",
+      "fragment": "sec-exercise",
+      "slide": "sec-exercise",
+      "labelHtml": "Постановка",
+      "numberHtml": "",
+      "label": "Постановка",
+      "number": "",
+      "title": "Постановка"
+    },
+    "practice:sec-results": {
+      "namespace": "practice",
+      "id": "sec-results",
+      "page": "01/tasks.html",
+      "fragment": "sec-results",
+      "slide": "sec-results",
+      "labelHtml": "Сверка",
+      "numberHtml": "",
+      "label": "Сверка",
+      "number": "",
+      "title": "Сверка"
+    }
+  }
+}

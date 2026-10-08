@@ -1,0 +1,31 @@
+{
+  "schema": "quarto-reference-catalog",
+  "generator": {
+    "quarto": "1.11.5"
+  },
+  "targets": {
+    "study:sec-notes": {
+      "namespace": "study",
+      "id": "sec-notes",
+      "page": "notes.html",
+      "fragment": "sec-notes",
+      "labelHtml": "Конспект",
+      "numberHtml": "",
+      "label": "Конспект",
+      "number": "",
+      "title": "Конспект"
+    },
+    "study:sec-slide": {
+      "namespace": "study",
+      "id": "sec-slide",
+      "page": "slides.html",
+      "fragment": "sec-slide",
+      "slide": "sec-slide",
+      "labelHtml": "Составной курс",
+      "numberHtml": "",
+      "label": "Составной курс",
+      "number": "",
+      "title": "Составной курс"
+    }
+  }
+}

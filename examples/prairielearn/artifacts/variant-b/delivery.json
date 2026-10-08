@@ -1,0 +1,27 @@
+{
+  "course": "demo-java-gradle",
+  "release": "native",
+  "works": [
+    {
+      "owner": "demo-java-gradle",
+      "id": "sec-variant-b",
+      "key": "demo-java-gradle/sec-variant-b",
+      "source": "variant-b.qmd",
+      "kind": "test",
+      "title": "Вариант Б",
+      "items": [
+        "demo-java-gradle/exr-control"
+      ],
+      "assignments": {
+        "demo-java-gradle/exr-control": {
+          "requirement": "required",
+          "stage": "classroom",
+          "workMode": "individual"
+        }
+      }
+    }
+  ],
+  "questions": [
+    "demo-java-gradle/exr-control"
+  ]
+}

@@ -1,0 +1,46 @@
+[
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Составной курс",
+    "section": "",
+    "text": "Составной курс Нативные проекты Корень, книга и смешанный сайт сохраняют конфигурацию Quarto. Адрес результата совпадает с путём папки, а namespace QRC задаётся независимо. Глава 2 — глава книги. Конспект — обычная HTML-страница. Составной курс — презентация в том же сайте."
+  },
+  {
+    "objectID": "index.html",
+    "href": "book/index.html",
+    "title": "Теория",
+    "section": "",
+    "text": "Теория 1 Книга Конспект и Составной курс .",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Книга</span>"
+    ]
+  },
+  {
+    "objectID": "theory.html",
+    "href": "book/theory.html",
+    "title": "2  Теория",
+    "section": "",
+    "text": "2 Теория Один источник, два профиля и нативная библиография ( Quarto , б. д. ) . Полный профиль демонстрации намеренно показывает комментарий. Составной курс Quarto . б. д. https://quarto.org/ .",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Теория</span>"
+    ]
+  },
+  {
+    "objectID": "control.html",
+    "href": "book/control.html",
+    "title": "3  Контрольная демонстрация",
+    "section": "",
+    "text": "3 Контрольная демонстрация Эта отдельная глава входит только в полный список глав.",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Контрольная демонстрация</span>"
+    ]
+  },
+  {
+    "objectID": "notes.html",
+    "href": "materials/notes.html",
+    "title": "Конспект",
+    "section": "",
+    "text": "Конспект Конспект Глава 2 и Составной курс ."
+  }
+]

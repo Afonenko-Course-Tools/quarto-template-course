@@ -1,0 +1,12 @@
+{
+  "sourceRepository": "Afonenko-Course-Tools/quarto-course-cloud",
+  "commit": "552612450b093b0cff2e33187a1cb5b9234c050a",
+  "sourceDirty": false,
+  "extensionVersion": "3.0.0",
+  "dependencies": {
+    "quarto-course": "4.0.0"
+  },
+  "projection": "full",
+  "verification": "local installed native build",
+  "livePlatformVerified": false
+}

@@ -1,0 +1,42 @@
+[
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Служба на виртуальной машине",
+    "section": "",
+    "text": "О курсе\nУсловия находятся в 1  Задания. Состав занятия задан в 2  Лабораторная 1.",
+    "crumbs": [
+      "О курсе"
+    ]
+  },
+  {
+    "objectID": "tasks/index.html",
+    "href": "tasks/index.html",
+    "title": "1  Задания",
+    "section": "",
+    "text": "1.1 Работа со службой",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Задания</span>"
+    ]
+  },
+  {
+    "objectID": "tasks/index.html#sec-service-topic",
+    "href": "tasks/index.html#sec-service-topic",
+    "title": "1  Задания",
+    "section": "",
+    "text": "Упражнение 1.1 (Состояние службы)  \n\n1.1.1 Запись состояния\nСоздайте /home/ubuntu/service-state.txt с единственной строкой ready.\n\n\n\n1.1.2 Доступ клиента\nСоздайте такой же файл на клиенте.\ntest \"$(cat /home/ubuntu/service-state.txt)\" = ready",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Задания</span>"
+    ]
+  },
+  {
+    "objectID": "labs/01.html",
+    "href": "labs/01.html",
+    "title": "2  Лабораторная 1",
+    "section": "",
+    "text": "Изучите Глава 1 перед началом занятия.\n\n\nУпражнение 1.1",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Лабораторная 1</span>"
+    ]
+  }
+]

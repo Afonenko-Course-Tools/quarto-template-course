@@ -1,0 +1,30 @@
+{
+  "schema": "quarto-reference-catalog",
+  "generator": {
+    "quarto": "1.11.5"
+  },
+  "targets": {
+    "theory:sec-control": {
+      "namespace": "theory",
+      "id": "sec-control",
+      "page": "control.html",
+      "fragment": "sec-control",
+      "labelHtml": "<span>Глава 3</span>",
+      "numberHtml": "<span>3</span>",
+      "label": "Глава 3",
+      "number": "3",
+      "title": "Контрольная демонстрация"
+    },
+    "theory:sec-theory": {
+      "namespace": "theory",
+      "id": "sec-theory",
+      "page": "theory.html",
+      "fragment": "sec-theory",
+      "labelHtml": "<span>Глава 2</span>",
+      "numberHtml": "<span>2</span>",
+      "label": "Глава 2",
+      "number": "2",
+      "title": "Теория"
+    }
+  }
+}

@@ -1,0 +1,53 @@
+{
+  "schema": "quarto-reference-catalog",
+  "generator": {
+    "quarto": "1.11.5"
+  },
+  "targets": {
+    "study:sec-notes": {
+      "namespace": "study",
+      "id": "sec-notes",
+      "page": "materials/notes.html",
+      "fragment": "sec-notes",
+      "labelHtml": "Конспект",
+      "numberHtml": "",
+      "label": "Конспект",
+      "number": "",
+      "title": "Конспект"
+    },
+    "study:sec-slide": {
+      "namespace": "study",
+      "id": "sec-slide",
+      "page": "materials/slides.html",
+      "fragment": "sec-slide",
+      "slide": "sec-slide",
+      "labelHtml": "Составной курс",
+      "numberHtml": "",
+      "label": "Составной курс",
+      "number": "",
+      "title": "Составной курс"
+    },
+    "theory:sec-control": {
+      "namespace": "theory",
+      "id": "sec-control",
+      "page": "book/control.html",
+      "fragment": "sec-control",
+      "labelHtml": "<span>Глава 3</span>",
+      "numberHtml": "<span>3</span>",
+      "label": "Глава 3",
+      "number": "3",
+      "title": "Контрольная демонстрация"
+    },
+    "theory:sec-theory": {
+      "namespace": "theory",
+      "id": "sec-theory",
+      "page": "book/theory.html",
+      "fragment": "sec-theory",
+      "labelHtml": "<span>Глава 2</span>",
+      "numberHtml": "<span>2</span>",
+      "label": "Глава 2",
+      "number": "2",
+      "title": "Теория"
+    }
+  }
+}

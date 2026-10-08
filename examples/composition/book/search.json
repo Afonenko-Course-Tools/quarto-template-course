@@ -1,0 +1,32 @@
+[
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Теория",
+    "section": "",
+    "text": "Теория 1 Книга Конспект и Составной курс .",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Книга</span>"
+    ]
+  },
+  {
+    "objectID": "theory.html",
+    "href": "theory.html",
+    "title": "2  Теория",
+    "section": "",
+    "text": "2 Теория Один источник, два профиля и нативная библиография ( Quarto , б. д. ) . Полный профиль демонстрации намеренно показывает комментарий. Составной курс Quarto . б. д. https://quarto.org/ .",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Теория</span>"
+    ]
+  },
+  {
+    "objectID": "control.html",
+    "href": "control.html",
+    "title": "3  Контрольная демонстрация",
+    "section": "",
+    "text": "3 Контрольная демонстрация Эта отдельная глава входит только в полный список глав.",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Контрольная демонстрация</span>"
+    ]
+  }
+]
