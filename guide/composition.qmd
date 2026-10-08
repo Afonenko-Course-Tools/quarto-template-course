@@ -66,10 +66,94 @@ quarto render --profile student
 общий файл через `metadata-files`. Предупреждение дочернего проекта тогда
 останавливает сборку до выдачи итогового результата.
 
-## Свяжите материалы
+## Свяжите материалы {#qrc-addresses}
 
 Если нужны ссылки между книгой и слайдами, установите
 [QRC](../extensions/reference-catalog.qmd) в соответствующие проекты и задайте
 их пространства имён. Namespace ссылки, путь публикации и `course.id`
 решают разные задачи. Готовый пример [book и HTML/Reveal](../catalog/index.qmd)
 показывает hooks и локальные переходы целиком.
+
+
+В книге теории ссылка остаётся адресной:
+
+```qmd
+Сначала выполните упражнение @task:exr-checksum.
+```
+
+Для внешней опубликованной библиотеки можно подключить адресный снимок:
+
+```yaml
+reference-catalog:
+  namespace: theory
+  imports:
+    handbook:
+      source: references/handbook.json
+      namespace: handbook
+      base-url: https://example.org/handbook/
+```
+
+Замените адрес и JSON реальным каталогом владельца. `@handbook:sec-integrity`
+перейдёт к его опубликованной цели. Namespace не равен пути размещения или
+course.id; импорт не копирует условие, ресурсы или чужие задания в банк.
+Для student QRC получает текущие публичные outputs: restricted цель и её
+текст в каталог и поиск не входят. Full разрешает текущие full цели.
+Локальная отсрочка ссылки не создаёт фиктивный href; строгий full требует
+доступной цели.
+
+## Сохраните ресурсное владение {#resource-ownership}
+
+Рисунок или ссылка условия относятся к своему native документу и владельцу.
+При selected экспорте Core отбирает текущие разрешённые ресурсы, проверяет
+реальный путь, байты и SHA-256 и переносит их под безопасные targets пакета.
+Адаптер не открывает заново producer effectiveBase. Относительный ресурс
+чужой публикации не становится местным ресурсом только из-за QRC ссылки.
+
+Publisher размещает готовые outputs частей, сохраняя их конфигурации.
+Самостоятельная вложенная книга не становится частью банка соседней книги.
+Полные output каталоги, `_generated`, source и закрытые проекты исключите
+из публичных `project.resources` — [профили и приватность](profiles.qmd#source-privacy).
+
+## Выдайте публичные материалы ZIP {#download-resources}
+
+[Download](../extensions/download.qmd) работает и без Core/CUE. Явно разрешите
+каталог данных, подключите его hooks и фильтр:
+
+```yaml
+project:
+  type: website
+  resources: ['!materials/**']
+  pre-render: _extensions/Afonenko-Course-Tools/project-download/entrypoints/pre.ts
+  post-render: _extensions/Afonenko-Course-Tools/project-download/entrypoints/post.ts
+filters: [project-download]
+project-download:
+  resources:
+    seminar-data:
+      path: /materials/observations
+      include: ['**/*.csv', '**/*.md']
+      exclude: ['drafts/**']
+      gitignore: true
+```
+
+В QMD запросите архив:
+
+```qmd
+{{< project-download seminar-data text="Скачать данные семинара" >}}
+```
+
+Начальный `/` означает корень текущего проекта. ZIP появляется по видимому
+после проекции запросу; profiles ресурса разрешает запрос, но не скрывает сам
+shortcode. Оберните его нативным условием профиля, если нужно скрыть ссылку.
+
+Для стартового проекта канонической задачи существующий мост включается явно
+`project-download: {course-model: true}`. Он получает текущую native модель
+и выбирает только `<project>/student`. Teacher tests, reference/solution,
+QMD, metadata и build-входы в публичный ZIP не входят. Restricted задача
+student заявки не оставляет. Participant public пакет Print/PL сам по себе
+не разрешает публиковать ZIP на сайте.
+
+После full → student проверяйте HTML, search, QRC, ресурсы и ZIP текущего
+выхода. Download очищает только собственные прежние archives/requests этого
+output; другие outputs и чужие ZIP сохраняет. Сохранённый course.json не
+доказывает актуальность. Скачивание архива и просмотр исходного QMD остаются
+отдельными действиями.

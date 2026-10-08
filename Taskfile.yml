@@ -20,9 +20,10 @@ tasks:
     cmds:
     - quarto render
   check:
-    desc: Проверить локальные ссылки, поиск и полный состав примеров
+    desc: Проверить ссылки, поиск, ready provenance и нативные авторские примеры
     cmds:
     - node tests/site.cjs
+    - python3 tests/guide-examples.py
   preview:
     cmds:
     - quarto preview --no-watch-inputs
@@ -46,6 +47,7 @@ tasks:
       platforms:
       - windows
     - curl --fail --location --retry 2 --output "{{.STAGE}}/demo.tar.gz" "{{.URL}}"
+    - node tests/site.cjs --demo-group "{{.GROUP}}" --asset-file "{{.STAGE}}/demo.tar.gz" --archive-only
     - tar -xzf "{{.STAGE}}/demo.tar.gz" -C "{{.STAGE}}/files"
     - cmd: test -s "{{.STAGE}}/files/index.html" && test -s "{{.STAGE}}/files/BUILD.json"
       platforms:
@@ -55,7 +57,7 @@ tasks:
         "{{.STAGE}}/files" $name) -PathType Leaf)) { throw ("Missing demo file: "+$name) } }'''
       platforms:
       - windows
-    - node tests/site.cjs --demo-dir "{{.STAGE}}/files"
+    - node tests/site.cjs --demo-dir "{{.STAGE}}/files" --demo-group "{{.GROUP}}"
     - cmd: rm -rf "{{.DEST}}" && mv "{{.STAGE}}/files" "{{.DEST}}"
       platforms:
       - linux

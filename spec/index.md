@@ -14,8 +14,8 @@ updated: 2026-10-08
 | Документ | type | component | status | Нормативный владелец и область |
 | --- | --- | --- | --- | --- |
 | [Документация-шаблон: действующий контракт](site.md) | specification | template-course | current | native website, producer ready assets, source/search и штатный gh-pages |
-| [Руководство и обзор](../guide/index.qmd) | documentation | template-course | current | Пояснения к закреплённым выпускам; нормативные правила у владельцев |
-| [Body Core](../../quarto-course/docs/body-export.md) | specification | course-core | current | Общий producer transport и selected source input |
+| [Руководство и обзор](../guide/index.qmd) | documentation | template-course | accepted-next | Подготовка следующего выпуска; прежние pins не подтверждают новую разметку; нормативные правила у владельцев |
+| [Body Core](../../quarto-course/docs/body-export.md) | specification | course-core | implementation-in-progress | Общий producer transport и selected source input |
 | [Следующая авторская модель](../../quarto-course/spec/authoring-model-next.md) | specification | course-core | accepted-next | Банк, условия, решения и назначения следующего выпуска |
 | [План владельца](../docs/plans/2026-10-08-implementation.md) | plan | template-course | in-progress | Шаги 14–15 и завершение общего маршрута |
 | [Карта сохранённой истории](../docs/history/2026-10-08/README.md) | history | template-course | historical | Исходные планы, probes/evidence, refs и provenance |
