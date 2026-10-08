@@ -7,11 +7,12 @@ updated: 2026-10-08
 
 # Документация-шаблон и gh-pages: план владельца
 
-Статус: шаги 1–2 выполнены; инструменты и новые ready assets выпущены по
-шагам 12–13. Локальная часть шага 14 прошла с exact pins и native installed
-payload; независимое review, CI/merge и публикация ещё ожидаются. Пункты 14–15/17–18
+Статус: первая публикация шагов 14–15 выполнена: main `8b050033…`,
+gh-pages `a55b0e3…`, Core 4.0.0. Для выявленного student book href/caption
+выпущены Core 4.0.1 и новый core demo; native локальные проверки прошли
+в отдельном worktree. Независимое review/CI/merge и повторная публикация ожидаются. Пункты 14–15/17–18
 [линейного плана](../../../quarto-course/docs/plans/2026-10-08-course-tools-implementation.md).
-Сначала читать [действующие контракты Core 4.0.0](https://github.com/Afonenko-Course-Tools/quarto-course/blob/v4.0.0/spec/index.md).
+Сначала читать [действующие контракты Core 4.0.1](https://github.com/Afonenko-Course-Tools/quarto-course/blob/v4.0.1/spec/index.md).
 Весь шаблон, его инструкции/проекты и тексты готовить на ultra, если настройка
 поддерживается; локальные проверки — до финального CI. Ресурсы/дедлайн —
 общие условия главного плана.
@@ -245,3 +246,80 @@ pins/manifest/harness/vendor/config не менялись, поэтому пре
 native guide PASS остаётся применимым без повторения широкой suite.
 Машинные proofs/receipts — `review-fix-*.json` в ранее указанном `/tmp`.
 Следующий gate — bounded re-review нового HEAD тем же reviewer, затем CI/merge.
+
+
+## Подготовка Core 4.0.1 — 8 октября 2026
+
+В отдельном worktree `quarto-template-core-patch-20261008`, ветка
+`fix/core-student-link-guide-pins-20261008` от опубликованного source main
+`8b050033b594eeae4270ca6f55f12a1d6e8f1243`, подготовлены только source pins
+Core `v4.0.1`, ссылки на его спецификации/Source и core demo
+`demo-20261008-1`. Авторская модель, схемы и NativeRun/Body API 4.0.0 сохраняются.
+README/версионная страница явно сообщают pending выпуск; это не свидетельство
+доступности будущих тегов или новых готовых bytes.
+
+Все остальные семь ready групп остаются на прежних точных `demo-20261008`
+producer refs; их BUILD/dependencies с Core 4.0.0 не переписываются. Manifest
+и весь установленный bundle пока побайтно равны опубликованному main.
+Ранее опубликованные main/gh-pages остаются действующим сайтом до нового
+native publish. Установка, fetch/render/check, commit/PR/CI/merge и публикация
+на этой подготовительной стадии не выполнялись.
+
+После actual immutable Core/tool+demo receipt: независимо скачать и проверить
+архив/sourceSHA/BUILD/full file map, заменить только core запись manifest,
+штатно установить весь native 4.0.1 bundle без overlays и сверить каждый путь
+и byte с новым tool Git object. Затем последовательно выполнить `task install`,
+`task fetch`, `task render`, `task check`, `python3 tests/fetch.py`, проверить
+полное копирование восьми групп и `git diff --check`; далее независимое review,
+CI/merge и повторный clean-main native publish у координатора.
+
+
+## Core 4.0.1 — фактические выпуски и локальные gates
+
+Опубликованы immutable Core `v4.0.1` (Release 406473961) и новый
+`demo-20261008-1` (Release 406475550) на одном producer SHA
+`a9a439bd6e6498806d4d4943efd71232e70170be`; exact main CI
+`37734901545` прошёл перед публикацией. Новый core archive самостоятельно
+скачан из Release: 2 783 070 bytes, SHA-256
+`fe90b587569891455694836a48385d102960e906e07f2011c1f28092d4455ae4`.
+Все 107 файлов и полный BUILD совпадают с native producer receipt;
+sourceRef/dependency — `v4.0.1`, sourceDirty — false. Существующий ready
+checker прошёл: 8 HTML, 230 локальных ссылок. Manifest заменяет только core
+запись; семь остальных producer records/BUILD/files на `demo-20261008`
+побайтно/по значениям сохранены, включая их исходные Core 4.0.0 dependencies.
+
+В этом worktree последовательно выполнены штатные команды, все exit 0:
+
+```sh
+task install
+task fetch
+task render
+task check
+python3 tests/fetch.py
+```
+
+Quarto 1.11.5, Task 3.54.0 и CUE 0.17.1; `CUE` указывает на
+`/home/tolya/course-tools/local-tools/cue/cue`, local CUE/Task стоят в PATH;
+cache/data/Jupyter/IPython каталоги writable в `/tmp`. Native установка
+содержит ровно 63 пути/файла, каждый byte равен tool Git object `a9a439bd…`;
+нет overlays или extras. Новый `deferred-assignments.lua` входит в bundle.
+
+Render: 28 страниц документации. Full site check: 61 HTML, 2459 local links,
+sidebar/source/search и точное копирование всех 549 opaque ready файлов.
+Literal guide native suite прошла student/full, ordinary exr, обе формы
+решений, 12 ролей, четыре работы, пять форм ответа, selected Body, четыре
+суммы времени и partial-run omission. Реальный fetch regression прошёл
+Unicode/spaces, отказы download/archive/file/BUILD/hash/dependency/lang/source,
+сохранение предыдущей группы и повторную замену. Все 28 tagged Git paths
+Source/spec/diagnostic проверены по actual producer SHA.
+
+Авторская модель, схемы и NativeRun/Body API 4.0.0 не меняются: 28 QMD /
+95 fenced blocks равны base main, кроме трёх shell install tags.
+`tests/site.cjs`, `tests/guide-examples.py`, `tests/fetch.py`, workflow и native
+resource/source/search configuration не менялись. `git diff --check` прошёл.
+Exact logs/proofs — `/tmp/template-core-patch-20261008/`.
+
+Source и receipts заморожены для независимого ultra review; commit/PR,
+CI/merge, clean-main повтор и native Task gh-pages publish ещё не выполнялись.
+Текущая первая публикация остаётся source `8b050033…` / gh-pages `a55b0e3…`.
+Все собственные native/process sessions завершены.

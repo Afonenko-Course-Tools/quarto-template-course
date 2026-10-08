@@ -7,14 +7,15 @@ title: Каталог готовых примеров
 её README. Соседние файлы, конфигурации и ресурсы являются частью примера.
 
 ::: {.callout-note}
-Восемь готовых групп закреплены на неизменяемых выпусках `demo-20261008`.
+Core закреплён на `demo-20261008-1`; остальные семь групп
+закреплены на неизменяемых выпусках `demo-20261008`.
 Исходники каждой группы соответствуют тегу её инструмента на том же producer SHA.
 [Версии и спецификации](../guide/specifications.qmd) связывают примеры с выпущенными правилами.
 :::
 
 | Группа и задача | Средство | Готовый результат | Целая папка исходников | Зависимости для сборки и исполнения |
 | --- | --- | --- | --- | --- |
-| Модель и представление: Банк, работа и одна презентация | [course](../extensions/course.qmd) | [Открыть](../examples/core/index.html) | [GitHub](https://github.com/Afonenko-Course-Tools/quarto-course/tree/demo-20261008/examples/course) | Quarto и CUE; Chromium для проверки печати |
+| Модель и представление: Банк, работа и одна презентация | [course](../extensions/course.qmd) | [Открыть](../examples/core/index.html) | [GitHub](https://github.com/Afonenko-Course-Tools/quarto-course/tree/demo-20261008-1/examples/course) | Quarto и CUE; Chromium для проверки печати |
 | Составной сайт: Book и HTML/Reveal в общем сайте | [publisher](../extensions/publisher.qmd) | [Открыть](../examples/composition/index.html) | [GitHub](https://github.com/Afonenko-Course-Tools/quarto-project-publish/tree/demo-20261008/examples/course) | Quarto и Task для сценария группы |
 | Межпроектные ссылки: Переходы книги, лекций и практики | [reference-catalog](../extensions/reference-catalog.qmd) | [Открыть](../examples/qrc/index.html) | [GitHub](https://github.com/Afonenko-Course-Tools/quarto-reference-catalog/tree/demo-20261008/examples/course) | Quarto и Task |
 | Печатные работы: Раздатки и варианты PDF | [print](../extensions/print.qmd) | [Открыть](../examples/print/index.html) | [GitHub](https://github.com/Afonenko-Course-Tools/quarto-course-print/tree/demo-20261008/examples/paper) | Quarto/Pandoc/Typst для PDF |

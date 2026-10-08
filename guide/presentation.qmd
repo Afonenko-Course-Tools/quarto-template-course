@@ -5,13 +5,13 @@ title: Одна презентация
 Одна презентация подходит для объяснения в аудитории и повторения дома.
 Presentation оформляет заметки и ответы; Navigation добавляет поиск и переходы Reveal.
 Core проверяет учебную разметку, если она используется. Обычные слайды
-ниже не включают банк. [Банковская политика Core 4.0.0](specifications.qmd)
+ниже не включают банк. [Банковская политика Core 4.0.1](specifications.qmd)
 действует при явном включении банка.
 
 Core, Presentation и Navigation устанавливаются одним выпуском:
 
 ```sh
-quarto add Afonenko-Course-Tools/quarto-course@v4.0.0 --no-prompt
+quarto add Afonenko-Course-Tools/quarto-course@v4.0.1 --no-prompt
 ```
  Включите
 фильтры и штатный Reveal-плагин:

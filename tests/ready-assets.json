@@ -1,14 +1,14 @@
 {
   "core": {
-    "url": "https://github.com/Afonenko-Course-Tools/quarto-course/releases/download/demo-20261008/course.tar.gz",
+    "url": "https://github.com/Afonenko-Course-Tools/quarto-course/releases/download/demo-20261008-1/course.tar.gz",
     "sourcePath": "examples/course",
-    "archiveSha256": "78d8146305ffda06123939e084091f75ce804195a66c4f2570f1c90998db92fb",
+    "archiveSha256": "fe90b587569891455694836a48385d102960e906e07f2011c1f28092d4455ae4",
     "build": {
       "producer": "Afonenko-Course-Tools/quarto-course",
-      "commit": "d58494171e3020957b64ed229cbc8537751e3beb",
+      "commit": "a9a439bd6e6498806d4d4943efd71232e70170be",
       "sourceDirty": false,
       "dependencies": {
-        "quarto-course": "v4.0.0",
+        "quarto-course": "v4.0.1",
         "quarto": "1.11.5"
       },
       "projection": "full",
@@ -17,14 +17,14 @@
         "task render"
       ]
     },
-    "sourceRef": "v4.0.0",
+    "sourceRef": "v4.0.1",
     "files": {
-      "BUILD.json": "a2d2b5271dd643c0b7fe267df39584bd978f0cec12e4e81f58e4fca5c9ac1eac",
-      "index.html": "a06e0f4762d8b3df87bbd770cf4365bf0b1d459316cfcf538156b4513a6dd046",
-      "labs/01.html": "f05b0c907be96c30af78213b01399adbaa3b7a0fe7ad3769874b38a1776d8d0d",
-      "practicals/01.html": "e87ff09f030bfc652a49420b87739ca3b76934e5937f10472d99c4abde4169c5",
+      "BUILD.json": "62f79ad8acf8afaadcecd11f7f7213b4dab466f8eb60599c5acc34044143048a",
+      "index.html": "da40fb024185002f98a1014863615b4a9c5ade70e18cfe349c4c760718640867",
+      "labs/01.html": "368510899b862b32072d5f38b1e3162856402e703fc52995549085d08fc25500",
+      "practicals/01.html": "b4be36c939181fcd6ae189f07eaca414fd12d8a5c52ea138444b4b79fec65abf",
       "search.json": "96ff221f6964dad18293d8a585a7594d0f94cd32c7e92fc1131d21f2db8bd03e",
-      "seminars/01.html": "e90e8e12432dd7c70afcdb4b0bd430775cb67f18f2e12affa1df5838f1507b13",
+      "seminars/01.html": "96c51427e27f2626c988ed04b0c49881476a6bdc040a65915383fcfcdd0b7560",
       "site_libs/bootstrap/bootstrap-752eb067b69f457d87b717766944ae1e.min.css": "96bd1da9c33ea37b430db027be45a42414232ec9b3932e31dd95c84a67b3dc0d",
       "site_libs/bootstrap/bootstrap-icons.css": "01253947f506e030589e4f33fc7ec7ccdfb9505e2e596dedf16445f12e243c0a",
       "site_libs/bootstrap/bootstrap-icons.woff": "f55513b7b591cb84a3b87ff0e34ea24d4831d6fedc22e54b911ca64b5b544a15",
@@ -45,7 +45,7 @@
       "site_libs/quarto-search/autocomplete.umd.js": "cd9db3b7d812139a4679a2566ea8f01b2a80159490a60b9e9e813e81b5e00a05",
       "site_libs/quarto-search/fuse.min.js": "c57339c3fa16b1d69d9a6b46749a8139ef8d4fc9bbfe48144ff897aa7d4222ec",
       "site_libs/quarto-search/quarto-search.js": "1a23221f499b3993dc66ca5c8913e4e6602dfa4652337e9fbf75139ded5ece68",
-      "slides/index.html": "519705c94d45cddb965a0d48df14eabe3c003fa41dc14778a1b5da8c6ad561df",
+      "slides/index.html": "21913c763b4e3589bd1ebe3603f7243690fbe5e35e92cfee3cb247ce0bd4203f",
       "slides/index_files/libs/clipboard/clipboard.min.js": "e17a1d816e13c0826e0ed7febfabc3277f45571234bde0bf9120829a7169edc9",
       "slides/index_files/libs/quarto-contrib/course-presentation-0.1.0/disclosure.js": "83fcce0f4a30a864b836bc4917c488420b5865314eeee21a6d6dea744665765c",
       "slides/index_files/libs/quarto-contrib/course-presentation-0.1.0/presentation.css": "a51eab093ac2bed4144a3f3d56fac77eba52805ead7c1ef6c95436724bc9af9e",
@@ -124,8 +124,8 @@
       "slides/index_files/libs/revealjs/plugin/zoom/plugin.js": "01826f83b492ebe3ef90f78964218c31c6ab3d864f8f66d2f0b941bc0de35475",
       "slides/index_files/libs/revealjs/plugin/zoom/zoom.esm.js": "f33afcee9351a8273d98caa6aa81d9f9fb2e65a79b23bb46b48e2d59c6d25930",
       "slides/index_files/libs/revealjs/plugin/zoom/zoom.js": "a46ab0fcab035e80f7838658365085f8761c57a4b806115323f4de0e37b23296",
-      "tasks/index.html": "3873fcb43725e1ee4b5b277ae9636bbfb308f14769e8a7b3123800059e8c47b2",
-      "tests/01.html": "03ffd838bcf4da214d67c3fc8d72d3ecbee8eb6052e7a23facbb3dc133af9d89"
+      "tasks/index.html": "1da16b7c13e693e6f15ad1dcb1706c80d72b5962e419d4df6582b709f90b2649",
+      "tests/01.html": "55843fb3d7dfa8922f35adc4ed6549202be41575673cb4dc2d950d69310ae8e7"
     }
   },
   "composition": {
