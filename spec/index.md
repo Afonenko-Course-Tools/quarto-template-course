@@ -17,7 +17,7 @@ updated: 2026-10-08
 | [Руководство и обзор](../guide/index.qmd) | documentation | template-course | current | Авторские действия для exact release pins; нормативные правила у владельцев |
 | [Body Core 4.0.1](https://github.com/Afonenko-Course-Tools/quarto-course/blob/v4.0.1/docs/body-export.md) | api-contract | course-core/body-export | current | Общий producer transport и selected source input |
 | [Учебные элементы Core 4.0.1](https://github.com/Afonenko-Course-Tools/quarto-course/blob/v4.0.1/spec/learning-elements.md) | specification | course-core | current | Банк, условия, решения, назначения и время |
-| [План владельца](../docs/plans/2026-10-08-implementation.md) | plan | template-course | in-progress | Шаги 14–15 и завершение общего маршрута |
-| [Карта сохранённой истории](../docs/history/2026-10-08/README.md) | history | template-course | historical | Исходные планы, probes/evidence, refs и provenance |
+| [Результат реализации](../docs/releases/2026-10-08-implementation.md) | implementation-report | template-course | historical | Шаги 14–15 и завершение общего маршрута |
+| [Карта сохранённой истории](https://github.com/Afonenko-Course-Tools/quarto-template-course/blob/d2376c0e0d555d54ad2ddcfe765af74106a5d596/docs/history/2026-10-08/README.md) | history | template-course | historical | Исходные планы, probes/evidence, refs и provenance |
 
-`exercise-bank`, `statementVisibility`, `assignments`, stage и suffix/nested решения внедрены в Core `v4.0.0` и сохраняются в `v4.0.1`. Возможности потребителей закреплены на [странице версий](../guide/specifications.qmd). Порядок внедрения и оставшиеся публикационные этапы — [линейный план](../../quarto-course/docs/plans/2026-10-08-course-tools-implementation.md).
+`exercise-bank`, `statementVisibility`, `assignments`, stage и suffix/nested решения внедрены в Core `v4.0.0` и сохраняются в `v4.0.1`. Возможности потребителей закреплены на [странице версий](../guide/specifications.qmd). Фактическая публикация и сохранённая история — [отчёт реализации](../docs/releases/2026-10-08-implementation.md).

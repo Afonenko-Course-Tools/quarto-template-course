@@ -1,1 +1,0 @@
-Root inspected all three rendered pages (ordinary, variant-a, variant-b) from the exact ready PDF files. Russian text, math/table, figure, date/group/name/answer fields and page numbers are legible; no clipping, overlap or missing glyphs. Each PDF is one page. Source PDFs unchanged; native producer/hash verifier already passed.
