@@ -12,7 +12,7 @@ Publisher собирает их результаты в общий сайт. О�
 В корне сайта выполните:
 
 ```sh
-quarto add Afonenko-Course-Tools/quarto-project-publish@v4.0.1 --no-prompt
+quarto add Afonenko-Course-Tools/quarto-project-publish@v5.0.0 --no-prompt
 ```
 
 Создайте корневой `_quarto.yml`:

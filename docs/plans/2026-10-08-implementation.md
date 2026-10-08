@@ -7,11 +7,11 @@ updated: 2026-10-08
 
 # Документация-шаблон и gh-pages: план владельца
 
-Статус: шаги 1–2 выполнены; авторское руководство шага 14 подготовлено и проверено
-с локальным Core. Опубликованные pins ещё прежние; новая модель и ready assets
-ожидают проверенных выпусков владельцев. Пункты 14–15/17–18
+Статус: шаги 1–2 выполнены; инструменты и новые ready assets выпущены по
+шагам 12–13. Локальная часть шага 14 прошла с exact pins и native installed
+payload; независимое review, CI/merge и публикация ещё ожидаются. Пункты 14–15/17–18
 [линейного плана](../../../quarto-course/docs/plans/2026-10-08-course-tools-implementation.md).
-Сначала читать [целевой контракт Core](../../../quarto-course/spec/authoring-model-next.md).
+Сначала читать [действующие контракты Core 4.0.0](https://github.com/Afonenko-Course-Tools/quarto-course/blob/v4.0.0/spec/index.md).
 Весь шаблон, его инструкции/проекты и тексты готовить на ultra, если настройка
 поддерживается; локальные проверки — до финального CI. Ресурсы/дедлайн —
 общие условия главного плана.
@@ -165,3 +165,66 @@ PrairieLearn 3.0.0, Cloud 3.0.0, Download 2.0.0. Свежий demo tag план�
 контейнеры без when-format/when-meta. HTML другой операции не доказывает
 доступность в source JSON; stage проверяется по текущему native результату.
 Копируемые положительные сценарии уже используют эту переносимую форму.
+
+## Шаг 14 — новые выпуски и локальная проверка 8 октября 2026
+
+Руководство переведено на current выпущенные контракты. Команды установки,
+спецификации и диагностика закреплены на точных тегах; переходный next-документ
+не используется как нормативная ссылка. Windows recoverEncode описан условно,
+без утверждения о текущем воспроизведении в Windows.
+
+| Инструмент | Опубликованный tag | Source SHA |
+| --- | --- | --- |
+| Core / Presentation / Navigation | `v4.0.0` | `d58494171e3020957b64ed229cbc8537751e3beb` |
+| Publisher | `v5.0.0` | `215309b5c41669e56a857a1bc3e4f7f2ce782c5f` |
+| QRC | `v3.0.0` | `559583805a514ae8a244b6ea4cb5124867064024` |
+| Print | `v0.3.0` | `00c51f7342da376e85027a925dd9f1207783f924` |
+| Moodle | `v0.3.0` | `60ce53d0d52a93e66ca545f2a6cd96f97f09d1e6` |
+| PrairieLearn | `v3.0.0` | `b9821b5b62863b7e1ae380a4c1a0a0bef855f8ba` |
+| Cloud | `v3.0.0` | `552612450b093b0cff2e33187a1cb5b9234c050a` |
+| Download | `v2.0.0` | `ee5ae76255d265ad7c7f43a765bc061ffc8eec75` |
+
+Все восемь групп семи производителей скачаны заново из опубликованного
+immutable `demo-20261008`. Архивные bytes/размер/SHA-256, полный BUILD и
+549 файлов сверены с независимыми receipts шага 13. [Manifest](../../tests/ready-assets.json)
+создан только из этих actual bytes; native sourceRef — tool tag на том же SHA,
+каталог исходников — demo tag. Producer HTML и opaque ресурсы не исправлялись
+в consumer. Все восемь отдельных native ready checks прошли.
+
+Последовательные команды 04:04–04:08 UTC на Quarto 1.11.5, CUE 0.17.1,
+Task 3.54.0, с writable cache/data/Jupyter/IPython каталогами:
+
+```sh
+task install
+task fetch
+task render
+task check
+python3 tests/fetch.py
+```
+
+- Native `task install` обновил bundle без overlays: все 62 пути и bytes
+  `_extensions/Afonenko-Course-Tools/` равны Git object Core `d584941…`.
+- `task fetch` проверил все архивы/BUILD/files/lang/source и заменил группы
+  только после проверки. `task render` собрал все 28 страниц сайта документации.
+- `task check`: 61 HTML-страница, 2459 локальных ссылок, native sidebar/source,
+  search без учебных тел и полное побайтное копирование готовых ресурсов;
+  literal QMD — student/full, обычные exr, suffix/nested решения, 12 ролей,
+  четыре сценария работ, пять форм ответа, selected public/teacher Body,
+  четыре итога времени, theory-time 7.5 и частичный run без ложной полной суммы.
+- `python3 tests/fetch.py`: настоящий Task/curl/tar в пути с кириллицей и
+  пробелами, отказы archive/BUILD/file/dependency/hash/lang/source,
+  сохранение прежней группы и повторная успешная замена.
+- 28 уникальных tagged source/spec/diagnostic ссылок проверены по точным
+  producer Git objects. `tests/site.cjs`, `fetch.py`, `guide-examples.py`,
+  render/publish workflow и resource/native UI конфигурация не ослаблялись.
+
+Точный CUE — `/home/tolya/course-tools/local-tools/cue/cue`; системный
+`/usr/bin/cue` имеет другую devel версию. CUE/Task directories добавлены в PATH,
+`CUE`/`TASK` указывают на эти проверенные binaries. Logs/receipts текущей сессии:
+`/tmp/template-release-finalize-20261008/`.
+
+Browser QA не подтверждён: CUA вернул unavailable для IAB и пустой список
+доступных browsers. Временный локальный HTTP server остановлен. Live URL/source/
+search/resources проверяются после штатной публикации. Пользовательские
+worktrees сохранены; push/PR/merge/Pages/branch cleanup этим исполнителем
+не выполнялись. Следующий gate — независимое review/CI и чистый merged main.

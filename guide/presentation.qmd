@@ -11,7 +11,7 @@ Core проверяет учебную разметку, если она исп�
 Core, Presentation и Navigation устанавливаются одним выпуском:
 
 ```sh
-quarto add Afonenko-Course-Tools/quarto-course@v3.0.2 --no-prompt
+quarto add Afonenko-Course-Tools/quarto-course@v4.0.0 --no-prompt
 ```
  Включите
 фильтры и штатный Reveal-плагин:
