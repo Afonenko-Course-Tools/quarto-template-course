@@ -191,8 +191,9 @@ instance, assessments, questions и delivery manifest. Runtime registry разр
 в private источниках; в native вопрос поставляются только выбранные student
 inputs, trusted grading assets и явный descriptor. Обычный HTML не запускает Java.
 
-Exporter5.0.0 опубликован. Platform source/image pins ещё ожидаются в этой ветке
-подготовки; команда показывает released exporter API и не утверждает image publication.
+Exporter 5.0.0 опубликован. Коммит исходников Platform и digest образов закреплены,
+но source tag, анонимное получение образов и приёмка точного Java PR head ещё
+ожидаются. Команда показывает API выпущенного exporter и не подтверждает эти этапы.
 Следуйте [матрице версий](specifications.qmd) и устанавливайте целые опубликованные
 пакеты после final pins. Native schema/CLI успех, actual import и Moodle результат
 проверяются отдельно. Старые ready Java/Gradle assets каталога сохраняют свой
