@@ -267,6 +267,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../guide/repository-texts.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">README, документация и описание PR</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../guide/specifications.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Версии и спецификации владельцев</span></a>
   </div>
@@ -312,7 +318,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../extensions/prairielearn.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">PrairieLearn — поставка вопросов</span></a>
+ <span class="menu-text">PrairieLearn — native поставка и проверки проектов</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -413,7 +419,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<p>Если одно условие используется в разных занятиях, объявите его в банке, а на страницах работ назначайте местные задачи. Модель описана в Core 4.0.1: <a href="../guide/specifications.html">версия и владелец правил</a>.</p>
+<p>Если одно условие используется в разных занятиях, объявите его в банке, а на страницах работ назначайте местные задачи. Модель описана в Core 5.0.2: <a href="../guide/specifications.html">версия и владелец правил</a>.</p>
 <section id="bank-layout" class="level2">
 <h2 class="anchored" data-anchor-id="bank-layout">Разделите книгу, задачи и работы</h2>
 <p>В примере логический корень курса содержит <code>_quarto.yml</code> с экспортным ID:</p>
@@ -442,7 +448,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Включите банк только в области задач:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># task/bank/_metadata.yml</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">exercise-bank</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="fu">exercise-statement-visibility</span><span class="kw">:</span><span class="at"> open</span></span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="fu">default-exercise-statement-visibility</span><span class="kw">:</span><span class="at"> open</span></span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Работы рядом в <code>works</code> остаются вне этой области. <code>book</code>, имя папки <code>task</code>, <code>course.id</code> и выбор <code>--book task</code> банк сами не включают. Quarto наследует метаданные <code>_metadata.yml</code>; Core использует получившуюся декларацию.</p>
 </section>
 <section id="declare-assign" class="level2">
@@ -953,7 +959,7 @@ assessment:
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
 <span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>Если одно условие используется в разных занятиях, объявите его в банке,</span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>а на страницах работ назначайте местные задачи. Модель описана в Core 4.0.1:</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>а на страницах работ назначайте местные задачи. Модель описана в Core 5.0.2:</span>
 <span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">версия и владелец правил</span><span class="co">](specifications.qmd)</span>.</span>
 <span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="fu">## Разделите книгу, задачи и работы {#bank-layout}</span></span>
@@ -997,7 +1003,7 @@ assessment:
 <span id="cb6-47"><a href="#cb6-47" aria-hidden="true" tabindex="-1"></a><span class="in">```yaml</span></span>
 <span id="cb6-48"><a href="#cb6-48" aria-hidden="true" tabindex="-1"></a><span class="co"># task/bank/_metadata.yml</span></span>
 <span id="cb6-49"><a href="#cb6-49" aria-hidden="true" tabindex="-1"></a><span class="fu">exercise-bank</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span>
-<span id="cb6-50"><a href="#cb6-50" aria-hidden="true" tabindex="-1"></a><span class="fu">exercise-statement-visibility</span><span class="kw">:</span><span class="at"> open</span></span>
+<span id="cb6-50"><a href="#cb6-50" aria-hidden="true" tabindex="-1"></a><span class="fu">default-exercise-statement-visibility</span><span class="kw">:</span><span class="at"> open</span></span>
 <span id="cb6-51"><a href="#cb6-51" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb6-52"><a href="#cb6-52" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb6-53"><a href="#cb6-53" aria-hidden="true" tabindex="-1"></a>Работы рядом в <span class="in">`works`</span> остаются вне этой области. <span class="in">`book`</span>, имя папки <span class="in">`task`</span>,</span>

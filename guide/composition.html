@@ -267,6 +267,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../guide/repository-texts.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">README, документация и описание PR</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../guide/specifications.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Версии и спецификации владельцев</span></a>
   </div>
@@ -312,7 +318,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../extensions/prairielearn.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">PrairieLearn — поставка вопросов</span></a>
+ <span class="menu-text">PrairieLearn — native поставка и проверки проектов</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -488,9 +494,24 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">gitignore</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <p>В QMD запросите архив:</p>
 <pre class="qmd"><code>{{&lt; project-download seminar-data text="Скачать данные семинара" &gt;}}</code></pre>
-<p>Начальный <code>/</code> означает корень текущего проекта. ZIP появляется по видимому после проекции запросу; profiles ресурса разрешает запрос, но не скрывает сам shortcode. Оберните его нативным условием профиля, если нужно скрыть ссылку.</p>
-<p>Для стартового проекта канонической задачи существующий мост включается явно <code>project-download: {course-model: true}</code>. Он получает текущую native модель и выбирает только <code>&lt;project&gt;/student</code>. Teacher tests, reference/solution, QMD, metadata и build-входы в публичный ZIP не входят. Restricted задача student заявки не оставляет. Participant public пакет Print/PL сам по себе не разрешает публиковать ZIP на сайте.</p>
+<p>Начальный <code>/</code> означает корень текущего проекта. ZIP появляется по видимому после проекции запросу; profiles ресурса разрешает запрос, но не скрывает сам shortcode. Ограниченный teacher ресурс размещайте на отдельной full-only странице книги; в Core5 author QMD audience wrappers student/full запрещены.</p>
+<p>Для стартового проекта канонической задачи существующий мост включается явно <code>project-download: {course-model: true}</code>. Он получает текущую native модель и получает policy conditions/student/full. Обычная задача student выдаёт starter, full — полный проект; открытая demonstration выдаёт full в обоих. Private tests/reference обычной задачи не попадают в student ZIP. Restricted задача student заявки не оставляет. Participant public пакет Print/PL сам по себе не разрешает публиковать ZIP на сайте.</p>
 <p>После full → student проверяйте HTML, search, QRC, ресурсы и ZIP текущего выхода. Download очищает только собственные прежние archives/requests этого output; другие outputs и чужие ZIP сохраняет. Сохранённый course.json не доказывает актуальность. Скачивание архива и просмотр исходного QMD остаются отдельными действиями.</p>
+<p>Модельная ссылка использует тот же exercise ID без дублирующей resources map. Поместите её внутри объявления упражнения, чтобы native bank projection удаляла restricted запрос вместе с условием в student. HTML-запросы ограничиваются форматом; такая functional format condition разрешена и не задаёт аудиторию:</p>
+<pre class="qmd"><code>::: {.content-visible when-format="html"}
+{{&lt; project-download exr-java-digest &gt;}}
+{{&lt; project-download exr-java-digest kind="conditions" text="Условие для работы вне сети" &gt;}}
+:::</code></pre>
+<p>Conditions требуют текущий resolved HTML output. Во время JSON/Body/native экспорта HTML-запросов в этой ветке нет; contextual ZIP не превращается в participant условие. Каждый starter/full/conditions комплект имеет самостоятельный README. Conditions не содержат закрытого решения или teacher notes; contextual links не входят в переносимое native условие как частный full ZIP. Проверяйте student→full→student и фактические составы всех архивов.</p>
+<p>README — непрозрачные файловые байты, не render target и не вход QRC. Quarto includes, profile conditions и ссылки на исходные QMD внутри README не исполняются. Ссылки ведут внутрь данного комплекта либо на устойчивый опубликованный ресурс. Starter README не ссылается на отсутствующие <code>../reference</code> или <code>../tests</code>; full README описывает собственный корень с <code>student</code>, <code>reference</code> и <code>tests</code>.</p>
+<p>Числовой Java-проект integer-arithmetic с build.gradle в student partition использует следующие команды из корня соответствующего распакованного ZIP:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># starter: src/main/java и src/test/java находятся в корне проекта</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="ex">gradle</span> test</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="co"># full: открытая часть находится в student/</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="ex">gradle</span> <span class="at">-p</span> student test</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="co"># full: существующие reference/ и tests/junit/ подключаются флагами проекта</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="ex">gradle</span> <span class="at">-p</span> student <span class="at">-Preference</span> <span class="at">-Pgrading</span> test</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Команда starter характеризует незавершённый ответ и может завершиться отказом его тестов; проверка эталона должна пройти. Эти флаги заданы конкретным build.gradle, а не самим Download. Они не переносятся в starter, где reference и tests/junit отсутствуют. Проверяйте команды на реальном распакованном комплекте; final Java acceptance и точный validated source ref записываются отдельно. <a href="https://github.com/Afonenko-Course-Tools/quarto-project-download/blob/v3.0.0/spec/contract.md">Download3 contract</a> описывает границы ресурсов и публикации.</p>
 
 
 <!-- -->
@@ -961,165 +982,212 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       </a>
   </div>
 </nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Исходный код</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> Составной сайт</span></span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>Когда теория, банк и презентации являются самостоятельными Quarto-проектами,</span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>Publisher собирает их результаты в общий сайт. Он сохраняет конфигурацию</span>
-<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>каждой части и размещает её по пути папки. QRC отдельно отвечает за ссылки</span>
-<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>между публикациями; для самой составной сборки каталог ссылок не обязателен.</span>
-<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a><span class="fu">## Установите сборщик</span></span>
-<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>В корне сайта выполните:</span>
-<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a><span class="in">```sh</span></span>
-<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a><span class="ex">quarto</span> add Afonenko-Course-Tools/quarto-project-publish@v5.0.0 <span class="at">--no-prompt</span></span>
-<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a>Создайте корневой <span class="in">`_quarto.yml`</span>:</span>
-<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a><span class="in">```yaml</span></span>
-<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a><span class="fu">project</span><span class="kw">:</span></span>
-<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">type</span><span class="kw">:</span><span class="at"> website</span></span>
-<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">output-dir</span><span class="kw">:</span><span class="at"> _site</span></span>
-<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">render</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="at">index.qmd</span><span class="kw">]</span></span>
-<span id="cb9-25"><a href="#cb9-25" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">pre-render</span><span class="kw">:</span><span class="at"> _extensions/Afonenko-Course-Tools/course-site/entrypoints/pre.ts</span></span>
-<span id="cb9-26"><a href="#cb9-26" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">post-render</span><span class="kw">:</span><span class="at"> _extensions/Afonenko-Course-Tools/course-site/entrypoints/post.ts</span></span>
-<span id="cb9-27"><a href="#cb9-27" aria-hidden="true" tabindex="-1"></a><span class="fu">website</span><span class="kw">:</span></span>
-<span id="cb9-28"><a href="#cb9-28" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">title</span><span class="kw">:</span><span class="at"> Учебный курс</span></span>
-<span id="cb9-29"><a href="#cb9-29" aria-hidden="true" tabindex="-1"></a><span class="fu">format</span><span class="kw">:</span><span class="at"> html</span></span>
-<span id="cb9-30"><a href="#cb9-30" aria-hidden="true" tabindex="-1"></a><span class="fu">lang</span><span class="kw">:</span><span class="at"> ru</span></span>
-<span id="cb9-31"><a href="#cb9-31" aria-hidden="true" tabindex="-1"></a><span class="fu">subprojects</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="at">theory</span><span class="kw">,</span><span class="at"> task</span><span class="kw">]</span></span>
-<span id="cb9-32"><a href="#cb9-32" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb9-33"><a href="#cb9-33" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-34"><a href="#cb9-34" aria-hidden="true" tabindex="-1"></a>У <span class="in">`theory`</span> и <span class="in">`task`</span> должны быть свои <span class="in">`_quarto.yml`</span>. Например, книга теории:</span>
-<span id="cb9-35"><a href="#cb9-35" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-36"><a href="#cb9-36" aria-hidden="true" tabindex="-1"></a><span class="in">```yaml</span></span>
-<span id="cb9-37"><a href="#cb9-37" aria-hidden="true" tabindex="-1"></a><span class="fu">project</span><span class="kw">:</span></span>
-<span id="cb9-38"><a href="#cb9-38" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">type</span><span class="kw">:</span><span class="at"> book</span></span>
-<span id="cb9-39"><a href="#cb9-39" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">output-dir</span><span class="kw">:</span><span class="at"> _book</span></span>
-<span id="cb9-40"><a href="#cb9-40" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">post-render</span><span class="kw">:</span><span class="at"> ../_extensions/Afonenko-Course-Tools/course-site/entrypoints/collect.ts</span></span>
-<span id="cb9-41"><a href="#cb9-41" aria-hidden="true" tabindex="-1"></a><span class="fu">book</span><span class="kw">:</span></span>
-<span id="cb9-42"><a href="#cb9-42" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">title</span><span class="kw">:</span><span class="at"> Теория</span></span>
-<span id="cb9-43"><a href="#cb9-43" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">chapters</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="at">index.qmd</span><span class="kw">]</span></span>
-<span id="cb9-44"><a href="#cb9-44" aria-hidden="true" tabindex="-1"></a><span class="fu">format</span><span class="kw">:</span><span class="at"> html</span></span>
-<span id="cb9-45"><a href="#cb9-45" aria-hidden="true" tabindex="-1"></a><span class="fu">lang</span><span class="kw">:</span><span class="at"> ru</span></span>
-<span id="cb9-46"><a href="#cb9-46" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb9-47"><a href="#cb9-47" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-48"><a href="#cb9-48" aria-hidden="true" tabindex="-1"></a>Последним post-hook каждой части подключите корневой <span class="in">`collect.ts`</span>. Если</span>
-<span id="cb9-49"><a href="#cb9-49" aria-hidden="true" tabindex="-1"></a>часть уже использует Core или QRC, их post-hooks идут перед ним.</span>
-<span id="cb9-50"><a href="#cb9-50" aria-hidden="true" tabindex="-1"></a>Пути здесь рассчитаны для части на один уровень ниже корня.</span>
-<span id="cb9-51"><a href="#cb9-51" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-52"><a href="#cb9-52" aria-hidden="true" tabindex="-1"></a><span class="in">```sh</span></span>
-<span id="cb9-53"><a href="#cb9-53" aria-hidden="true" tabindex="-1"></a><span class="ex">quarto</span> render <span class="at">--profile</span> student</span>
-<span id="cb9-54"><a href="#cb9-54" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb9-55"><a href="#cb9-55" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-56"><a href="#cb9-56" aria-hidden="true" tabindex="-1"></a>В <span class="in">`_site/theory/`</span> и <span class="in">`_site/task/`</span> появятся актуальные результаты частей.</span>
-<span id="cb9-57"><a href="#cb9-57" aria-hidden="true" tabindex="-1"></a>Путь <span class="in">`a/slides`</span> публикуется как <span class="in">`a/slides/`</span>; переименование папки меняет URL.</span>
-<span id="cb9-58"><a href="#cb9-58" aria-hidden="true" tabindex="-1"></a>Один выбранный веб-формат документа может быть HTML или Reveal. PDF и другие</span>
-<span id="cb9-59"><a href="#cb9-59" aria-hidden="true" tabindex="-1"></a>форматы собираются отдельно с учётом обычных ограничений Quarto book.</span>
-<span id="cb9-60"><a href="#cb9-60" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-61"><a href="#cb9-61" aria-hidden="true" tabindex="-1"></a><span class="fu">## Предупреждения частей</span></span>
-<span id="cb9-62"><a href="#cb9-62" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-63"><a href="#cb9-63" aria-hidden="true" tabindex="-1"></a>Корневой CLI <span class="in">`--fail-if-warnings`</span> не передаётся автоматически отдельным</span>
-<span id="cb9-64"><a href="#cb9-64" aria-hidden="true" tabindex="-1"></a>процессам рендера. Для публичной сборки задайте штатное</span>
-<span id="cb9-65"><a href="#cb9-65" aria-hidden="true" tabindex="-1"></a><span class="in">`fail-if-warnings: true`</span> в каждом самостоятельном проекте либо подключите</span>
-<span id="cb9-66"><a href="#cb9-66" aria-hidden="true" tabindex="-1"></a>общий файл через <span class="in">`metadata-files`</span>. Предупреждение дочернего проекта тогда</span>
-<span id="cb9-67"><a href="#cb9-67" aria-hidden="true" tabindex="-1"></a>останавливает сборку до выдачи итогового результата.</span>
-<span id="cb9-68"><a href="#cb9-68" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-69"><a href="#cb9-69" aria-hidden="true" tabindex="-1"></a><span class="fu">## Свяжите материалы {#qrc-addresses}</span></span>
-<span id="cb9-70"><a href="#cb9-70" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-71"><a href="#cb9-71" aria-hidden="true" tabindex="-1"></a>Если нужны ссылки между книгой и слайдами, установите</span>
-<span id="cb9-72"><a href="#cb9-72" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">QRC</span><span class="co">](../extensions/reference-catalog.qmd)</span> в соответствующие проекты и задайте</span>
-<span id="cb9-73"><a href="#cb9-73" aria-hidden="true" tabindex="-1"></a>их пространства имён. Namespace ссылки, путь публикации и <span class="in">`course.id`</span></span>
-<span id="cb9-74"><a href="#cb9-74" aria-hidden="true" tabindex="-1"></a>решают разные задачи. Готовый пример <span class="co">[</span><span class="ot">book и HTML/Reveal</span><span class="co">](../catalog/index.qmd)</span></span>
-<span id="cb9-75"><a href="#cb9-75" aria-hidden="true" tabindex="-1"></a>показывает hooks и локальные переходы целиком.</span>
-<span id="cb9-76"><a href="#cb9-76" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-77"><a href="#cb9-77" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-78"><a href="#cb9-78" aria-hidden="true" tabindex="-1"></a>В книге теории ссылка остаётся адресной:</span>
-<span id="cb9-79"><a href="#cb9-79" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-80"><a href="#cb9-80" aria-hidden="true" tabindex="-1"></a><span class="in">```qmd</span></span>
-<span id="cb9-81"><a href="#cb9-81" aria-hidden="true" tabindex="-1"></a><span class="in">Сначала выполните упражнение @task:exr-checksum.</span></span>
-<span id="cb9-82"><a href="#cb9-82" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb9-83"><a href="#cb9-83" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-84"><a href="#cb9-84" aria-hidden="true" tabindex="-1"></a>Для внешней опубликованной библиотеки можно подключить адресный снимок:</span>
-<span id="cb9-85"><a href="#cb9-85" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-86"><a href="#cb9-86" aria-hidden="true" tabindex="-1"></a><span class="in">```yaml</span></span>
-<span id="cb9-87"><a href="#cb9-87" aria-hidden="true" tabindex="-1"></a><span class="fu">reference-catalog</span><span class="kw">:</span></span>
-<span id="cb9-88"><a href="#cb9-88" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">namespace</span><span class="kw">:</span><span class="at"> theory</span></span>
-<span id="cb9-89"><a href="#cb9-89" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">imports</span><span class="kw">:</span></span>
-<span id="cb9-90"><a href="#cb9-90" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">handbook</span><span class="kw">:</span></span>
-<span id="cb9-91"><a href="#cb9-91" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">source</span><span class="kw">:</span><span class="at"> references/handbook.json</span></span>
-<span id="cb9-92"><a href="#cb9-92" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">namespace</span><span class="kw">:</span><span class="at"> handbook</span></span>
-<span id="cb9-93"><a href="#cb9-93" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">base-url</span><span class="kw">:</span><span class="at"> https://example.org/handbook/</span></span>
-<span id="cb9-94"><a href="#cb9-94" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb9-95"><a href="#cb9-95" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-96"><a href="#cb9-96" aria-hidden="true" tabindex="-1"></a>Замените адрес и JSON реальным каталогом владельца. <span class="in">`@handbook:sec-integrity`</span></span>
-<span id="cb9-97"><a href="#cb9-97" aria-hidden="true" tabindex="-1"></a>перейдёт к его опубликованной цели. Namespace не равен пути размещения или</span>
-<span id="cb9-98"><a href="#cb9-98" aria-hidden="true" tabindex="-1"></a>course.id; импорт не копирует условие, ресурсы или чужие задания в банк.</span>
-<span id="cb9-99"><a href="#cb9-99" aria-hidden="true" tabindex="-1"></a>Для student QRC получает текущие публичные outputs: restricted цель и её</span>
-<span id="cb9-100"><a href="#cb9-100" aria-hidden="true" tabindex="-1"></a>текст в каталог и поиск не входят. Full разрешает текущие full цели.</span>
-<span id="cb9-101"><a href="#cb9-101" aria-hidden="true" tabindex="-1"></a>Локальная отсрочка ссылки не создаёт фиктивный href; строгий full требует</span>
-<span id="cb9-102"><a href="#cb9-102" aria-hidden="true" tabindex="-1"></a>доступной цели.</span>
-<span id="cb9-103"><a href="#cb9-103" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-104"><a href="#cb9-104" aria-hidden="true" tabindex="-1"></a><span class="fu">## Сохраните ресурсное владение {#resource-ownership}</span></span>
-<span id="cb9-105"><a href="#cb9-105" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-106"><a href="#cb9-106" aria-hidden="true" tabindex="-1"></a>Рисунок или ссылка условия относятся к своему native документу и владельцу.</span>
-<span id="cb9-107"><a href="#cb9-107" aria-hidden="true" tabindex="-1"></a>При selected экспорте Core отбирает текущие разрешённые ресурсы, проверяет</span>
-<span id="cb9-108"><a href="#cb9-108" aria-hidden="true" tabindex="-1"></a>реальный путь, байты и SHA-256 и переносит их под безопасные targets пакета.</span>
-<span id="cb9-109"><a href="#cb9-109" aria-hidden="true" tabindex="-1"></a>Адаптер не открывает заново producer effectiveBase. Относительный ресурс</span>
-<span id="cb9-110"><a href="#cb9-110" aria-hidden="true" tabindex="-1"></a>чужой публикации не становится местным ресурсом только из-за QRC ссылки.</span>
-<span id="cb9-111"><a href="#cb9-111" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-112"><a href="#cb9-112" aria-hidden="true" tabindex="-1"></a>Publisher размещает готовые outputs частей, сохраняя их конфигурации.</span>
-<span id="cb9-113"><a href="#cb9-113" aria-hidden="true" tabindex="-1"></a>Самостоятельная вложенная книга не становится частью банка соседней книги.</span>
-<span id="cb9-114"><a href="#cb9-114" aria-hidden="true" tabindex="-1"></a>Полные output каталоги, <span class="in">`_generated`</span>, source и закрытые проекты исключите</span>
-<span id="cb9-115"><a href="#cb9-115" aria-hidden="true" tabindex="-1"></a>из публичных <span class="in">`project.resources`</span> — <span class="co">[</span><span class="ot">профили и приватность</span><span class="co">](profiles.qmd#source-privacy)</span>.</span>
-<span id="cb9-116"><a href="#cb9-116" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-117"><a href="#cb9-117" aria-hidden="true" tabindex="-1"></a><span class="fu">## Выдайте публичные материалы ZIP {#download-resources}</span></span>
-<span id="cb9-118"><a href="#cb9-118" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-119"><a href="#cb9-119" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">Download</span><span class="co">](../extensions/download.qmd)</span> работает и без Core/CUE. Явно разрешите</span>
-<span id="cb9-120"><a href="#cb9-120" aria-hidden="true" tabindex="-1"></a>каталог данных, подключите его hooks и фильтр:</span>
-<span id="cb9-121"><a href="#cb9-121" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-122"><a href="#cb9-122" aria-hidden="true" tabindex="-1"></a><span class="in">```yaml</span></span>
-<span id="cb9-123"><a href="#cb9-123" aria-hidden="true" tabindex="-1"></a><span class="fu">project</span><span class="kw">:</span></span>
-<span id="cb9-124"><a href="#cb9-124" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">type</span><span class="kw">:</span><span class="at"> website</span></span>
-<span id="cb9-125"><a href="#cb9-125" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">resources</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="st">'!materials/**'</span><span class="kw">]</span></span>
-<span id="cb9-126"><a href="#cb9-126" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">pre-render</span><span class="kw">:</span><span class="at"> _extensions/Afonenko-Course-Tools/project-download/entrypoints/pre.ts</span></span>
-<span id="cb9-127"><a href="#cb9-127" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">post-render</span><span class="kw">:</span><span class="at"> _extensions/Afonenko-Course-Tools/project-download/entrypoints/post.ts</span></span>
-<span id="cb9-128"><a href="#cb9-128" aria-hidden="true" tabindex="-1"></a><span class="fu">filters</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="at">project-download</span><span class="kw">]</span></span>
-<span id="cb9-129"><a href="#cb9-129" aria-hidden="true" tabindex="-1"></a><span class="fu">project-download</span><span class="kw">:</span></span>
-<span id="cb9-130"><a href="#cb9-130" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">resources</span><span class="kw">:</span></span>
-<span id="cb9-131"><a href="#cb9-131" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">seminar-data</span><span class="kw">:</span></span>
-<span id="cb9-132"><a href="#cb9-132" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">path</span><span class="kw">:</span><span class="at"> /materials/observations</span></span>
-<span id="cb9-133"><a href="#cb9-133" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">include</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="st">'**/*.csv'</span><span class="kw">,</span><span class="at"> </span><span class="st">'**/*.md'</span><span class="kw">]</span></span>
-<span id="cb9-134"><a href="#cb9-134" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">exclude</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="st">'drafts/**'</span><span class="kw">]</span></span>
-<span id="cb9-135"><a href="#cb9-135" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">gitignore</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span>
-<span id="cb9-136"><a href="#cb9-136" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb9-137"><a href="#cb9-137" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-138"><a href="#cb9-138" aria-hidden="true" tabindex="-1"></a>В QMD запросите архив:</span>
-<span id="cb9-139"><a href="#cb9-139" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-140"><a href="#cb9-140" aria-hidden="true" tabindex="-1"></a><span class="in">```qmd</span></span>
-<span id="cb9-141"><a href="#cb9-141" aria-hidden="true" tabindex="-1"></a><span class="in">{{&lt; project-download seminar-data text="cf5733e5-0370-4aae-8689-61bad1dd9ec0&amp;#x421;cf5733e5-0370-4aae-8689-61bad1dd9ec0&amp;#x43a;cf5733e5-0370-4aae-8689-61bad1dd9ec0&amp;#x430;cf5733e5-0370-4aae-8689-61bad1dd9ec0&amp;#x447;cf5733e5-0370-4aae-8689-61bad1dd9ec0&amp;#x430;cf5733e5-0370-4aae-8689-61bad1dd9ec0&amp;#x442;cf5733e5-0370-4aae-8689-61bad1dd9ec0&amp;#x44c; cf5733e5-0370-4aae-8689-61bad1dd9ec0&amp;#x434;cf5733e5-0370-4aae-8689-61bad1dd9ec0&amp;#x430;cf5733e5-0370-4aae-8689-61bad1dd9ec0&amp;#x43d;cf5733e5-0370-4aae-8689-61bad1dd9ec0&amp;#x43d;cf5733e5-0370-4aae-8689-61bad1dd9ec0&amp;#x44b;cf5733e5-0370-4aae-8689-61bad1dd9ec0&amp;#x435; cf5733e5-0370-4aae-8689-61bad1dd9ec0&amp;#x441;cf5733e5-0370-4aae-8689-61bad1dd9ec0&amp;#x435;cf5733e5-0370-4aae-8689-61bad1dd9ec0&amp;#x43c;cf5733e5-0370-4aae-8689-61bad1dd9ec0&amp;#x438;cf5733e5-0370-4aae-8689-61bad1dd9ec0&amp;#x43d;cf5733e5-0370-4aae-8689-61bad1dd9ec0&amp;#x430;cf5733e5-0370-4aae-8689-61bad1dd9ec0&amp;#x440;cf5733e5-0370-4aae-8689-61bad1dd9ec0&amp;#x430;" &gt;}}</span></span>
-<span id="cb9-142"><a href="#cb9-142" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb9-143"><a href="#cb9-143" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-144"><a href="#cb9-144" aria-hidden="true" tabindex="-1"></a>Начальный <span class="in">`/`</span> означает корень текущего проекта. ZIP появляется по видимому</span>
-<span id="cb9-145"><a href="#cb9-145" aria-hidden="true" tabindex="-1"></a>после проекции запросу; profiles ресурса разрешает запрос, но не скрывает сам</span>
-<span id="cb9-146"><a href="#cb9-146" aria-hidden="true" tabindex="-1"></a>shortcode. Оберните его нативным условием профиля, если нужно скрыть ссылку.</span>
-<span id="cb9-147"><a href="#cb9-147" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-148"><a href="#cb9-148" aria-hidden="true" tabindex="-1"></a>Для стартового проекта канонической задачи существующий мост включается явно</span>
-<span id="cb9-149"><a href="#cb9-149" aria-hidden="true" tabindex="-1"></a><span class="in">`project-download: {course-model: true}`</span>. Он получает текущую native модель</span>
-<span id="cb9-150"><a href="#cb9-150" aria-hidden="true" tabindex="-1"></a>и выбирает только <span class="in">`&lt;project&gt;/student`</span>. Teacher tests, reference/solution,</span>
-<span id="cb9-151"><a href="#cb9-151" aria-hidden="true" tabindex="-1"></a>QMD, metadata и build-входы в публичный ZIP не входят. Restricted задача</span>
-<span id="cb9-152"><a href="#cb9-152" aria-hidden="true" tabindex="-1"></a>student заявки не оставляет. Participant public пакет Print/PL сам по себе</span>
-<span id="cb9-153"><a href="#cb9-153" aria-hidden="true" tabindex="-1"></a>не разрешает публиковать ZIP на сайте.</span>
-<span id="cb9-154"><a href="#cb9-154" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-155"><a href="#cb9-155" aria-hidden="true" tabindex="-1"></a>После full → student проверяйте HTML, search, QRC, ресурсы и ZIP текущего</span>
-<span id="cb9-156"><a href="#cb9-156" aria-hidden="true" tabindex="-1"></a>выхода. Download очищает только собственные прежние archives/requests этого</span>
-<span id="cb9-157"><a href="#cb9-157" aria-hidden="true" tabindex="-1"></a>output; другие outputs и чужие ZIP сохраняет. Сохранённый course.json не</span>
-<span id="cb9-158"><a href="#cb9-158" aria-hidden="true" tabindex="-1"></a>доказывает актуальность. Скачивание архива и просмотр исходного QMD остаются</span>
-<span id="cb9-159"><a href="#cb9-159" aria-hidden="true" tabindex="-1"></a>отдельными действиями.</span></code></pre></div><button title="Скопировать текст" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> Составной сайт</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>Когда теория, банк и презентации являются самостоятельными Quarto-проектами,</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>Publisher собирает их результаты в общий сайт. Он сохраняет конфигурацию</span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>каждой части и размещает её по пути папки. QRC отдельно отвечает за ссылки</span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>между публикациями; для самой составной сборки каталог ссылок не обязателен.</span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a><span class="fu">## Установите сборщик</span></span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>В корне сайта выполните:</span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a><span class="in">```sh</span></span>
+<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a><span class="ex">quarto</span> add Afonenko-Course-Tools/quarto-project-publish@v5.0.0 <span class="at">--no-prompt</span></span>
+<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-18"><a href="#cb11-18" aria-hidden="true" tabindex="-1"></a>Создайте корневой <span class="in">`_quarto.yml`</span>:</span>
+<span id="cb11-19"><a href="#cb11-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-20"><a href="#cb11-20" aria-hidden="true" tabindex="-1"></a><span class="in">```yaml</span></span>
+<span id="cb11-21"><a href="#cb11-21" aria-hidden="true" tabindex="-1"></a><span class="fu">project</span><span class="kw">:</span></span>
+<span id="cb11-22"><a href="#cb11-22" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">type</span><span class="kw">:</span><span class="at"> website</span></span>
+<span id="cb11-23"><a href="#cb11-23" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">output-dir</span><span class="kw">:</span><span class="at"> _site</span></span>
+<span id="cb11-24"><a href="#cb11-24" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">render</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="at">index.qmd</span><span class="kw">]</span></span>
+<span id="cb11-25"><a href="#cb11-25" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">pre-render</span><span class="kw">:</span><span class="at"> _extensions/Afonenko-Course-Tools/course-site/entrypoints/pre.ts</span></span>
+<span id="cb11-26"><a href="#cb11-26" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">post-render</span><span class="kw">:</span><span class="at"> _extensions/Afonenko-Course-Tools/course-site/entrypoints/post.ts</span></span>
+<span id="cb11-27"><a href="#cb11-27" aria-hidden="true" tabindex="-1"></a><span class="fu">website</span><span class="kw">:</span></span>
+<span id="cb11-28"><a href="#cb11-28" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">title</span><span class="kw">:</span><span class="at"> Учебный курс</span></span>
+<span id="cb11-29"><a href="#cb11-29" aria-hidden="true" tabindex="-1"></a><span class="fu">format</span><span class="kw">:</span><span class="at"> html</span></span>
+<span id="cb11-30"><a href="#cb11-30" aria-hidden="true" tabindex="-1"></a><span class="fu">lang</span><span class="kw">:</span><span class="at"> ru</span></span>
+<span id="cb11-31"><a href="#cb11-31" aria-hidden="true" tabindex="-1"></a><span class="fu">subprojects</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="at">theory</span><span class="kw">,</span><span class="at"> task</span><span class="kw">]</span></span>
+<span id="cb11-32"><a href="#cb11-32" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb11-33"><a href="#cb11-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-34"><a href="#cb11-34" aria-hidden="true" tabindex="-1"></a>У <span class="in">`theory`</span> и <span class="in">`task`</span> должны быть свои <span class="in">`_quarto.yml`</span>. Например, книга теории:</span>
+<span id="cb11-35"><a href="#cb11-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-36"><a href="#cb11-36" aria-hidden="true" tabindex="-1"></a><span class="in">```yaml</span></span>
+<span id="cb11-37"><a href="#cb11-37" aria-hidden="true" tabindex="-1"></a><span class="fu">project</span><span class="kw">:</span></span>
+<span id="cb11-38"><a href="#cb11-38" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">type</span><span class="kw">:</span><span class="at"> book</span></span>
+<span id="cb11-39"><a href="#cb11-39" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">output-dir</span><span class="kw">:</span><span class="at"> _book</span></span>
+<span id="cb11-40"><a href="#cb11-40" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">post-render</span><span class="kw">:</span><span class="at"> ../_extensions/Afonenko-Course-Tools/course-site/entrypoints/collect.ts</span></span>
+<span id="cb11-41"><a href="#cb11-41" aria-hidden="true" tabindex="-1"></a><span class="fu">book</span><span class="kw">:</span></span>
+<span id="cb11-42"><a href="#cb11-42" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">title</span><span class="kw">:</span><span class="at"> Теория</span></span>
+<span id="cb11-43"><a href="#cb11-43" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">chapters</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="at">index.qmd</span><span class="kw">]</span></span>
+<span id="cb11-44"><a href="#cb11-44" aria-hidden="true" tabindex="-1"></a><span class="fu">format</span><span class="kw">:</span><span class="at"> html</span></span>
+<span id="cb11-45"><a href="#cb11-45" aria-hidden="true" tabindex="-1"></a><span class="fu">lang</span><span class="kw">:</span><span class="at"> ru</span></span>
+<span id="cb11-46"><a href="#cb11-46" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb11-47"><a href="#cb11-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-48"><a href="#cb11-48" aria-hidden="true" tabindex="-1"></a>Последним post-hook каждой части подключите корневой <span class="in">`collect.ts`</span>. Если</span>
+<span id="cb11-49"><a href="#cb11-49" aria-hidden="true" tabindex="-1"></a>часть уже использует Core или QRC, их post-hooks идут перед ним.</span>
+<span id="cb11-50"><a href="#cb11-50" aria-hidden="true" tabindex="-1"></a>Пути здесь рассчитаны для части на один уровень ниже корня.</span>
+<span id="cb11-51"><a href="#cb11-51" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-52"><a href="#cb11-52" aria-hidden="true" tabindex="-1"></a><span class="in">```sh</span></span>
+<span id="cb11-53"><a href="#cb11-53" aria-hidden="true" tabindex="-1"></a><span class="ex">quarto</span> render <span class="at">--profile</span> student</span>
+<span id="cb11-54"><a href="#cb11-54" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb11-55"><a href="#cb11-55" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-56"><a href="#cb11-56" aria-hidden="true" tabindex="-1"></a>В <span class="in">`_site/theory/`</span> и <span class="in">`_site/task/`</span> появятся актуальные результаты частей.</span>
+<span id="cb11-57"><a href="#cb11-57" aria-hidden="true" tabindex="-1"></a>Путь <span class="in">`a/slides`</span> публикуется как <span class="in">`a/slides/`</span>; переименование папки меняет URL.</span>
+<span id="cb11-58"><a href="#cb11-58" aria-hidden="true" tabindex="-1"></a>Один выбранный веб-формат документа может быть HTML или Reveal. PDF и другие</span>
+<span id="cb11-59"><a href="#cb11-59" aria-hidden="true" tabindex="-1"></a>форматы собираются отдельно с учётом обычных ограничений Quarto book.</span>
+<span id="cb11-60"><a href="#cb11-60" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-61"><a href="#cb11-61" aria-hidden="true" tabindex="-1"></a><span class="fu">## Предупреждения частей</span></span>
+<span id="cb11-62"><a href="#cb11-62" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-63"><a href="#cb11-63" aria-hidden="true" tabindex="-1"></a>Корневой CLI <span class="in">`--fail-if-warnings`</span> не передаётся автоматически отдельным</span>
+<span id="cb11-64"><a href="#cb11-64" aria-hidden="true" tabindex="-1"></a>процессам рендера. Для публичной сборки задайте штатное</span>
+<span id="cb11-65"><a href="#cb11-65" aria-hidden="true" tabindex="-1"></a><span class="in">`fail-if-warnings: true`</span> в каждом самостоятельном проекте либо подключите</span>
+<span id="cb11-66"><a href="#cb11-66" aria-hidden="true" tabindex="-1"></a>общий файл через <span class="in">`metadata-files`</span>. Предупреждение дочернего проекта тогда</span>
+<span id="cb11-67"><a href="#cb11-67" aria-hidden="true" tabindex="-1"></a>останавливает сборку до выдачи итогового результата.</span>
+<span id="cb11-68"><a href="#cb11-68" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-69"><a href="#cb11-69" aria-hidden="true" tabindex="-1"></a><span class="fu">## Свяжите материалы {#qrc-addresses}</span></span>
+<span id="cb11-70"><a href="#cb11-70" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-71"><a href="#cb11-71" aria-hidden="true" tabindex="-1"></a>Если нужны ссылки между книгой и слайдами, установите</span>
+<span id="cb11-72"><a href="#cb11-72" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">QRC</span><span class="co">](../extensions/reference-catalog.qmd)</span> в соответствующие проекты и задайте</span>
+<span id="cb11-73"><a href="#cb11-73" aria-hidden="true" tabindex="-1"></a>их пространства имён. Namespace ссылки, путь публикации и <span class="in">`course.id`</span></span>
+<span id="cb11-74"><a href="#cb11-74" aria-hidden="true" tabindex="-1"></a>решают разные задачи. Готовый пример <span class="co">[</span><span class="ot">book и HTML/Reveal</span><span class="co">](../catalog/index.qmd)</span></span>
+<span id="cb11-75"><a href="#cb11-75" aria-hidden="true" tabindex="-1"></a>показывает hooks и локальные переходы целиком.</span>
+<span id="cb11-76"><a href="#cb11-76" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-77"><a href="#cb11-77" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-78"><a href="#cb11-78" aria-hidden="true" tabindex="-1"></a>В книге теории ссылка остаётся адресной:</span>
+<span id="cb11-79"><a href="#cb11-79" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-80"><a href="#cb11-80" aria-hidden="true" tabindex="-1"></a><span class="in">```qmd</span></span>
+<span id="cb11-81"><a href="#cb11-81" aria-hidden="true" tabindex="-1"></a><span class="in">Сначала выполните упражнение @task:exr-checksum.</span></span>
+<span id="cb11-82"><a href="#cb11-82" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb11-83"><a href="#cb11-83" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-84"><a href="#cb11-84" aria-hidden="true" tabindex="-1"></a>Для внешней опубликованной библиотеки можно подключить адресный снимок:</span>
+<span id="cb11-85"><a href="#cb11-85" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-86"><a href="#cb11-86" aria-hidden="true" tabindex="-1"></a><span class="in">```yaml</span></span>
+<span id="cb11-87"><a href="#cb11-87" aria-hidden="true" tabindex="-1"></a><span class="fu">reference-catalog</span><span class="kw">:</span></span>
+<span id="cb11-88"><a href="#cb11-88" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">namespace</span><span class="kw">:</span><span class="at"> theory</span></span>
+<span id="cb11-89"><a href="#cb11-89" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">imports</span><span class="kw">:</span></span>
+<span id="cb11-90"><a href="#cb11-90" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">handbook</span><span class="kw">:</span></span>
+<span id="cb11-91"><a href="#cb11-91" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">source</span><span class="kw">:</span><span class="at"> references/handbook.json</span></span>
+<span id="cb11-92"><a href="#cb11-92" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">namespace</span><span class="kw">:</span><span class="at"> handbook</span></span>
+<span id="cb11-93"><a href="#cb11-93" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">base-url</span><span class="kw">:</span><span class="at"> https://example.org/handbook/</span></span>
+<span id="cb11-94"><a href="#cb11-94" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb11-95"><a href="#cb11-95" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-96"><a href="#cb11-96" aria-hidden="true" tabindex="-1"></a>Замените адрес и JSON реальным каталогом владельца. <span class="in">`@handbook:sec-integrity`</span></span>
+<span id="cb11-97"><a href="#cb11-97" aria-hidden="true" tabindex="-1"></a>перейдёт к его опубликованной цели. Namespace не равен пути размещения или</span>
+<span id="cb11-98"><a href="#cb11-98" aria-hidden="true" tabindex="-1"></a>course.id; импорт не копирует условие, ресурсы или чужие задания в банк.</span>
+<span id="cb11-99"><a href="#cb11-99" aria-hidden="true" tabindex="-1"></a>Для student QRC получает текущие публичные outputs: restricted цель и её</span>
+<span id="cb11-100"><a href="#cb11-100" aria-hidden="true" tabindex="-1"></a>текст в каталог и поиск не входят. Full разрешает текущие full цели.</span>
+<span id="cb11-101"><a href="#cb11-101" aria-hidden="true" tabindex="-1"></a>Локальная отсрочка ссылки не создаёт фиктивный href; строгий full требует</span>
+<span id="cb11-102"><a href="#cb11-102" aria-hidden="true" tabindex="-1"></a>доступной цели.</span>
+<span id="cb11-103"><a href="#cb11-103" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-104"><a href="#cb11-104" aria-hidden="true" tabindex="-1"></a><span class="fu">## Сохраните ресурсное владение {#resource-ownership}</span></span>
+<span id="cb11-105"><a href="#cb11-105" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-106"><a href="#cb11-106" aria-hidden="true" tabindex="-1"></a>Рисунок или ссылка условия относятся к своему native документу и владельцу.</span>
+<span id="cb11-107"><a href="#cb11-107" aria-hidden="true" tabindex="-1"></a>При selected экспорте Core отбирает текущие разрешённые ресурсы, проверяет</span>
+<span id="cb11-108"><a href="#cb11-108" aria-hidden="true" tabindex="-1"></a>реальный путь, байты и SHA-256 и переносит их под безопасные targets пакета.</span>
+<span id="cb11-109"><a href="#cb11-109" aria-hidden="true" tabindex="-1"></a>Адаптер не открывает заново producer effectiveBase. Относительный ресурс</span>
+<span id="cb11-110"><a href="#cb11-110" aria-hidden="true" tabindex="-1"></a>чужой публикации не становится местным ресурсом только из-за QRC ссылки.</span>
+<span id="cb11-111"><a href="#cb11-111" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-112"><a href="#cb11-112" aria-hidden="true" tabindex="-1"></a>Publisher размещает готовые outputs частей, сохраняя их конфигурации.</span>
+<span id="cb11-113"><a href="#cb11-113" aria-hidden="true" tabindex="-1"></a>Самостоятельная вложенная книга не становится частью банка соседней книги.</span>
+<span id="cb11-114"><a href="#cb11-114" aria-hidden="true" tabindex="-1"></a>Полные output каталоги, <span class="in">`_generated`</span>, source и закрытые проекты исключите</span>
+<span id="cb11-115"><a href="#cb11-115" aria-hidden="true" tabindex="-1"></a>из публичных <span class="in">`project.resources`</span> — <span class="co">[</span><span class="ot">профили и приватность</span><span class="co">](profiles.qmd#source-privacy)</span>.</span>
+<span id="cb11-116"><a href="#cb11-116" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-117"><a href="#cb11-117" aria-hidden="true" tabindex="-1"></a><span class="fu">## Выдайте публичные материалы ZIP {#download-resources}</span></span>
+<span id="cb11-118"><a href="#cb11-118" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-119"><a href="#cb11-119" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">Download</span><span class="co">](../extensions/download.qmd)</span> работает и без Core/CUE. Явно разрешите</span>
+<span id="cb11-120"><a href="#cb11-120" aria-hidden="true" tabindex="-1"></a>каталог данных, подключите его hooks и фильтр:</span>
+<span id="cb11-121"><a href="#cb11-121" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-122"><a href="#cb11-122" aria-hidden="true" tabindex="-1"></a><span class="in">```yaml</span></span>
+<span id="cb11-123"><a href="#cb11-123" aria-hidden="true" tabindex="-1"></a><span class="fu">project</span><span class="kw">:</span></span>
+<span id="cb11-124"><a href="#cb11-124" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">type</span><span class="kw">:</span><span class="at"> website</span></span>
+<span id="cb11-125"><a href="#cb11-125" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">resources</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="st">'!materials/**'</span><span class="kw">]</span></span>
+<span id="cb11-126"><a href="#cb11-126" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">pre-render</span><span class="kw">:</span><span class="at"> _extensions/Afonenko-Course-Tools/project-download/entrypoints/pre.ts</span></span>
+<span id="cb11-127"><a href="#cb11-127" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">post-render</span><span class="kw">:</span><span class="at"> _extensions/Afonenko-Course-Tools/project-download/entrypoints/post.ts</span></span>
+<span id="cb11-128"><a href="#cb11-128" aria-hidden="true" tabindex="-1"></a><span class="fu">filters</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="at">project-download</span><span class="kw">]</span></span>
+<span id="cb11-129"><a href="#cb11-129" aria-hidden="true" tabindex="-1"></a><span class="fu">project-download</span><span class="kw">:</span></span>
+<span id="cb11-130"><a href="#cb11-130" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">resources</span><span class="kw">:</span></span>
+<span id="cb11-131"><a href="#cb11-131" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">seminar-data</span><span class="kw">:</span></span>
+<span id="cb11-132"><a href="#cb11-132" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">path</span><span class="kw">:</span><span class="at"> /materials/observations</span></span>
+<span id="cb11-133"><a href="#cb11-133" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">include</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="st">'**/*.csv'</span><span class="kw">,</span><span class="at"> </span><span class="st">'**/*.md'</span><span class="kw">]</span></span>
+<span id="cb11-134"><a href="#cb11-134" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">exclude</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="st">'drafts/**'</span><span class="kw">]</span></span>
+<span id="cb11-135"><a href="#cb11-135" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">gitignore</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span>
+<span id="cb11-136"><a href="#cb11-136" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb11-137"><a href="#cb11-137" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-138"><a href="#cb11-138" aria-hidden="true" tabindex="-1"></a>В QMD запросите архив:</span>
+<span id="cb11-139"><a href="#cb11-139" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-140"><a href="#cb11-140" aria-hidden="true" tabindex="-1"></a><span class="in">```qmd</span></span>
+<span id="cb11-141"><a href="#cb11-141" aria-hidden="true" tabindex="-1"></a><span class="in">{{&lt; project-download seminar-data text="cf5733e5-0370-4aae-8689-61bad1dd9ec0&amp;#x421;cf5733e5-0370-4aae-8689-61bad1dd9ec0&amp;#x43a;cf5733e5-0370-4aae-8689-61bad1dd9ec0&amp;#x430;cf5733e5-0370-4aae-8689-61bad1dd9ec0&amp;#x447;cf5733e5-0370-4aae-8689-61bad1dd9ec0&amp;#x430;cf5733e5-0370-4aae-8689-61bad1dd9ec0&amp;#x442;cf5733e5-0370-4aae-8689-61bad1dd9ec0&amp;#x44c; cf5733e5-0370-4aae-8689-61bad1dd9ec0&amp;#x434;cf5733e5-0370-4aae-8689-61bad1dd9ec0&amp;#x430;cf5733e5-0370-4aae-8689-61bad1dd9ec0&amp;#x43d;cf5733e5-0370-4aae-8689-61bad1dd9ec0&amp;#x43d;cf5733e5-0370-4aae-8689-61bad1dd9ec0&amp;#x44b;cf5733e5-0370-4aae-8689-61bad1dd9ec0&amp;#x435; cf5733e5-0370-4aae-8689-61bad1dd9ec0&amp;#x441;cf5733e5-0370-4aae-8689-61bad1dd9ec0&amp;#x435;cf5733e5-0370-4aae-8689-61bad1dd9ec0&amp;#x43c;cf5733e5-0370-4aae-8689-61bad1dd9ec0&amp;#x438;cf5733e5-0370-4aae-8689-61bad1dd9ec0&amp;#x43d;cf5733e5-0370-4aae-8689-61bad1dd9ec0&amp;#x430;cf5733e5-0370-4aae-8689-61bad1dd9ec0&amp;#x440;cf5733e5-0370-4aae-8689-61bad1dd9ec0&amp;#x430;" &gt;}}</span></span>
+<span id="cb11-142"><a href="#cb11-142" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb11-143"><a href="#cb11-143" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-144"><a href="#cb11-144" aria-hidden="true" tabindex="-1"></a>Начальный <span class="in">`/`</span> означает корень текущего проекта. ZIP появляется по видимому</span>
+<span id="cb11-145"><a href="#cb11-145" aria-hidden="true" tabindex="-1"></a>после проекции запросу; profiles ресурса разрешает запрос, но не скрывает сам</span>
+<span id="cb11-146"><a href="#cb11-146" aria-hidden="true" tabindex="-1"></a>shortcode. Ограниченный teacher ресурс размещайте на отдельной full-only странице книги;</span>
+<span id="cb11-147"><a href="#cb11-147" aria-hidden="true" tabindex="-1"></a>в Core5 author QMD audience wrappers student/full запрещены.</span>
+<span id="cb11-148"><a href="#cb11-148" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-149"><a href="#cb11-149" aria-hidden="true" tabindex="-1"></a>Для стартового проекта канонической задачи существующий мост включается явно</span>
+<span id="cb11-150"><a href="#cb11-150" aria-hidden="true" tabindex="-1"></a><span class="in">`project-download: {course-model: true}`</span>. Он получает текущую native модель</span>
+<span id="cb11-151"><a href="#cb11-151" aria-hidden="true" tabindex="-1"></a>и получает policy conditions/student/full. Обычная задача student выдаёт</span>
+<span id="cb11-152"><a href="#cb11-152" aria-hidden="true" tabindex="-1"></a>starter, full — полный проект; открытая demonstration выдаёт full в обоих.</span>
+<span id="cb11-153"><a href="#cb11-153" aria-hidden="true" tabindex="-1"></a>Private tests/reference обычной задачи не попадают в student ZIP. Restricted задача</span>
+<span id="cb11-154"><a href="#cb11-154" aria-hidden="true" tabindex="-1"></a>student заявки не оставляет. Participant public пакет Print/PL сам по себе</span>
+<span id="cb11-155"><a href="#cb11-155" aria-hidden="true" tabindex="-1"></a>не разрешает публиковать ZIP на сайте.</span>
+<span id="cb11-156"><a href="#cb11-156" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-157"><a href="#cb11-157" aria-hidden="true" tabindex="-1"></a>После full → student проверяйте HTML, search, QRC, ресурсы и ZIP текущего</span>
+<span id="cb11-158"><a href="#cb11-158" aria-hidden="true" tabindex="-1"></a>выхода. Download очищает только собственные прежние archives/requests этого</span>
+<span id="cb11-159"><a href="#cb11-159" aria-hidden="true" tabindex="-1"></a>output; другие outputs и чужие ZIP сохраняет. Сохранённый course.json не</span>
+<span id="cb11-160"><a href="#cb11-160" aria-hidden="true" tabindex="-1"></a>доказывает актуальность. Скачивание архива и просмотр исходного QMD остаются</span>
+<span id="cb11-161"><a href="#cb11-161" aria-hidden="true" tabindex="-1"></a>отдельными действиями.</span>
+<span id="cb11-162"><a href="#cb11-162" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-163"><a href="#cb11-163" aria-hidden="true" tabindex="-1"></a>Модельная ссылка использует тот же exercise ID без дублирующей resources map.</span>
+<span id="cb11-164"><a href="#cb11-164" aria-hidden="true" tabindex="-1"></a>Поместите её внутри объявления упражнения, чтобы native bank projection</span>
+<span id="cb11-165"><a href="#cb11-165" aria-hidden="true" tabindex="-1"></a>удаляла restricted запрос вместе с условием в student. HTML-запросы ограничиваются</span>
+<span id="cb11-166"><a href="#cb11-166" aria-hidden="true" tabindex="-1"></a>форматом; такая functional format condition разрешена и не задаёт аудиторию:</span>
+<span id="cb11-167"><a href="#cb11-167" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-168"><a href="#cb11-168" aria-hidden="true" tabindex="-1"></a><span class="in">```qmd</span></span>
+<span id="cb11-169"><a href="#cb11-169" aria-hidden="true" tabindex="-1"></a><span class="in">::: {.content-visible when-format="html"}</span></span>
+<span id="cb11-170"><a href="#cb11-170" aria-hidden="true" tabindex="-1"></a><span class="in">{{&lt; project-download exr-java-digest &gt;}}</span></span>
+<span id="cb11-171"><a href="#cb11-171" aria-hidden="true" tabindex="-1"></a><span class="in">{{&lt; project-download exr-java-digest kind="conditions" text="cf5733e5-0370-4aae-8689-61bad1dd9ec0&amp;#x423;cf5733e5-0370-4aae-8689-61bad1dd9ec0&amp;#x441;cf5733e5-0370-4aae-8689-61bad1dd9ec0&amp;#x43b;cf5733e5-0370-4aae-8689-61bad1dd9ec0&amp;#x43e;cf5733e5-0370-4aae-8689-61bad1dd9ec0&amp;#x432;cf5733e5-0370-4aae-8689-61bad1dd9ec0&amp;#x438;cf5733e5-0370-4aae-8689-61bad1dd9ec0&amp;#x435; cf5733e5-0370-4aae-8689-61bad1dd9ec0&amp;#x434;cf5733e5-0370-4aae-8689-61bad1dd9ec0&amp;#x43b;cf5733e5-0370-4aae-8689-61bad1dd9ec0&amp;#x44f; cf5733e5-0370-4aae-8689-61bad1dd9ec0&amp;#x440;cf5733e5-0370-4aae-8689-61bad1dd9ec0&amp;#x430;cf5733e5-0370-4aae-8689-61bad1dd9ec0&amp;#x431;cf5733e5-0370-4aae-8689-61bad1dd9ec0&amp;#x43e;cf5733e5-0370-4aae-8689-61bad1dd9ec0&amp;#x442;cf5733e5-0370-4aae-8689-61bad1dd9ec0&amp;#x44b; cf5733e5-0370-4aae-8689-61bad1dd9ec0&amp;#x432;cf5733e5-0370-4aae-8689-61bad1dd9ec0&amp;#x43d;cf5733e5-0370-4aae-8689-61bad1dd9ec0&amp;#x435; cf5733e5-0370-4aae-8689-61bad1dd9ec0&amp;#x441;cf5733e5-0370-4aae-8689-61bad1dd9ec0&amp;#x435;cf5733e5-0370-4aae-8689-61bad1dd9ec0&amp;#x442;cf5733e5-0370-4aae-8689-61bad1dd9ec0&amp;#x438;" &gt;}}</span></span>
+<span id="cb11-172"><a href="#cb11-172" aria-hidden="true" tabindex="-1"></a><span class="in">:::</span></span>
+<span id="cb11-173"><a href="#cb11-173" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb11-174"><a href="#cb11-174" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-175"><a href="#cb11-175" aria-hidden="true" tabindex="-1"></a>Conditions требуют текущий resolved HTML output. Во время JSON/Body/native</span>
+<span id="cb11-176"><a href="#cb11-176" aria-hidden="true" tabindex="-1"></a>экспорта HTML-запросов в этой ветке нет; contextual ZIP не превращается в</span>
+<span id="cb11-177"><a href="#cb11-177" aria-hidden="true" tabindex="-1"></a>participant условие. Каждый starter/full/conditions комплект имеет самостоятельный README. Conditions</span>
+<span id="cb11-178"><a href="#cb11-178" aria-hidden="true" tabindex="-1"></a>не содержат закрытого решения или teacher notes; contextual links не входят в</span>
+<span id="cb11-179"><a href="#cb11-179" aria-hidden="true" tabindex="-1"></a>переносимое native условие как частный full ZIP. Проверяйте student→full→student</span>
+<span id="cb11-180"><a href="#cb11-180" aria-hidden="true" tabindex="-1"></a>и фактические составы всех архивов.</span>
+<span id="cb11-181"><a href="#cb11-181" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-182"><a href="#cb11-182" aria-hidden="true" tabindex="-1"></a>README — непрозрачные файловые байты, не render target и не вход QRC. Quarto</span>
+<span id="cb11-183"><a href="#cb11-183" aria-hidden="true" tabindex="-1"></a>includes, profile conditions и ссылки на исходные QMD внутри README не исполняются.</span>
+<span id="cb11-184"><a href="#cb11-184" aria-hidden="true" tabindex="-1"></a>Ссылки ведут внутрь данного комплекта либо на устойчивый опубликованный ресурс.</span>
+<span id="cb11-185"><a href="#cb11-185" aria-hidden="true" tabindex="-1"></a>Starter README не ссылается на отсутствующие <span class="in">`../reference`</span> или <span class="in">`../tests`</span>; full</span>
+<span id="cb11-186"><a href="#cb11-186" aria-hidden="true" tabindex="-1"></a>README описывает собственный корень с <span class="in">`student`</span>, <span class="in">`reference`</span> и <span class="in">`tests`</span>.</span>
+<span id="cb11-187"><a href="#cb11-187" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-188"><a href="#cb11-188" aria-hidden="true" tabindex="-1"></a>Числовой Java-проект integer-arithmetic с build.gradle в student partition</span>
+<span id="cb11-189"><a href="#cb11-189" aria-hidden="true" tabindex="-1"></a>использует следующие команды из корня соответствующего распакованного ZIP:</span>
+<span id="cb11-190"><a href="#cb11-190" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-191"><a href="#cb11-191" aria-hidden="true" tabindex="-1"></a><span class="in">```sh</span></span>
+<span id="cb11-192"><a href="#cb11-192" aria-hidden="true" tabindex="-1"></a><span class="co"># starter: src/main/java и src/test/java находятся в корне проекта</span></span>
+<span id="cb11-193"><a href="#cb11-193" aria-hidden="true" tabindex="-1"></a><span class="ex">gradle</span> test</span>
+<span id="cb11-194"><a href="#cb11-194" aria-hidden="true" tabindex="-1"></a><span class="co"># full: открытая часть находится в student/</span></span>
+<span id="cb11-195"><a href="#cb11-195" aria-hidden="true" tabindex="-1"></a><span class="ex">gradle</span> <span class="at">-p</span> student test</span>
+<span id="cb11-196"><a href="#cb11-196" aria-hidden="true" tabindex="-1"></a><span class="co"># full: существующие reference/ и tests/junit/ подключаются флагами проекта</span></span>
+<span id="cb11-197"><a href="#cb11-197" aria-hidden="true" tabindex="-1"></a><span class="ex">gradle</span> <span class="at">-p</span> student <span class="at">-Preference</span> <span class="at">-Pgrading</span> test</span>
+<span id="cb11-198"><a href="#cb11-198" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb11-199"><a href="#cb11-199" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-200"><a href="#cb11-200" aria-hidden="true" tabindex="-1"></a>Команда starter характеризует незавершённый ответ и может завершиться отказом</span>
+<span id="cb11-201"><a href="#cb11-201" aria-hidden="true" tabindex="-1"></a>его тестов; проверка эталона должна пройти. Эти флаги заданы конкретным</span>
+<span id="cb11-202"><a href="#cb11-202" aria-hidden="true" tabindex="-1"></a>build.gradle, а не самим Download. Они не переносятся в starter, где reference</span>
+<span id="cb11-203"><a href="#cb11-203" aria-hidden="true" tabindex="-1"></a>и tests/junit отсутствуют. Проверяйте команды на реальном распакованном комплекте;</span>
+<span id="cb11-204"><a href="#cb11-204" aria-hidden="true" tabindex="-1"></a>final Java acceptance и точный validated source ref записываются отдельно.</span>
+<span id="cb11-205"><a href="#cb11-205" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">Download3 contract</span><span class="co">](https://github.com/Afonenko-Course-Tools/quarto-project-download/blob/v3.0.0/spec/contract.md)</span></span>
+<span id="cb11-206"><a href="#cb11-206" aria-hidden="true" tabindex="-1"></a>описывает границы ресурсов и публикации.</span></code></pre></div><button title="Скопировать текст" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 

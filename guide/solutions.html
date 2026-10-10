@@ -267,6 +267,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../guide/repository-texts.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">README, документация и описание PR</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../guide/specifications.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Версии и спецификации владельцев</span></a>
   </div>
@@ -312,7 +318,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../extensions/prairielearn.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">PrairieLearn — поставка вопросов</span></a>
+ <span class="menu-text">PrairieLearn — native поставка и проверки проектов</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -414,7 +420,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<p>Сначала решите, нужна ли ссылка на разбор. В модели <a href="../guide/specifications.html">Core 4.0.1</a> есть две формы связи; у канонической задачи остаётся один контейнер решения.</p>
+<p>Сначала решите, нужна ли ссылка на разбор. В модели <a href="../guide/specifications.html">Core 5.0.2</a> есть две формы связи; у канонической задачи остаётся один контейнер решения.</p>
 <section id="solution-suffix" class="level2">
 <h2 class="anchored" data-anchor-id="solution-suffix">Именованное решение для ссылки</h2>
 <p>Объявите задачу и решение <strong>в одном QMD</strong> с одинаковым суффиксом:</p>
@@ -425,11 +431,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 ::: {#sol-lab-1}
 Выберите алгоритм, вычислите сумму и сравните её с доверенным значением.
 :::
-
-::: {.content-visible when-profile="full"}
-После выполнения можно обратиться к @sol-lab-1.
-:::</code></pre>
-<p>Связь <code>exr-lab-1</code> → <code>sol-lab-1</code> не требует дополнительного атрибута. В обычной open задаче student получает условие без решения; full видит оба. Ссылку на закрытый разбор не помещайте в открытый текст. Course-атрибут <code>for</code> у банковского решения больше не поддерживается.</p>
+</code></pre>
+<p>Связь <code>exr-lab-1</code> → <code>sol-lab-1</code> не требует дополнительного атрибута. В обычной open задаче student получает условие без решения; full видит оба. Ссылку на закрытый разбор помещайте на отдельной full-only странице книги, не в audience wrapper внутри авторского QMD. Course-атрибут <code>for</code> у банковского решения больше не поддерживается.</p>
 </section>
 <section id="solution-nested" class="level2">
 <h2 class="anchored" data-anchor-id="solution-nested">Вложенное решение без ссылки</h2>
@@ -936,7 +939,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
 <span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>Сначала решите, нужна ли ссылка на разбор. В модели</span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">Core 4.0.1</span><span class="co">](specifications.qmd)</span> есть две формы связи; у канонической</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">Core 5.0.2</span><span class="co">](specifications.qmd)</span> есть две формы связи; у канонической</span>
 <span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>задачи остаётся один контейнер решения.</span>
 <span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="fu">## Именованное решение для ссылки {#solution-suffix}</span></span>
@@ -952,73 +955,71 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a><span class="in">Выберите алгоритм, вычислите сумму и сравните её с доверенным значением.</span></span>
 <span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a><span class="in">:::</span></span>
 <span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a><span class="in">::: {.content-visible when-profile="full"}</span></span>
-<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a><span class="in">После выполнения можно обратиться к @sol-lab-1.</span></span>
-<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a><span class="in">:::</span></span>
-<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a>Связь <span class="in">`exr-lab-1`</span> → <span class="in">`sol-lab-1`</span> не требует дополнительного атрибута.</span>
-<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a>В обычной open задаче student получает условие без решения; full видит оба.</span>
-<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a>Ссылку на закрытый разбор не помещайте в открытый текст.</span>
-<span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a>Course-атрибут <span class="in">`for`</span> у банковского решения больше не поддерживается.</span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a>Связь <span class="in">`exr-lab-1`</span> → <span class="in">`sol-lab-1`</span> не требует дополнительного атрибута.</span>
+<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a>В обычной open задаче student получает условие без решения; full видит оба.</span>
+<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a>Ссылку на закрытый разбор помещайте на отдельной full-only странице книги,</span>
+<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a>не в audience wrapper внутри авторского QMD.</span>
+<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a>Course-атрибут <span class="in">`for`</span> у банковского решения больше не поддерживается.</span>
+<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a><span class="fu">## Вложенное решение без ссылки {#solution-nested}</span></span>
 <span id="cb4-31"><a href="#cb4-31" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-32"><a href="#cb4-32" aria-hidden="true" tabindex="-1"></a><span class="fu">## Вложенное решение без ссылки {#solution-nested}</span></span>
+<span id="cb4-32"><a href="#cb4-32" aria-hidden="true" tabindex="-1"></a>Используйте <span class="in">`.solution`</span> внутри задачи, когда отдельный ID не нужен:</span>
 <span id="cb4-33"><a href="#cb4-33" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-34"><a href="#cb4-34" aria-hidden="true" tabindex="-1"></a>Используйте <span class="in">`.solution`</span> внутри задачи, когда отдельный ID не нужен:</span>
-<span id="cb4-35"><a href="#cb4-35" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-36"><a href="#cb4-36" aria-hidden="true" tabindex="-1"></a><span class="in">```qmd</span></span>
-<span id="cb4-37"><a href="#cb4-37" aria-hidden="true" tabindex="-1"></a><span class="in">:::: {#exr-checksum-demo difficulty="introductory" time="10" course-role="demonstration"}</span></span>
-<span id="cb4-38"><a href="#cb4-38" aria-hidden="true" tabindex="-1"></a><span class="in">Покажите, как изменение одного байта влияет на контрольную сумму.</span></span>
-<span id="cb4-39"><a href="#cb4-39" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-40"><a href="#cb4-40" aria-hidden="true" tabindex="-1"></a><span class="in">::: {.solution}</span></span>
-<span id="cb4-41"><a href="#cb4-41" aria-hidden="true" tabindex="-1"></a><span class="in">Вычислим SHA-256 исходного файла, изменим один байт и повторим вычисление.</span></span>
-<span id="cb4-42"><a href="#cb4-42" aria-hidden="true" tabindex="-1"></a><span class="in">Различие сумм обнаруживает изменение.</span></span>
-<span id="cb4-43"><a href="#cb4-43" aria-hidden="true" tabindex="-1"></a><span class="in">:::</span></span>
-<span id="cb4-44"><a href="#cb4-44" aria-hidden="true" tabindex="-1"></a><span class="in">::::</span></span>
-<span id="cb4-45"><a href="#cb4-45" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb4-46"><a href="#cb4-46" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-47"><a href="#cb4-47" aria-hidden="true" tabindex="-1"></a>При <span class="in">`open`</span> из <span class="co">[</span><span class="ot">метаданных банка</span><span class="co">](exercises.qmd)</span> это публичный разбор:</span>
-<span id="cb4-48"><a href="#cb4-48" aria-hidden="true" tabindex="-1"></a>student и full видят условие и решение. Именно роль <span class="in">`demonstration`</span></span>
-<span id="cb4-49"><a href="#cb4-49" aria-hidden="true" tabindex="-1"></a>открывает решение. Обычная open задача, роль standalone блока или stage</span>
-<span id="cb4-50"><a href="#cb4-50" aria-hidden="true" tabindex="-1"></a><span class="in">`demonstration`</span> сами такого права не дают.</span>
+<span id="cb4-34"><a href="#cb4-34" aria-hidden="true" tabindex="-1"></a><span class="in">```qmd</span></span>
+<span id="cb4-35"><a href="#cb4-35" aria-hidden="true" tabindex="-1"></a><span class="in">:::: {#exr-checksum-demo difficulty="introductory" time="10" course-role="demonstration"}</span></span>
+<span id="cb4-36"><a href="#cb4-36" aria-hidden="true" tabindex="-1"></a><span class="in">Покажите, как изменение одного байта влияет на контрольную сумму.</span></span>
+<span id="cb4-37"><a href="#cb4-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-38"><a href="#cb4-38" aria-hidden="true" tabindex="-1"></a><span class="in">::: {.solution}</span></span>
+<span id="cb4-39"><a href="#cb4-39" aria-hidden="true" tabindex="-1"></a><span class="in">Вычислим SHA-256 исходного файла, изменим один байт и повторим вычисление.</span></span>
+<span id="cb4-40"><a href="#cb4-40" aria-hidden="true" tabindex="-1"></a><span class="in">Различие сумм обнаруживает изменение.</span></span>
+<span id="cb4-41"><a href="#cb4-41" aria-hidden="true" tabindex="-1"></a><span class="in">:::</span></span>
+<span id="cb4-42"><a href="#cb4-42" aria-hidden="true" tabindex="-1"></a><span class="in">::::</span></span>
+<span id="cb4-43"><a href="#cb4-43" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb4-44"><a href="#cb4-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-45"><a href="#cb4-45" aria-hidden="true" tabindex="-1"></a>При <span class="in">`open`</span> из <span class="co">[</span><span class="ot">метаданных банка</span><span class="co">](exercises.qmd)</span> это публичный разбор:</span>
+<span id="cb4-46"><a href="#cb4-46" aria-hidden="true" tabindex="-1"></a>student и full видят условие и решение. Именно роль <span class="in">`demonstration`</span></span>
+<span id="cb4-47"><a href="#cb4-47" aria-hidden="true" tabindex="-1"></a>открывает решение. Обычная open задача, роль standalone блока или stage</span>
+<span id="cb4-48"><a href="#cb4-48" aria-hidden="true" tabindex="-1"></a><span class="in">`demonstration`</span> сами такого права не дают.</span>
+<span id="cb4-49"><a href="#cb4-49" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-50"><a href="#cb4-50" aria-hidden="true" tabindex="-1"></a><span class="fu">## Сохраните однозначную связь {#solution-rules}</span></span>
 <span id="cb4-51"><a href="#cb4-51" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-52"><a href="#cb4-52" aria-hidden="true" tabindex="-1"></a><span class="fu">## Сохраните однозначную связь {#solution-rules}</span></span>
+<span id="cb4-52"><a href="#cb4-52" aria-hidden="true" tabindex="-1"></a>Один связанный контейнер может содержать несколько подходов:</span>
 <span id="cb4-53"><a href="#cb4-53" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-54"><a href="#cb4-54" aria-hidden="true" tabindex="-1"></a>Один связанный контейнер может содержать несколько подходов:</span>
-<span id="cb4-55"><a href="#cb4-55" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-56"><a href="#cb4-56" aria-hidden="true" tabindex="-1"></a><span class="in">```qmd</span></span>
-<span id="cb4-57"><a href="#cb4-57" aria-hidden="true" tabindex="-1"></a><span class="in">::: {#sol-lab-1}</span></span>
-<span id="cb4-58"><a href="#cb4-58" aria-hidden="true" tabindex="-1"></a><span class="in">### Через командную строку</span></span>
-<span id="cb4-59"><a href="#cb4-59" aria-hidden="true" tabindex="-1"></a><span class="in">Вычислите сумму штатной утилитой.</span></span>
-<span id="cb4-60"><a href="#cb4-60" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-61"><a href="#cb4-61" aria-hidden="true" tabindex="-1"></a><span class="in">### Через программу</span></span>
-<span id="cb4-62"><a href="#cb4-62" aria-hidden="true" tabindex="-1"></a><span class="in">Прочитайте файл как байты и примените тот же алгоритм.</span></span>
-<span id="cb4-63"><a href="#cb4-63" aria-hidden="true" tabindex="-1"></a><span class="in">:::</span></span>
-<span id="cb4-64"><a href="#cb4-64" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb4-65"><a href="#cb4-65" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-66"><a href="#cb4-66" aria-hidden="true" tabindex="-1"></a>Это замена содержимого решения из первого примера, а не второе объявление</span>
-<span id="cb4-67"><a href="#cb4-67" aria-hidden="true" tabindex="-1"></a>того же ID. Сирота <span class="in">`sol-*`</span>, две подходящие пары, дубли и одновременно именованное</span>
-<span id="cb4-68"><a href="#cb4-68" aria-hidden="true" tabindex="-1"></a>и вложенное решение одной канонической задачи отклоняются.</span>
-<span id="cb4-69"><a href="#cb4-69" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-70"><a href="#cb4-70" aria-hidden="true" tabindex="-1"></a>В HTML Presentation сворачивает доступное решение; в Reveal использует</span>
-<span id="cb4-71"><a href="#cb4-71" aria-hidden="true" tabindex="-1"></a><span class="in">`details`</span>, в PDF/Typst показывает его статически. Профиль Core сначала</span>
-<span id="cb4-72"><a href="#cb4-72" aria-hidden="true" tabindex="-1"></a>определяет доступность, а затем Presentation оформляет оставшееся содержимое.</span>
-<span id="cb4-73"><a href="#cb4-73" aria-hidden="true" tabindex="-1"></a>Подсказка <span class="in">`.callout-tip`</span> имеет свой смысл; допустимое <span class="in">`for`</span> подсказки не</span>
-<span id="cb4-74"><a href="#cb4-74" aria-hidden="true" tabindex="-1"></a>меняет правило связи решения. Подробнее — <span class="co">[</span><span class="ot">представление</span><span class="co">](presentation.qmd)</span>.</span>
-<span id="cb4-75"><a href="#cb4-75" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-54"><a href="#cb4-54" aria-hidden="true" tabindex="-1"></a><span class="in">```qmd</span></span>
+<span id="cb4-55"><a href="#cb4-55" aria-hidden="true" tabindex="-1"></a><span class="in">::: {#sol-lab-1}</span></span>
+<span id="cb4-56"><a href="#cb4-56" aria-hidden="true" tabindex="-1"></a><span class="in">### Через командную строку</span></span>
+<span id="cb4-57"><a href="#cb4-57" aria-hidden="true" tabindex="-1"></a><span class="in">Вычислите сумму штатной утилитой.</span></span>
+<span id="cb4-58"><a href="#cb4-58" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-59"><a href="#cb4-59" aria-hidden="true" tabindex="-1"></a><span class="in">### Через программу</span></span>
+<span id="cb4-60"><a href="#cb4-60" aria-hidden="true" tabindex="-1"></a><span class="in">Прочитайте файл как байты и примените тот же алгоритм.</span></span>
+<span id="cb4-61"><a href="#cb4-61" aria-hidden="true" tabindex="-1"></a><span class="in">:::</span></span>
+<span id="cb4-62"><a href="#cb4-62" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb4-63"><a href="#cb4-63" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-64"><a href="#cb4-64" aria-hidden="true" tabindex="-1"></a>Это замена содержимого решения из первого примера, а не второе объявление</span>
+<span id="cb4-65"><a href="#cb4-65" aria-hidden="true" tabindex="-1"></a>того же ID. Сирота <span class="in">`sol-*`</span>, две подходящие пары, дубли и одновременно именованное</span>
+<span id="cb4-66"><a href="#cb4-66" aria-hidden="true" tabindex="-1"></a>и вложенное решение одной канонической задачи отклоняются.</span>
+<span id="cb4-67"><a href="#cb4-67" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-68"><a href="#cb4-68" aria-hidden="true" tabindex="-1"></a>В HTML Presentation сворачивает доступное решение; в Reveal использует</span>
+<span id="cb4-69"><a href="#cb4-69" aria-hidden="true" tabindex="-1"></a><span class="in">`details`</span>, в PDF/Typst показывает его статически. Профиль Core сначала</span>
+<span id="cb4-70"><a href="#cb4-70" aria-hidden="true" tabindex="-1"></a>определяет доступность, а затем Presentation оформляет оставшееся содержимое.</span>
+<span id="cb4-71"><a href="#cb4-71" aria-hidden="true" tabindex="-1"></a>Подсказка <span class="in">`.callout-tip`</span> имеет свой смысл; допустимое <span class="in">`for`</span> подсказки не</span>
+<span id="cb4-72"><a href="#cb4-72" aria-hidden="true" tabindex="-1"></a>меняет правило связи решения. Подробнее — <span class="co">[</span><span class="ot">представление</span><span class="co">](presentation.qmd)</span>.</span>
+<span id="cb4-73"><a href="#cb4-73" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-74"><a href="#cb4-74" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-75"><a href="#cb4-75" aria-hidden="true" tabindex="-1"></a><span class="fu">## Сделайте разбор переносимым для экспорта {#solution-native-witness}</span></span>
 <span id="cb4-76"><a href="#cb4-76" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-77"><a href="#cb4-77" aria-hidden="true" tabindex="-1"></a><span class="fu">## Сделайте разбор переносимым для экспорта {#solution-native-witness}</span></span>
-<span id="cb4-78"><a href="#cb4-78" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-79"><a href="#cb4-79" aria-hidden="true" tabindex="-1"></a>Для demonstration, которую назначаете в экспортируемую работу, рекомендуются</span>
-<span id="cb4-80"><a href="#cb4-80" aria-hidden="true" tabindex="-1"></a>обычный suffix-контейнер или вложенная <span class="in">`.solution`</span> без <span class="in">`when-format`</span>/<span class="in">`when-meta`</span></span>
-<span id="cb4-81"><a href="#cb4-81" aria-hidden="true" tabindex="-1"></a>на самом контейнере решения. Такое решение переносится вместе с условием</span>
-<span id="cb4-82"><a href="#cb4-82" aria-hidden="true" tabindex="-1"></a>через выбранный native writer.</span>
-<span id="cb4-83"><a href="#cb4-83" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-84"><a href="#cb4-84" aria-hidden="true" tabindex="-1"></a>Форматное условие может оставить решение в HTML, но убрать его из публичной</span>
-<span id="cb4-85"><a href="#cb4-85" aria-hidden="true" tabindex="-1"></a>проекции исходного JSON-прохода. Тогда demonstration stage при экспорте честно</span>
-<span id="cb4-86"><a href="#cb4-86" aria-hidden="true" tabindex="-1"></a>отклоняется: требуется фактическое публичное решение **текущей операции**.</span>
-<span id="cb4-87"><a href="#cb4-87" aria-hidden="true" tabindex="-1"></a>Ранее собранный HTML не доказывает доступность в JSON. Дополнительный полный</span>
-<span id="cb4-88"><a href="#cb4-88" aria-hidden="true" tabindex="-1"></a>render, чтение старого результата или отдельный поиск решения не выполняются.</span></code></pre></div><button title="Скопировать текст" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
+<span id="cb4-77"><a href="#cb4-77" aria-hidden="true" tabindex="-1"></a>Для demonstration, которую назначаете в экспортируемую работу, рекомендуются</span>
+<span id="cb4-78"><a href="#cb4-78" aria-hidden="true" tabindex="-1"></a>обычный suffix-контейнер или вложенная <span class="in">`.solution`</span> без <span class="in">`when-format`</span>/<span class="in">`when-meta`</span></span>
+<span id="cb4-79"><a href="#cb4-79" aria-hidden="true" tabindex="-1"></a>на самом контейнере решения. Такое решение переносится вместе с условием</span>
+<span id="cb4-80"><a href="#cb4-80" aria-hidden="true" tabindex="-1"></a>через выбранный native writer.</span>
+<span id="cb4-81"><a href="#cb4-81" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-82"><a href="#cb4-82" aria-hidden="true" tabindex="-1"></a>Форматное условие может оставить решение в HTML, но убрать его из публичной</span>
+<span id="cb4-83"><a href="#cb4-83" aria-hidden="true" tabindex="-1"></a>проекции исходного JSON-прохода. Тогда demonstration stage при экспорте честно</span>
+<span id="cb4-84"><a href="#cb4-84" aria-hidden="true" tabindex="-1"></a>отклоняется: требуется фактическое публичное решение **текущей операции**.</span>
+<span id="cb4-85"><a href="#cb4-85" aria-hidden="true" tabindex="-1"></a>Ранее собранный HTML не доказывает доступность в JSON. Дополнительный полный</span>
+<span id="cb4-86"><a href="#cb4-86" aria-hidden="true" tabindex="-1"></a>render, чтение старого результата или отдельный поиск решения не выполняются.</span></code></pre></div><button title="Скопировать текст" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 

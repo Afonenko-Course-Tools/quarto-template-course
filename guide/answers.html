@@ -267,6 +267,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../guide/repository-texts.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">README, документация и описание PR</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../guide/specifications.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Версии и спецификации владельцев</span></a>
   </div>
@@ -312,7 +318,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../extensions/prairielearn.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">PrairieLearn — поставка вопросов</span></a>
+ <span class="menu-text">PrairieLearn — native поставка и проверки проектов</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -417,7 +423,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<p>Выберите форму ответа по смыслу задачи и возможностям потребителя. Разметка ниже относится к <a href="../guide/specifications.html">Core 4.0.1</a>; банк уже включён, а каждая показанная задача имеет собственные difficulty/time и open default.</p>
+<p>Выберите форму ответа по смыслу задачи и возможностям потребителя. Разметка ниже относится к <a href="../guide/specifications.html">Core 5.0.2</a>; банк уже включён, а каждая показанная задача имеет собственные difficulty/time и open default.</p>
 <section id="answer-manual" class="level2">
 <h2 class="anchored" data-anchor-id="answer-manual">Текстовый ответ manual</h2>
 <pre class="qmd"><code>:::: {#exr-explain difficulty="introductory" time="10"}
@@ -554,7 +560,7 @@ key:
 </tr>
 </tbody>
 </table>
-<p>PrairieLearn поставляет нативные вопросы с <strong>внешней проверкой</strong>: явный <code>project</code>, binding, стартовые файлы и закрытые tests. Наличие формы Core само по себе не создаёт встроенный PL-вопрос соответствующего типа. Cloud проверяет свою модель VM/действий и не является потребителем Body ответов.</p>
+<p>PrairieLearn поставляет нативные вопросы с <strong>внешней проверкой</strong>: явный <code>project</code>, именованный project-check, стартовые файлы и закрытые tests. Наличие формы Core само по себе не создаёт встроенный PL-вопрос соответствующего типа. Cloud проверяет свою модель VM/действий и не является потребителем Body ответов.</p>
 </section>
 <section id="answer-privacy" class="level2">
 <h2 class="anchored" data-anchor-id="answer-privacy">Сохраните границу payload</h2>
@@ -1035,7 +1041,7 @@ key:
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
 <span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>Выберите форму ответа по смыслу задачи и возможностям потребителя. Разметка</span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>ниже относится к <span class="co">[</span><span class="ot">Core 4.0.1</span><span class="co">](specifications.qmd)</span>; банк уже включён,</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>ниже относится к <span class="co">[</span><span class="ot">Core 5.0.2</span><span class="co">](specifications.qmd)</span>; банк уже включён,</span>
 <span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>а каждая показанная задача имеет собственные difficulty/time и open default.</span>
 <span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="fu">## Текстовый ответ manual {#answer-manual}</span></span>
@@ -1162,7 +1168,7 @@ key:
 <span id="cb6-130"><a href="#cb6-130" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> matching <span class="pp">|</span> Условия, варианты и поле соответствий <span class="pp">|</span> Отклоняется <span class="pp">|</span> Не отдельный встроенный matching-экспорт <span class="pp">|</span></span>
 <span id="cb6-131"><a href="#cb6-131" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb6-132"><a href="#cb6-132" aria-hidden="true" tabindex="-1"></a>PrairieLearn поставляет нативные вопросы с **внешней проверкой**: явный</span>
-<span id="cb6-133"><a href="#cb6-133" aria-hidden="true" tabindex="-1"></a><span class="in">`project`</span>, binding, стартовые файлы и закрытые tests. Наличие формы Core само по</span>
+<span id="cb6-133"><a href="#cb6-133" aria-hidden="true" tabindex="-1"></a><span class="in">`project`</span>, именованный project-check, стартовые файлы и закрытые tests. Наличие формы Core само по</span>
 <span id="cb6-134"><a href="#cb6-134" aria-hidden="true" tabindex="-1"></a>себе не создаёт встроенный PL-вопрос соответствующего типа. Cloud проверяет</span>
 <span id="cb6-135"><a href="#cb6-135" aria-hidden="true" tabindex="-1"></a>свою модель VM/действий и не является потребителем Body ответов.</span>
 <span id="cb6-136"><a href="#cb6-136" aria-hidden="true" tabindex="-1"></a></span>

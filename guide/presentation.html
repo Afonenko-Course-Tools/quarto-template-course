@@ -267,6 +267,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../guide/repository-texts.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">README, документация и описание PR</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../guide/specifications.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Версии и спецификации владельцев</span></a>
   </div>
@@ -312,7 +318,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../extensions/prairielearn.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">PrairieLearn — поставка вопросов</span></a>
+ <span class="menu-text">PrairieLearn — native поставка и проверки проектов</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -385,7 +391,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">Содержание</h2>
    
   <ul>
-  <li><a href="#presentation-fragments" id="toc-presentation-fragments" class="nav-link active" data-scroll-target="#presentation-fragments">Нативные фрагменты и форматы</a></li>
+  <li><a href="#подключите-нативные-средства" id="toc-подключите-нативные-средства" class="nav-link active" data-scroll-target="#подключите-нативные-средства">Подключите нативные средства</a></li>
+  <li><a href="#выровняйте-обычные-абзацы" id="toc-выровняйте-обычные-абзацы" class="nav-link" data-scroll-target="#выровняйте-обычные-абзацы">Выровняйте обычные абзацы</a></li>
+  <li><a href="#начните-раздел-с-материала" id="toc-начните-раздел-с-материала" class="nav-link" data-scroll-target="#начните-раздел-с-материала">Начните раздел с материала</a></li>
+  <li><a href="#покажите-ответы-и-общие-заметки" id="toc-покажите-ответы-и-общие-заметки" class="nav-link" data-scroll-target="#покажите-ответы-и-общие-заметки">Покажите ответы и общие заметки</a></li>
+  <li><a href="#presentation-fragments" id="toc-presentation-fragments" class="nav-link" data-scroll-target="#presentation-fragments">Нативные фрагменты и форматы</a></li>
   <li><a href="#соберите-слайды" id="toc-соберите-слайды" class="nav-link" data-scroll-target="#соберите-слайды">Соберите слайды</a></li>
   </ul>
 </nav>
@@ -412,18 +422,107 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<p>Одна презентация подходит для объяснения в аудитории и повторения дома. Presentation оформляет заметки и ответы; Navigation добавляет поиск и переходы Reveal. Core проверяет учебную разметку, если она используется. Обычные слайды ниже не включают банк. <a href="../guide/specifications.html">Банковская политика Core 4.0.1</a> действует при явном включении банка.</p>
+<p>Одна презентация подходит для объяснения в аудитории и повторения дома. Presentation оформляет заметки и ответы; Navigation добавляет поиск и переходы Reveal. Core проверяет учебную разметку, если она используется. Обычные слайды ниже не включают банк; <a href="../guide/specifications.html">банковская политика Core 5.0.2</a> действует при явном включении банка.</p>
+<section id="подключите-нативные-средства" class="level2">
+<h2 class="anchored" data-anchor-id="подключите-нативные-средства">Подключите нативные средства</h2>
 <p>Core, Presentation и Navigation устанавливаются одним выпуском:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">quarto</span> add Afonenko-Course-Tools/quarto-course@v4.0.1 <span class="at">--no-prompt</span></span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
-<p>Включите фильтры и штатный Reveal-плагин:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">filters</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="at">course-core</span><span class="kw">,</span><span class="at"> course-presentation</span><span class="kw">]</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">revealjs-plugins</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="at">course-navigation</span><span class="kw">]</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">quarto</span> add Afonenko-Course-Tools/quarto-course@v5.0.2 <span class="at">--no-prompt</span></span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Сохраните <code>_quarto.yml</code> рядом с <code>slides.qmd</code>. Нативные параметры формата задают иерархию заголовков, последовательное движение и CSS; фильтры оформляют материал, а плагин Navigation работает с результатом Reveal:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">lang</span><span class="kw">:</span><span class="at"> ru</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">filters</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="at">course-core</span><span class="kw">,</span><span class="at"> course-presentation</span><span class="kw">]</span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">format</span><span class="kw">:</span></span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">revealjs</span><span class="kw">:</span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">slide-level</span><span class="kw">:</span><span class="at"> </span><span class="dv">2</span></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">pdf-separate-fragments</span><span class="kw">:</span><span class="at"> </span><span class="ch">false</span></span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">shift-heading-level-by</span><span class="kw">:</span><span class="at"> </span><span class="dv">-1</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">slide-level</span><span class="kw">:</span><span class="at"> </span><span class="dv">2</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">navigation-mode</span><span class="kw">:</span><span class="at"> linear</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">revealjs-plugins</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="at">course-navigation</span><span class="kw">]</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">css</span><span class="kw">:</span><span class="at"> prose.css</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">pdf-separate-fragments</span><span class="kw">:</span><span class="at"> </span><span class="ch">false</span></span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="выровняйте-обычные-абзацы" class="level2">
+<h2 class="anchored" data-anchor-id="выровняйте-обычные-абзацы">Выровняйте обычные абзацы</h2>
+<p>Сохраните <code>prose.css</code> рядом с документом:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode css code-with-copy"><code class="sourceCode css"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">/* Обычные абзацы; язык переносов задаёт нативный lang: ru. */</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">.reveal</span> <span class="fu">.slides</span> section p {</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="kw">text-align</span><span class="ch">:</span> <span class="dv">justify</span><span class="op">;</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="kw">text-align-last</span><span class="ch">:</span> <span class="dv">left</span><span class="op">;</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  <span class="kw">hyphens</span><span class="ch">:</span> <span class="bu">auto</span><span class="op">;</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="co">/* Заголовки, код и вывод сохраняют левое выравнивание. */</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="fu">.reveal</span> <span class="fu">.slides</span> section <span class="in">:is(</span>h1<span class="op">,</span> h2<span class="op">,</span> h3<span class="op">,</span> h4<span class="op">,</span> h5<span class="op">,</span> h6<span class="op">,</span> pre<span class="op">,</span> code<span class="in">)</span><span class="op">,</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="fu">.reveal</span> <span class="fu">.slides</span> section <span class="fu">.cell-output</span> p {</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>  <span class="kw">text-align</span><span class="ch">:</span> <span class="dv">left</span><span class="op">;</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>  <span class="kw">text-align-last</span><span class="ch">:</span> <span class="bu">auto</span><span class="op">;</span></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>  <span class="kw">hyphens</span><span class="ch">:</span> <span class="dv">none</span><span class="op">;</span></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a><span class="co">/* Изображения и их подписи не являются обычными абзацами. */</span></span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a><span class="fu">.reveal</span> <span class="fu">.slides</span> section figure p {</span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>  <span class="kw">text-align</span><span class="ch">:</span> <span class="dv">center</span><span class="op">;</span></span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>  <span class="kw">text-align-last</span><span class="ch">:</span> <span class="bu">auto</span><span class="op">;</span></span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>  <span class="kw">hyphens</span><span class="ch">:</span> <span class="dv">none</span><span class="op">;</span></span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Обычные абзацы выравниваются по ширине; последняя строка остаётся слева. Заголовки, код и вывод выравниваются слева. CSS сохраняет размеры шрифта и подсветку. <code>lang: ru</code> задаёт язык для <code>hyphens: auto</code>; фактические переносы зависят от словаря браузера. Это штатное подключение CSS Quarto, без нового параметра <code>course-presentation</code>.</p>
+</section>
+<section id="начните-раздел-с-материала" class="level2">
+<h2 class="anchored" data-anchor-id="начните-раздел-с-материала">Начните раздел с материала</h2>
+<p>В <code>slides.qmd</code> YAML <code>title</code> задаёт название лекции, <code>##</code> — раздел, <code>###</code> — слайд. <code>shift-heading-level-by: -1</code> и <code>slide-level: 2</code> применяются только к Reveal; при выборе HTML уровни остаются исходными.</p>
+<p>Раздел может начинаться с объяснения сразу после <code>##</code>. Пустая заставка раздела получается, когда автор сам оставляет заголовок без вводного содержимого перед первым <code>###</code>. Граница <code>---</code> создаёт безымянное продолжение; Navigation сохраняет его в группе текущего раздела. Повторное название <code>###</code> продолжает тему, а следующий <code>##</code> начинает новую группу даже при таком же названии. Для устойчивых ссылок задавайте разные ID.</p>
+<p>Полный исходник ниже показывает два раздела с материалом, повторные названия и два безымянных продолжения:</p>
+<pre class="qmd"><code>---
+title: От вопроса к объяснению
+---
+
+## Наблюдение {#sec-observation}
+
+Наблюдение помогает сформулировать вопрос и выбрать способ проверки объяснения.
+Раздел сразу содержит материал; отдельная пустая заставка для него не нужна.
+
+### Изменение состояния {#state-before}
+
+Сравните значение до выполнения операции и после неё. Сначала предскажите
+результат, затем проверьте, какая часть состояния изменилась.
+
+```text
+значение до: 3
+операция: прибавить 2
+```
+
+---
+
+Продолжение того же объяснения не требует нового заголовка. Физическая граница
+слайда помогает сохранить читаемый объём текста.
+
+### Изменение состояния {#state-after}
+
+Повторное название сохраняет тему сравнения. Идентификаторы двух слайдов
+различаются, поэтому ссылки ведут к нужной части объяснения.
+
+::: {.cell-output .cell-output-stdout}
+```text
+значение после: 5
+```
+
+Результат: значение увеличилось на два.
+:::
+
+## Наблюдение {#sec-generalization}
+
+Одинаковое название нового раздела не объединяет его с предыдущим: границу
+задаёт заголовок раздела. Здесь обобщаем связь между операцией и изменением
+состояния.
+
+---
+
+Продолжение второго раздела остаётся в его группе навигации.</code></pre>
+<p>Тот же исходник, CSS и конфигурация двух форматов находятся в <a href="https://github.com/Afonenko-Course-Tools/quarto-course/tree/v5.0.2/examples/presentation">примере владельца bundle 5.0.2</a>. <code>quarto add</code> устанавливает расширения; три исходных файла примера копируются из указанного Git ref отдельно. Установка не создаёт папку примеров в курсе.</p>
+</section>
+<section id="покажите-ответы-и-общие-заметки" class="level2">
+<h2 class="anchored" data-anchor-id="покажите-ответы-и-общие-заметки">Покажите ответы и общие заметки</h2>
 <p>При обычном открытии общие <code>.notes</code> видны рядом со слайдами, ответы свёрнуты. Кнопка «Аудитория» скрывает заметки и сохраняет открытые ответы. Кнопка «Изучение» возвращает их. Режим действует до перезагрузки; явная ссылка <code>slides.html?course-mode=lecture</code> открывает аудиторный режим.</p>
-<pre class="qmd"><code>## Слайд {#sec-slide}
+<p>Этот фрагмент можно добавить в выбранный раздел после его вводного материала:</p>
+<pre class="qmd"><code>### Прогноз {#slide-predict}
 
 ::: {#exr-predict}
 Предскажите результат.
@@ -437,22 +536,23 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 Общие пояснения, доступные всем читателям.
 :::</code></pre>
 <p>Показ заметок использует API Reveal <code>showNotes</code>; окно по клавише <code>S</code> остаётся штатным. Поиск включает заметки, подсказки и решения. Прямая ссылка и результат поиска раскрывают только цель и её родителей. При печати ответы открываются, заметки исключаются, длинный слайд продолжается на следующих страницах. После обычной печати экранное состояние восстанавливается.</p>
-<p>В обычных слайдах вне банка авторские ответы публичны. Если явно включён банк, student Reveal применяет ту же statement-visibility и правило demonstration, что книга. Решения банка автоматически на отдельные слайды не переносятся. Общие notes остаются публичными.</p>
+<p>В обычных слайдах вне банка авторские ответы публичны. Если явно включён банк, student Reveal применяет ту же <code>statement-visibility</code> и правило канонической <code>demonstration</code>, что книга. Решения банка автоматически на отдельные слайды не переносятся. Общие заметки остаются публичными.</p>
+</section>
 <section id="presentation-fragments" class="level2">
 <h2 class="anchored" data-anchor-id="presentation-fragments">Нативные фрагменты и форматы</h2>
 <pre class="qmd"><code>::: {.fragment}
 Этот вывод появляется после очередного перехода Reveal.
 :::</code></pre>
 <p>Фрагменты, заголовки слайдов, форматы и PDF остаются средствами Quarto. Для статически раскрытых доступных ответов используйте:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">course-presentation</span><span class="kw">:</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">answers</span><span class="kw">:</span><span class="at"> expanded</span></span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">course-presentation</span><span class="kw">:</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">answers</span><span class="kw">:</span><span class="at"> expanded</span></span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <p>HTML оформляет доступное решение штатным сворачиваемым callout; Reveal — <code>details</code>; PDF/Typst/LaTeX сохраняют статическое содержимое. При <code>?print-pdf</code> открываются ответы, callout, фрагменты и вкладки; notes исключаются. Банковская приватность применяется до оформления и печати.</p>
 </section>
 <section id="соберите-слайды" class="level2">
 <h2 class="anchored" data-anchor-id="соберите-слайды">Соберите слайды</h2>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="ex">quarto</span> render slides.qmd <span class="at">--to</span> revealjs <span class="at">--fail-if-warnings</span></span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="ex">quarto</span> render slides.qmd <span class="at">--to</span> revealjs <span class="at">--fail-if-warnings</span></span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Команда создаст <code>slides.html</code>. Откройте его для самостоятельного просмотра или используйте ссылку с <code>?course-mode=lecture</code> для занятия. Условия, ответы и общие заметки демонстрации намеренно публичны.</p>
-<p>Смотрите <a href="../catalog/index.html">готовую презентацию и её исходную папку</a>. Ссылка на QMD слайдов остаётся обычной ссылкой; HTML Code Tools не добавляется к Reveal. Подробнее — в <a href="../reference/source.html">справочнике исходников</a>.</p>
+<p>Смотрите также <a href="../catalog/index.html">готовые презентации и исходные папки каталога</a>. Готовые группы сохраняют собственные исторические выпуски; новый нативный пример выше относится к bundle 5.0.2. Ссылка на QMD слайдов остаётся обычной ссылкой; HTML Code Tools не добавляется к Reveal. Подробнее — в <a href="../reference/source.html">справочнике исходников</a>.</p>
 
 
 <!-- -->
@@ -923,99 +1023,217 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       </a>
   </div>
 </nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Исходный код</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> Одна презентация</span></span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>Одна презентация подходит для объяснения в аудитории и повторения дома.</span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>Presentation оформляет заметки и ответы; Navigation добавляет поиск и переходы Reveal.</span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>Core проверяет учебную разметку, если она используется. Обычные слайды</span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>ниже не включают банк. <span class="co">[</span><span class="ot">Банковская политика Core 4.0.1</span><span class="co">](specifications.qmd)</span></span>
-<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>действует при явном включении банка.</span>
-<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>Core, Presentation и Navigation устанавливаются одним выпуском:</span>
-<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a><span class="in">```sh</span></span>
-<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a><span class="ex">quarto</span> add Afonenko-Course-Tools/quarto-course@v4.0.1 <span class="at">--no-prompt</span></span>
-<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a> Включите</span>
-<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>фильтры и штатный Reveal-плагин:</span>
-<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a><span class="in">```yaml</span></span>
-<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a><span class="fu">filters</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="at">course-core</span><span class="kw">,</span><span class="at"> course-presentation</span><span class="kw">]</span></span>
-<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a><span class="fu">revealjs-plugins</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="at">course-navigation</span><span class="kw">]</span></span>
-<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a><span class="fu">format</span><span class="kw">:</span></span>
-<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">revealjs</span><span class="kw">:</span></span>
-<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">slide-level</span><span class="kw">:</span><span class="at"> </span><span class="dv">2</span></span>
-<span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">pdf-separate-fragments</span><span class="kw">:</span><span class="at"> </span><span class="ch">false</span></span>
-<span id="cb7-26"><a href="#cb7-26" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb7-27"><a href="#cb7-27" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-28"><a href="#cb7-28" aria-hidden="true" tabindex="-1"></a>При обычном открытии общие <span class="in">`.notes`</span> видны рядом со слайдами, ответы свёрнуты.</span>
-<span id="cb7-29"><a href="#cb7-29" aria-hidden="true" tabindex="-1"></a>Кнопка «Аудитория» скрывает заметки и сохраняет открытые ответы. Кнопка</span>
-<span id="cb7-30"><a href="#cb7-30" aria-hidden="true" tabindex="-1"></a>«Изучение» возвращает их. Режим действует до перезагрузки; явная ссылка</span>
-<span id="cb7-31"><a href="#cb7-31" aria-hidden="true" tabindex="-1"></a><span class="in">`slides.html?course-mode=lecture`</span> открывает аудиторный режим.</span>
-<span id="cb7-32"><a href="#cb7-32" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-33"><a href="#cb7-33" aria-hidden="true" tabindex="-1"></a><span class="in">```qmd</span></span>
-<span id="cb7-34"><a href="#cb7-34" aria-hidden="true" tabindex="-1"></a><span class="in">## Слайд {#sec-slide}</span></span>
-<span id="cb7-35"><a href="#cb7-35" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-36"><a href="#cb7-36" aria-hidden="true" tabindex="-1"></a><span class="in">::: {#exr-predict}</span></span>
-<span id="cb7-37"><a href="#cb7-37" aria-hidden="true" tabindex="-1"></a><span class="in">Предскажите результат.</span></span>
-<span id="cb7-38"><a href="#cb7-38" aria-hidden="true" tabindex="-1"></a><span class="in">:::</span></span>
-<span id="cb7-39"><a href="#cb7-39" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-40"><a href="#cb7-40" aria-hidden="true" tabindex="-1"></a><span class="in">::: {#sol-predict}</span></span>
-<span id="cb7-41"><a href="#cb7-41" aria-hidden="true" tabindex="-1"></a><span class="in">Объяснение результата.</span></span>
-<span id="cb7-42"><a href="#cb7-42" aria-hidden="true" tabindex="-1"></a><span class="in">:::</span></span>
-<span id="cb7-43"><a href="#cb7-43" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-44"><a href="#cb7-44" aria-hidden="true" tabindex="-1"></a><span class="in">::: {.notes}</span></span>
-<span id="cb7-45"><a href="#cb7-45" aria-hidden="true" tabindex="-1"></a><span class="in">Общие пояснения, доступные всем читателям.</span></span>
-<span id="cb7-46"><a href="#cb7-46" aria-hidden="true" tabindex="-1"></a><span class="in">:::</span></span>
-<span id="cb7-47"><a href="#cb7-47" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb7-48"><a href="#cb7-48" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-49"><a href="#cb7-49" aria-hidden="true" tabindex="-1"></a>Показ заметок использует API Reveal <span class="in">`showNotes`</span>; окно по клавише <span class="in">`S`</span></span>
-<span id="cb7-50"><a href="#cb7-50" aria-hidden="true" tabindex="-1"></a>остаётся штатным. Поиск включает заметки, подсказки и решения. Прямая ссылка</span>
-<span id="cb7-51"><a href="#cb7-51" aria-hidden="true" tabindex="-1"></a>и результат поиска раскрывают только цель и её родителей. При печати</span>
-<span id="cb7-52"><a href="#cb7-52" aria-hidden="true" tabindex="-1"></a>ответы открываются, заметки исключаются, длинный слайд продолжается на</span>
-<span id="cb7-53"><a href="#cb7-53" aria-hidden="true" tabindex="-1"></a>следующих страницах. После обычной печати экранное состояние восстанавливается.</span>
-<span id="cb7-54"><a href="#cb7-54" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-55"><a href="#cb7-55" aria-hidden="true" tabindex="-1"></a>В обычных слайдах вне банка авторские ответы публичны. Если явно включён</span>
-<span id="cb7-56"><a href="#cb7-56" aria-hidden="true" tabindex="-1"></a>банк, student Reveal применяет ту же statement-visibility и правило</span>
-<span id="cb7-57"><a href="#cb7-57" aria-hidden="true" tabindex="-1"></a>demonstration, что книга. Решения банка автоматически на отдельные слайды</span>
-<span id="cb7-58"><a href="#cb7-58" aria-hidden="true" tabindex="-1"></a>не переносятся. Общие notes остаются публичными.</span>
-<span id="cb7-59"><a href="#cb7-59" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-60"><a href="#cb7-60" aria-hidden="true" tabindex="-1"></a><span class="fu">## Нативные фрагменты и форматы {#presentation-fragments}</span></span>
-<span id="cb7-61"><a href="#cb7-61" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-62"><a href="#cb7-62" aria-hidden="true" tabindex="-1"></a><span class="in">```qmd</span></span>
-<span id="cb7-63"><a href="#cb7-63" aria-hidden="true" tabindex="-1"></a><span class="in">::: {.fragment}</span></span>
-<span id="cb7-64"><a href="#cb7-64" aria-hidden="true" tabindex="-1"></a><span class="in">Этот вывод появляется после очередного перехода Reveal.</span></span>
-<span id="cb7-65"><a href="#cb7-65" aria-hidden="true" tabindex="-1"></a><span class="in">:::</span></span>
-<span id="cb7-66"><a href="#cb7-66" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb7-67"><a href="#cb7-67" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-68"><a href="#cb7-68" aria-hidden="true" tabindex="-1"></a>Фрагменты, заголовки слайдов, форматы и PDF остаются средствами Quarto.</span>
-<span id="cb7-69"><a href="#cb7-69" aria-hidden="true" tabindex="-1"></a>Для статически раскрытых доступных ответов используйте:</span>
-<span id="cb7-70"><a href="#cb7-70" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-71"><a href="#cb7-71" aria-hidden="true" tabindex="-1"></a><span class="in">```yaml</span></span>
-<span id="cb7-72"><a href="#cb7-72" aria-hidden="true" tabindex="-1"></a><span class="fu">course-presentation</span><span class="kw">:</span></span>
-<span id="cb7-73"><a href="#cb7-73" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">answers</span><span class="kw">:</span><span class="at"> expanded</span></span>
-<span id="cb7-74"><a href="#cb7-74" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb7-75"><a href="#cb7-75" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-76"><a href="#cb7-76" aria-hidden="true" tabindex="-1"></a>HTML оформляет доступное решение штатным сворачиваемым callout; Reveal —</span>
-<span id="cb7-77"><a href="#cb7-77" aria-hidden="true" tabindex="-1"></a><span class="in">`details`</span>; PDF/Typst/LaTeX сохраняют статическое содержимое.</span>
-<span id="cb7-78"><a href="#cb7-78" aria-hidden="true" tabindex="-1"></a>При <span class="in">`?print-pdf`</span> открываются ответы, callout, фрагменты и вкладки; notes</span>
-<span id="cb7-79"><a href="#cb7-79" aria-hidden="true" tabindex="-1"></a>исключаются. Банковская приватность применяется до оформления и печати.</span>
-<span id="cb7-80"><a href="#cb7-80" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-81"><a href="#cb7-81" aria-hidden="true" tabindex="-1"></a><span class="fu">## Соберите слайды</span></span>
-<span id="cb7-82"><a href="#cb7-82" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-83"><a href="#cb7-83" aria-hidden="true" tabindex="-1"></a><span class="in">```sh</span></span>
-<span id="cb7-84"><a href="#cb7-84" aria-hidden="true" tabindex="-1"></a><span class="ex">quarto</span> render slides.qmd <span class="at">--to</span> revealjs <span class="at">--fail-if-warnings</span></span>
-<span id="cb7-85"><a href="#cb7-85" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb7-86"><a href="#cb7-86" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-87"><a href="#cb7-87" aria-hidden="true" tabindex="-1"></a>Команда создаст <span class="in">`slides.html`</span>. Откройте его для самостоятельного просмотра</span>
-<span id="cb7-88"><a href="#cb7-88" aria-hidden="true" tabindex="-1"></a>или используйте ссылку с <span class="in">`?course-mode=lecture`</span> для занятия.</span>
-<span id="cb7-89"><a href="#cb7-89" aria-hidden="true" tabindex="-1"></a>Условия, ответы и общие заметки демонстрации намеренно публичны.</span>
-<span id="cb7-90"><a href="#cb7-90" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-91"><a href="#cb7-91" aria-hidden="true" tabindex="-1"></a>Смотрите <span class="co">[</span><span class="ot">готовую презентацию и её исходную папку</span><span class="co">](../catalog/index.qmd)</span>.</span>
-<span id="cb7-92"><a href="#cb7-92" aria-hidden="true" tabindex="-1"></a>Ссылка на QMD слайдов остаётся обычной ссылкой; HTML Code Tools</span>
-<span id="cb7-93"><a href="#cb7-93" aria-hidden="true" tabindex="-1"></a>не добавляется к Reveal. Подробнее — в <span class="co">[</span><span class="ot">справочнике исходников</span><span class="co">](../reference/source.qmd)</span>.</span></code></pre></div><button title="Скопировать текст" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> Одна презентация</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>Одна презентация подходит для объяснения в аудитории и повторения дома.</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>Presentation оформляет заметки и ответы; Navigation добавляет поиск и переходы</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>Reveal. Core проверяет учебную разметку, если она используется. Обычные слайды</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>ниже не включают банк; <span class="co">[</span><span class="ot">банковская политика Core 5.0.2</span><span class="co">](specifications.qmd)</span></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>действует при явном включении банка.</span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a><span class="fu">## Подключите нативные средства</span></span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>Core, Presentation и Navigation устанавливаются одним выпуском:</span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a><span class="in">```sh</span></span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a><span class="ex">quarto</span> add Afonenko-Course-Tools/quarto-course@v5.0.2 <span class="at">--no-prompt</span></span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a>Сохраните <span class="in">`_quarto.yml`</span> рядом с <span class="in">`slides.qmd`</span>. Нативные параметры формата задают</span>
+<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a>иерархию заголовков, последовательное движение и CSS; фильтры оформляют материал,</span>
+<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a>а плагин Navigation работает с результатом Reveal:</span>
+<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a><span class="in">```yaml</span></span>
+<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a><span class="fu">lang</span><span class="kw">:</span><span class="at"> ru</span></span>
+<span id="cb9-25"><a href="#cb9-25" aria-hidden="true" tabindex="-1"></a><span class="fu">filters</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="at">course-core</span><span class="kw">,</span><span class="at"> course-presentation</span><span class="kw">]</span></span>
+<span id="cb9-26"><a href="#cb9-26" aria-hidden="true" tabindex="-1"></a><span class="fu">format</span><span class="kw">:</span></span>
+<span id="cb9-27"><a href="#cb9-27" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">revealjs</span><span class="kw">:</span></span>
+<span id="cb9-28"><a href="#cb9-28" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">shift-heading-level-by</span><span class="kw">:</span><span class="at"> </span><span class="dv">-1</span></span>
+<span id="cb9-29"><a href="#cb9-29" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">slide-level</span><span class="kw">:</span><span class="at"> </span><span class="dv">2</span></span>
+<span id="cb9-30"><a href="#cb9-30" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">navigation-mode</span><span class="kw">:</span><span class="at"> linear</span></span>
+<span id="cb9-31"><a href="#cb9-31" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">revealjs-plugins</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="at">course-navigation</span><span class="kw">]</span></span>
+<span id="cb9-32"><a href="#cb9-32" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">css</span><span class="kw">:</span><span class="at"> prose.css</span></span>
+<span id="cb9-33"><a href="#cb9-33" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">pdf-separate-fragments</span><span class="kw">:</span><span class="at"> </span><span class="ch">false</span></span>
+<span id="cb9-34"><a href="#cb9-34" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb9-35"><a href="#cb9-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-36"><a href="#cb9-36" aria-hidden="true" tabindex="-1"></a><span class="fu">## Выровняйте обычные абзацы</span></span>
+<span id="cb9-37"><a href="#cb9-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-38"><a href="#cb9-38" aria-hidden="true" tabindex="-1"></a>Сохраните <span class="in">`prose.css`</span> рядом с документом:</span>
+<span id="cb9-39"><a href="#cb9-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-40"><a href="#cb9-40" aria-hidden="true" tabindex="-1"></a><span class="in">```css</span></span>
+<span id="cb9-41"><a href="#cb9-41" aria-hidden="true" tabindex="-1"></a><span class="co">/* Обычные абзацы; язык переносов задаёт нативный lang: ru. */</span></span>
+<span id="cb9-42"><a href="#cb9-42" aria-hidden="true" tabindex="-1"></a><span class="op">.</span><span class="fu">reveal</span> <span class="op">.</span><span class="fu">slides</span> section p <span class="op">{</span></span>
+<span id="cb9-43"><a href="#cb9-43" aria-hidden="true" tabindex="-1"></a>  text<span class="op">-</span>align<span class="op">:</span> justify<span class="op">;</span></span>
+<span id="cb9-44"><a href="#cb9-44" aria-hidden="true" tabindex="-1"></a>  text<span class="op">-</span>align<span class="op">-</span>last<span class="op">:</span> left<span class="op">;</span></span>
+<span id="cb9-45"><a href="#cb9-45" aria-hidden="true" tabindex="-1"></a>  hyphens<span class="op">:</span> auto<span class="op">;</span></span>
+<span id="cb9-46"><a href="#cb9-46" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb9-47"><a href="#cb9-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-48"><a href="#cb9-48" aria-hidden="true" tabindex="-1"></a><span class="co">/* Заголовки, код и вывод сохраняют левое выравнивание. */</span></span>
+<span id="cb9-49"><a href="#cb9-49" aria-hidden="true" tabindex="-1"></a><span class="op">.</span><span class="fu">reveal</span> <span class="op">.</span><span class="fu">slides</span> section <span class="op">:</span><span class="kw">is</span><span class="op">(</span>h1<span class="op">,</span> h2<span class="op">,</span> h3<span class="op">,</span> h4<span class="op">,</span> h5<span class="op">,</span> h6<span class="op">,</span> pre<span class="op">,</span> code<span class="op">),</span></span>
+<span id="cb9-50"><a href="#cb9-50" aria-hidden="true" tabindex="-1"></a><span class="op">.</span><span class="fu">reveal</span> <span class="op">.</span><span class="fu">slides</span> section <span class="op">.</span><span class="fu">cell</span><span class="op">-</span>output p <span class="op">{</span></span>
+<span id="cb9-51"><a href="#cb9-51" aria-hidden="true" tabindex="-1"></a>  text<span class="op">-</span>align<span class="op">:</span> left<span class="op">;</span></span>
+<span id="cb9-52"><a href="#cb9-52" aria-hidden="true" tabindex="-1"></a>  text<span class="op">-</span>align<span class="op">-</span>last<span class="op">:</span> auto<span class="op">;</span></span>
+<span id="cb9-53"><a href="#cb9-53" aria-hidden="true" tabindex="-1"></a>  hyphens<span class="op">:</span> none<span class="op">;</span></span>
+<span id="cb9-54"><a href="#cb9-54" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb9-55"><a href="#cb9-55" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-56"><a href="#cb9-56" aria-hidden="true" tabindex="-1"></a><span class="co">/* Изображения и их подписи не являются обычными абзацами. */</span></span>
+<span id="cb9-57"><a href="#cb9-57" aria-hidden="true" tabindex="-1"></a><span class="op">.</span><span class="fu">reveal</span> <span class="op">.</span><span class="fu">slides</span> section figure p <span class="op">{</span></span>
+<span id="cb9-58"><a href="#cb9-58" aria-hidden="true" tabindex="-1"></a>  text<span class="op">-</span>align<span class="op">:</span> center<span class="op">;</span></span>
+<span id="cb9-59"><a href="#cb9-59" aria-hidden="true" tabindex="-1"></a>  text<span class="op">-</span>align<span class="op">-</span>last<span class="op">:</span> auto<span class="op">;</span></span>
+<span id="cb9-60"><a href="#cb9-60" aria-hidden="true" tabindex="-1"></a>  hyphens<span class="op">:</span> none<span class="op">;</span></span>
+<span id="cb9-61"><a href="#cb9-61" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb9-62"><a href="#cb9-62" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb9-63"><a href="#cb9-63" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-64"><a href="#cb9-64" aria-hidden="true" tabindex="-1"></a>Обычные абзацы выравниваются по ширине; последняя строка остаётся слева.</span>
+<span id="cb9-65"><a href="#cb9-65" aria-hidden="true" tabindex="-1"></a>Заголовки, код и вывод выравниваются слева. CSS сохраняет размеры шрифта</span>
+<span id="cb9-66"><a href="#cb9-66" aria-hidden="true" tabindex="-1"></a>и подсветку. <span class="in">`lang: ru`</span> задаёт язык для <span class="in">`hyphens: auto`</span>; фактические переносы</span>
+<span id="cb9-67"><a href="#cb9-67" aria-hidden="true" tabindex="-1"></a>зависят от словаря браузера. Это штатное подключение CSS Quarto, без нового</span>
+<span id="cb9-68"><a href="#cb9-68" aria-hidden="true" tabindex="-1"></a>параметра <span class="in">`course-presentation`</span>.</span>
+<span id="cb9-69"><a href="#cb9-69" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-70"><a href="#cb9-70" aria-hidden="true" tabindex="-1"></a><span class="fu">## Начните раздел с материала</span></span>
+<span id="cb9-71"><a href="#cb9-71" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-72"><a href="#cb9-72" aria-hidden="true" tabindex="-1"></a>В <span class="in">`slides.qmd`</span> YAML <span class="in">`title`</span> задаёт название лекции, <span class="in">`##`</span> — раздел,</span>
+<span id="cb9-73"><a href="#cb9-73" aria-hidden="true" tabindex="-1"></a><span class="in">`###`</span> — слайд. <span class="in">`shift-heading-level-by: -1`</span> и <span class="in">`slide-level: 2`</span> применяются</span>
+<span id="cb9-74"><a href="#cb9-74" aria-hidden="true" tabindex="-1"></a>только к Reveal; при выборе HTML уровни остаются исходными.</span>
+<span id="cb9-75"><a href="#cb9-75" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-76"><a href="#cb9-76" aria-hidden="true" tabindex="-1"></a>Раздел может начинаться с объяснения сразу после <span class="in">`##`</span>. Пустая заставка раздела</span>
+<span id="cb9-77"><a href="#cb9-77" aria-hidden="true" tabindex="-1"></a>получается, когда автор сам оставляет заголовок без вводного содержимого перед</span>
+<span id="cb9-78"><a href="#cb9-78" aria-hidden="true" tabindex="-1"></a>первым <span class="in">`###`</span>. Граница <span class="in">`---`</span> создаёт безымянное продолжение; Navigation сохраняет</span>
+<span id="cb9-79"><a href="#cb9-79" aria-hidden="true" tabindex="-1"></a>его в группе текущего раздела. Повторное название <span class="in">`###`</span> продолжает тему, а</span>
+<span id="cb9-80"><a href="#cb9-80" aria-hidden="true" tabindex="-1"></a>следующий <span class="in">`##`</span> начинает новую группу даже при таком же названии. Для устойчивых</span>
+<span id="cb9-81"><a href="#cb9-81" aria-hidden="true" tabindex="-1"></a>ссылок задавайте разные ID.</span>
+<span id="cb9-82"><a href="#cb9-82" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-83"><a href="#cb9-83" aria-hidden="true" tabindex="-1"></a>Полный исходник ниже показывает два раздела с материалом, повторные названия</span>
+<span id="cb9-84"><a href="#cb9-84" aria-hidden="true" tabindex="-1"></a>и два безымянных продолжения:</span>
+<span id="cb9-85"><a href="#cb9-85" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-86"><a href="#cb9-86" aria-hidden="true" tabindex="-1"></a><span class="in">````qmd</span></span>
+<span id="cb9-87"><a href="#cb9-87" aria-hidden="true" tabindex="-1"></a><span class="in">---</span></span>
+<span id="cb9-88"><a href="#cb9-88" aria-hidden="true" tabindex="-1"></a><span class="in">title: От вопроса к объяснению</span></span>
+<span id="cb9-89"><a href="#cb9-89" aria-hidden="true" tabindex="-1"></a><span class="in">---</span></span>
+<span id="cb9-90"><a href="#cb9-90" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-91"><a href="#cb9-91" aria-hidden="true" tabindex="-1"></a><span class="in">## Наблюдение {#sec-observation}</span></span>
+<span id="cb9-92"><a href="#cb9-92" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-93"><a href="#cb9-93" aria-hidden="true" tabindex="-1"></a><span class="in">Наблюдение помогает сформулировать вопрос и выбрать способ проверки объяснения.</span></span>
+<span id="cb9-94"><a href="#cb9-94" aria-hidden="true" tabindex="-1"></a><span class="in">Раздел сразу содержит материал; отдельная пустая заставка для него не нужна.</span></span>
+<span id="cb9-95"><a href="#cb9-95" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-96"><a href="#cb9-96" aria-hidden="true" tabindex="-1"></a><span class="in">### Изменение состояния {#state-before}</span></span>
+<span id="cb9-97"><a href="#cb9-97" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-98"><a href="#cb9-98" aria-hidden="true" tabindex="-1"></a><span class="in">Сравните значение до выполнения операции и после неё. Сначала предскажите</span></span>
+<span id="cb9-99"><a href="#cb9-99" aria-hidden="true" tabindex="-1"></a><span class="in">результат, затем проверьте, какая часть состояния изменилась.</span></span>
+<span id="cb9-100"><a href="#cb9-100" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-101"><a href="#cb9-101" aria-hidden="true" tabindex="-1"></a><span class="in">```text</span></span>
+<span id="cb9-102"><a href="#cb9-102" aria-hidden="true" tabindex="-1"></a><span class="in">значение до: 3</span></span>
+<span id="cb9-103"><a href="#cb9-103" aria-hidden="true" tabindex="-1"></a><span class="in">операция: прибавить 2</span></span>
+<span id="cb9-104"><a href="#cb9-104" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb9-105"><a href="#cb9-105" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-106"><a href="#cb9-106" aria-hidden="true" tabindex="-1"></a><span class="in">---</span></span>
+<span id="cb9-107"><a href="#cb9-107" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-108"><a href="#cb9-108" aria-hidden="true" tabindex="-1"></a><span class="in">Продолжение того же объяснения не требует нового заголовка. Физическая граница</span></span>
+<span id="cb9-109"><a href="#cb9-109" aria-hidden="true" tabindex="-1"></a><span class="in">слайда помогает сохранить читаемый объём текста.</span></span>
+<span id="cb9-110"><a href="#cb9-110" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-111"><a href="#cb9-111" aria-hidden="true" tabindex="-1"></a><span class="in">### Изменение состояния {#state-after}</span></span>
+<span id="cb9-112"><a href="#cb9-112" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-113"><a href="#cb9-113" aria-hidden="true" tabindex="-1"></a><span class="in">Повторное название сохраняет тему сравнения. Идентификаторы двух слайдов</span></span>
+<span id="cb9-114"><a href="#cb9-114" aria-hidden="true" tabindex="-1"></a><span class="in">различаются, поэтому ссылки ведут к нужной части объяснения.</span></span>
+<span id="cb9-115"><a href="#cb9-115" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-116"><a href="#cb9-116" aria-hidden="true" tabindex="-1"></a><span class="in">::: {.cell-output .cell-output-stdout}</span></span>
+<span id="cb9-117"><a href="#cb9-117" aria-hidden="true" tabindex="-1"></a><span class="in">```text</span></span>
+<span id="cb9-118"><a href="#cb9-118" aria-hidden="true" tabindex="-1"></a><span class="in">значение после: 5</span></span>
+<span id="cb9-119"><a href="#cb9-119" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb9-120"><a href="#cb9-120" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-121"><a href="#cb9-121" aria-hidden="true" tabindex="-1"></a><span class="in">Результат: значение увеличилось на два.</span></span>
+<span id="cb9-122"><a href="#cb9-122" aria-hidden="true" tabindex="-1"></a><span class="in">:::</span></span>
+<span id="cb9-123"><a href="#cb9-123" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-124"><a href="#cb9-124" aria-hidden="true" tabindex="-1"></a><span class="in">## Наблюдение {#sec-generalization}</span></span>
+<span id="cb9-125"><a href="#cb9-125" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-126"><a href="#cb9-126" aria-hidden="true" tabindex="-1"></a><span class="in">Одинаковое название нового раздела не объединяет его с предыдущим: границу</span></span>
+<span id="cb9-127"><a href="#cb9-127" aria-hidden="true" tabindex="-1"></a><span class="in">задаёт заголовок раздела. Здесь обобщаем связь между операцией и изменением</span></span>
+<span id="cb9-128"><a href="#cb9-128" aria-hidden="true" tabindex="-1"></a><span class="in">состояния.</span></span>
+<span id="cb9-129"><a href="#cb9-129" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-130"><a href="#cb9-130" aria-hidden="true" tabindex="-1"></a><span class="in">---</span></span>
+<span id="cb9-131"><a href="#cb9-131" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-132"><a href="#cb9-132" aria-hidden="true" tabindex="-1"></a><span class="in">Продолжение второго раздела остаётся в его группе навигации.</span></span>
+<span id="cb9-133"><a href="#cb9-133" aria-hidden="true" tabindex="-1"></a><span class="in">````</span></span>
+<span id="cb9-134"><a href="#cb9-134" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-135"><a href="#cb9-135" aria-hidden="true" tabindex="-1"></a>Тот же исходник, CSS и конфигурация двух форматов находятся в</span>
+<span id="cb9-136"><a href="#cb9-136" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">примере владельца bundle 5.0.2</span><span class="co">](https://github.com/Afonenko-Course-Tools/quarto-course/tree/v5.0.2/examples/presentation)</span>.</span>
+<span id="cb9-137"><a href="#cb9-137" aria-hidden="true" tabindex="-1"></a><span class="in">`quarto add`</span> устанавливает расширения; три исходных файла примера копируются</span>
+<span id="cb9-138"><a href="#cb9-138" aria-hidden="true" tabindex="-1"></a>из указанного Git ref отдельно. Установка не создаёт папку примеров в курсе.</span>
+<span id="cb9-139"><a href="#cb9-139" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-140"><a href="#cb9-140" aria-hidden="true" tabindex="-1"></a><span class="fu">## Покажите ответы и общие заметки</span></span>
+<span id="cb9-141"><a href="#cb9-141" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-142"><a href="#cb9-142" aria-hidden="true" tabindex="-1"></a>При обычном открытии общие <span class="in">`.notes`</span> видны рядом со слайдами, ответы свёрнуты.</span>
+<span id="cb9-143"><a href="#cb9-143" aria-hidden="true" tabindex="-1"></a>Кнопка «Аудитория» скрывает заметки и сохраняет открытые ответы. Кнопка</span>
+<span id="cb9-144"><a href="#cb9-144" aria-hidden="true" tabindex="-1"></a>«Изучение» возвращает их. Режим действует до перезагрузки; явная ссылка</span>
+<span id="cb9-145"><a href="#cb9-145" aria-hidden="true" tabindex="-1"></a><span class="in">`slides.html?course-mode=lecture`</span> открывает аудиторный режим.</span>
+<span id="cb9-146"><a href="#cb9-146" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-147"><a href="#cb9-147" aria-hidden="true" tabindex="-1"></a>Этот фрагмент можно добавить в выбранный раздел после его вводного материала:</span>
+<span id="cb9-148"><a href="#cb9-148" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-149"><a href="#cb9-149" aria-hidden="true" tabindex="-1"></a><span class="in">```qmd</span></span>
+<span id="cb9-150"><a href="#cb9-150" aria-hidden="true" tabindex="-1"></a><span class="in">### Прогноз {#slide-predict}</span></span>
+<span id="cb9-151"><a href="#cb9-151" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-152"><a href="#cb9-152" aria-hidden="true" tabindex="-1"></a><span class="in">::: {#exr-predict}</span></span>
+<span id="cb9-153"><a href="#cb9-153" aria-hidden="true" tabindex="-1"></a><span class="in">Предскажите результат.</span></span>
+<span id="cb9-154"><a href="#cb9-154" aria-hidden="true" tabindex="-1"></a><span class="in">:::</span></span>
+<span id="cb9-155"><a href="#cb9-155" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-156"><a href="#cb9-156" aria-hidden="true" tabindex="-1"></a><span class="in">::: {#sol-predict}</span></span>
+<span id="cb9-157"><a href="#cb9-157" aria-hidden="true" tabindex="-1"></a><span class="in">Объяснение результата.</span></span>
+<span id="cb9-158"><a href="#cb9-158" aria-hidden="true" tabindex="-1"></a><span class="in">:::</span></span>
+<span id="cb9-159"><a href="#cb9-159" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-160"><a href="#cb9-160" aria-hidden="true" tabindex="-1"></a><span class="in">::: {.notes}</span></span>
+<span id="cb9-161"><a href="#cb9-161" aria-hidden="true" tabindex="-1"></a><span class="in">Общие пояснения, доступные всем читателям.</span></span>
+<span id="cb9-162"><a href="#cb9-162" aria-hidden="true" tabindex="-1"></a><span class="in">:::</span></span>
+<span id="cb9-163"><a href="#cb9-163" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb9-164"><a href="#cb9-164" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-165"><a href="#cb9-165" aria-hidden="true" tabindex="-1"></a>Показ заметок использует API Reveal <span class="in">`showNotes`</span>; окно по клавише <span class="in">`S`</span></span>
+<span id="cb9-166"><a href="#cb9-166" aria-hidden="true" tabindex="-1"></a>остаётся штатным. Поиск включает заметки, подсказки и решения. Прямая ссылка</span>
+<span id="cb9-167"><a href="#cb9-167" aria-hidden="true" tabindex="-1"></a>и результат поиска раскрывают только цель и её родителей. При печати</span>
+<span id="cb9-168"><a href="#cb9-168" aria-hidden="true" tabindex="-1"></a>ответы открываются, заметки исключаются, длинный слайд продолжается на</span>
+<span id="cb9-169"><a href="#cb9-169" aria-hidden="true" tabindex="-1"></a>следующих страницах. После обычной печати экранное состояние восстанавливается.</span>
+<span id="cb9-170"><a href="#cb9-170" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-171"><a href="#cb9-171" aria-hidden="true" tabindex="-1"></a>В обычных слайдах вне банка авторские ответы публичны. Если явно включён</span>
+<span id="cb9-172"><a href="#cb9-172" aria-hidden="true" tabindex="-1"></a>банк, student Reveal применяет ту же <span class="in">`statement-visibility`</span> и правило</span>
+<span id="cb9-173"><a href="#cb9-173" aria-hidden="true" tabindex="-1"></a>канонической <span class="in">`demonstration`</span>, что книга. Решения банка автоматически на</span>
+<span id="cb9-174"><a href="#cb9-174" aria-hidden="true" tabindex="-1"></a>отдельные слайды не переносятся. Общие заметки остаются публичными.</span>
+<span id="cb9-175"><a href="#cb9-175" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-176"><a href="#cb9-176" aria-hidden="true" tabindex="-1"></a><span class="fu">## Нативные фрагменты и форматы {#presentation-fragments}</span></span>
+<span id="cb9-177"><a href="#cb9-177" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-178"><a href="#cb9-178" aria-hidden="true" tabindex="-1"></a><span class="in">```qmd</span></span>
+<span id="cb9-179"><a href="#cb9-179" aria-hidden="true" tabindex="-1"></a><span class="in">::: {.fragment}</span></span>
+<span id="cb9-180"><a href="#cb9-180" aria-hidden="true" tabindex="-1"></a><span class="in">Этот вывод появляется после очередного перехода Reveal.</span></span>
+<span id="cb9-181"><a href="#cb9-181" aria-hidden="true" tabindex="-1"></a><span class="in">:::</span></span>
+<span id="cb9-182"><a href="#cb9-182" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb9-183"><a href="#cb9-183" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-184"><a href="#cb9-184" aria-hidden="true" tabindex="-1"></a>Фрагменты, заголовки слайдов, форматы и PDF остаются средствами Quarto.</span>
+<span id="cb9-185"><a href="#cb9-185" aria-hidden="true" tabindex="-1"></a>Для статически раскрытых доступных ответов используйте:</span>
+<span id="cb9-186"><a href="#cb9-186" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-187"><a href="#cb9-187" aria-hidden="true" tabindex="-1"></a><span class="in">```yaml</span></span>
+<span id="cb9-188"><a href="#cb9-188" aria-hidden="true" tabindex="-1"></a><span class="fu">course-presentation</span><span class="kw">:</span></span>
+<span id="cb9-189"><a href="#cb9-189" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">answers</span><span class="kw">:</span><span class="at"> expanded</span></span>
+<span id="cb9-190"><a href="#cb9-190" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb9-191"><a href="#cb9-191" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-192"><a href="#cb9-192" aria-hidden="true" tabindex="-1"></a>HTML оформляет доступное решение штатным сворачиваемым callout; Reveal —</span>
+<span id="cb9-193"><a href="#cb9-193" aria-hidden="true" tabindex="-1"></a><span class="in">`details`</span>; PDF/Typst/LaTeX сохраняют статическое содержимое.</span>
+<span id="cb9-194"><a href="#cb9-194" aria-hidden="true" tabindex="-1"></a>При <span class="in">`?print-pdf`</span> открываются ответы, callout, фрагменты и вкладки; notes</span>
+<span id="cb9-195"><a href="#cb9-195" aria-hidden="true" tabindex="-1"></a>исключаются. Банковская приватность применяется до оформления и печати.</span>
+<span id="cb9-196"><a href="#cb9-196" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-197"><a href="#cb9-197" aria-hidden="true" tabindex="-1"></a><span class="fu">## Соберите слайды</span></span>
+<span id="cb9-198"><a href="#cb9-198" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-199"><a href="#cb9-199" aria-hidden="true" tabindex="-1"></a><span class="in">```sh</span></span>
+<span id="cb9-200"><a href="#cb9-200" aria-hidden="true" tabindex="-1"></a><span class="ex">quarto</span> render slides.qmd <span class="at">--to</span> revealjs <span class="at">--fail-if-warnings</span></span>
+<span id="cb9-201"><a href="#cb9-201" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb9-202"><a href="#cb9-202" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-203"><a href="#cb9-203" aria-hidden="true" tabindex="-1"></a>Команда создаст <span class="in">`slides.html`</span>. Откройте его для самостоятельного просмотра</span>
+<span id="cb9-204"><a href="#cb9-204" aria-hidden="true" tabindex="-1"></a>или используйте ссылку с <span class="in">`?course-mode=lecture`</span> для занятия.</span>
+<span id="cb9-205"><a href="#cb9-205" aria-hidden="true" tabindex="-1"></a>Условия, ответы и общие заметки демонстрации намеренно публичны.</span>
+<span id="cb9-206"><a href="#cb9-206" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-207"><a href="#cb9-207" aria-hidden="true" tabindex="-1"></a>Смотрите также <span class="co">[</span><span class="ot">готовые презентации и исходные папки каталога</span><span class="co">](../catalog/index.qmd)</span>.</span>
+<span id="cb9-208"><a href="#cb9-208" aria-hidden="true" tabindex="-1"></a>Готовые группы сохраняют собственные исторические выпуски; новый нативный пример</span>
+<span id="cb9-209"><a href="#cb9-209" aria-hidden="true" tabindex="-1"></a>выше относится к bundle 5.0.2. Ссылка на QMD слайдов остаётся обычной ссылкой;</span>
+<span id="cb9-210"><a href="#cb9-210" aria-hidden="true" tabindex="-1"></a>HTML Code Tools не добавляется к Reveal. Подробнее — в</span>
+<span id="cb9-211"><a href="#cb9-211" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">справочнике исходников</span><span class="co">](../reference/source.qmd)</span>.</span></code></pre></div><button title="Скопировать текст" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 

@@ -267,6 +267,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../guide/repository-texts.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">README, документация и описание PR</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../guide/specifications.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Версии и спецификации владельцев</span></a>
   </div>
@@ -312,7 +318,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../extensions/prairielearn.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">PrairieLearn — поставка вопросов</span></a>
+ <span class="menu-text">PrairieLearn — native поставка и проверки проектов</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -389,6 +395,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#statement-policy" id="toc-statement-policy" class="nav-link" data-scroll-target="#statement-policy">Выберите публикацию условия</a></li>
   <li><a href="#ordinary-exercise" id="toc-ordinary-exercise" class="nav-link" data-scroll-target="#ordinary-exercise">Оставьте обычное упражнение вне банка</a></li>
   <li><a href="#exercise-binding" id="toc-exercise-binding" class="nav-link" data-scroll-target="#exercise-binding">Добавьте платформенный проект</a></li>
+  <li><a href="#exercise-defaults" id="toc-exercise-defaults" class="nav-link" data-scroll-target="#exercise-defaults">Общие defaults и явное переопределение</a></li>
   </ul>
 </nav>
     </div>
@@ -414,21 +421,21 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<p>Банк нужен для повторного назначения и выбранного экспорта. Обычный <code>exr</code> в книге или на слайде может оставаться обычным объектом Quarto. Ниже — <a href="../guide/specifications.html">модель Core 4.0.1</a>.</p>
+<p>Банк нужен для повторного назначения и выбранного экспорта. Обычный <code>exr</code> в книге или на слайде может оставаться обычным объектом Quarto. Ниже — <a href="../guide/specifications.html">модель Core 5.0.2</a>.</p>
 <section id="bank-opt-in" class="level2">
 <h2 class="anchored" data-anchor-id="bank-opt-in">Явно включите банк</h2>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># task/bank/_metadata.yml</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">exercise-bank</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">exercise-statement-visibility</span><span class="kw">:</span><span class="at"> open</span></span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
-<p>Только <code>#exr-*</code> в области <code>exercise-bank: true</code> становится канонической задачей. По умолчанию банк выключен. Имя папки, формат книги и платформа не включают его. У каждой задачи обязательны <strong>собственные</strong> <code>difficulty</code> и <code>time</code>: <code>introductory</code>, <code>intermediate</code> или <code>advanced</code>; время — положительное целое число минут. Значения страницы или раздела эти поля не заменяют.</p>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">default-exercise-statement-visibility</span><span class="kw">:</span><span class="at"> open</span></span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Только <code>#exr-*</code> в области <code>exercise-bank: true</code> становится канонической задачей. По умолчанию банк выключен. Имя папки, формат книги и платформа не включают его. У каждой банковской задачи обязательны итоговые <code>difficulty</code> и <code>time</code>: <code>introductory</code>, <code>intermediate</code> или <code>advanced</code>; время — положительное целое число минут. Они берутся из атрибутов задачи либо поддерживаемых <code>default-exercise-difficulty/time</code> в объединённых metadata Quarto. Произвольные поля страницы <code>difficulty/time</code> такими defaults не являются.</p>
 <pre class="qmd"><code>::: {#exr-collision difficulty="intermediate" time="25"}
 Объясните различие между случайной коллизией и намеренным подбором.
 :::</code></pre>
-<p>Результат — открытая задача средней сложности на 25 минут. Core отклонит её, если удалить собственное время, указать <code>time="0"</code>, дробное время задачи или неизвестную сложность. Оценка времени относится к задаче; работа в паре задаётся позже на <a href="../guide/assessments.html">назначении</a>.</p>
+<p>Результат — открытая задача средней сложности на 25 минут. Core отклонит её, если убрать время и не задать effective default, указать <code>time="0"</code>, дробное время задачи или неизвестную сложность. Оценка времени относится к задаче; работа в паре задаётся позже на <a href="../guide/assessments.html">назначении</a>.</p>
 </section>
 <section id="statement-policy" class="level2">
 <h2 class="anchored" data-anchor-id="statement-policy">Выберите публикацию условия</h2>
-<p><code>exercise-statement-visibility</code> в нативных метаданных задаёт политику области. Атрибут <code>statement-visibility</code> конкретной задачи имеет приоритет:</p>
+<p><code>default-exercise-statement-visibility</code> в нативных метаданных задаёт политику области. Атрибут <code>statement-visibility</code> конкретной задачи имеет приоритет:</p>
 <pre class="qmd"><code>::: {#exr-integrity-variant difficulty="intermediate" time="30" statement-visibility="restricted" course-role="control"}
 Получены две версии журнала проверки. Укажите, какие изменения
 можно обнаружить по сохранённым контрольным суммам.
@@ -492,12 +499,42 @@ format: html
 <section id="exercise-binding" class="level2">
 <h2 class="anchored" data-anchor-id="exercise-binding">Добавьте платформенный проект</h2>
 <p>Для программной задачи привязка остаётся явной:</p>
-<pre class="qmd"><code>::: {#exr-java-digest difficulty="intermediate" time="45" statement-visibility="restricted" target="prairielearn" project="/projects/java-digest"}
+<pre class="qmd"><code>::: {#exr-java-digest difficulty="intermediate" time="45" statement-visibility="restricted" target="prairielearn" project="/projects/java-digest" project-check="java25-junit-root"}
 ## Подсчёт контрольной суммы
 
 Допишите метод подсчёта SHA-256. Стартовые файлы находятся в проекте задачи.
 :::</code></pre>
-<p><code>target</code> и <code>project</code> не включают банк. Адаптер может требовать ведущий заголовок, структуру проекта и собственные настройки. Для PrairieLearn публичные стартовые файлы лежат в <code>student</code>, закрытые проверки — в <code>tests</code>, авторский вариант — в <code>reference</code>; весь каталог не становится веб-ресурсом. <a href="../guide/export.html">Экспорт</a> и <a href="../guide/composition.html">ресурсное владение</a> проверяются отдельно.</p>
+<p><code>target</code> и <code>project</code> не включают банк. Адаптер может требовать ведущий заголовок, структуру проекта и собственные настройки. Задача с target имеет ведущий непустой заголовок. Для PrairieLearn публичные стартовые файлы лежат в <code>student</code>, закрытые проверки — в <code>tests</code>, авторский вариант — в <code>reference</code>; весь каталог не становится веб-ресурсом. <a href="../guide/export.html">Экспорт</a> и <a href="../guide/composition.html">ресурсное владение</a> проверяются отдельно.</p>
+</section>
+<section id="exercise-defaults" class="level2">
+<h2 class="anchored" data-anchor-id="exercise-defaults">Общие defaults и явное переопределение</h2>
+<p>Используйте scalar metadata, унаследованные Quarto из каталога или документа:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">exercise-bank</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">default-exercise-target</span><span class="kw">:</span><span class="at"> manual</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="fu">default-exercise-course-role</span><span class="kw">:</span><span class="at"> independent-study</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="fu">default-exercise-statement-visibility</span><span class="kw">:</span><span class="at"> open</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="fu">default-exercise-difficulty</span><span class="kw">:</span><span class="at"> introductory</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="fu">default-exercise-time</span><span class="kw">:</span><span class="at"> </span><span class="dv">90</span></span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Для каталога программных контрольных задач:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">exercise-bank</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">default-exercise-target</span><span class="kw">:</span><span class="at"> prairielearn</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="fu">default-exercise-course-role</span><span class="kw">:</span><span class="at"> control</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="fu">default-exercise-statement-visibility</span><span class="kw">:</span><span class="at"> restricted</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="fu">default-exercise-project-check</span><span class="kw">:</span><span class="at"> java25-junit-root</span></span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Явная visibility задачи имеет приоритет. Явный target, отличный от inherited default, отклоняется; повтор того же target допустим. Смешанный документ отменяет общий target через <code>default-exercise-target: false</code>, затем задаёт target каждой задаче явно. <code>default-exercise-statement-visibility: false</code> отменяет inherited visibility: банковские задачи затем задают её сами. <code>default-exercise-project-check: false</code> отменяет inherited проверку для смешанной области. Null и пустая строка не означают отмену и отклоняются; неизвестные ключи и неверные типы тоже не игнорируются. Индивидуальные difficulty/time, course-role, visibility и project-check имеют приоритет над соответствующими defaults. Итоговые difficulty/time в банке обязательны. Manual эссе без check не проверяется как Java.</p>
+<p>При пяти общих defaults из первого примера ниже одна задача наследует introductory/90/independent-study/open, другая явно переопределяет эти поля:</p>
+<pre class="qmd"><code>::: {#exr-inherited-estimate}
+## Унаследованная оценка
+
+Объясните, почему контрольная сумма помогает обнаружить изменение файла.
+:::
+
+::: {#exr-own-estimate difficulty="advanced" time="35" course-role="discussion" statement-visibility="restricted"}
+## Индивидуальная оценка
+
+Сопоставьте два способа проверки целостности в заданном сценарии.
+:::</code></pre>
+<p>Общие <a href="../extensions/prairielearn.html#project-checks">project-check profiles</a> описывают source selection, Java, JUnit, limits, scoring и expectations отдельно от назначения в LMS. Реализация сборщика и schemas находятся у Core/Platform.</p>
 
 
 <!-- -->
@@ -968,115 +1005,174 @@ format: html
       </a>
   </div>
 </nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Исходный код</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> Задачи банка и обычные упражнения</span></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>Банк нужен для повторного назначения и выбранного экспорта. Обычный <span class="in">`exr`</span></span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>в книге или на слайде может оставаться обычным объектом Quarto.</span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>Ниже — <span class="co">[</span><span class="ot">модель Core 4.0.1</span><span class="co">](specifications.qmd)</span>.</span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="fu">## Явно включите банк {#bank-opt-in}</span></span>
-<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a><span class="in">```yaml</span></span>
-<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a><span class="co"># task/bank/_metadata.yml</span></span>
-<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a><span class="fu">exercise-bank</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span>
-<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a><span class="fu">exercise-statement-visibility</span><span class="kw">:</span><span class="at"> open</span></span>
-<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>Только <span class="in">`#exr-*`</span> в области <span class="in">`exercise-bank: true`</span> становится канонической</span>
-<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a>задачей. По умолчанию банк выключен. Имя папки, формат книги и платформа</span>
-<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a>не включают его. У каждой задачи обязательны **собственные** <span class="in">`difficulty`</span></span>
-<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a>и <span class="in">`time`</span>: <span class="in">`introductory`</span>, <span class="in">`intermediate`</span> или <span class="in">`advanced`</span>; время — положительное</span>
-<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a>целое число минут. Значения страницы или раздела эти поля не заменяют.</span>
-<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a><span class="in">```qmd</span></span>
-<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a><span class="in">::: {#exr-collision difficulty="intermediate" time="25"}</span></span>
-<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a><span class="in">Объясните различие между случайной коллизией и намеренным подбором.</span></span>
-<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a><span class="in">:::</span></span>
-<span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb6-28"><a href="#cb6-28" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-29"><a href="#cb6-29" aria-hidden="true" tabindex="-1"></a>Результат — открытая задача средней сложности на 25 минут. Core отклонит</span>
-<span id="cb6-30"><a href="#cb6-30" aria-hidden="true" tabindex="-1"></a>её, если удалить собственное время, указать <span class="in">`time="0"`</span>, дробное время задачи</span>
-<span id="cb6-31"><a href="#cb6-31" aria-hidden="true" tabindex="-1"></a>или неизвестную сложность. Оценка времени относится к задаче; работа в паре</span>
-<span id="cb6-32"><a href="#cb6-32" aria-hidden="true" tabindex="-1"></a>задаётся позже на <span class="co">[</span><span class="ot">назначении</span><span class="co">](assessments.qmd)</span>.</span>
-<span id="cb6-33"><a href="#cb6-33" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-34"><a href="#cb6-34" aria-hidden="true" tabindex="-1"></a><span class="fu">## Выберите публикацию условия {#statement-policy}</span></span>
-<span id="cb6-35"><a href="#cb6-35" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-36"><a href="#cb6-36" aria-hidden="true" tabindex="-1"></a><span class="in">`exercise-statement-visibility`</span> в нативных метаданных задаёт политику области.</span>
-<span id="cb6-37"><a href="#cb6-37" aria-hidden="true" tabindex="-1"></a>Атрибут <span class="in">`statement-visibility`</span> конкретной задачи имеет приоритет:</span>
-<span id="cb6-38"><a href="#cb6-38" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-39"><a href="#cb6-39" aria-hidden="true" tabindex="-1"></a><span class="in">```qmd</span></span>
-<span id="cb6-40"><a href="#cb6-40" aria-hidden="true" tabindex="-1"></a><span class="in">::: {#exr-integrity-variant difficulty="intermediate" time="30" statement-visibility="restricted" course-role="control"}</span></span>
-<span id="cb6-41"><a href="#cb6-41" aria-hidden="true" tabindex="-1"></a><span class="in">Получены две версии журнала проверки. Укажите, какие изменения</span></span>
-<span id="cb6-42"><a href="#cb6-42" aria-hidden="true" tabindex="-1"></a><span class="in">можно обнаружить по сохранённым контрольным суммам.</span></span>
-<span id="cb6-43"><a href="#cb6-43" aria-hidden="true" tabindex="-1"></a><span class="in">:::</span></span>
-<span id="cb6-44"><a href="#cb6-44" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb6-45"><a href="#cb6-45" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-46"><a href="#cb6-46" aria-hidden="true" tabindex="-1"></a>Эффективная политика обязательна: без метаданных области и без атрибута задачи</span>
-<span id="cb6-47"><a href="#cb6-47" aria-hidden="true" tabindex="-1"></a>объявление отклоняется. Скрытого open или restricted default нет.</span>
-<span id="cb6-48"><a href="#cb6-48" aria-hidden="true" tabindex="-1"></a>Роль <span class="in">`control`</span> обозначает деятельность, но сама условие не скрывает.</span>
-<span id="cb6-49"><a href="#cb6-49" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-50"><a href="#cb6-50" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Задача <span class="pp">|</span> Student-сайт <span class="pp">|</span> Full-сайт <span class="pp">|</span></span>
-<span id="cb6-51"><a href="#cb6-51" aria-hidden="true" tabindex="-1"></a><span class="pp">| ---</span> <span class="pp">| ---</span> <span class="pp">| ---</span> <span class="pp">|</span></span>
-<span id="cb6-52"><a href="#cb6-52" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`open`</span>, обычная <span class="pp">|</span> Условие; решение скрыто <span class="pp">|</span> Условие и решение <span class="pp">|</span></span>
-<span id="cb6-53"><a href="#cb6-53" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`open`</span>, <span class="in">`course-role="demonstration"`</span>, решение есть <span class="pp">|</span> Условие и решение <span class="pp">|</span> Условие и решение <span class="pp">|</span></span>
-<span id="cb6-54"><a href="#cb6-54" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`restricted`</span> <span class="pp">|</span> Условие, решение и ссылка назначения скрыты <span class="pp">|</span> Условие и решение <span class="pp">|</span></span>
-<span id="cb6-55"><a href="#cb6-55" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-56"><a href="#cb6-56" aria-hidden="true" tabindex="-1"></a>Открытое условие не разрешает публиковать решение. Для публичного разбора</span>
-<span id="cb6-57"><a href="#cb6-57" aria-hidden="true" tabindex="-1"></a>нужна <span class="co">[</span><span class="ot">явная demonstration с решением</span><span class="co">](solutions.qmd)</span>. Stage работы свойства</span>
-<span id="cb6-58"><a href="#cb6-58" aria-hidden="true" tabindex="-1"></a>банковской задачи не меняет. Проверяется текущая декларация, без анализа Git</span>
-<span id="cb6-59"><a href="#cb6-59" aria-hidden="true" tabindex="-1"></a>или истории прежних публикаций.</span>
-<span id="cb6-60"><a href="#cb6-60" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-61"><a href="#cb6-61" aria-hidden="true" tabindex="-1"></a>Restricted условие можно выдать участнику выбранного Print/PrairieLearn</span>
-<span id="cb6-62"><a href="#cb6-62" aria-hidden="true" tabindex="-1"></a>экспорта. Это отдельная выдача участнику, а не публикация на открытом сайте;</span>
-<span id="cb6-63"><a href="#cb6-63" aria-hidden="true" tabindex="-1"></a>ключ, решение и заметки преподавателя остаются закрытыми.</span>
-<span id="cb6-64"><a href="#cb6-64" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-65"><a href="#cb6-65" aria-hidden="true" tabindex="-1"></a><span class="fu">## Оставьте обычное упражнение вне банка {#ordinary-exercise}</span></span>
-<span id="cb6-66"><a href="#cb6-66" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-67"><a href="#cb6-67" aria-hidden="true" tabindex="-1"></a>В самостоятельной странице, где банк не включён:</span>
-<span id="cb6-68"><a href="#cb6-68" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-69"><a href="#cb6-69" aria-hidden="true" tabindex="-1"></a><span class="in">````qmd</span></span>
-<span id="cb6-70"><a href="#cb6-70" aria-hidden="true" tabindex="-1"></a><span class="in">---</span></span>
-<span id="cb6-71"><a href="#cb6-71" aria-hidden="true" tabindex="-1"></a><span class="in">title: Обсуждение целостности</span></span>
-<span id="cb6-72"><a href="#cb6-72" aria-hidden="true" tabindex="-1"></a><span class="in">format: html</span></span>
-<span id="cb6-73"><a href="#cb6-73" aria-hidden="true" tabindex="-1"></a><span class="in">---</span></span>
-<span id="cb6-74"><a href="#cb6-74" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-75"><a href="#cb6-75" aria-hidden="true" tabindex="-1"></a><span class="in">::: {#exr-observe}</span></span>
-<span id="cb6-76"><a href="#cb6-76" aria-hidden="true" tabindex="-1"></a><span class="in">Как понять, что файл изменился?</span></span>
-<span id="cb6-77"><a href="#cb6-77" aria-hidden="true" tabindex="-1"></a><span class="in">:::</span></span>
-<span id="cb6-78"><a href="#cb6-78" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-79"><a href="#cb6-79" aria-hidden="true" tabindex="-1"></a><span class="in">::: {#exm-digest}</span></span>
-<span id="cb6-80"><a href="#cb6-80" aria-hidden="true" tabindex="-1"></a><span class="in">Сравнение хешей — пример проверки целостности.</span></span>
-<span id="cb6-81"><a href="#cb6-81" aria-hidden="true" tabindex="-1"></a><span class="in">:::</span></span>
-<span id="cb6-82"><a href="#cb6-82" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-83"><a href="#cb6-83" aria-hidden="true" tabindex="-1"></a><span class="in">::: {#sol-observe}</span></span>
-<span id="cb6-84"><a href="#cb6-84" aria-hidden="true" tabindex="-1"></a><span class="in">Сравните текущую сумму с ранее сохранённой доверенной суммой.</span></span>
-<span id="cb6-85"><a href="#cb6-85" aria-hidden="true" tabindex="-1"></a><span class="in">:::</span></span>
-<span id="cb6-86"><a href="#cb6-86" aria-hidden="true" tabindex="-1"></a><span class="in">````</span></span>
-<span id="cb6-87"><a href="#cb6-87" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-88"><a href="#cb6-88" aria-hidden="true" tabindex="-1"></a><span class="in">`exr`</span>, <span class="in">`exm`</span>, <span class="in">`sol`</span> следуют Quarto: банковские difficulty/time и приватность</span>
-<span id="cb6-89"><a href="#cb6-89" aria-hidden="true" tabindex="-1"></a>к ним не применяются, в Course они автоматически не включаются.</span>
-<span id="cb6-90"><a href="#cb6-90" aria-hidden="true" tabindex="-1"></a>Нативный <span class="in">`exm`</span> не становится банковской демонстрацией. Если нужно оформление,</span>
-<span id="cb6-91"><a href="#cb6-91" aria-hidden="true" tabindex="-1"></a>явно подключите <span class="in">`filters: [course-presentation]`</span>.</span>
-<span id="cb6-92"><a href="#cb6-92" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-93"><a href="#cb6-93" aria-hidden="true" tabindex="-1"></a><span class="fu">## Добавьте платформенный проект {#exercise-binding}</span></span>
-<span id="cb6-94"><a href="#cb6-94" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-95"><a href="#cb6-95" aria-hidden="true" tabindex="-1"></a>Для программной задачи привязка остаётся явной:</span>
-<span id="cb6-96"><a href="#cb6-96" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-97"><a href="#cb6-97" aria-hidden="true" tabindex="-1"></a><span class="in">```qmd</span></span>
-<span id="cb6-98"><a href="#cb6-98" aria-hidden="true" tabindex="-1"></a><span class="in">::: {#exr-java-digest difficulty="intermediate" time="45" statement-visibility="restricted" target="prairielearn" project="/projects/java-digest"}</span></span>
-<span id="cb6-99"><a href="#cb6-99" aria-hidden="true" tabindex="-1"></a><span class="in">## Подсчёт контрольной суммы</span></span>
-<span id="cb6-100"><a href="#cb6-100" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-101"><a href="#cb6-101" aria-hidden="true" tabindex="-1"></a><span class="in">Допишите метод подсчёта SHA-256. Стартовые файлы находятся в проекте задачи.</span></span>
-<span id="cb6-102"><a href="#cb6-102" aria-hidden="true" tabindex="-1"></a><span class="in">:::</span></span>
-<span id="cb6-103"><a href="#cb6-103" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb6-104"><a href="#cb6-104" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-105"><a href="#cb6-105" aria-hidden="true" tabindex="-1"></a><span class="in">`target`</span> и <span class="in">`project`</span> не включают банк. Адаптер может требовать ведущий заголовок,</span>
-<span id="cb6-106"><a href="#cb6-106" aria-hidden="true" tabindex="-1"></a>структуру проекта и собственные настройки. Для PrairieLearn публичные стартовые</span>
-<span id="cb6-107"><a href="#cb6-107" aria-hidden="true" tabindex="-1"></a>файлы лежат в <span class="in">`student`</span>, закрытые проверки — в <span class="in">`tests`</span>, авторский вариант —</span>
-<span id="cb6-108"><a href="#cb6-108" aria-hidden="true" tabindex="-1"></a>в <span class="in">`reference`</span>; весь каталог не становится веб-ресурсом.</span>
-<span id="cb6-109"><a href="#cb6-109" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">Экспорт</span><span class="co">](export.qmd)</span> и <span class="co">[</span><span class="ot">ресурсное владение</span><span class="co">](composition.qmd)</span> проверяются отдельно.</span></code></pre></div><button title="Скопировать текст" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> Задачи банка и обычные упражнения</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>Банк нужен для повторного назначения и выбранного экспорта. Обычный <span class="in">`exr`</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>в книге или на слайде может оставаться обычным объектом Quarto.</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>Ниже — <span class="co">[</span><span class="ot">модель Core 5.0.2</span><span class="co">](specifications.qmd)</span>.</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a><span class="fu">## Явно включите банк {#bank-opt-in}</span></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a><span class="in">```yaml</span></span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a><span class="co"># task/bank/_metadata.yml</span></span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a><span class="fu">exercise-bank</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a><span class="fu">default-exercise-statement-visibility</span><span class="kw">:</span><span class="at"> open</span></span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a>Только <span class="in">`#exr-*`</span> в области <span class="in">`exercise-bank: true`</span> становится канонической</span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a>задачей. По умолчанию банк выключен. Имя папки, формат книги и платформа</span>
+<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a>не включают его. У каждой банковской задачи обязательны итоговые <span class="in">`difficulty`</span></span>
+<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a>и <span class="in">`time`</span>: <span class="in">`introductory`</span>, <span class="in">`intermediate`</span> или <span class="in">`advanced`</span>; время — положительное</span>
+<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a>целое число минут. Они берутся из атрибутов задачи либо поддерживаемых</span>
+<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a><span class="in">`default-exercise-difficulty/time`</span> в объединённых metadata Quarto. Произвольные</span>
+<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a>поля страницы <span class="in">`difficulty/time`</span> такими defaults не являются.</span>
+<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-25"><a href="#cb9-25" aria-hidden="true" tabindex="-1"></a><span class="in">```qmd</span></span>
+<span id="cb9-26"><a href="#cb9-26" aria-hidden="true" tabindex="-1"></a><span class="in">::: {#exr-collision difficulty="intermediate" time="25"}</span></span>
+<span id="cb9-27"><a href="#cb9-27" aria-hidden="true" tabindex="-1"></a><span class="in">Объясните различие между случайной коллизией и намеренным подбором.</span></span>
+<span id="cb9-28"><a href="#cb9-28" aria-hidden="true" tabindex="-1"></a><span class="in">:::</span></span>
+<span id="cb9-29"><a href="#cb9-29" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb9-30"><a href="#cb9-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-31"><a href="#cb9-31" aria-hidden="true" tabindex="-1"></a>Результат — открытая задача средней сложности на 25 минут. Core отклонит</span>
+<span id="cb9-32"><a href="#cb9-32" aria-hidden="true" tabindex="-1"></a>её, если убрать время и не задать effective default, указать <span class="in">`time="0"`</span>, дробное время задачи</span>
+<span id="cb9-33"><a href="#cb9-33" aria-hidden="true" tabindex="-1"></a>или неизвестную сложность. Оценка времени относится к задаче; работа в паре</span>
+<span id="cb9-34"><a href="#cb9-34" aria-hidden="true" tabindex="-1"></a>задаётся позже на <span class="co">[</span><span class="ot">назначении</span><span class="co">](assessments.qmd)</span>.</span>
+<span id="cb9-35"><a href="#cb9-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-36"><a href="#cb9-36" aria-hidden="true" tabindex="-1"></a><span class="fu">## Выберите публикацию условия {#statement-policy}</span></span>
+<span id="cb9-37"><a href="#cb9-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-38"><a href="#cb9-38" aria-hidden="true" tabindex="-1"></a><span class="in">`default-exercise-statement-visibility`</span> в нативных метаданных задаёт политику области.</span>
+<span id="cb9-39"><a href="#cb9-39" aria-hidden="true" tabindex="-1"></a>Атрибут <span class="in">`statement-visibility`</span> конкретной задачи имеет приоритет:</span>
+<span id="cb9-40"><a href="#cb9-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-41"><a href="#cb9-41" aria-hidden="true" tabindex="-1"></a><span class="in">```qmd</span></span>
+<span id="cb9-42"><a href="#cb9-42" aria-hidden="true" tabindex="-1"></a><span class="in">::: {#exr-integrity-variant difficulty="intermediate" time="30" statement-visibility="restricted" course-role="control"}</span></span>
+<span id="cb9-43"><a href="#cb9-43" aria-hidden="true" tabindex="-1"></a><span class="in">Получены две версии журнала проверки. Укажите, какие изменения</span></span>
+<span id="cb9-44"><a href="#cb9-44" aria-hidden="true" tabindex="-1"></a><span class="in">можно обнаружить по сохранённым контрольным суммам.</span></span>
+<span id="cb9-45"><a href="#cb9-45" aria-hidden="true" tabindex="-1"></a><span class="in">:::</span></span>
+<span id="cb9-46"><a href="#cb9-46" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb9-47"><a href="#cb9-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-48"><a href="#cb9-48" aria-hidden="true" tabindex="-1"></a>Эффективная политика обязательна: без метаданных области и без атрибута задачи</span>
+<span id="cb9-49"><a href="#cb9-49" aria-hidden="true" tabindex="-1"></a>объявление отклоняется. Скрытого open или restricted default нет.</span>
+<span id="cb9-50"><a href="#cb9-50" aria-hidden="true" tabindex="-1"></a>Роль <span class="in">`control`</span> обозначает деятельность, но сама условие не скрывает.</span>
+<span id="cb9-51"><a href="#cb9-51" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-52"><a href="#cb9-52" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Задача <span class="pp">|</span> Student-сайт <span class="pp">|</span> Full-сайт <span class="pp">|</span></span>
+<span id="cb9-53"><a href="#cb9-53" aria-hidden="true" tabindex="-1"></a><span class="pp">| ---</span> <span class="pp">| ---</span> <span class="pp">| ---</span> <span class="pp">|</span></span>
+<span id="cb9-54"><a href="#cb9-54" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`open`</span>, обычная <span class="pp">|</span> Условие; решение скрыто <span class="pp">|</span> Условие и решение <span class="pp">|</span></span>
+<span id="cb9-55"><a href="#cb9-55" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`open`</span>, <span class="in">`course-role="demonstration"`</span>, решение есть <span class="pp">|</span> Условие и решение <span class="pp">|</span> Условие и решение <span class="pp">|</span></span>
+<span id="cb9-56"><a href="#cb9-56" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`restricted`</span> <span class="pp">|</span> Условие, решение и ссылка назначения скрыты <span class="pp">|</span> Условие и решение <span class="pp">|</span></span>
+<span id="cb9-57"><a href="#cb9-57" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-58"><a href="#cb9-58" aria-hidden="true" tabindex="-1"></a>Открытое условие не разрешает публиковать решение. Для публичного разбора</span>
+<span id="cb9-59"><a href="#cb9-59" aria-hidden="true" tabindex="-1"></a>нужна <span class="co">[</span><span class="ot">явная demonstration с решением</span><span class="co">](solutions.qmd)</span>. Stage работы свойства</span>
+<span id="cb9-60"><a href="#cb9-60" aria-hidden="true" tabindex="-1"></a>банковской задачи не меняет. Проверяется текущая декларация, без анализа Git</span>
+<span id="cb9-61"><a href="#cb9-61" aria-hidden="true" tabindex="-1"></a>или истории прежних публикаций.</span>
+<span id="cb9-62"><a href="#cb9-62" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-63"><a href="#cb9-63" aria-hidden="true" tabindex="-1"></a>Restricted условие можно выдать участнику выбранного Print/PrairieLearn</span>
+<span id="cb9-64"><a href="#cb9-64" aria-hidden="true" tabindex="-1"></a>экспорта. Это отдельная выдача участнику, а не публикация на открытом сайте;</span>
+<span id="cb9-65"><a href="#cb9-65" aria-hidden="true" tabindex="-1"></a>ключ, решение и заметки преподавателя остаются закрытыми.</span>
+<span id="cb9-66"><a href="#cb9-66" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-67"><a href="#cb9-67" aria-hidden="true" tabindex="-1"></a><span class="fu">## Оставьте обычное упражнение вне банка {#ordinary-exercise}</span></span>
+<span id="cb9-68"><a href="#cb9-68" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-69"><a href="#cb9-69" aria-hidden="true" tabindex="-1"></a>В самостоятельной странице, где банк не включён:</span>
+<span id="cb9-70"><a href="#cb9-70" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-71"><a href="#cb9-71" aria-hidden="true" tabindex="-1"></a><span class="in">````qmd</span></span>
+<span id="cb9-72"><a href="#cb9-72" aria-hidden="true" tabindex="-1"></a><span class="in">---</span></span>
+<span id="cb9-73"><a href="#cb9-73" aria-hidden="true" tabindex="-1"></a><span class="in">title: Обсуждение целостности</span></span>
+<span id="cb9-74"><a href="#cb9-74" aria-hidden="true" tabindex="-1"></a><span class="in">format: html</span></span>
+<span id="cb9-75"><a href="#cb9-75" aria-hidden="true" tabindex="-1"></a><span class="in">---</span></span>
+<span id="cb9-76"><a href="#cb9-76" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-77"><a href="#cb9-77" aria-hidden="true" tabindex="-1"></a><span class="in">::: {#exr-observe}</span></span>
+<span id="cb9-78"><a href="#cb9-78" aria-hidden="true" tabindex="-1"></a><span class="in">Как понять, что файл изменился?</span></span>
+<span id="cb9-79"><a href="#cb9-79" aria-hidden="true" tabindex="-1"></a><span class="in">:::</span></span>
+<span id="cb9-80"><a href="#cb9-80" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-81"><a href="#cb9-81" aria-hidden="true" tabindex="-1"></a><span class="in">::: {#exm-digest}</span></span>
+<span id="cb9-82"><a href="#cb9-82" aria-hidden="true" tabindex="-1"></a><span class="in">Сравнение хешей — пример проверки целостности.</span></span>
+<span id="cb9-83"><a href="#cb9-83" aria-hidden="true" tabindex="-1"></a><span class="in">:::</span></span>
+<span id="cb9-84"><a href="#cb9-84" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-85"><a href="#cb9-85" aria-hidden="true" tabindex="-1"></a><span class="in">::: {#sol-observe}</span></span>
+<span id="cb9-86"><a href="#cb9-86" aria-hidden="true" tabindex="-1"></a><span class="in">Сравните текущую сумму с ранее сохранённой доверенной суммой.</span></span>
+<span id="cb9-87"><a href="#cb9-87" aria-hidden="true" tabindex="-1"></a><span class="in">:::</span></span>
+<span id="cb9-88"><a href="#cb9-88" aria-hidden="true" tabindex="-1"></a><span class="in">````</span></span>
+<span id="cb9-89"><a href="#cb9-89" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-90"><a href="#cb9-90" aria-hidden="true" tabindex="-1"></a><span class="in">`exr`</span>, <span class="in">`exm`</span>, <span class="in">`sol`</span> следуют Quarto: банковские difficulty/time и приватность</span>
+<span id="cb9-91"><a href="#cb9-91" aria-hidden="true" tabindex="-1"></a>к ним не применяются, в Course они автоматически не включаются.</span>
+<span id="cb9-92"><a href="#cb9-92" aria-hidden="true" tabindex="-1"></a>Нативный <span class="in">`exm`</span> не становится банковской демонстрацией. Если нужно оформление,</span>
+<span id="cb9-93"><a href="#cb9-93" aria-hidden="true" tabindex="-1"></a>явно подключите <span class="in">`filters: [course-presentation]`</span>.</span>
+<span id="cb9-94"><a href="#cb9-94" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-95"><a href="#cb9-95" aria-hidden="true" tabindex="-1"></a><span class="fu">## Добавьте платформенный проект {#exercise-binding}</span></span>
+<span id="cb9-96"><a href="#cb9-96" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-97"><a href="#cb9-97" aria-hidden="true" tabindex="-1"></a>Для программной задачи привязка остаётся явной:</span>
+<span id="cb9-98"><a href="#cb9-98" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-99"><a href="#cb9-99" aria-hidden="true" tabindex="-1"></a><span class="in">```qmd</span></span>
+<span id="cb9-100"><a href="#cb9-100" aria-hidden="true" tabindex="-1"></a><span class="in">::: {#exr-java-digest difficulty="intermediate" time="45" statement-visibility="restricted" target="prairielearn" project="/projects/java-digest" project-check="java25-junit-root"}</span></span>
+<span id="cb9-101"><a href="#cb9-101" aria-hidden="true" tabindex="-1"></a><span class="in">## Подсчёт контрольной суммы</span></span>
+<span id="cb9-102"><a href="#cb9-102" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-103"><a href="#cb9-103" aria-hidden="true" tabindex="-1"></a><span class="in">Допишите метод подсчёта SHA-256. Стартовые файлы находятся в проекте задачи.</span></span>
+<span id="cb9-104"><a href="#cb9-104" aria-hidden="true" tabindex="-1"></a><span class="in">:::</span></span>
+<span id="cb9-105"><a href="#cb9-105" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb9-106"><a href="#cb9-106" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-107"><a href="#cb9-107" aria-hidden="true" tabindex="-1"></a><span class="in">`target`</span> и <span class="in">`project`</span> не включают банк. Адаптер может требовать ведущий заголовок,</span>
+<span id="cb9-108"><a href="#cb9-108" aria-hidden="true" tabindex="-1"></a>структуру проекта и собственные настройки. Задача с target имеет ведущий</span>
+<span id="cb9-109"><a href="#cb9-109" aria-hidden="true" tabindex="-1"></a>непустой заголовок. Для PrairieLearn публичные стартовые</span>
+<span id="cb9-110"><a href="#cb9-110" aria-hidden="true" tabindex="-1"></a>файлы лежат в <span class="in">`student`</span>, закрытые проверки — в <span class="in">`tests`</span>, авторский вариант —</span>
+<span id="cb9-111"><a href="#cb9-111" aria-hidden="true" tabindex="-1"></a>в <span class="in">`reference`</span>; весь каталог не становится веб-ресурсом.</span>
+<span id="cb9-112"><a href="#cb9-112" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">Экспорт</span><span class="co">](export.qmd)</span> и <span class="co">[</span><span class="ot">ресурсное владение</span><span class="co">](composition.qmd)</span> проверяются отдельно.</span>
+<span id="cb9-113"><a href="#cb9-113" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-114"><a href="#cb9-114" aria-hidden="true" tabindex="-1"></a><span class="fu">## Общие defaults и явное переопределение {#exercise-defaults}</span></span>
+<span id="cb9-115"><a href="#cb9-115" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-116"><a href="#cb9-116" aria-hidden="true" tabindex="-1"></a>Используйте scalar metadata, унаследованные Quarto из каталога или документа:</span>
+<span id="cb9-117"><a href="#cb9-117" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-118"><a href="#cb9-118" aria-hidden="true" tabindex="-1"></a><span class="in">```yaml</span></span>
+<span id="cb9-119"><a href="#cb9-119" aria-hidden="true" tabindex="-1"></a><span class="fu">exercise-bank</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span>
+<span id="cb9-120"><a href="#cb9-120" aria-hidden="true" tabindex="-1"></a><span class="fu">default-exercise-target</span><span class="kw">:</span><span class="at"> manual</span></span>
+<span id="cb9-121"><a href="#cb9-121" aria-hidden="true" tabindex="-1"></a><span class="fu">default-exercise-course-role</span><span class="kw">:</span><span class="at"> independent-study</span></span>
+<span id="cb9-122"><a href="#cb9-122" aria-hidden="true" tabindex="-1"></a><span class="fu">default-exercise-statement-visibility</span><span class="kw">:</span><span class="at"> open</span></span>
+<span id="cb9-123"><a href="#cb9-123" aria-hidden="true" tabindex="-1"></a><span class="fu">default-exercise-difficulty</span><span class="kw">:</span><span class="at"> introductory</span></span>
+<span id="cb9-124"><a href="#cb9-124" aria-hidden="true" tabindex="-1"></a><span class="fu">default-exercise-time</span><span class="kw">:</span><span class="at"> </span><span class="dv">90</span></span>
+<span id="cb9-125"><a href="#cb9-125" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb9-126"><a href="#cb9-126" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-127"><a href="#cb9-127" aria-hidden="true" tabindex="-1"></a>Для каталога программных контрольных задач:</span>
+<span id="cb9-128"><a href="#cb9-128" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-129"><a href="#cb9-129" aria-hidden="true" tabindex="-1"></a><span class="in">```yaml</span></span>
+<span id="cb9-130"><a href="#cb9-130" aria-hidden="true" tabindex="-1"></a><span class="fu">exercise-bank</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span>
+<span id="cb9-131"><a href="#cb9-131" aria-hidden="true" tabindex="-1"></a><span class="fu">default-exercise-target</span><span class="kw">:</span><span class="at"> prairielearn</span></span>
+<span id="cb9-132"><a href="#cb9-132" aria-hidden="true" tabindex="-1"></a><span class="fu">default-exercise-course-role</span><span class="kw">:</span><span class="at"> control</span></span>
+<span id="cb9-133"><a href="#cb9-133" aria-hidden="true" tabindex="-1"></a><span class="fu">default-exercise-statement-visibility</span><span class="kw">:</span><span class="at"> restricted</span></span>
+<span id="cb9-134"><a href="#cb9-134" aria-hidden="true" tabindex="-1"></a><span class="fu">default-exercise-project-check</span><span class="kw">:</span><span class="at"> java25-junit-root</span></span>
+<span id="cb9-135"><a href="#cb9-135" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb9-136"><a href="#cb9-136" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-137"><a href="#cb9-137" aria-hidden="true" tabindex="-1"></a>Явная visibility задачи имеет приоритет. Явный target, отличный от inherited</span>
+<span id="cb9-138"><a href="#cb9-138" aria-hidden="true" tabindex="-1"></a>default, отклоняется; повтор того же target допустим. Смешанный документ отменяет</span>
+<span id="cb9-139"><a href="#cb9-139" aria-hidden="true" tabindex="-1"></a>общий target через <span class="in">`default-exercise-target: false`</span>, затем задаёт target каждой</span>
+<span id="cb9-140"><a href="#cb9-140" aria-hidden="true" tabindex="-1"></a>задаче явно. <span class="in">`default-exercise-statement-visibility: false`</span> отменяет inherited</span>
+<span id="cb9-141"><a href="#cb9-141" aria-hidden="true" tabindex="-1"></a>visibility: банковские задачи затем задают её сами.</span>
+<span id="cb9-142"><a href="#cb9-142" aria-hidden="true" tabindex="-1"></a><span class="in">`default-exercise-project-check: false`</span> отменяет inherited проверку для смешанной</span>
+<span id="cb9-143"><a href="#cb9-143" aria-hidden="true" tabindex="-1"></a>области. Null и пустая строка не означают отмену и отклоняются; неизвестные</span>
+<span id="cb9-144"><a href="#cb9-144" aria-hidden="true" tabindex="-1"></a>ключи и неверные типы тоже не игнорируются. Индивидуальные difficulty/time,</span>
+<span id="cb9-145"><a href="#cb9-145" aria-hidden="true" tabindex="-1"></a>course-role, visibility и project-check имеют приоритет над соответствующими</span>
+<span id="cb9-146"><a href="#cb9-146" aria-hidden="true" tabindex="-1"></a>defaults. Итоговые difficulty/time в банке обязательны. Manual эссе без check</span>
+<span id="cb9-147"><a href="#cb9-147" aria-hidden="true" tabindex="-1"></a>не проверяется как Java.</span>
+<span id="cb9-148"><a href="#cb9-148" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-149"><a href="#cb9-149" aria-hidden="true" tabindex="-1"></a>При пяти общих defaults из первого примера ниже одна задача наследует</span>
+<span id="cb9-150"><a href="#cb9-150" aria-hidden="true" tabindex="-1"></a>introductory/90/independent-study/open, другая явно переопределяет эти поля:</span>
+<span id="cb9-151"><a href="#cb9-151" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-152"><a href="#cb9-152" aria-hidden="true" tabindex="-1"></a><span class="in">```qmd</span></span>
+<span id="cb9-153"><a href="#cb9-153" aria-hidden="true" tabindex="-1"></a><span class="in">::: {#exr-inherited-estimate}</span></span>
+<span id="cb9-154"><a href="#cb9-154" aria-hidden="true" tabindex="-1"></a><span class="in">## Унаследованная оценка</span></span>
+<span id="cb9-155"><a href="#cb9-155" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-156"><a href="#cb9-156" aria-hidden="true" tabindex="-1"></a><span class="in">Объясните, почему контрольная сумма помогает обнаружить изменение файла.</span></span>
+<span id="cb9-157"><a href="#cb9-157" aria-hidden="true" tabindex="-1"></a><span class="in">:::</span></span>
+<span id="cb9-158"><a href="#cb9-158" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-159"><a href="#cb9-159" aria-hidden="true" tabindex="-1"></a><span class="in">::: {#exr-own-estimate difficulty="advanced" time="35" course-role="discussion" statement-visibility="restricted"}</span></span>
+<span id="cb9-160"><a href="#cb9-160" aria-hidden="true" tabindex="-1"></a><span class="in">## Индивидуальная оценка</span></span>
+<span id="cb9-161"><a href="#cb9-161" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-162"><a href="#cb9-162" aria-hidden="true" tabindex="-1"></a><span class="in">Сопоставьте два способа проверки целостности в заданном сценарии.</span></span>
+<span id="cb9-163"><a href="#cb9-163" aria-hidden="true" tabindex="-1"></a><span class="in">:::</span></span>
+<span id="cb9-164"><a href="#cb9-164" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb9-165"><a href="#cb9-165" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-166"><a href="#cb9-166" aria-hidden="true" tabindex="-1"></a>Общие <span class="co">[</span><span class="ot">project-check profiles</span><span class="co">](../extensions/prairielearn.qmd#project-checks)</span></span>
+<span id="cb9-167"><a href="#cb9-167" aria-hidden="true" tabindex="-1"></a>описывают source selection, Java, JUnit, limits, scoring и expectations отдельно</span>
+<span id="cb9-168"><a href="#cb9-168" aria-hidden="true" tabindex="-1"></a>от назначения в LMS. Реализация сборщика и schemas находятся у Core/Platform.</span></code></pre></div><button title="Скопировать текст" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 

@@ -267,6 +267,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../guide/repository-texts.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">README, документация и описание PR</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../guide/specifications.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Версии и спецификации владельцев</span></a>
   </div>
@@ -312,7 +318,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../extensions/prairielearn.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">PrairieLearn — поставка вопросов</span></a>
+ <span class="menu-text">PrairieLearn — native поставка и проверки проектов</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -420,25 +426,25 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>Core</td>
 <td><code>CORE.DUPLICATE_EXERCISE, CORE.DUPLICATE_ASSESSMENT</code></td>
 <td>Два объявления одного ID</td>
-<td>Проверить оба исходных файла и оставить уникальные ID; <a href="https://github.com/Afonenko-Course-Tools/quarto-course/blob/v4.0.1/docs/diagnostics.md">полный справочник</a></td>
+<td>Проверить оба исходных файла и оставить уникальные ID; <a href="https://github.com/Afonenko-Course-Tools/quarto-course/blob/v5.0.2/docs/diagnostics.md">полный справочник</a></td>
 </tr>
 <tr class="even">
 <td>Core</td>
 <td><code>CORE.UNKNOWN_MEMBER</code></td>
 <td>Не найден член работы</td>
-<td>Сверить items и ID объявления в выбранном банке; <a href="https://github.com/Afonenko-Course-Tools/quarto-course/blob/v4.0.1/docs/diagnostics.md">полный справочник</a></td>
+<td>Сверить items и ID объявления в выбранном банке; <a href="https://github.com/Afonenko-Course-Tools/quarto-course/blob/v5.0.2/docs/diagnostics.md">полный справочник</a></td>
 </tr>
 <tr class="odd">
 <td>Core</td>
 <td><code>ANSWER_YAML, ANSWER_INVALID</code></td>
 <td>Не разобран или не проверен ответ</td>
-<td>Исправить answer-spec; сохранить исходное пояснение parser/CUE; <a href="https://github.com/Afonenko-Course-Tools/quarto-course/blob/v4.0.1/docs/diagnostics.md">полный справочник</a></td>
+<td>Исправить answer-spec; сохранить исходное пояснение parser/CUE; <a href="https://github.com/Afonenko-Course-Tools/quarto-course/blob/v5.0.2/docs/diagnostics.md">полный справочник</a></td>
 </tr>
 <tr class="even">
 <td>Presentation</td>
 <td><code>PRESENTATION.CONFIG_INVALID, PRESENTATION.FILTER_ORDER_INVALID</code></td>
 <td>Конфигурация или порядок фильтров</td>
-<td>Сверить поле и включить Core перед Presentation; <a href="https://github.com/Afonenko-Course-Tools/quarto-course/blob/v4.0.1/docs/diagnostics.md">полный справочник</a></td>
+<td>Сверить поле и включить Core перед Presentation; <a href="https://github.com/Afonenko-Course-Tools/quarto-course/blob/v5.0.2/docs/diagnostics.md">полный справочник</a></td>
 </tr>
 <tr class="odd">
 <td>Publisher</td>
@@ -468,7 +474,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>PrairieLearn</td>
 <td><code>ADAPTER, PL.INPUT_INVALID</code></td>
 <td>Пакет, binding или вход CLI</td>
-<td>Сверить выбранный вопрос и его binding; <a href="https://github.com/Afonenko-Course-Tools/quarto-course-prairielearn/blob/v3.0.0/docs/diagnostics.md">полный справочник</a></td>
+<td>Сверить выбранный вопрос и его binding; <a href="https://github.com/Afonenko-Course-Tools/quarto-course-prairielearn/blob/v5.0.0/docs/diagnostics.md">полный справочник</a></td>
 </tr>
 <tr class="even">
 <td>Cloud</td>
@@ -480,7 +486,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>Download</td>
 <td><code>RESOURCE.PRIVATE_OR_SOURCE, DOWNLOAD.OUTPUT_CONFLICT</code></td>
 <td>Закрытый ресурс или конфликт результата</td>
-<td>Выбрать публичный каталог и свободный путь архива; <a href="https://github.com/Afonenko-Course-Tools/quarto-project-download/blob/v2.0.0/docs/diagnostics.md">полный справочник</a></td>
+<td>Выбрать публичный каталог и свободный путь архива; <a href="https://github.com/Afonenko-Course-Tools/quarto-project-download/blob/v3.0.0/docs/diagnostics.md">полный справочник</a></td>
 </tr>
 </tbody>
 </table>
@@ -967,17 +973,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Компонент <span class="pp">|</span> ID <span class="pp">|</span> Смысл <span class="pp">|</span> Действие <span class="pp">|</span></span>
 <span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="pp">| ---</span> <span class="pp">| ---</span> <span class="pp">| ---</span> <span class="pp">| ---</span> <span class="pp">|</span></span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Core <span class="pp">|</span> <span class="in">`CORE.DUPLICATE_EXERCISE, CORE.DUPLICATE_ASSESSMENT`</span> <span class="pp">|</span> Два объявления одного ID <span class="pp">|</span> Проверить оба исходных файла и оставить уникальные ID; <span class="co">[</span><span class="ot">полный справочник</span><span class="co">](https://github.com/Afonenko-Course-Tools/quarto-course/blob/v4.0.1/docs/diagnostics.md)</span> <span class="pp">|</span></span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Core <span class="pp">|</span> <span class="in">`CORE.UNKNOWN_MEMBER`</span> <span class="pp">|</span> Не найден член работы <span class="pp">|</span> Сверить items и ID объявления в выбранном банке; <span class="co">[</span><span class="ot">полный справочник</span><span class="co">](https://github.com/Afonenko-Course-Tools/quarto-course/blob/v4.0.1/docs/diagnostics.md)</span> <span class="pp">|</span></span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Core <span class="pp">|</span> <span class="in">`ANSWER_YAML, ANSWER_INVALID`</span> <span class="pp">|</span> Не разобран или не проверен ответ <span class="pp">|</span> Исправить answer-spec; сохранить исходное пояснение parser/CUE; <span class="co">[</span><span class="ot">полный справочник</span><span class="co">](https://github.com/Afonenko-Course-Tools/quarto-course/blob/v4.0.1/docs/diagnostics.md)</span> <span class="pp">|</span></span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Presentation <span class="pp">|</span> <span class="in">`PRESENTATION.CONFIG_INVALID, PRESENTATION.FILTER_ORDER_INVALID`</span> <span class="pp">|</span> Конфигурация или порядок фильтров <span class="pp">|</span> Сверить поле и включить Core перед Presentation; <span class="co">[</span><span class="ot">полный справочник</span><span class="co">](https://github.com/Afonenko-Course-Tools/quarto-course/blob/v4.0.1/docs/diagnostics.md)</span> <span class="pp">|</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Core <span class="pp">|</span> <span class="in">`CORE.DUPLICATE_EXERCISE, CORE.DUPLICATE_ASSESSMENT`</span> <span class="pp">|</span> Два объявления одного ID <span class="pp">|</span> Проверить оба исходных файла и оставить уникальные ID; <span class="co">[</span><span class="ot">полный справочник</span><span class="co">](https://github.com/Afonenko-Course-Tools/quarto-course/blob/v5.0.2/docs/diagnostics.md)</span> <span class="pp">|</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Core <span class="pp">|</span> <span class="in">`CORE.UNKNOWN_MEMBER`</span> <span class="pp">|</span> Не найден член работы <span class="pp">|</span> Сверить items и ID объявления в выбранном банке; <span class="co">[</span><span class="ot">полный справочник</span><span class="co">](https://github.com/Afonenko-Course-Tools/quarto-course/blob/v5.0.2/docs/diagnostics.md)</span> <span class="pp">|</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Core <span class="pp">|</span> <span class="in">`ANSWER_YAML, ANSWER_INVALID`</span> <span class="pp">|</span> Не разобран или не проверен ответ <span class="pp">|</span> Исправить answer-spec; сохранить исходное пояснение parser/CUE; <span class="co">[</span><span class="ot">полный справочник</span><span class="co">](https://github.com/Afonenko-Course-Tools/quarto-course/blob/v5.0.2/docs/diagnostics.md)</span> <span class="pp">|</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Presentation <span class="pp">|</span> <span class="in">`PRESENTATION.CONFIG_INVALID, PRESENTATION.FILTER_ORDER_INVALID`</span> <span class="pp">|</span> Конфигурация или порядок фильтров <span class="pp">|</span> Сверить поле и включить Core перед Presentation; <span class="co">[</span><span class="ot">полный справочник</span><span class="co">](https://github.com/Afonenko-Course-Tools/quarto-course/blob/v5.0.2/docs/diagnostics.md)</span> <span class="pp">|</span></span>
 <span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Publisher <span class="pp">|</span> <span class="in">`SITE.CONFIG_INVALID, SITE.CURRENT_RESULT_MISSING`</span> <span class="pp">|</span> Конфигурация или актуальный результат части <span class="pp">|</span> Сверить путь проекта, hooks и результат текущего рендера; <span class="co">[</span><span class="ot">полный справочник</span><span class="co">](https://github.com/Afonenko-Course-Tools/quarto-project-publish/blob/v5.0.0/docs/diagnostics.md)</span> <span class="pp">|</span></span>
 <span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> QRC <span class="pp">|</span> <span class="in">`QRC.TARGET_UNKNOWN, QRC.TARGET_DUPLICATE`</span> <span class="pp">|</span> Не найдена цель или повторён ID <span class="pp">|</span> Сверить namespace и обе страницы результата; <span class="co">[</span><span class="ot">полный справочник</span><span class="co">](https://github.com/Afonenko-Course-Tools/quarto-reference-catalog/blob/v3.0.0/docs/diagnostics.md)</span> <span class="pp">|</span></span>
 <span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Print <span class="pp">|</span> <span class="in">`ADAPTER, PRINT.INPUT_INVALID`</span> <span class="pp">|</span> Неподдерживаемый публичный пакет или вход CLI <span class="pp">|</span> Сверить вопрос, поле, ресурсы и аргументы команды; <span class="co">[</span><span class="ot">полный справочник</span><span class="co">](https://github.com/Afonenko-Course-Tools/quarto-course-print/blob/v0.3.0/docs/diagnostics.md)</span> <span class="pp">|</span></span>
 <span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Moodle <span class="pp">|</span> <span class="in">`ADAPTER, MOODLE.INPUT_INVALID`</span> <span class="pp">|</span> Пакет, binding или вход CLI <span class="pp">|</span> Сверить тип ответа, выбор и явные настройки; <span class="co">[</span><span class="ot">полный справочник</span><span class="co">](https://github.com/Afonenko-Course-Tools/quarto-course-moodle/blob/v0.3.0/docs/diagnostics.md)</span> <span class="pp">|</span></span>
-<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> PrairieLearn <span class="pp">|</span> <span class="in">`ADAPTER, PL.INPUT_INVALID`</span> <span class="pp">|</span> Пакет, binding или вход CLI <span class="pp">|</span> Сверить выбранный вопрос и его binding; <span class="co">[</span><span class="ot">полный справочник</span><span class="co">](https://github.com/Afonenko-Course-Tools/quarto-course-prairielearn/blob/v3.0.0/docs/diagnostics.md)</span> <span class="pp">|</span></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> PrairieLearn <span class="pp">|</span> <span class="in">`ADAPTER, PL.INPUT_INVALID`</span> <span class="pp">|</span> Пакет, binding или вход CLI <span class="pp">|</span> Сверить выбранный вопрос и его binding; <span class="co">[</span><span class="ot">полный справочник</span><span class="co">](https://github.com/Afonenko-Course-Tools/quarto-course-prairielearn/blob/v5.0.0/docs/diagnostics.md)</span> <span class="pp">|</span></span>
 <span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Cloud <span class="pp">|</span> <span class="in">`CLOUD005_declaredVm, CLOUD.ACTION_SOURCE_INVALID`</span> <span class="pp">|</span> Необъявленная VM или неверный источник действия <span class="pp">|</span> Сверить VM и файл действия по контексту; <span class="co">[</span><span class="ot">полный справочник</span><span class="co">](https://github.com/Afonenko-Course-Tools/quarto-course-cloud/blob/v3.0.0/docs/diagnostics.md)</span> <span class="pp">|</span></span>
-<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Download <span class="pp">|</span> <span class="in">`RESOURCE.PRIVATE_OR_SOURCE, DOWNLOAD.OUTPUT_CONFLICT`</span> <span class="pp">|</span> Закрытый ресурс или конфликт результата <span class="pp">|</span> Выбрать публичный каталог и свободный путь архива; <span class="co">[</span><span class="ot">полный справочник</span><span class="co">](https://github.com/Afonenko-Course-Tools/quarto-project-download/blob/v2.0.0/docs/diagnostics.md)</span> <span class="pp">|</span></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Download <span class="pp">|</span> <span class="in">`RESOURCE.PRIVATE_OR_SOURCE, DOWNLOAD.OUTPUT_CONFLICT`</span> <span class="pp">|</span> Закрытый ресурс или конфликт результата <span class="pp">|</span> Выбрать публичный каталог и свободный путь архива; <span class="co">[</span><span class="ot">полный справочник</span><span class="co">](https://github.com/Afonenko-Course-Tools/quarto-project-download/blob/v3.0.0/docs/diagnostics.md)</span> <span class="pp">|</span></span>
 <span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a><span class="in">`ADAPTER`</span> сохраняет своё широкое значение: компонент, вопрос и поле уточняют</span>
 <span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>проверяемый контракт. Именованные CUE-правила, например</span>
