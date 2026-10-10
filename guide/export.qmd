@@ -4,7 +4,7 @@ title: Экспорт выбранной работы
 
 Экспорт получает назначения одной работы из полной исходной книги банка.
 Публикация full HTML для него не требуется. Назначения и restricted
-выдача определены [контрактом Core 4.0.1](specifications.qmd).
+выдача определены [контрактом Core 5.0.1](specifications.qmd).
 
 ## Выберите корень, книгу и работу {#selected-source-export}
 
@@ -116,59 +116,87 @@ projects/java-digest/
   reference/   # авторский вариант, не поставляется
 ```
 
-Каждый выбранный вопрос получает binding по **местному** ID `q.id`;
-это отдельная карта платформы, не qualified assignments:
+Полная поставка использует `prairielearn.delivery`, общие question/assessment
+metadata и именованный `project-check`. Ручные binding/export/native JSON и
+курсный grader main больше не являются авторским маршрутом.
 
-```json
-{
-  "questions": {
-    "exr-java-digest": {
-      "topic": "Java",
-      "files": ["Digest.java"],
-      "externalGradingOptions": {
-        "image": "YOUR_VERIFIED_GRADER_IMAGE",
-        "entrypoint": ["sh", "/grade/tests/grade.sh"],
-        "timeout": 60,
-        "enableNetworking": false
-      }
-    }
-  }
-}
+```yaml
+# task/_quarto.yml; project-checks описаны на странице PrairieLearn
+course:
+  adapters: [prairielearn]
+prairielearn:
+  assessment-defaults:
+    attempts: 3
+    question-points: 1
+    pass: {at-least: 1}
+    assignment: {mode: assessment-id}
+  question-defaults:
+    topic: Java
+    single-variant: true
+    submission: {mode: editor, ace-mode: ace/mode/java}
+  delivery:
+    book: task
+    course:
+      name: INTEGRITY
+      title: Контроль целостности
+      timezone: Europe/Minsk
+      topics: [{name: Java, color: blue2, description: Java 25}]
+    instances:
+      pilot:
+        title: Проверка контрольных сумм
+        self-enrollment: false
+        publishing:
+          start-date: "2026-09-01T00:00:00+03:00"
+          end-date: "2027-01-01T00:00:00+03:00"
+        works: [sec-java-lab]
 ```
 
-Замените `YOUR_VERIFIED_GRADER_IMAGE` реальным проверенным образом вашей
-установки. `topic` задаёт тему; `files` — принимаемые файлы ответа,
-которые должны соответствовать выбранному стартовому проекту и проверкам. Опциональные `entrypoint`, `timeout`, `enableNetworking`,
-`environment` задаются явно по контракту адаптера.
+Полный export выбирает канонические work IDs вида `sec-*`; тот же ID задайте
+в assessment документа. Publishing interval обязателен и содержит явные
+start/end timestamps с timezone offset; укажите фактический период своей работы.
 
-```sh
-quarto run task/_extensions/Afonenko-Course-Tools/course-prairielearn/entrypoints/export.ts . task java-lab binding.json _generated/pl
-```
-
-Поставка создаёт нативные вопросы `gradingMethod: External`, participant
-`question.html`, `clientFilesQuestion` из student и приватные tests.
-Reference не поставляется. Forms Core не превращаются автоматически
-во встроенные PL numeric/choice вопросы.
-
-Если работе нужны PL правила, подключите их явно:
+`question-points` объявляется автором: exporter5 не подставляет единицу при
+отсутствии поля. Homework использует число; Exam также допускает непустой
+невозрастающий список баллов за попытки. Exam запрещает question-max-points.
+`single-variant` управляет native singleVariant явно; отсутствие не означает true.
+Например, document override задаёт повторные попытки без скрытой перенастройки:
 
 ```yaml
 assessment:
-  id: java-lab
-  kind: lab
+  id: sec-java-lab
+  kind: test
   prairielearn:
+    question-points: [5, 3, 1]
     attempts: 3
     pass: {at-least: 1}
-    assignment: {mode: assessment-id}
 ```
 
-Все назначения такой работы должны соответствовать target PrairieLearn.
-Attempts/pass/assignment описывают платформенную семантику; обязательность
-общего назначения не заменяется суммой баллов. Экспорт вопросов не создаёт
-activity и не назначает пользователей. Режим assessment-id получает устойчивую
-метку из course.id и assessment.id; применение метки — отдельное действие PL.
-[Java/Gradle-группа](../catalog/index.qmd) содержит bindings, student, reference
-и настоящие локальные assertions. Они не подтверждают запуск image на сервере.
+Native Quarto сначала сливает один metadata path, включая concatenation списков.
+Между defaults, document policy и question-overrides адаптер заменяет список
+целиком. Для предсказуемой настройки оставьте scalar course points, а schedule
+укажите в document override. `inspect-grading` показывает effective policy до
+поставки. Completion считает полностью выполненные required вопросы отдельно
+от weighted raw score; это не просто сумма native points.
+
+```sh
+quarto run task/_extensions/Afonenko-Course-Tools/course-prairielearn/entrypoints/export-course.ts \
+  . /absolute/private/fresh-native --book task --instance pilot \
+  --checks-output /absolute/private/checks.json \
+  --runtime-registry /absolute/released/platform/runtime-profiles.json
+```
+
+Каталог результата свежий и вне курса; exporter генерирует весь native course,
+instance, assessments, questions и delivery manifest. Runtime registry разрешает
+только реально опубликованные digest pins. References/checks inventory остаются
+в private источниках; в native вопрос поставляются только выбранные student
+inputs, trusted grading assets и явный descriptor. Обычный HTML не запускает Java.
+
+Exporter5.0.0 опубликован. Platform source/image pins ещё ожидаются в этой ветке
+подготовки; команда показывает released exporter API и не утверждает image publication.
+Следуйте [матрице версий](specifications.qmd) и устанавливайте целые опубликованные
+пакеты после final pins. Native schema/CLI успех, actual import и Moodle результат
+проверяются отдельно. Старые ready Java/Gradle assets каталога сохраняют свой
+исторический контракт и не служат примером этого full-export маршрута.
 
 ## Cloud остаётся моделью действий {#cloud-model}
 

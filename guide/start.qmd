@@ -51,7 +51,7 @@ website:
 Core, Presentation и Navigation устанавливаются одним выпуском:
 
 ```sh
-quarto add Afonenko-Course-Tools/quarto-course@v4.0.1 --no-prompt
+quarto add Afonenko-Course-Tools/quarto-course@v5.0.1 --no-prompt
 ```
 
 Команда помещает компоненты в `_extensions/Afonenko-Course-Tools/`.
@@ -61,7 +61,7 @@ quarto add Afonenko-Course-Tools/quarto-course@v4.0.1 --no-prompt
 filters: [course-core, course-presentation]
 ```
 
-Команда устанавливает банковскую модель [Core 4.0.1](specifications.qmd).
+Команда устанавливает банковскую модель [Core 5.0.1](specifications.qmd).
 Обычный документ ниже не включает банк.
 
 Core проверяет указанные учебные метаданные. Presentation оформляет учебные

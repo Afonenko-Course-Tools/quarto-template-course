@@ -26,7 +26,7 @@ try:
         shutil.copytree(source/component,root/'_extensions'/component)
     (root/'bank').mkdir()
     (root/'works').mkdir()
-    (root/'bank/_metadata.yml').write_text('exercise-bank: true\nexercise-statement-visibility: open\n')
+    (root/'bank/_metadata.yml').write_text('exercise-bank: true\ndefault-exercise-statement-visibility: open\n')
     bank,*works=snippets('assessments.qmd')
     assert len(works)==4,'Expected the four literal work scenarios'
     (root/'bank/integrity.qmd').write_text(bank)
@@ -38,9 +38,14 @@ try:
     (root/'bank/roles.qmd').write_text('# Педагогические роли {#sec-role-examples}\n\n'+'\n'.join(snippets('roles.qmd')))
     (root/'bank/solutions.qmd').write_text('# Решения {#sec-solution-examples}\n\n'+'\n'.join(snippets('solutions.qmd')[:2]))
     (root/'ordinary.qmd').write_text(snippets('exercises.qmd')[2])
+    defaults=snippets('exercises.qmd','yaml')[1]
+    assert 'default-exercise-difficulty: introductory' in defaults
+    assert 'default-exercise-time: 90' in defaults
+    (root/'bank/defaults.qmd').write_text('---\n'+defaults+'---\n\n# Итоговые defaults {#sec-effective-defaults}\n\n'+snippets('exercises.qmd')[-1])
+    (root/'works/defaults.qmd').write_text('---\nassessment:\n  id: effective-defaults\n  kind: lab\n---\n\n# Итоговые defaults {#sec-default-work}\n\n::: {.task-items}\n1. @exr-inherited-estimate\n2. @exr-own-estimate\n:::\n')
     (root/'works/answers.qmd').write_text('---\nassessment:\n  id: answer-forms\n  kind: lab\n---\n\n# Формы ответа {#sec-answer-work}\n\n::: {.task-items}\n'+''.join(f'{i}. @exr-{name}\n' for i,name in enumerate(['explain','choose','size','parts','match'],1))+':::\n')
     (root/'index.qmd').write_text('# Примеры руководства\n')
-    chapters=['index.qmd','bank/integrity.qmd','bank/answers.qmd','bank/roles.qmd','bank/solutions.qmd','ordinary.qmd']+[f'works/{name}.qmd' for name in ['lab','seminar','practical','test','answers']]
+    chapters=['index.qmd','bank/integrity.qmd','bank/answers.qmd','bank/roles.qmd','bank/solutions.qmd','bank/defaults.qmd','ordinary.qmd']+[f'works/{name}.qmd' for name in ['lab','seminar','practical','test','answers','defaults']]
     (root/'_quarto.yml').write_text('project:\n  type: book\n  pre-render: _extensions/course-core/entrypoints/pre.ts\n  post-render: _extensions/course-core/entrypoints/post.ts\nbook:\n  title: Проверка примеров руководства\n  chapters: CHAPTERS\ncourse:\n  id: integrity-course\nfilters: [course-core, course-presentation]\nformat: html\nlang: ru\nfail-if-warnings: true\n'.replace('CHAPTERS',json.dumps(chapters)))
     for view in ['student','full']:
         (root/f'_quarto-{view}.yml').write_text(f'project:\n  output-dir: _book-{view}\ncourse:\n  view: {view}\nformat:\n  html:\n    code-tools: {{source: false}}\n    keep-source: false\n')
@@ -74,11 +79,21 @@ try:
         assert role in roles,'Missing rendered pedagogical role: '+role
     ordinary=(root/'_book-student/ordinary.html').read_text()
     assert 'id="exr-observe"' in ordinary and 'id="sol-observe"' in ordinary
+    defaults_html=(root/'_book-full/bank/defaults.html').read_text()
+    for identity,difficulty,time,visibility in [('exr-inherited-estimate','introductory','90','open'),('exr-own-estimate','advanced','35','restricted')]:
+        opening=re.search(r'<div[^>]*id="'+identity+r'"[^>]*>',defaults_html).group()
+        assert 'data-course-difficulty="'+difficulty+'"' in opening
+        assert 'data-course-time="'+time+'"' in opening
+        assert 'data-statement-visibility="'+visibility+'"' in opening
+    defaults_student=(root/'_book-student/bank/defaults.html').read_text()
+    assert 'id="exr-inherited-estimate"' in defaults_student
+    assert 'id="exr-own-estimate"' not in defaults_student
     expected={
       'checksum-lab':['exr-collision','exr-repair'],
       'sec-integrity-seminar':['exr-checksum','exr-collision','exr-repair'],
       'integrity-practical':['exr-integrity-variant'],
       'integrity-test':['exr-integrity-variant'],
+      'effective-defaults':['exr-inherited-estimate','exr-own-estimate'],
       'answer-forms':['exr-explain','exr-choose','exr-size','exr-parts','exr-match'],
     }
     for work,ids in expected.items():
@@ -104,6 +119,15 @@ try:
             assert [selected['assignments'][key].get('stage') for key in keys]==['demonstration','classroom','homework']
             assert selected['assignments'][keys[1]]['workMode']=='pair'
             assert selected['assignments'][keys[2]]['requirement']=='optional'
+        if work=='checksum-lab':
+            assert selected['assignments'][keys[0]]['requirement']=='required'
+            assert selected['assignments'][keys[0]]['workMode']=='pair'
+            assert selected['assignments'][keys[1]]['requirement']=='optional'
+            assert selected['assignments'][keys[1]]['workMode']=='individual'
+            assert all('stage' not in selected['assignments'][key] for key in keys)
+        if work=='effective-defaults':
+            assert [q.get('purpose') for q in public['questions']]==['independent-study','discussion']
+            assert [q['statementVisibility'] for q in public['questions']]==['open','restricted']
         if work=='answer-forms':
             assert [question['answerType'] for question in public['questions']]==['manual','single-choice','numeric','multipart','matching']
             assert teacher['questions'][1]['closedKey']['correct']==0
@@ -115,6 +139,6 @@ try:
     assert 'Задачи: обязательные 35 мин; все 75 мин. Теория: 7.5 мин. Занятие: обязательные 42.5 мин; все 82.5 мин.' in (root/'_book-full/works/seminar.html').read_text()
     run(['render','works/seminar.qmd','--profile','student','--fail-if-warnings=false'])
     assert 'data-course-assessment-time="ready"' not in (root/'_book-student/works/seminar.html').read_text()
-    print('PASS literal guide native student/full book, ordinary exercises, both solution forms, all roles, four work scenarios, five answer forms, selected Body exports, four time totals and partial-run omission')
+    print('PASS literal guide native student/full book, ordinary exercises, both solution forms, all roles, four work scenarios, five answer forms, selected Body exports, four time totals, effective scalar defaults/overrides, list/Span/fallback assignments and partial-run omission')
 finally:
     shutil.rmtree(root)

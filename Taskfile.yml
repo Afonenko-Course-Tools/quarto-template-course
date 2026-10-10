@@ -3,7 +3,7 @@ tasks:
   install:
     desc: Установить закреплённый bundle для документации
     cmds:
-    - quarto add Afonenko-Course-Tools/quarto-course@v4.0.1 --no-prompt
+    - quarto add Afonenko-Course-Tools/quarto-course@v5.0.1 --no-prompt
   fetch:
     desc: Явно получить готовые закреплённые демонстрации
     cmds:

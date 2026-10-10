@@ -3,7 +3,7 @@ title: Модель курса
 ---
 
 Если одно условие используется в разных занятиях, объявите его в банке,
-а на страницах работ назначайте местные задачи. Модель описана в Core 4.0.1:
+а на страницах работ назначайте местные задачи. Модель описана в Core 5.0.1:
 [версия и владелец правил](specifications.qmd).
 
 ## Разделите книгу, задачи и работы {#bank-layout}
@@ -47,7 +47,7 @@ fail-if-warnings: true
 ```yaml
 # task/bank/_metadata.yml
 exercise-bank: true
-exercise-statement-visibility: open
+default-exercise-statement-visibility: open
 ```
 
 Работы рядом в `works` остаются вне этой области. `book`, имя папки `task`,

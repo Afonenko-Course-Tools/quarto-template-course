@@ -7,7 +7,7 @@ Core проверяет учебные факты и экспортирует в
 ## Установка и подключение
 
 ```sh
-quarto add Afonenko-Course-Tools/quarto-course@v4.0.1 --no-prompt
+quarto add Afonenko-Course-Tools/quarto-course@v5.0.1 --no-prompt
 ```
 
 Для обычной книги оставьте `format: html` и уберите `revealjs-plugins`. Для сбора фактов текущего рендера подключите Core pre/post hooks из `course-core/entrypoints/pre.ts` и `post.ts` в `project.pre-render` и `project.post-render`; пути при установке из GitHub начинаются с `_extensions/Afonenko-Course-Tools/`. Экспорт выбранной работы читает исходники банка самостоятельно.

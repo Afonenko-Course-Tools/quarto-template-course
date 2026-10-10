@@ -30,7 +30,7 @@ filters: [course-core, course-cloud]
 
 ## Опишите задачу и VM
 
-В области [явного банка](../guide/exercises.qmd) Core 4.0.1:
+В области [явного банка](../guide/exercises.qmd) Core 5.0.1:
 
 ````qmd
 :::: {#exr-service difficulty="introductory" time="20" target="cloud"}

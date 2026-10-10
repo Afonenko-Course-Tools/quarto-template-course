@@ -1,28 +1,128 @@
 ---
-title: PrairieLearn — поставка вопросов
+title: PrairieLearn — native поставка и проверки проектов
 ---
 
-PrairieLearn получает выбранную работу через установленный Core и создаёт поставку вопросов с явными bindings. Платформенная конфигурация хранится у автора, а не вычисляется из общей формулы оценки.
+Полный exporter получает свежую модель Core, authored delivery metadata и
+именованные project-check profiles. Платформа владеет одним Java25/JUnit runner;
+курс содержит исходники, trusted suites и отдельные reference/negative fixtures.
+Manual binding/native JSON и курсный grader main не создаются.
 
-## Установка и подключение
+В этой ветке используется опубликованный exporter 5.0.0 API вместе с Core 5.0.1.
+Platform metadata 1.0.1 normal merged source и OCI images закреплены; source tag ещё ожидается; [матрица](../guide/specifications.qmd) отличает опубликованные
+выпуски от проверяемых candidates. Устанавливайте целые owner packages через
+штатный `quarto add` из закреплённых опубликованных tags, без правки vendored файлов.
 
-```sh
-quarto add Afonenko-Course-Tools/quarto-course-prairielearn@v3.0.0 --no-prompt
-```
+## Явно подключите проверку {#project-checks}
 
-Для проверки метаданных подключите адаптер вместе с Core в книге банка. Для экспорта установите оба средства в банк и передайте корень, путь банка, ID работы, binding и каталог результата как описано в руководстве. Группа Java/Gradle содержит законченные стартовые файлы, reference и проверки.
+В metadata книги создайте общий нейтральный профиль:
 
 ```yaml
-course:
-  adapters: [prairielearn]
-filters: [course-core, course-prairielearn]
+project-checks:
+  defaults:
+    runtime: java25-junit-v1
+    java:
+      release: 25
+      encoding: UTF-8
+      compiler-options: ["-proc:none", "-Xmaxerrs", "5"]
+    limits:
+      outer-seconds: 30
+      networking: false
+      max-output-bytes: 65536
+    references:
+      - name: default
+        root: reference
+        optional: false
+    scoring: {mode: weighted}
+    discovery: {min-executed: 1, allow-skipped: false}
+    verification-expectations:
+      reference: {student-compilation: success, job: complete, required-tests: all-pass}
+      starter: {student-compilation: success, job: complete}
+  source-profiles:
+    java-root:
+      mode: implementation
+      root: student
+      include: ["*.java"]
+  profiles:
+    java25-junit-root:
+      source-profile: java-root
+      tests: ["tests/junit/**/*.java"]
 ```
 
-## Результат и ограничения
+На задаче укажите `project-check="java25-junit-root"`, либо объявите этот профиль
+через `default-exercise-project-check` в нужном каталоге. Только явный opt-in
+попадает в declared inventory; наличие reference и Gradle project само проверку
+не включает. Selected PL вопрос требует check; manual задача без check исключена.
+Названия profiles не несут встроенной семантики: source/mode/runtime определяются
+декларацией. Для submitted tests используется отдельный student-tests профиль с
+изолированными correct/mutant variants; student Gradle script не исполняется.
 
-Обычный HTML не запускает Java. Java и Gradle нужны для исполнения демонстрации. Локальные assertions не подтверждают совместимость выбранного контейнера с сервером PrairieLearn; его нужно проверить на целевой установке.
+Reference должен пройти trusted suite; starter может иметь ненулевой балл при
+weighted policy. Verification expectations отдельно оценивают compilation, job
+и требуемые тесты. Отрицательные contract-cases доказывают качество suite:
+эталон GREEN сам по себе не исключает полного балла у empty/no-op ответа.
+Infrastructure failure не превращается в student score0. Limits, scoring и
+runtime registry принадлежат закрытым schemas Platform.
 
-Продолжите с [руководством по сценарию](../guide/export.qmd).
-[Каталог готовых групп](../catalog/index.qmd) связывает результат, исходную папку
-и требования для просмотра, рендера и исполнения.
-Собственные ID описаны в [справочнике диагностики](../reference/diagnostics.qmd).
+## Полная native поставка и authored retries
+
+Курс объявляет `prairielearn.delivery`, `question-defaults` и
+`assessment-defaults` как в [примере полного экспорта](../guide/export.qmd#prairielearn-export).
+`question-points` обязателен; attempts, Exam points schedule и single-variant
+задаются явно. `inspect-grading` проверяет effective policy, включая native Quarto
+metadata inheritance. Raw score и required-question completion — разные величины.
+Состав работы сохраняет порядок `.task-items`; stage находится на block, а
+requirement/work-mode задают назначение. `related-exercise` связывает защиту с
+конкретным manual essay; запись не выдаёт ACL и не определяет способ выбора темы.
+
+## Inventory и authoritative verification
+
+```sh
+quarto run task/_extensions/Afonenko-Course-Tools/course-core/entrypoints/project-checks.ts \
+  --book task --output /absolute/private/checks.json
+python3 /absolute/released/platform/tools/check-course.py inventory \
+  --manifest /absolute/private/checks.json --scope declared \
+  --output /absolute/private/inventory.json
+```
+
+Inventory показывает ready/incomplete для каждого явно объявленного проекта.
+Declared ready-only проверка диагностирует готовую часть; она не объявляет весь
+банк готовым. Delivery verification сверяет actual exported sources/tests,
+полный scenario inventory, runtime/dependency closure и matching receipt.
+Container authoritative, host diagnostic; используйте один реально опубликованный
+OCI digest из versioned registry. Local candidate ID требует явного local override
+и не проходит production staging gate. Runtime image и source tag/commit записаны
+раздельно; новый rebuild не наследует автоматически identity старого кандидата.
+
+Обычная HTML-сборка не запускает проекты. CI helpers вызывают owner CLIs; они не
+копируют grading/export implementation. Private checks/references/receipts хранятся
+вне сайта и student ZIP. [Модельные Download комплекты](download.qmd) выбираются
+contextually и не превращаются в native вопрос как ссылка на приватный full ZIP.
+
+## Community, Moodle и private TLS
+
+Community bridge использует native Student enrollment/labels и отдельные private
+identity/assignment/result endpoints. Gateway владеет Moodle LTI/AGS identity,
+approval, durable outbox и server ACL. Курс не привязывает body к self-selection
+или назначению. Sync/CLI успех, editor grading и actual Moodle readback проверяются
+отдельно; локальное development authentication не доказывает Student ACL.
+
+Runtime tokens, identities, databases, CA/server private keys находятся вне Git,
+сайта и учебных проектов. Каждый development laptop создаёт собственный CA;
+student Windows/macOS/Linux получает только public CA доверенной установки.
+Переносимый runtime TLS setup не является частью project-check или ZIP starter.
+Практические команды владельца находятся в
+[Platform local TLS guide](https://github.com/Afonenko-Course-Tools/prairielearn-platform/blob/0083e3e102f47860cabc1d1e62e6434353f5c4c6/docs/local-tls.md)
+и [LAN guide](https://github.com/Afonenko-Course-Tools/prairielearn-platform/blob/0083e3e102f47860cabc1d1e62e6434353f5c4c6/docs/proxmox-lan-tls.md).
+Published source/image pins не подтверждают фактический LAN rollout или доверие
+локальному CA на другом компьютере.
+
+Текущий Platform metadata 1.0.1 normal merged source: `0083e3e102f47860cabc1d1e62e6434353f5c4c6`.
+Java registry: `ghcr.io/afonenko-course-tools/java25-grader@sha256:1084c3e254105383d476303a4983d70abef58cb046a4899f05339f1d13c9a9a6`.
+Community runtime: `ghcr.io/afonenko-course-tools/prairielearn-community-gateway@sha256:a1fd72637587782766d8f2f1fd37fad23b8a56ade7f5754b7f2f3bcfda50bc34`.
+Publication run 38061254263: actual image source 756d9dfb96fcb43cb02d499594a7408d174be16c,
+runner hash 3e6d45c783e3972aa02c294312244f6f81c284897418954a7653cf64bfe4a051.
+Source tag v1.0.1 ещё ожидается; ссылки выше закрепляют фактически слитый commit.
+Анонимный pull пока ожидает видимости пакетов. Source merge и опубликованный
+digest сами по себе публичную переносимость не доказывают. Final Java exacthead
+закрепляется только после фактической приёмки текущего feedback runtime.
+Исторический Platform v1.0.0 остаётся неизменяемым опубликованным выпуском.
