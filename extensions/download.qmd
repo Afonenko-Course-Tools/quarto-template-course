@@ -7,7 +7,7 @@ Download создаёт ZIP явно выбранных материалов: н
 ## Установка и подключение
 
 ```sh
-quarto add Afonenko-Course-Tools/quarto-project-download@v2.0.0 --no-prompt
+quarto add Afonenko-Course-Tools/quarto-project-download@v3.0.0 --no-prompt
 ```
 
 В QMD вставьте shortcode `{{< project-download seminar-data text="Скачать данные семинара" >}}`. После `quarto render` ссылка ведёт к архиву разрешённых файлов. Начальный `/` в `path` означает корень проекта. `include`, `exclude`, `profiles` и `gitignore` уточняют отбор.
@@ -34,3 +34,42 @@ project-download:
 [Каталог готовых групп](../catalog/index.qmd) связывает результат, исходную папку
 и требования для просмотра, рендера и исполнения.
 Собственные ID описаны в [справочнике диагностики](../reference/diagnostics.qmd).
+
+## Материалы банковской задачи
+
+С Core5 включите `project-download: {course-model: true}`. Для одной задачи
+используйте contextual shortcode с её ID внутри объявления упражнения;
+`kind="conditions"` запрашивает переносимые условия текущего resolved HTML.
+Ограничьте HTML-запрос `when-format="html"`, как в связанном примере, чтобы
+JSON/Body/native export его не исполнял; format condition разрешена и не
+заменяет student/full политику банка. Обычный student получает starter, full — полный проект;
+open demonstration выдаёт full в обоих представлениях. У каждого комплекта
+самостоятельный README. Ручная resources map для того же проекта не нужна.
+Модель и private policy проверяются до записи ZIP; подробности —
+[материалы проекта](../guide/composition.qmd#download-resources).
+
+README — непрозрачные файловые байты, не render target и не вход QRC. Quarto
+includes, profile conditions и ссылки на исходные QMD внутри README не исполняются.
+Ссылки ведут внутрь данного комплекта либо на устойчивый опубликованный ресурс.
+Starter README не ссылается на отсутствующие `../reference` или `../tests`; full
+README описывает собственный корень с `student`, `reference` и `tests`.
+
+Числовой Java-проект integer-arithmetic с build.gradle в student partition
+использует следующие команды из корня соответствующего распакованного ZIP:
+
+```sh
+# starter: src/main/java и src/test/java находятся в корне проекта
+gradle test
+# full: открытая часть находится в student/
+gradle -p student test
+# full: существующие reference/ и tests/junit/ подключаются флагами проекта
+gradle -p student -Preference -Pgrading test
+```
+
+Команда starter характеризует незавершённый ответ и может завершиться отказом
+его тестов; проверка эталона должна пройти. Эти флаги заданы конкретным
+build.gradle, а не самим Download. Они не переносятся в starter, где reference
+и tests/junit отсутствуют. Проверяйте команды на реальном распакованном комплекте;
+final Java acceptance и точный validated source ref записываются отдельно.
+[Download3 contract](https://github.com/Afonenko-Course-Tools/quarto-project-download/blob/v3.0.0/spec/contract.md)
+описывает границы ресурсов и публикации.

@@ -13,7 +13,7 @@ title: Расширения
 | [Publisher](publisher.qmd) | Общий сайт самостоятельных частей | Корневые hooks, `subprojects`, child collect |
 | [QRC](reference-catalog.qmd) | Ссылки между публикациями | Namespace, фильтр и post-hook |
 | [Print](print.qmd) | PDF-раздатка работы | CLI с публичным Body-пакетом |
-| [PrairieLearn](prairielearn.qmd) | Поставка PL-вопросов | Core в банке, CLI и явные bindings |
+| [PrairieLearn](prairielearn.qmd) | Поставка PL-вопросов | Core в банке, full CLI, authored metadata и project-check |
 | [Moodle](moodle.qmd) | XML вопросов | CLI с полным пакетом и binding |
 | [Cloud](cloud.qmd) | Проверка облачной модели | Core и адаптер Cloud |
 | [Download](download.qmd) | ZIP разрешённых материалов | Фильтр, hooks и shortcode |

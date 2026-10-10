@@ -143,12 +143,14 @@ project-download:
 
 Начальный `/` означает корень текущего проекта. ZIP появляется по видимому
 после проекции запросу; profiles ресурса разрешает запрос, но не скрывает сам
-shortcode. Оберните его нативным условием профиля, если нужно скрыть ссылку.
+shortcode. Ограниченный teacher ресурс размещайте на отдельной full-only странице книги;
+в Core5 author QMD audience wrappers student/full запрещены.
 
 Для стартового проекта канонической задачи существующий мост включается явно
 `project-download: {course-model: true}`. Он получает текущую native модель
-и выбирает только `<project>/student`. Teacher tests, reference/solution,
-QMD, metadata и build-входы в публичный ZIP не входят. Restricted задача
+и получает policy conditions/student/full. Обычная задача student выдаёт
+starter, full — полный проект; открытая demonstration выдаёт full в обоих.
+Private tests/reference обычной задачи не попадают в student ZIP. Restricted задача
 student заявки не оставляет. Participant public пакет Print/PL сам по себе
 не разрешает публиковать ZIP на сайте.
 
@@ -157,3 +159,48 @@ student заявки не оставляет. Participant public пакет Prin
 output; другие outputs и чужие ZIP сохраняет. Сохранённый course.json не
 доказывает актуальность. Скачивание архива и просмотр исходного QMD остаются
 отдельными действиями.
+
+Модельная ссылка использует тот же exercise ID без дублирующей resources map.
+Поместите её внутри объявления упражнения, чтобы native bank projection
+удаляла restricted запрос вместе с условием в student. HTML-запросы ограничиваются
+форматом; такая functional format condition разрешена и не задаёт аудиторию:
+
+```qmd
+::: {.content-visible when-format="html"}
+{{< project-download exr-java-digest >}}
+{{< project-download exr-java-digest kind="conditions" text="Условие для работы вне сети" >}}
+:::
+```
+
+Conditions требуют текущий resolved HTML output. Во время JSON/Body/native
+экспорта HTML-запросов в этой ветке нет; contextual ZIP не превращается в
+participant условие. Каждый starter/full/conditions комплект имеет самостоятельный README. Conditions
+не содержат закрытого решения или teacher notes; contextual links не входят в
+переносимое native условие как частный full ZIP. Проверяйте student→full→student
+и фактические составы всех архивов.
+
+README — непрозрачные файловые байты, не render target и не вход QRC. Quarto
+includes, profile conditions и ссылки на исходные QMD внутри README не исполняются.
+Ссылки ведут внутрь данного комплекта либо на устойчивый опубликованный ресурс.
+Starter README не ссылается на отсутствующие `../reference` или `../tests`; full
+README описывает собственный корень с `student`, `reference` и `tests`.
+
+Числовой Java-проект integer-arithmetic с build.gradle в student partition
+использует следующие команды из корня соответствующего распакованного ZIP:
+
+```sh
+# starter: src/main/java и src/test/java находятся в корне проекта
+gradle test
+# full: открытая часть находится в student/
+gradle -p student test
+# full: существующие reference/ и tests/junit/ подключаются флагами проекта
+gradle -p student -Preference -Pgrading test
+```
+
+Команда starter характеризует незавершённый ответ и может завершиться отказом
+его тестов; проверка эталона должна пройти. Эти флаги заданы конкретным
+build.gradle, а не самим Download. Они не переносятся в starter, где reference
+и tests/junit отсутствуют. Проверяйте команды на реальном распакованном комплекте;
+final Java acceptance и точный validated source ref записываются отдельно.
+[Download3 contract](https://github.com/Afonenko-Course-Tools/quarto-project-download/blob/v3.0.0/spec/contract.md)
+описывает границы ресурсов и публикации.

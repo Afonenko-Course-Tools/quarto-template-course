@@ -71,6 +71,7 @@ website:
       - guide/presentation.qmd
       - guide/export.qmd
       - guide/windows.qmd
+      - guide/repository-texts.qmd
       - guide/specifications.qmd
     - section: Расширения
       contents:
