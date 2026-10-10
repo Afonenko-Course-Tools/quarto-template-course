@@ -85,8 +85,7 @@ PR workflow устанавливает Quarto 1.11.5 и CUE 0.17.1 и выпол
 по проверенному main после обновления точных releases/assets.
 
 Подготовка согласованного authoring обновления выполняется отдельно от публикации
-этого сайта. Core 5.0.1, Download 3.0.0 и exporter 5.0.0 опубликованы;
-новый bundle Core 5.0.2 указан в Taskfile и требует отдельной проверки выпуска. Platform
+этого сайта. Core 5.0.2, Download 3.0.0 и exporter 5.0.0 опубликованы. Platform
 metadata 1.0.1 normal merged source и published OCI pins указаны в матрице;
 source tag v1.0.1 ещё ожидается. Анонимный GHCR pull и проверенный Java
 PR head остаются отдельными gates. Исторические готовые группы

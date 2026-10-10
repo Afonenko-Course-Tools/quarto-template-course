@@ -57,9 +57,8 @@ producer Release. Её `BUILD.json` сообщает commit, зависимос�
 
 ## Текущий согласованный комплект
 
-Core 5.0.1, Download 3.0.0 и exporter 5.0.0 опубликованы и задают текущие
-authoring/ZIP/native-export API. Руководство подготовлено для bundle Core 5.0.2;
-публикация и установка этого выпуска проверяются отдельно. Platform metadata 1.0.1 закреплена на фактически
+Core 5.0.2, Download 3.0.0 и exporter 5.0.0 опубликованы и задают текущие
+authoring/ZIP/native-export API. Platform metadata 1.0.1 закреплена на фактически
 слитом source `0083e3e102f47860cabc1d1e62e6434353f5c4c6`; source tag v1.0.1 ещё ожидается.
 Опубликованные Java/Community OCI digests и actual image build provenance
 приведены на [странице runtime](../extensions/prairielearn.qmd).
