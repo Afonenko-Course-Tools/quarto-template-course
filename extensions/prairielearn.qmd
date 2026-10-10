@@ -7,7 +7,7 @@ title: PrairieLearn — native поставка и проверки проект
 курс содержит исходники, trusted suites и отдельные reference/negative fixtures.
 Manual binding/native JSON и курсный grader main не создаются.
 
-В этой ветке используется опубликованный exporter 5.0.0 API вместе с Core 5.0.1.
+В этой ветке используется опубликованный exporter 5.0.0 API вместе с Core 5.0.2.
 Platform metadata 1.0.1 normal merged source и OCI images закреплены; source tag ещё ожидается; [матрица](../guide/specifications.qmd) отличает опубликованные
 выпуски от проверяемых candidates. Устанавливайте целые owner packages через
 штатный `quarto add` из закреплённых опубликованных tags, без правки vendored файлов.

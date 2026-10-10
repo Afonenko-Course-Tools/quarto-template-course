@@ -23,13 +23,17 @@ pin в Taskfile и ссылки руководства, выполните `task
 демонстрации прикладываются и проверяются в draft перед неизменяемым Release.
 Опубликованные теги и assets не заменяются; исправление получает новый выпуск.
 
-Ветка coordinated-authoring устанавливает реально опубликованный Corev5.0.1 для
-новых literal snippets и использует опубликованный Downloadv3.0.0 contract.
-Исторические ready assets сохраняются с прежними source/ref/hash и не подменяются
-новыми HTML. Core 5.0.1 и exporter 5.0.0 опубликованы; Java validated head ещё ожидается.
-Текущая Platform metadata 1.0.1 закрепляет actual normal merged main source
-`0083e3e102f47860cabc1d1e62e6434353f5c4c6`. Published Java/Community digests и actual image build provenance
-записаны на странице extensions/prairielearn.qmd. Source tag v1.0.1 ещё ожидается;
-анонимный pull и validated Java exacthead остаются отдельными gates.
-Исторические Platform v1.0.0 pins/READY producer assets не заменяются новой
-приёмкой; финальные source tag/spec links обновляются только после публикации.
+Документация подготовлена для bundle Core 5.0.2: точная команда установки
+указана в Taskfile. Новый выпуск и штатная установка проверяются отдельно.
+Он документирует нативный пример презентации; схемы и публичные API Core 5.0.0
+сохраняются. Исторические готовые группы сохраняют прежние исходники, refs
+и контрольные суммы и не подменяются новым HTML.
+
+Core 5.0.1, Download 3.0.0 и exporter 5.0.0 опубликованы. Текущая Platform
+metadata 1.0.1 закрепляет фактически слитый коммит
+`0083e3e102f47860cabc1d1e62e6434353f5c4c6`. Опубликованные Java/Community
+digests и происхождение сборки образов записаны на странице
+`extensions/prairielearn.qmd`. Source tag v1.0.1 ещё ожидается; анонимное получение
+образов и приёмка точного Java PR head остаются отдельными этапами.
+Исторический Platform v1.0.0 и готовые группы производителей сохраняются;
+окончательные ссылки на source tag и спецификации обновляются после публикации.

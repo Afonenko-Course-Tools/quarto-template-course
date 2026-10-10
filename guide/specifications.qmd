@@ -7,7 +7,7 @@ title: Версии и спецификации владельцев
 
 ## Выпущенные версии {#guide-status}
 
-Руководство закрепляет Core `v5.0.1` и версии потребителей из таблицы ниже.
+Руководство закрепляет Core `v5.0.2` и версии потребителей из таблицы ниже.
 Core5 добавляет scalar defaults, project-check collection, artifact policies
 и запрет авторских student/full audience wrappers.
 Историческая Core ready-группа закреплена на `demo-20261008-1`, остальные семь
@@ -24,7 +24,7 @@ render не подтверждают текущий контракт или де
 
 | Правило | Владелец и актуальный индекс | Закреплённая версия |
 | --- | --- | --- |
-| Банк, роли, решения, работы, время, student/full, Body | [Core / Presentation / Navigation](https://github.com/Afonenko-Course-Tools/quarto-course/blob/v5.0.1/spec/index.md) | [Core v5.0.1](https://github.com/Afonenko-Course-Tools/quarto-course/tree/v5.0.1) |
+| Банк, роли, решения, работы, время, student/full, Body | [Core / Presentation / Navigation](https://github.com/Afonenko-Course-Tools/quarto-course/blob/v5.0.2/spec/index.md) | [Core v5.0.2](https://github.com/Afonenko-Course-Tools/quarto-course/tree/v5.0.2) |
 | Составной native сайт и current outputs | [Publisher](https://github.com/Afonenko-Course-Tools/quarto-project-publish/blob/v5.0.0/spec/index.md) | [v5.0.0](https://github.com/Afonenko-Course-Tools/quarto-project-publish/tree/v5.0.0) |
 | Адресные ссылки и каталог целей | [QRC](https://github.com/Afonenko-Course-Tools/quarto-reference-catalog/blob/v3.0.0/spec/index.md) | [v3.0.0](https://github.com/Afonenko-Course-Tools/quarto-reference-catalog/tree/v3.0.0) |
 | Participant PDF и guards публичного пакета | [Print](https://github.com/Afonenko-Course-Tools/quarto-course-print/blob/v0.3.0/spec/index.md) | [v0.3.0](https://github.com/Afonenko-Course-Tools/quarto-course-print/tree/v0.3.0) |
@@ -42,10 +42,10 @@ render не подтверждают текущий контракт или де
 ## Сопоставьте руководство и результат {#contract-evidence}
 
 Модель определена в действующих тематических спецификациях Core:
-[банк, решения и работы](https://github.com/Afonenko-Course-Tools/quarto-course/blob/v5.0.1/spec/learning-elements.md),
-[видимость](https://github.com/Afonenko-Course-Tools/quarto-course/blob/v5.0.1/spec/visibility.md),
-[Body](https://github.com/Afonenko-Course-Tools/quarto-course/blob/v5.0.1/docs/body-export.md) и
-[NativeRun](https://github.com/Afonenko-Course-Tools/quarto-course/blob/v5.0.1/docs/native-run.md).
+[банк, решения и работы](https://github.com/Afonenko-Course-Tools/quarto-course/blob/v5.0.2/spec/learning-elements.md),
+[видимость](https://github.com/Afonenko-Course-Tools/quarto-course/blob/v5.0.2/spec/visibility.md),
+[Body](https://github.com/Afonenko-Course-Tools/quarto-course/blob/v5.0.2/docs/body-export.md) и
+[NativeRun](https://github.com/Afonenko-Course-Tools/quarto-course/blob/v5.0.2/docs/native-run.md).
 Индекс также связывает Presentation и diagnostics. Адаптер определяет свои
 поля и поддерживаемые формы; README и пример объясняют запуск.
 
@@ -58,7 +58,8 @@ producer Release. Её `BUILD.json` сообщает commit, зависимос�
 ## Текущий согласованный комплект
 
 Core 5.0.1, Download 3.0.0 и exporter 5.0.0 опубликованы и задают текущие
-authoring/ZIP/native-export API. Platform metadata 1.0.1 закреплена на фактически
+authoring/ZIP/native-export API. Руководство подготовлено для bundle Core 5.0.2;
+публикация и установка этого выпуска проверяются отдельно. Platform metadata 1.0.1 закреплена на фактически
 слитом source `0083e3e102f47860cabc1d1e62e6434353f5c4c6`; source tag v1.0.1 ещё ожидается.
 Опубликованные Java/Community OCI digests и actual image build provenance
 приведены на [странице runtime](../extensions/prairielearn.qmd).

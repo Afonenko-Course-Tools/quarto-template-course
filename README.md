@@ -2,7 +2,7 @@
 type: documentation
 component: template-course
 status: current
-updated: 2026-10-08
+updated: 2026-10-10
 ---
 
 # Документация инструментов Quarto
@@ -20,7 +20,7 @@ updated: 2026-10-08
 документации; `examples/` и `_site/` исключены из Git.
 
 Требуются Quarto >=1.11.5, Task 3, curl и tar; для получения и проверки — Node.js.
-Core 5.0.1 и текущие адаптеры используют CUE 0.17.1.
+Core 5.0.2 и текущие адаптеры используют CUE 0.17.1.
 Для установки используйте точные команды `quarto add` из `Taskfile.yml`.
 
 ```sh
@@ -60,7 +60,7 @@ Windows использует PowerShell для операций с катало�
 Публикуйте заново проверенное дерево чистого `main` с теми же pins/assets; PR workflow выполняет проверки. Фактическая публикация и live URL проверяются отдельно по [отчёту реализации](docs/releases/2026-10-08-implementation.md).
 
 Структура исходников прежнего учебного шаблона доступна в истории Git и выпуске
-`v1.0.0`. Руководство закрепляет Core `v5.0.1`, Publisher `v5.0.0`,
+`v1.0.0`. Руководство закрепляет Core `v5.0.2`, Publisher `v5.0.0`,
 QRC `v3.0.0`, Print/Moodle `v0.3.0`, PrairieLearn `v5.0.0`, Cloud `v3.0.0` и Download
 `v3.0.0`. Историческая Core ready-группа закреплена на `demo-20261008-1`; остальные семь готовых
 групп используют неизменяемый `demo-20261008`. Source каждой группы соответствует
@@ -85,7 +85,8 @@ PR workflow устанавливает Quarto 1.11.5 и CUE 0.17.1 и выпол
 по проверенному main после обновления точных releases/assets.
 
 Подготовка согласованного authoring обновления выполняется отдельно от публикации
-этого сайта. Core 5.0.1, Download 3.0.0 и exporter 5.0.0 опубликованы. Platform
+этого сайта. Core 5.0.1, Download 3.0.0 и exporter 5.0.0 опубликованы;
+новый bundle Core 5.0.2 указан в Taskfile и требует отдельной проверки выпуска. Platform
 metadata 1.0.1 normal merged source и published OCI pins указаны в матрице;
 source tag v1.0.1 ещё ожидается. Анонимный GHCR pull и проверенный Java
 PR head остаются отдельными gates. Исторические готовые группы
