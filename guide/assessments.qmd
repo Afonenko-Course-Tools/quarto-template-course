@@ -4,7 +4,7 @@ title: Работы, назначения и время
 
 Состав работы — упорядоченные местные ссылки на банк. Один QMD описывает
 одну лабораторную, семинар, практическую или контрольную работу. Ниже —
-[контракт Core 4.0.1](specifications.qmd).
+[контракт Core 5.0.1](specifications.qmd).
 
 ## Подготовьте общий банк для сценариев {#scenario-bank}
 
@@ -12,7 +12,7 @@ title: Работы, назначения и время
 
 ```yaml
 exercise-bank: true
-exercise-statement-visibility: open
+default-exercise-statement-visibility: open
 ```
 
 В `bank/integrity.qmd` поместите условия и решения:
@@ -76,7 +76,7 @@ assessment:
 Сдайте программу сравнения сумм и объяснение выбранного алгоритма.
 :::
 
-::: {.task-items}
+::: {.task-items requirement="required" work-mode="pair"}
 1. @exr-collision
 2. [@exr-repair]{requirement="optional" work-mode="individual"}
 :::
@@ -124,9 +124,14 @@ ID работы здесь `sec-integrity-seminar`; вместо него мож
 Несколько списков объединяются в порядке документа: checksum, collision, repair.
 Заголовки — штатный способ описать последовательность занятия.
 
-На Span ссылки `requirement="required|optional"` и
-`work-mode="individual|pair|group"` задают конкретное назначение. Defaults —
-required/individual. Stage задаётся всему списку и не выводится из заголовка.
+На `.task-items` задаются общие `requirement="required|optional"` и
+`work-mode="individual|pair|group"`; Span конкретной ссылки может их переопределить.
+Приоритет: Span → `.task-items` → required/individual. В лабораторной выше
+collision наследует required/pair, repair переопределяет оба поля на
+optional/individual. Это свойства назначения, а не самого упражнения.
+Stage задаётся только блоку списка, может отсутствовать и не выводится из заголовка;
+скрытого classroom нет. `[@exr-collision]{stage="classroom"}` отклоняется как
+ошибочное размещение stage на Span.
 Каждый пункт содержит одну местную ссылку. Повтор задачи в пределах одной
 работы отклоняется; в разных работах её можно назначать снова.
 
@@ -222,3 +227,18 @@ Student/full и экспорт ведут себя как в practical. `.assess
 preview не выполняется.
 
 [Экспорт](export.qmd) поясняет разделение participant и teacher пакетов.
+
+## Свяжите защиту с постановкой
+
+```yaml
+assessment:
+  kind: test
+  related-exercise: exr-essay-integrity
+```
+
+Related exercise должен существовать как конкретная manual independent-study
+постановка. Presentation выводит связанную тему; ручную дублирующую ссылку не
+добавляйте. `.task-items` сохраняет порядок трёх проверяемых заданий, required
+и individual по умолчанию. При policy pass-at-least2 fully completed считаются
+два required вопроса; partial points не заменяют завершённый вопрос.
+Способ выбора, approval и доступ определяется server Gateway отдельно от body.

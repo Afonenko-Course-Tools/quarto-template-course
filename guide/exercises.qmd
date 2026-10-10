@@ -4,21 +4,23 @@ title: Задачи банка и обычные упражнения
 
 Банк нужен для повторного назначения и выбранного экспорта. Обычный `exr`
 в книге или на слайде может оставаться обычным объектом Quarto.
-Ниже — [модель Core 4.0.1](specifications.qmd).
+Ниже — [модель Core 5.0.1](specifications.qmd).
 
 ## Явно включите банк {#bank-opt-in}
 
 ```yaml
 # task/bank/_metadata.yml
 exercise-bank: true
-exercise-statement-visibility: open
+default-exercise-statement-visibility: open
 ```
 
 Только `#exr-*` в области `exercise-bank: true` становится канонической
 задачей. По умолчанию банк выключен. Имя папки, формат книги и платформа
-не включают его. У каждой задачи обязательны **собственные** `difficulty`
+не включают его. У каждой банковской задачи обязательны итоговые `difficulty`
 и `time`: `introductory`, `intermediate` или `advanced`; время — положительное
-целое число минут. Значения страницы или раздела эти поля не заменяют.
+целое число минут. Они берутся из атрибутов задачи либо поддерживаемых
+`default-exercise-difficulty/time` в объединённых metadata Quarto. Произвольные
+поля страницы `difficulty/time` такими defaults не являются.
 
 ```qmd
 ::: {#exr-collision difficulty="intermediate" time="25"}
@@ -27,13 +29,13 @@ exercise-statement-visibility: open
 ```
 
 Результат — открытая задача средней сложности на 25 минут. Core отклонит
-её, если удалить собственное время, указать `time="0"`, дробное время задачи
+её, если убрать время и не задать effective default, указать `time="0"`, дробное время задачи
 или неизвестную сложность. Оценка времени относится к задаче; работа в паре
 задаётся позже на [назначении](assessments.qmd).
 
 ## Выберите публикацию условия {#statement-policy}
 
-`exercise-statement-visibility` в нативных метаданных задаёт политику области.
+`default-exercise-statement-visibility` в нативных метаданных задаёт политику области.
 Атрибут `statement-visibility` конкретной задачи имеет приоритет:
 
 ```qmd
@@ -95,7 +97,7 @@ format: html
 Для программной задачи привязка остаётся явной:
 
 ```qmd
-::: {#exr-java-digest difficulty="intermediate" time="45" statement-visibility="restricted" target="prairielearn" project="/projects/java-digest"}
+::: {#exr-java-digest difficulty="intermediate" time="45" statement-visibility="restricted" target="prairielearn" project="/projects/java-digest" project-check="java25-junit-root"}
 ## Подсчёт контрольной суммы
 
 Допишите метод подсчёта SHA-256. Стартовые файлы находятся в проекте задачи.
@@ -103,7 +105,64 @@ format: html
 ```
 
 `target` и `project` не включают банк. Адаптер может требовать ведущий заголовок,
-структуру проекта и собственные настройки. Для PrairieLearn публичные стартовые
+структуру проекта и собственные настройки. Задача с target имеет ведущий
+непустой заголовок. Для PrairieLearn публичные стартовые
 файлы лежат в `student`, закрытые проверки — в `tests`, авторский вариант —
 в `reference`; весь каталог не становится веб-ресурсом.
 [Экспорт](export.qmd) и [ресурсное владение](composition.qmd) проверяются отдельно.
+
+## Общие defaults и явное переопределение {#exercise-defaults}
+
+Используйте scalar metadata, унаследованные Quarto из каталога или документа:
+
+```yaml
+exercise-bank: true
+default-exercise-target: manual
+default-exercise-course-role: independent-study
+default-exercise-statement-visibility: open
+default-exercise-difficulty: introductory
+default-exercise-time: 90
+```
+
+Для каталога программных контрольных задач:
+
+```yaml
+exercise-bank: true
+default-exercise-target: prairielearn
+default-exercise-course-role: control
+default-exercise-statement-visibility: restricted
+default-exercise-project-check: java25-junit-root
+```
+
+Явная visibility задачи имеет приоритет. Явный target, отличный от inherited
+default, отклоняется; повтор того же target допустим. Смешанный документ отменяет
+общий target через `default-exercise-target: false`, затем задаёт target каждой
+задаче явно. `default-exercise-statement-visibility: false` отменяет inherited
+visibility: банковские задачи затем задают её сами.
+`default-exercise-project-check: false` отменяет inherited проверку для смешанной
+области. Null и пустая строка не означают отмену и отклоняются; неизвестные
+ключи и неверные типы тоже не игнорируются. Индивидуальные difficulty/time,
+course-role, visibility и project-check имеют приоритет над соответствующими
+defaults. Итоговые difficulty/time в банке обязательны. Manual эссе без check
+не проверяется как Java.
+
+При пяти общих defaults из первого примера ниже одна задача наследует
+introductory/90/independent-study/open, другая явно переопределяет эти поля:
+
+```qmd
+::: {#exr-inherited-estimate}
+## Унаследованная оценка
+
+Объясните, почему контрольная сумма помогает обнаружить изменение файла.
+:::
+
+::: {#exr-own-estimate difficulty="advanced" time="35" course-role="discussion" statement-visibility="restricted"}
+## Индивидуальная оценка
+
+Сопоставьте два способа проверки целостности в заданном сценарии.
+:::
+```
+
+Общие [project-check profiles](../extensions/prairielearn.qmd#project-checks)
+описывают source selection, Java, JUnit, limits, scoring и expectations отдельно
+от назначения в LMS. Реализация сборщика и schemas находятся у Core/Platform.
