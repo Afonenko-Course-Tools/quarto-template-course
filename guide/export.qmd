@@ -4,7 +4,10 @@ title: Экспорт выбранной работы
 
 Экспорт получает назначения одной работы из полной исходной книги банка.
 Публикация full HTML для него не требуется. Назначения и restricted
-выдача определены [контрактом Core 5.0.2](specifications.qmd).
+выдача определены [контрактом владельца Body](specifications.qmd#candidate-contracts).
+Эта страница описывает подготовленный Body v2 и новые публичные метаданные;
+финальные install pins согласуются отдельно. Сохранённые ready-примеры имеют
+собственные исторические версии и не пересобираются при чтении руководства.
 
 ## Выберите корень, книгу и работу {#selected-source-export}
 
@@ -37,31 +40,49 @@ CLI требует одну книгу, одну работу и путь `.json
 
 Создаются `_generated/checksum.json` для преподавательского потребителя и
 соседний `_generated/checksum.public.json` для участника. Исключите `_generated`
-из веб-ресурсов. Schema остаётся `course-body-package-v1`.
+из веб-ресурсов. Schema — `course-body-package-v2`.
 
 | Поле | Смысл |
 | --- | --- |
 | question `owner`, `id`, `key`, `source` | Владелец, местный ID, квалифицированный ключ и источник |
+| question `title?`, `difficulty?`, `time?` | Авторское название, сложность и учебные минуты |
 | `visibility: public` | Безопасная часть выдачи участнику |
 | `statementVisibility: open|restricted` | Публикация условия на сайте |
 | `purpose?`, `hasPublicSolution` | Факты текущего native прохода для проверки demonstration назначения |
 | `answerType`, `condition`, `publicAnswer` | Тип ответа, выбранное условие и публичные поля |
 | teacher `closedKey`, `solution`, `gradingNotes` | Отдельные закрытые поля |
-| work `items`, `assignments`, `theoryTime?` | Порядок, свойства назначений и время теории |
+| work `slots`, `theoryTime?` | Порядок позиций, кандидаты, свойства назначения и время теории |
+| work `title`, `introduction?` | Название и публичное введение работы в AST |
 
-Ключи `works.items` и `assignments` **совпадают** и квалифицированы одинаково:
-`integrity-course/exr-collision`. Значение назначения содержит
-`{stage?, requirement, workMode}`. Core локальная модель использует местные
-`exr-*` ключи; transport не является вторым авторским синтаксисом.
+Каждая позиция `slots` содержит `id`, `selection: fixed|random`, `candidates`
+и `assignment: {stage?, requirement, workMode}`. ID позиции квалифицирован
+как `integrity-course/checksum-lab/<slot>`, кандидат — как
+`integrity-course/exr-collision`. Fixed содержит одного кандидата; random —
+не менее двух. `questions` содержит всех кандидатов выбранной работы.
+Прежние `items` и `assignments` не принимаются. Core локальная модель использует
+местные `exr-*` ключи; transport не является вторым авторским синтаксисом.
 
 Экспортируются только выбранные условия, поля ответа и их ресурсы.
-Заголовок/ID работы сохраняются в метаданных. Preview, внешние заголовки
-этапов и окружающая проза исключаются; внутренние заголовки условия остаются.
+Заголовок/ID работы сохраняются в метаданных. Публичная окружающая проза и
+заголовки этапов входят в отдельное `introduction`; `.task-items`,
+`.assessment-preview`, упражнения банка и закрытые части из него удаляются.
+Внутренние заголовки условия остаются. Название задачи берётся из её
+канонического заголовка; для native PrairieLearn оно обязательно и не заменяется ID.
+Отсутствующие авторские difficulty/time не выдумываются.
 Обычная ссылка на разбор не выбирает его. Demonstration stage требует решения,
 сохранившегося в публичной native проекции этого JSON-прохода; доступность в
 ранее собранном HTML не подставляется. [Переносимая форма](solutions.qmd#solution-native-witness)
 не ставит when-format/when-meta на контейнер решения. QRC предоставляет адрес ссылки,
 без импорта чужого тела.
+
+Публичные ссылки выбранного условия и введения разрешаются в контексте native
+проекта и его namespace. Для адресных ссылок настройте публичный
+`website.site-url` либо `course-navigation.course-url` и подготовьте актуальный
+каталог композиции QRC. Native `output-file` и формат HTML/Reveal определяет
+Quarto; расширение файла исходника не заменяется вручную. Пустое введение без
+ссылок не требует публикации. Неразрешённая содержательная ссылка диагностируется
+с указанием источника. Contextual Download-ссылка не входит в публичный Body;
+обычные разрешённые вложения сохраняются.
 
 Restricted означает запрет открытой веб-публикации, но разрешает выбранную
 выдачу условия участнику. Public guards ключей, solution, gradingNotes,
@@ -72,6 +93,9 @@ source/service ресурсов сохраняются. Не переимено�
 
 Установите [Print](../extensions/print.qmd) в корень курса, передайте participant
 пакет, полный ключ выбранной работы и новый каталог результата:
+
+Перед запуском проверьте поддержку Body v2 в выбранном выпуске Print.
+Исторический ready PDF подтверждает только собственные producer pins.
 
 ```sh
 quarto run _extensions/Afonenko-Course-Tools/course-print/entrypoints/export.ts _generated/checksum.public.json integrity-course/checksum-lab _generated/paper
@@ -87,6 +111,9 @@ restricted назначения; публичный разбор из preview в
 
 Установите [Moodle](../extensions/moodle.qmd). Для manual/single-choice
 сохраните `binding.json` с явными настройками:
+
+Выбранный consumer должен явно принимать Body v2; исторический ready XML
+не подтверждает совместимость текущего transport.
 
 ```json
 {"defaultGrade": 1, "shuffle": false}

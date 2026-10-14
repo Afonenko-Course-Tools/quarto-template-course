@@ -7,7 +7,7 @@ title: Версии и спецификации владельцев
 
 ## Выпущенные версии {#guide-status}
 
-Руководство закрепляет Core `v5.0.2` и версии потребителей из таблицы ниже.
+Установочные команды пока закрепляют Core `v5.0.2` и версии потребителей из таблицы ниже.
 Core5 добавляет scalar defaults, project-check collection, artifact policies
 и запрет авторских student/full audience wrappers.
 Историческая Core ready-группа закреплена на `demo-20261008-1`, остальные семь
@@ -19,6 +19,27 @@ Core5 добавляет scalar defaults, project-check collection, artifact pol
 `implementation-in-progress` — внедрение в рабочей ветке; `unreleased` — код
 после последнего опубликованного выпуска. Исторический план и старый успешный
 render не подтверждают текущий контракт или дерево.
+
+## Подготовленные контракты {#candidate-contracts}
+
+Страницы [экспорта](export.qmd) и [постоянной навигации](navigation.qmd)
+обновлены по текущим owner interfaces: Body v2 с `slots`, публичными метаданными
+задач и `introduction`, native HTML/Reveal с repo-actions и выходами к курсу.
+Владельцы — [Body Core](https://github.com/Afonenko-Course-Tools/quarto-course/blob/main/docs/body-export.md),
+[Navigation](https://github.com/Afonenko-Course-Tools/quarto-course/blob/main/docs/navigation.md)
+и [Publisher](https://github.com/Afonenko-Course-Tools/quarto-project-publish/blob/main/spec/contract.md).
+Ссылки на `main` обозначают разрабатываемый контракт, а не неизменяемый release pin.
+
+До согласования точных выпусков проверяйте эти примеры через
+`tests/guide-examples.py --core-source /path/to/quarto-course` и
+`tests/navigation-examples.py --core-source /path/to/quarto-course`.
+Тесты используют целые компоненты указанного checkout только во временных
+проектах. Постоянные `_extensions`, `Taskfile.yml` и восемь ready-групп не
+обновляются автоматически. Обычный `task install` пока устанавливает прежний
+bundle и не подтверждает новые примеры; финальная установка и полный `task check`
+обязательны после обновления pins. Возможности Print/Moodle и других потребителей
+проверяются по их собственным схемам; наличие Body v2 у Core не подтверждает
+совместимость прежнего установленного потребителя.
 
 ## Найдите владельца правила {#owner-contracts}
 

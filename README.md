@@ -64,18 +64,25 @@ Windows использует PowerShell для операций с катало�
 QRC `v3.0.0`, Print/Moodle `v0.3.0`, PrairieLearn `v5.0.0`, Cloud `v3.0.0` и Download
 `v3.0.0`. Историческая Core ready-группа закреплена на `demo-20261008-1`; остальные семь готовых
 групп используют неизменяемый `demo-20261008`. Source каждой группы соответствует
-точному tool tag того же producer SHA. Авторская модель, схемы и Body API
-сохраняют контракт Core 5. Старые aliases в текущую модель не переносятся.
+точному tool tag того же producer SHA. Установочные pins сохраняют прежнюю
+линию; подготовленные Body v2 и навигация описаны отдельно в
+[статусе контрактов](guide/specifications.qmd#candidate-contracts).
 
 Локальное изменение Core можно проверить отдельно до установки его выпуска:
 
 ```sh
 python3 tests/guide-examples.py --core-source /path/to/quarto-course
+python3 tests/navigation-examples.py --core-source /path/to/quarto-course
 ```
 
 Тест копирует выбранный Core в временную native книгу и читает буквальные
 QMD из руководства. Он проверяет student/full, четыре сценария работ, пять
 форм ответа, обе связи решений, все роли, время и selected Body; ready producer assets не пересобираются.
+Body-проверки используют v2 `slots`, названия, difficulty/time и публичное
+введение работы. Второй тест исполняет буквальную конфигурацию HTML/Reveal,
+проверяет вложенный native output-file, выходы к курсу и repo-actions.
+Эти обновления ожидают финальных install pins; прежний `task install` их
+не подтверждает. До согласованной установки используйте явный `--core-source`.
 По умолчанию `task check` использует фактически установленный bundle из `task install`.
 `node tests/site.cjs --documentation-only` проверяет только сайт объяснений;
 полный check также проверяет все ready группы и буквальную авторскую разметку.

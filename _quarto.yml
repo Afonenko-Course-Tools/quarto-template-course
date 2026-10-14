@@ -69,6 +69,7 @@ website:
       - guide/profiles.qmd
       - guide/composition.qmd
       - guide/presentation.qmd
+      - guide/navigation.qmd
       - guide/export.qmd
       - guide/windows.qmd
       - guide/repository-texts.qmd

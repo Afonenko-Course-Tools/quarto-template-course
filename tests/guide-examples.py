@@ -20,6 +20,13 @@ def snippets(page, language='qmd'):
     pattern=re.compile(r'^(`{3,})'+re.escape(language)+r'\n(.*?)^\1\s*$',re.M|re.S)
     return [match[2] for match in pattern.finditer(text)]
 
+def ast_text(value):
+    if isinstance(value, dict):
+        if value.get('t')=='Str': return value['c']
+        return ' '.join(ast_text(child) for child in value.values())
+    if isinstance(value, list): return ' '.join(filter(None, map(ast_text,value)))
+    return ''
+
 root=Path(tempfile.mkdtemp(prefix='native-guide-examples-'))
 try:
     for component in ['course-core','course-presentation','course-navigation']:
@@ -101,30 +108,37 @@ try:
              '--work',work,'--output',f'_generated/{work}.json'])
         public=json.loads((root/f'_generated/{work}.public.json').read_text())
         teacher=json.loads((root/f'_generated/{work}.json').read_text())
-        assert public['schema']=='course-body-package-v1'
+        assert public['schema']=='course-body-package-v2'
         assert [question['id'] for question in public['questions']]==ids
         selected=public['works'][0]
         keys=['integrity-course/'+name for name in ids]
-        assert selected['items']==keys
-        assert set(selected['assignments'])==set(keys)
+        assert 'items' not in selected and 'assignments' not in selected
+        assert [slot['candidates'] for slot in selected['slots']]==[[key] for key in keys]
+        assert all(slot['selection']=='fixed' for slot in selected['slots'])
+        assert len({slot['id'] for slot in selected['slots']})==len(keys)
+        assignments={slot['candidates'][0]:slot['assignment'] for slot in selected['slots']}
         assert all(not any(key in question for key in ['closedKey','solution','gradingNotes'])
                    for question in public['questions'])
         assert all(question['visibility']=='public' for question in public['questions'])
         if work in ['integrity-practical','integrity-test']:
             assert all(question['statementVisibility']=='restricted' for question in public['questions'])
-            assert 'Проверяются выбор метода' not in json.dumps(public,ensure_ascii=False)
-            assert 'Перед занятием изучите разбор' not in json.dumps(public,ensure_ascii=False)
+            assert 'Проверяются выбор метода' not in ast_text(public)
+            assert 'Перед занятием изучите разбор' not in ast_text(public)
         if work=='sec-integrity-seminar':
             assert selected['theoryTime']==15
-            assert [selected['assignments'][key].get('stage') for key in keys]==['demonstration','classroom','homework']
-            assert selected['assignments'][keys[1]]['workMode']=='pair'
-            assert selected['assignments'][keys[2]]['requirement']=='optional'
+            assert [assignments[key].get('stage') for key in keys]==['demonstration','classroom','homework']
+            assert assignments[keys[1]]['workMode']=='pair'
+            assert assignments[keys[2]]['requirement']=='optional'
         if work=='checksum-lab':
-            assert selected['assignments'][keys[0]]['requirement']=='required'
-            assert selected['assignments'][keys[0]]['workMode']=='pair'
-            assert selected['assignments'][keys[1]]['requirement']=='optional'
-            assert selected['assignments'][keys[1]]['workMode']=='individual'
-            assert all('stage' not in selected['assignments'][key] for key in keys)
+            assert assignments[keys[0]]['requirement']=='required'
+            assert assignments[keys[0]]['workMode']=='pair'
+            assert assignments[keys[1]]['requirement']=='optional'
+            assert assignments[keys[1]]['workMode']=='individual'
+            assert all('stage' not in assignments[key] for key in keys)
+            assert [q['title'] for q in public['questions']]==['Случайная коллизия','Восстановление архива']
+            assert [q['difficulty'] for q in public['questions']]==['intermediate','advanced']
+            assert [q['time'] for q in public['questions']]==[25,40]
+            assert 'Сдайте программу' in ast_text(selected['introduction'])
         if work=='effective-defaults':
             assert [q.get('purpose') for q in public['questions']]==['independent-study','discussion']
             assert [q['statementVisibility'] for q in public['questions']]==['open','restricted']
@@ -139,6 +153,6 @@ try:
     assert 'Задачи: обязательные 35 мин; все 75 мин. Теория: 7.5 мин. Занятие: обязательные 42.5 мин; все 82.5 мин.' in (root/'_book-full/works/seminar.html').read_text()
     run(['render','works/seminar.qmd','--profile','student','--fail-if-warnings=false'])
     assert 'data-course-assessment-time="ready"' not in (root/'_book-student/works/seminar.html').read_text()
-    print('PASS literal guide native student/full book, ordinary exercises, both solution forms, all roles, four work scenarios, five answer forms, selected Body exports, four time totals, effective scalar defaults/overrides, list/Span/fallback assignments and partial-run omission')
+    print('PASS literal guide native student/full book, roles, four work scenarios, five answer forms, Body v2 slots/title/metadata/introduction, time totals, defaults and partial-run omission')
 finally:
     shutil.rmtree(root)

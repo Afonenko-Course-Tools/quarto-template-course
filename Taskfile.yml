@@ -24,6 +24,7 @@ tasks:
     cmds:
     - node tests/site.cjs
     - python3 tests/guide-examples.py
+    - python3 tests/navigation-examples.py
   preview:
     cmds:
     - quarto preview --no-watch-inputs
