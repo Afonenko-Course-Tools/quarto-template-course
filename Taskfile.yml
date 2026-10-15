@@ -4,11 +4,11 @@ tasks:
     desc: Установить закреплённый bundle для документации
     cmds:
     - quarto add https://github.com/Afonenko-Course-Tools/quarto-course/archive/refs/tags/v7.0.0.zip --no-prompt
-    - cmd: set -e; mkdir -p _extensions/Afonenko-Course-Tools; for package in course-core course-presentation course-navigation; do rm -rf "_extensions/Afonenko-Course-Tools/$package"; mv "_extensions/$package" "_extensions/Afonenko-Course-Tools/$package"; done
+    - cmd: set -e; mkdir -p _extensions/Afonenko-Course-Tools; for package in course-core course-presentation course-navigation; do if [ -d "_extensions/$package" ]; then test -f "_extensions/$package/_extension.yml"; rm -rf "_extensions/Afonenko-Course-Tools/$package"; mv "_extensions/$package" "_extensions/Afonenko-Course-Tools/$package"; else test -f "_extensions/Afonenko-Course-Tools/$package/_extension.yml"; fi; done
       platforms:
       - linux
       - darwin
-    - cmd: powershell -NoProfile -Command '$ErrorActionPreference="Stop"; New-Item -ItemType Directory -Force "_extensions/Afonenko-Course-Tools" | Out-Null; foreach ($package in "course-core","course-presentation","course-navigation") { $dest = "_extensions/Afonenko-Course-Tools/$package"; if (Test-Path $dest) { Remove-Item -Recurse -Force $dest }; Move-Item "_extensions/$package" $dest }'
+    - cmd: powershell -NoProfile -Command '$ErrorActionPreference="Stop"; New-Item -ItemType Directory -Force "_extensions/Afonenko-Course-Tools" | Out-Null; foreach ($package in "course-core","course-presentation","course-navigation") { $src = "_extensions/$package"; $dest = "_extensions/Afonenko-Course-Tools/$package"; if (Test-Path $src -PathType Container) { if (!(Test-Path "$src/_extension.yml" -PathType Leaf)) { throw "Missing package descriptor: $src" }; if (Test-Path $dest) { Remove-Item -Recurse -Force $dest }; Move-Item $src $dest } elseif (!(Test-Path "$dest/_extension.yml" -PathType Leaf)) { throw "Missing installed package: $package" } }'
       platforms:
       - windows
   fetch:
@@ -29,6 +29,7 @@ tasks:
   check:
     desc: Проверить ссылки, поиск, ready provenance и нативные авторские примеры
     cmds:
+    - python3 tests/install-layout.py
     - node tests/site.cjs
     - python3 tests/guide-examples.py
     - python3 tests/navigation-examples.py
