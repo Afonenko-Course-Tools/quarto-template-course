@@ -1,0 +1,121 @@
+---
+title: Выходы к курсу и исходникам
+---
+
+HTML использует штатные navbar/sidebar и repo-actions Quarto. Reveal получает
+постоянные выходы через Navigation. Пример относится к
+[подготовленному контракту](specifications.qmd#candidate-contracts); окончательные
+install pins согласуются отдельно от исторических ready-групп.
+
+## Общая конфигурация {#navigation-config}
+
+В самостоятельной папке `lectures` сохраните `_quarto.yml`. Установите целый
+согласованный bundle Core/Presentation/Navigation из выбранного точного ref.
+Фильтр `course-navigation` формирует контекст действий, а Reveal plugin
+показывает их в панели и мобильном меню.
+
+```yaml
+project:
+  type: website
+  output-dir: _site
+  render: [index.qmd, slides/lesson.qmd]
+lang: ru
+filters: [course-navigation]
+repo-url: &repo_url https://github.com/owner/course
+repo-branch: &repo_revision main
+repo-subdir: &repo_subdir lectures
+repo-actions: &repo_actions [source, issue]
+issue-url: https://github.com/owner/course/issues/new
+website:
+  title: Лекции курса
+  repo-url: *repo_url
+  repo-branch: *repo_revision
+  repo-subdir: *repo_subdir
+  repo-actions: *repo_actions
+  navbar:
+    left:
+      - {text: Курс, href: 'https://example.org/course/index.html'}
+      - {text: Лекции, href: index.qmd}
+course-navigation:
+  course-url: https://example.org/course/
+  links:
+    - {text: Курс, href: /index.html, scope: course}
+    - {text: Все лекции, href: /index.html, scope: project}
+    - {text: Теория, href: /theory/index.html, scope: course}
+format:
+  html:
+    code-tools: false
+  revealjs:
+    revealjs-plugins: [course-navigation]
+```
+
+Замените `owner/course`, `lectures`, публичный URL и ревизию собственными
+значениями. Для закреплённого исходника используйте commit SHA вместо `main`.
+Anchors и их aliases должны находиться в одном YAML-документе. Quarto убирает
+`website` перед Lua-фильтром, поэтому те же repo-параметры присутствуют на
+верхнем уровне через aliases. В QMD их повторять не нужно.
+
+## Индекс и вложенная презентация {#navigation-files}
+
+В `index.qmd` явно выберите HTML:
+
+```qmd
+---
+title: Лекции курса
+format: html
+---
+
+## Материалы
+
+[Наблюдение и проверка](slides/lesson.qmd)
+```
+
+В `slides/lesson.qmd` выберите Reveal и собственное имя результата:
+
+```qmd
+---
+title: Наблюдение и проверка
+format:
+  revealjs:
+    output-file: observation.html
+---
+
+## Наблюдение {#sec-observation}
+
+Сначала сформулируйте предположение, затем проверьте его на примере.
+
+## Проверка {#sec-check}
+
+Сравните ожидаемый и полученный результат.
+```
+
+Выполните `quarto render`. Получатся `_site/index.html` и
+`_site/slides/observation.html`. Постоянный выход «Все лекции» из вложенных
+слайдов ведёт к `../index.html`; курс и теория — к указанному публичному корню.
+«Исходный код» открывает `lectures/slides/lesson.qmd` выбранной ревизии,
+«Сообщить об ошибке» — авторский `issue-url`. Действия работают при прямом
+входе в слайды без предыдущей вкладки. История посещённых слайдов остаётся
+отдельной кнопкой.
+
+## Композиция и самостоятельный render {#navigation-composition}
+
+`href` в `course-navigation.links` начинается с `/`: это URL-путь от корня
+области `project` или `course`. Относительные строки Quarto может перебазировать
+при обнаружении одноимённого файла; машинные пути и `..` здесь не допускаются.
+
+Для [композиции](composition.qmd) добавьте последним post-render hook проекта
+`course-site/entrypoints/collect.ts` из целиком установленного Publisher.
+Корневой `website.site-url` и дочерний `course-navigation.course-url` обозначают
+один публичный корень. Publisher переводит постоянные выходы и native navbar
+к корню текущего результата, сохраняя размещение под URL-префиксом.
+
+Publisher открывает ссылки штатного `index.html` на реальные Reveal outputs
+текущего запуска в новой вкладке. Это работает в композиции и в самостоятельной
+сборке с `collect.ts`; без Publisher действует обычная HTML-ссылка. Исходники
+и issue URL сохраняют авторскую ревизию и репозиторий. Дополнительный список
+слайдов или карта выходных файлов не нужны.
+
+Проверка этого буквального примера выполняется командой
+`python3 tests/navigation-examples.py --core-source /path/to/quarto-course`.
+Она копирует расширение только во временный проект и не меняет установленный
+bundle либо готовые группы сайта.

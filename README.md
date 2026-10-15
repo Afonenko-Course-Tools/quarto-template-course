@@ -20,7 +20,7 @@ updated: 2026-10-10
 документации; `examples/` и `_site/` исключены из Git.
 
 Требуются Quarto >=1.11.5, Task 3, curl и tar; для получения и проверки — Node.js.
-Core 5.0.2 и текущие адаптеры используют CUE 0.17.1.
+Линия Core 7.0.0 и текущие адаптеры используют CUE 0.17.1.
 Для установки используйте точные команды `quarto add` из `Taskfile.yml`.
 
 ```sh
@@ -60,22 +60,34 @@ Windows использует PowerShell для операций с катало�
 Публикуйте заново проверенное дерево чистого `main` с теми же pins/assets; PR workflow выполняет проверки. Фактическая публикация и live URL проверяются отдельно по [отчёту реализации](docs/releases/2026-10-08-implementation.md).
 
 Структура исходников прежнего учебного шаблона доступна в истории Git и выпуске
-`v1.0.0`. Руководство закрепляет Core `v5.0.2`, Publisher `v5.0.0`,
+`v1.0.0`. `task install` закрепляет целый Core bundle на опубликованном теге
+`v7.0.0`.
+Task использует ZIP URL `archive/refs/tags/v7.0.0.zip` опубликованного тега. Он устанавливает три целых пакета и переносит их в
+`_extensions/Afonenko-Course-Tools/`, заменяя прежние пакеты целиком.
+Восемь
+исторических ready-групп сохраняют Publisher `v5.0.0`,
 QRC `v3.0.0`, Print/Moodle `v0.3.0`, PrairieLearn `v5.0.0`, Cloud `v3.0.0` и Download
 `v3.0.0`. Историческая Core ready-группа закреплена на `demo-20261008-1`; остальные семь готовых
 групп используют неизменяемый `demo-20261008`. Source каждой группы соответствует
-точному tool tag того же producer SHA. Авторская модель, схемы и Body API
-сохраняют контракт Core 5. Старые aliases в текущую модель не переносятся.
+точному tool tag того же producer SHA. Body v2 и навигация выбранного Core
+описаны в
+[статусе контрактов](guide/specifications.qmd#candidate-contracts).
 
 Локальное изменение Core можно проверить отдельно до установки его выпуска:
 
 ```sh
 python3 tests/guide-examples.py --core-source /path/to/quarto-course
+python3 tests/navigation-examples.py --core-source /path/to/quarto-course
 ```
 
 Тест копирует выбранный Core в временную native книгу и читает буквальные
 QMD из руководства. Он проверяет student/full, четыре сценария работ, пять
 форм ответа, обе связи решений, все роли, время и selected Body; ready producer assets не пересобираются.
+Body-проверки используют v2 `slots`, названия, difficulty/time и публичное
+введение работы. Второй тест исполняет буквальную конфигурацию HTML/Reveal,
+проверяет вложенный native output-file, выходы к курсу и repo-actions.
+Эти примеры проверяются обычным `task check` после `task install` по точному
+тегу Core `v7.0.0`.
 По умолчанию `task check` использует фактически установленный bundle из `task install`.
 `node tests/site.cjs --documentation-only` проверяет только сайт объяснений;
 полный check также проверяет все ready группы и буквальную авторскую разметку.

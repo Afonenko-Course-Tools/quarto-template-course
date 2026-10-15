@@ -29,7 +29,7 @@ const documentation = [
   'index', 'guide/index', 'guide/start', 'guide/model', 'guide/profiles',
   'guide/exercises', 'guide/solutions', 'guide/roles', 'guide/assessments',
   'guide/answers', 'guide/windows', 'guide/specifications',
-  'guide/composition', 'guide/presentation', 'guide/export', 'extensions/index',
+  'guide/composition', 'guide/presentation', 'guide/navigation', 'guide/export', 'extensions/index',
   'extensions/course', 'extensions/publisher', 'extensions/reference-catalog',
   'extensions/print', 'extensions/prairielearn', 'extensions/moodle',
   'extensions/cloud', 'extensions/download', 'reference/index',
@@ -133,6 +133,7 @@ if (!demoOnly) {
     'guide/answers': ['answer-manual','answer-single-choice','answer-numeric','answer-multipart','answer-matching','answer-support','answer-privacy'],
     'guide/profiles': ['audience-profiles','profile-composition','source-privacy','functional-profiles'],
     'guide/export': ['selected-source-export','body-contract','print-export','moodle-export','prairielearn-export','cloud-model'],
+    'guide/navigation': ['navigation-config','navigation-files','navigation-composition'],
     'guide/windows': ['windows-paths','windows-course-fixes','windows-recover-encode'],
     'guide/specifications': ['guide-status','owner-contracts','contract-evidence'],
   };
