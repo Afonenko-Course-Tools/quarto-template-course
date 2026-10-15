@@ -6,12 +6,14 @@ import shlex
 import shutil
 import subprocess
 import tempfile
+import textwrap
 import unittest
 
 ROOT = Path(__file__).resolve().parents[1]
 PACKAGES = ('course-core', 'course-presentation', 'course-navigation')
 INSTALL = (ROOT / 'Taskfile.yml').read_text().split('  fetch:', 1)[0]
-COMMANDS = re.findall(r'^    - cmd: (.+)$', INSTALL, re.M)
+COMMANDS = [textwrap.dedent(block).strip() for block in
+            re.findall(r'^    - cmd: \|\n((?:        .+\n)+)', INSTALL, re.M)]
 
 
 class InstallLayout(unittest.TestCase):
@@ -54,6 +56,13 @@ class InstallLayout(unittest.TestCase):
 
         if not exercised:
             self.skipTest('Neither sh nor PowerShell is available')
+
+    def test_taskfile_parses_with_task(self):
+        task = shutil.which('task')
+        if not task:
+            self.skipTest('Task is not available')
+        result = subprocess.run([task, '--list'], cwd=ROOT, text=True, capture_output=True)
+        self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
 
     def test_preserves_namespaced_tag_installation(self):
         self.run_layout('tag')
