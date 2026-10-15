@@ -3,7 +3,14 @@ tasks:
   install:
     desc: Установить закреплённый bundle для документации
     cmds:
-    - quarto add Afonenko-Course-Tools/quarto-course@v5.0.2 --no-prompt
+    - quarto add https://github.com/Afonenko-Course-Tools/quarto-course/archive/1d2429065e66d1dc856637e863c901fe9148af04.zip --no-prompt
+    - cmd: set -e; mkdir -p _extensions/Afonenko-Course-Tools; for package in course-core course-presentation course-navigation; do rm -rf "_extensions/Afonenko-Course-Tools/$package"; mv "_extensions/$package" "_extensions/Afonenko-Course-Tools/$package"; done
+      platforms:
+      - linux
+      - darwin
+    - cmd: powershell -NoProfile -Command '$ErrorActionPreference="Stop"; New-Item -ItemType Directory -Force "_extensions/Afonenko-Course-Tools" | Out-Null; foreach ($package in "course-core","course-presentation","course-navigation") { $dest = "_extensions/Afonenko-Course-Tools/$package"; if (Test-Path $dest) { Remove-Item -Recurse -Force $dest }; Move-Item "_extensions/$package" $dest }'
+      platforms:
+      - windows
   fetch:
     desc: Явно получить готовые закреплённые демонстрации
     cmds:

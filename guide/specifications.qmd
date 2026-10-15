@@ -5,9 +5,14 @@ title: Версии и спецификации владельцев
 Руководство объясняет авторские действия. Нормативные правила принадлежат
 владельцам инструментов и читаются на том же Git ref, что установленный код.
 
-## Выпущенные версии {#guide-status}
+## Закреплённые источники и выпуски {#guide-status}
 
-Установочные команды пока закрепляют Core `v5.0.2` и версии потребителей из таблицы ниже.
+`task install` закрепляет целый Core bundle на immutable commit
+`1d2429065e66d1dc856637e863c901fe9148af04` кандидатной линии Core 7.
+Quarto получает ZIP по точному commit URL; Task размещает три целых пакета в
+`_extensions/Afonenko-Course-Tools/`. Запись `@SHA` в Quarto 1.11.5 ищет
+tag/branch и для commit не подходит. Стабильный versioned tag ещё не выпущен. Исторические
+ready-группы и версии остальных потребителей сохранены в таблице ниже.
 Core5 добавляет scalar defaults, project-check collection, artifact policies
 и запрет авторских student/full audience wrappers.
 Историческая Core ready-группа закреплена на `demo-20261008-1`, остальные семь
@@ -30,14 +35,13 @@ render не подтверждают текущий контракт или де
 и [Publisher](https://github.com/Afonenko-Course-Tools/quarto-project-publish/blob/main/spec/contract.md).
 Ссылки на `main` обозначают разрабатываемый контракт, а не неизменяемый release pin.
 
-До согласования точных выпусков проверяйте эти примеры через
+После `task install` обычный `task check` проверяет эти примеры из установленного
+immutable Core bundle. Для локального checkout владельца доступны
 `tests/guide-examples.py --core-source /path/to/quarto-course` и
-`tests/navigation-examples.py --core-source /path/to/quarto-course`.
-Тесты используют целые компоненты указанного checkout только во временных
-проектах. Постоянные `_extensions`, `Taskfile.yml` и восемь ready-групп не
-обновляются автоматически. Обычный `task install` пока устанавливает прежний
-bundle и не подтверждает новые примеры; финальная установка и полный `task check`
-обязательны после обновления pins. Возможности Print/Moodle и других потребителей
+`tests/navigation-examples.py --core-source /path/to/quarto-course`;
+они используют целые компоненты только во временных проектах. Восемь ready-групп
+не обновляются автоматически. После фактического стабильного выпуска source pin
+заменяется его versioned tag с повторной whole installation и проверкой. Возможности Print/Moodle и других потребителей
 проверяются по их собственным схемам; наличие Body v2 у Core не подтверждает
 совместимость прежнего установленного потребителя.
 
@@ -45,7 +49,7 @@ bundle и не подтверждает новые примеры; финаль�
 
 | Правило | Владелец и актуальный индекс | Закреплённая версия |
 | --- | --- | --- |
-| Банк, роли, решения, работы, время, student/full, Body | [Core / Presentation / Navigation](https://github.com/Afonenko-Course-Tools/quarto-course/blob/v5.0.2/spec/index.md) | [Core v5.0.2](https://github.com/Afonenko-Course-Tools/quarto-course/tree/v5.0.2) |
+| Банк, роли, решения, работы, время, student/full, Body | [Core / Presentation / Navigation](https://github.com/Afonenko-Course-Tools/quarto-course/blob/1d2429065e66d1dc856637e863c901fe9148af04/spec/index.md) | [Core 7 candidate, exact source](https://github.com/Afonenko-Course-Tools/quarto-course/tree/1d2429065e66d1dc856637e863c901fe9148af04) |
 | Составной native сайт и current outputs | [Publisher](https://github.com/Afonenko-Course-Tools/quarto-project-publish/blob/v5.0.0/spec/index.md) | [v5.0.0](https://github.com/Afonenko-Course-Tools/quarto-project-publish/tree/v5.0.0) |
 | Адресные ссылки и каталог целей | [QRC](https://github.com/Afonenko-Course-Tools/quarto-reference-catalog/blob/v3.0.0/spec/index.md) | [v3.0.0](https://github.com/Afonenko-Course-Tools/quarto-reference-catalog/tree/v3.0.0) |
 | Participant PDF и guards публичного пакета | [Print](https://github.com/Afonenko-Course-Tools/quarto-course-print/blob/v0.3.0/spec/index.md) | [v0.3.0](https://github.com/Afonenko-Course-Tools/quarto-course-print/tree/v0.3.0) |
@@ -55,7 +59,7 @@ bundle и не подтверждает новые примеры; финаль�
 | Java25/JUnit runtime, schemas и Community bridge | [Platform exact merged source](https://github.com/Afonenko-Course-Tools/prairielearn-platform/tree/0083e3e102f47860cabc1d1e62e6434353f5c4c6) | metadata 1.0.1; source tag ещё ожидается |
 | Явные материалы и безопасные ZIP | [Download](https://github.com/Afonenko-Course-Tools/quarto-project-download/blob/v3.0.0/spec/index.md) | [v3.0.0](https://github.com/Afonenko-Course-Tools/quarto-project-download/tree/v3.0.0) |
 
-Индексы в таблице относятся к указанным выпускам; Platform временно закрепляет
+Core в таблице относится к exact candidate source, остальные индексы — к указанным выпускам; Platform временно закрепляет
 точный слитый commit с ожидающим source tag. Изменения `main` после них
 могут быть unreleased; проверяйте поведение по точному тегу своей установки.
 Минимальная текущая линия — Quarto 1.11.5 и CUE 0.17.1.
@@ -63,10 +67,10 @@ bundle и не подтверждает новые примеры; финаль�
 ## Сопоставьте руководство и результат {#contract-evidence}
 
 Модель определена в действующих тематических спецификациях Core:
-[банк, решения и работы](https://github.com/Afonenko-Course-Tools/quarto-course/blob/v5.0.2/spec/learning-elements.md),
-[видимость](https://github.com/Afonenko-Course-Tools/quarto-course/blob/v5.0.2/spec/visibility.md),
-[Body](https://github.com/Afonenko-Course-Tools/quarto-course/blob/v5.0.2/docs/body-export.md) и
-[NativeRun](https://github.com/Afonenko-Course-Tools/quarto-course/blob/v5.0.2/docs/native-run.md).
+[банк, решения и работы](https://github.com/Afonenko-Course-Tools/quarto-course/blob/1d2429065e66d1dc856637e863c901fe9148af04/spec/learning-elements.md),
+[видимость](https://github.com/Afonenko-Course-Tools/quarto-course/blob/1d2429065e66d1dc856637e863c901fe9148af04/spec/visibility.md),
+[Body](https://github.com/Afonenko-Course-Tools/quarto-course/blob/1d2429065e66d1dc856637e863c901fe9148af04/docs/body-export.md) и
+[NativeRun](https://github.com/Afonenko-Course-Tools/quarto-course/blob/1d2429065e66d1dc856637e863c901fe9148af04/docs/native-run.md).
 Индекс также связывает Presentation и diagnostics. Адаптер определяет свои
 поля и поддерживаемые формы; README и пример объясняют запуск.
 
@@ -78,8 +82,9 @@ producer Release. Её `BUILD.json` сообщает commit, зависимос�
 
 ## Текущий согласованный комплект
 
-Core 5.0.2, Download 3.0.0 и exporter 5.0.0 опубликованы и задают текущие
-authoring/ZIP/native-export API. Platform metadata 1.0.1 закреплена на фактически
+Core 5.0.2, Download 3.0.0 и exporter 5.0.0 сохраняются как опубликованные
+исторические refs. Текущий default authoring Core выбирается по immutable SHA
+из `task install`; версии остальных потребителей проверяются отдельно. Platform metadata 1.0.1 закреплена на фактически
 слитом source `0083e3e102f47860cabc1d1e62e6434353f5c4c6`; source tag v1.0.1 ещё ожидается.
 Опубликованные Java/Community OCI digests и actual image build provenance
 приведены на [странице runtime](../extensions/prairielearn.qmd).
