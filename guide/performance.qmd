@@ -1,0 +1,79 @@
+---
+title: Измерение рендера
+---
+
+`quarto-course-perf` измеряет рендер существующего Quarto-проекта: время, CPU, пиковую память и
+доступные операции расширений. Обычный запуск принимает привычные параметры Quarto и сохраняет
+отдельный отчёт. Для первого измерения не нужен JSON эксперимента.
+
+## Установите команду
+
+В Arch Linux используйте
+[инструкцию Performance 2.0.0](https://github.com/Afonenko-Course-Tools/quarto-course-performance/blob/v2.0.0/docs/arch-package.md)
+и материалы
+[выпуска 2.0.0](https://github.com/Afonenko-Course-Tools/quarto-course-performance/releases/tag/v2.0.0).
+Пакет `quarto-course-perf` использует установленный Quarto, отдельный Deno, GNU time и `setsid`.
+Подготовленные npm-зависимости входят в пакет. Локальная инструкция после установки находится в
+`/usr/share/doc/quarto-course-perf/arch-package.md`.
+
+## Измерьте свою сборку
+
+Перейдите в каталог, из которого обычно запускаете Quarto:
+
+```sh
+quarto-course-perf render --profile student
+```
+
+Профиль `student` выбирайте, если он определён в вашем курсе. Допустимы также собственные профили,
+путь к документу или самостоятельному вложенному проекту и обычный `--to`. Например, для
+существующей презентации:
+
+```sh
+quarto-course-perf render --perf-mode cpu slides/index.qmd --profile student --to revealjs
+```
+
+`--perf-mode` и `--perf-output` ставятся перед первым аргументом Quarto. Сборка выводит свои обычные
+сообщения, затем Performance печатает wall/CPU/peak RSS, статус и путь результата. По умолчанию
+это `.quarto/course-perf/runs/<run-id>` выбранного проекта. Откройте находящийся там `report.md`.
+
+| Режим | Для чего нужен |
+| --- | --- |
+| `off`, по умолчанию | Внешние время, CPU и память обычной сборки |
+| `summary` | Доступные ручные операции и счётчики расширений |
+| `cpu` | Дополнительно V8 CPU-профили процессов Deno |
+| `trace` через отдельный эксперимент | Подробное исследование выбранных функций в изолированной копии |
+
+Нативный код завершения, пригодность данных `dataValid` и полнота покрытия
+`quality.coverageComplete` имеют разный смысл. Успешный рендер не доказывает наблюдение всех
+операций; простой запуск сохраняет неполное покрытие. Пиковая память находится в
+`run.json.outcome.peakRssKiB`.
+
+Штатная очистка `.quarto` может удалить прежнюю историю. Для долгого хранения задайте внешний
+каталог, отделённый от `output-dir` и публикуемых ресурсов:
+
+```sh
+quarto-course-perf render --perf-output ../measurements --profile student
+```
+
+Текущий запуск собирает материалы через внешний временный каталог и сохраняет их после рендера.
+Если финальная запись не удалась, сообщение показывает оставшееся временное место.
+
+## Прочитайте отчёт
+
+Ссылки из `report.md` ведут к реальным файлам запуска. Perfetto показывает интервалы и
+подтверждённые связи, Speedscope — записанные V8 CPU-профили. Lua CPU, TS wall и некалиброванные
+локальные часы анализируются раздельно. Сумма вложенных интервалов не равна времени сборки.
+
+Подробный веб-справочник закреплён на Performance 2.0.0:
+
+- [Диагностика, сохранение результатов и ограничения](https://github.com/Afonenko-Course-Tools/quarto-course-performance/blob/v2.0.0/docs/diagnostics.md).
+- [Открытие Perfetto и Speedscope](https://github.com/Afonenko-Course-Tools/quarto-course-performance/blob/v2.0.0/docs/visualization.md).
+- [Изолированный trace, замена пакетов и парное сравнение](https://github.com/Afonenko-Course-Tools/quarto-course-performance/blob/v2.0.0/docs/experiments.md).
+- [Переход с 1.0.0 и чтение исторических результатов](https://github.com/Afonenko-Course-Tools/quarto-course-performance/blob/v2.0.0/docs/migration.md).
+- [Машинные форматы](https://github.com/Afonenko-Course-Tools/quarto-course-performance/blob/v2.0.0/docs/general-use-formats.md).
+
+Состав расширений задаётся самим курсом и его штатной установкой. Реестр Performance объединяет
+ручную разметку восьми владельцев: Core/Presentation/Navigation, Publisher, QRC, Download, PrairieLearn,
+Print, Moodle и Cloud. [Реестр и границы ответственности](https://github.com/Afonenko-Course-Tools/quarto-course-performance/blob/v2.0.0/docs/development.md#владельцы-и-ручная-разметка)
+не заменяют [версии и контракты расширений](specifications.qmd). Наличие Cloud в реестре не
+является свидетельством проверки Cloud VM в Java-матрице Performance.

@@ -71,6 +71,7 @@ website:
       - guide/presentation.qmd
       - guide/navigation.qmd
       - guide/export.qmd
+      - guide/performance.qmd
       - guide/windows.qmd
       - guide/repository-texts.qmd
       - guide/specifications.qmd
