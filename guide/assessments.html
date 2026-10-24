@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="ru" xml:lang="ru"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.11.5">
+<meta name="generator" content="quarto-1.11.6">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -75,11 +75,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../guide/roles.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/scrollable-regions/scrollable-regions.js" type="module"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-3b9ea68436acb9022c2fbce6dbb58b06.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-35fc0813589bbfbfa0b8ec974497eeb2.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="../site_libs/bootstrap/bootstrap-c8050ee4572cac00e2239e8af6c5df5d.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
@@ -255,8 +256,20 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../guide/navigation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Выходы к курсу и исходникам</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../guide/export.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Экспорт выбранной работы</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../guide/performance.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Измерение рендера</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -423,7 +436,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<p>Состав работы — упорядоченные местные ссылки на банк. Один QMD описывает одну лабораторную, семинар, практическую или контрольную работу. Ниже — <a href="../guide/specifications.html">контракт Core 5.0.2</a>.</p>
+<p>Состав работы — упорядоченные местные ссылки на банк. Один QMD описывает одну лабораторную, семинар, практическую или контрольную работу. Ниже — <a href="../guide/specifications.html">контракт владельца</a>. Выходной Body v2 и публичное введение проверяются по <a href="../guide/specifications.html#candidate-contracts">подготовленному комплекту</a>.</p>
 <section id="scenario-bank" class="level2">
 <h2 class="anchored" data-anchor-id="scenario-bank">Подготовьте общий банк для сценариев</h2>
 <p>Примеры используют <a href="../guide/model.html">книгу task</a> с <code>bank/_metadata.yml</code>:</p>
@@ -433,6 +446,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <pre class="qmd"><code># Целостность данных {#sec-integrity}
 
 :::: {#exr-checksum difficulty="introductory" time="10" course-role="demonstration"}
+## Изменение контрольной суммы
 Покажите изменение SHA-256 после замены одного байта.
 
 ::: {.solution}
@@ -441,6 +455,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 ::::
 
 ::: {#exr-collision difficulty="intermediate" time="25"}
+## Случайная коллизия
 Объясните отличие случайной коллизии от намеренного подбора.
 :::
 
@@ -450,6 +465,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 :::
 
 ::: {#exr-repair difficulty="advanced" time="40"}
+## Восстановление архива
 Предложите проверку повреждённого архива при наличии резервных данных.
 :::
 
@@ -486,7 +502,7 @@ assessment:
 1. @exr-collision
 2. [@exr-repair]{requirement="optional" work-mode="individual"}
 :::</code></pre>
-<p>Stage может отсутствовать: скрытого <code>classroom</code> нет. Вид <code>lab</code> не задаёт платформу или оценку. Student/full показывают ссылки на оба открытых условия; доступ к решениям определяется банком. Экспорт содержит collision, repair и их поля ответа, но не внешнее описание сдачи.</p>
+<p>Stage может отсутствовать: скрытого <code>classroom</code> нет. Вид <code>lab</code> не задаёт платформу или оценку. Student/full показывают ссылки на оба открытых условия; доступ к решениям определяется банком. Экспорт содержит collision, repair и их поля ответа. Body v2 сохраняет публичное описание сдачи отдельно в <code>works[].introduction</code>; оно не становится частью условия каждой задачи.</p>
 </section>
 <section id="seminar-scenario" class="level2">
 <h2 class="anchored" data-anchor-id="seminar-scenario">Семинар с тремя этапами</h2>
@@ -519,7 +535,7 @@ assessment:
 <p>ID работы здесь <code>sec-integrity-seminar</code>; вместо него можно явно задать <code>assessment.id: integrity-seminar</code> или использовать существующий <code>chapter-id</code>. Несколько списков объединяются в порядке документа: checksum, collision, repair. Заголовки — штатный способ описать последовательность занятия.</p>
 <p>На <code>.task-items</code> задаются общие <code>requirement="required|optional"</code> и <code>work-mode="individual|pair|group"</code>; Span конкретной ссылки может их переопределить. Приоритет: Span → <code>.task-items</code> → required/individual. В лабораторной выше collision наследует required/pair, repair переопределяет оба поля на optional/individual. Это свойства назначения, а не самого упражнения. Stage задаётся только блоку списка, может отсутствовать и не выводится из заголовка; скрытого classroom нет. <code>[@exr-collision]{stage="classroom"}</code> отклоняется как ошибочное размещение stage на Span. Каждый пункт содержит одну местную ссылку. Повтор задачи в пределах одной работы отклоняется; в разных работах её можно назначать снова.</p>
 <p>Для demonstration обязательны три факта банка: открытое условие, роль <code>demonstration</code> и фактическое публичное решение. Удаление любого из них делает первое назначение ошибкой. Stage не открывает закрытое решение. Проверяется фактическая публичная проекция текущей операции: решение, видимое в прежнем HTML, может отсутствовать в исходном JSON из-за when-format/when-meta. Для экспортируемого разбора используйте <a href="../guide/solutions.html#solution-native-witness">переносимый контейнер решения</a>.</p>
-<p>Student/full показывают состав семинара; student видит публичный разбор checksum. Экспорт содержит три условия в том же порядке, без внешних заголовков этапов и без решений. Внутренний заголовок самой задачи сохраняется.</p>
+<p>Student/full показывают состав семинара; student видит публичный разбор checksum. Экспорт содержит три условия в том же порядке, без решений. Публичное введение и заголовки этапов принадлежат <code>works[].introduction</code>, состав назначений — <code>works[].slots</code>. Внутренний заголовок самой задачи сохраняется.</p>
 </section>
 <section id="practical-scenario" class="level2">
 <h2 class="anchored" data-anchor-id="practical-scenario">Практическая на распечатках рядом с lab</h2>
@@ -1064,6 +1080,9 @@ assessment:
     }
   });
   </script>
+  <script type="application/javascript">
+  window.quartoScrollableRegionsLabels = {"code":"Прокручиваемый код","output":"Прокручиваемый вывод"};
+  </script>
 <nav class="page-navigation" aria-label="Страница">
   <div class="nav-page nav-page-previous">
       <a href="../guide/roles.html" class="pagination-link" aria-label="Педагогические роли">
@@ -1082,244 +1101,250 @@ assessment:
 <span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>Состав работы — упорядоченные местные ссылки на банк. Один QMD описывает</span>
 <span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>одну лабораторную, семинар, практическую или контрольную работу. Ниже —</span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">контракт Core 5.0.2</span><span class="co">](specifications.qmd)</span>.</span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a><span class="fu">## Подготовьте общий банк для сценариев {#scenario-bank}</span></span>
-<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>Примеры используют <span class="co">[</span><span class="ot">книгу task</span><span class="co">](model.qmd)</span> с <span class="in">`bank/_metadata.yml`</span>:</span>
-<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a><span class="in">```yaml</span></span>
-<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a><span class="fu">exercise-bank</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span>
-<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a><span class="fu">default-exercise-statement-visibility</span><span class="kw">:</span><span class="at"> open</span></span>
-<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a>В <span class="in">`bank/integrity.qmd`</span> поместите условия и решения:</span>
-<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a><span class="in">```qmd</span></span>
-<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a><span class="in"># Целостность данных {#sec-integrity}</span></span>
-<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a><span class="in">:::: {#exr-checksum difficulty="introductory" time="10" course-role="demonstration"}</span></span>
-<span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a><span class="in">Покажите изменение SHA-256 после замены одного байта.</span></span>
-<span id="cb8-25"><a href="#cb8-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-26"><a href="#cb8-26" aria-hidden="true" tabindex="-1"></a><span class="in">::: {.solution}</span></span>
-<span id="cb8-27"><a href="#cb8-27" aria-hidden="true" tabindex="-1"></a><span class="in">Сначала вычислим исходную сумму, затем изменим байт и повторим вычисление.</span></span>
-<span id="cb8-28"><a href="#cb8-28" aria-hidden="true" tabindex="-1"></a><span class="in">:::</span></span>
-<span id="cb8-29"><a href="#cb8-29" aria-hidden="true" tabindex="-1"></a><span class="in">::::</span></span>
-<span id="cb8-30"><a href="#cb8-30" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-31"><a href="#cb8-31" aria-hidden="true" tabindex="-1"></a><span class="in">::: {#exr-collision difficulty="intermediate" time="25"}</span></span>
-<span id="cb8-32"><a href="#cb8-32" aria-hidden="true" tabindex="-1"></a><span class="in">Объясните отличие случайной коллизии от намеренного подбора.</span></span>
-<span id="cb8-33"><a href="#cb8-33" aria-hidden="true" tabindex="-1"></a><span class="in">:::</span></span>
-<span id="cb8-34"><a href="#cb8-34" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-35"><a href="#cb8-35" aria-hidden="true" tabindex="-1"></a><span class="in">::: {#sol-collision}</span></span>
-<span id="cb8-36"><a href="#cb8-36" aria-hidden="true" tabindex="-1"></a><span class="in">Случайное совпадение возникает без выбранной цели; намеренный подбор</span></span>
-<span id="cb8-37"><a href="#cb8-37" aria-hidden="true" tabindex="-1"></a><span class="in">ищет входы с требуемым совпадением.</span></span>
-<span id="cb8-38"><a href="#cb8-38" aria-hidden="true" tabindex="-1"></a><span class="in">:::</span></span>
-<span id="cb8-39"><a href="#cb8-39" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-40"><a href="#cb8-40" aria-hidden="true" tabindex="-1"></a><span class="in">::: {#exr-repair difficulty="advanced" time="40"}</span></span>
-<span id="cb8-41"><a href="#cb8-41" aria-hidden="true" tabindex="-1"></a><span class="in">Предложите проверку повреждённого архива при наличии резервных данных.</span></span>
-<span id="cb8-42"><a href="#cb8-42" aria-hidden="true" tabindex="-1"></a><span class="in">:::</span></span>
-<span id="cb8-43"><a href="#cb8-43" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-44"><a href="#cb8-44" aria-hidden="true" tabindex="-1"></a><span class="in">::: {#sol-repair}</span></span>
-<span id="cb8-45"><a href="#cb8-45" aria-hidden="true" tabindex="-1"></a><span class="in">Сравните доступные копии с доверенным эталоном и восстановите проверенную копию.</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">контракт владельца</span><span class="co">](specifications.qmd)</span>. Выходной Body v2 и публичное введение</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>проверяются по <span class="co">[</span><span class="ot">подготовленному комплекту</span><span class="co">](specifications.qmd#candidate-contracts)</span>.</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a><span class="fu">## Подготовьте общий банк для сценариев {#scenario-bank}</span></span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>Примеры используют <span class="co">[</span><span class="ot">книгу task</span><span class="co">](model.qmd)</span> с <span class="in">`bank/_metadata.yml`</span>:</span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a><span class="in">```yaml</span></span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a><span class="fu">exercise-bank</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a><span class="fu">default-exercise-statement-visibility</span><span class="kw">:</span><span class="at"> open</span></span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a>В <span class="in">`bank/integrity.qmd`</span> поместите условия и решения:</span>
+<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a><span class="in">```qmd</span></span>
+<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a><span class="in"># Целостность данных {#sec-integrity}</span></span>
+<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a><span class="in">:::: {#exr-checksum difficulty="introductory" time="10" course-role="demonstration"}</span></span>
+<span id="cb8-25"><a href="#cb8-25" aria-hidden="true" tabindex="-1"></a><span class="in">## Изменение контрольной суммы</span></span>
+<span id="cb8-26"><a href="#cb8-26" aria-hidden="true" tabindex="-1"></a><span class="in">Покажите изменение SHA-256 после замены одного байта.</span></span>
+<span id="cb8-27"><a href="#cb8-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-28"><a href="#cb8-28" aria-hidden="true" tabindex="-1"></a><span class="in">::: {.solution}</span></span>
+<span id="cb8-29"><a href="#cb8-29" aria-hidden="true" tabindex="-1"></a><span class="in">Сначала вычислим исходную сумму, затем изменим байт и повторим вычисление.</span></span>
+<span id="cb8-30"><a href="#cb8-30" aria-hidden="true" tabindex="-1"></a><span class="in">:::</span></span>
+<span id="cb8-31"><a href="#cb8-31" aria-hidden="true" tabindex="-1"></a><span class="in">::::</span></span>
+<span id="cb8-32"><a href="#cb8-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-33"><a href="#cb8-33" aria-hidden="true" tabindex="-1"></a><span class="in">::: {#exr-collision difficulty="intermediate" time="25"}</span></span>
+<span id="cb8-34"><a href="#cb8-34" aria-hidden="true" tabindex="-1"></a><span class="in">## Случайная коллизия</span></span>
+<span id="cb8-35"><a href="#cb8-35" aria-hidden="true" tabindex="-1"></a><span class="in">Объясните отличие случайной коллизии от намеренного подбора.</span></span>
+<span id="cb8-36"><a href="#cb8-36" aria-hidden="true" tabindex="-1"></a><span class="in">:::</span></span>
+<span id="cb8-37"><a href="#cb8-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-38"><a href="#cb8-38" aria-hidden="true" tabindex="-1"></a><span class="in">::: {#sol-collision}</span></span>
+<span id="cb8-39"><a href="#cb8-39" aria-hidden="true" tabindex="-1"></a><span class="in">Случайное совпадение возникает без выбранной цели; намеренный подбор</span></span>
+<span id="cb8-40"><a href="#cb8-40" aria-hidden="true" tabindex="-1"></a><span class="in">ищет входы с требуемым совпадением.</span></span>
+<span id="cb8-41"><a href="#cb8-41" aria-hidden="true" tabindex="-1"></a><span class="in">:::</span></span>
+<span id="cb8-42"><a href="#cb8-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-43"><a href="#cb8-43" aria-hidden="true" tabindex="-1"></a><span class="in">::: {#exr-repair difficulty="advanced" time="40"}</span></span>
+<span id="cb8-44"><a href="#cb8-44" aria-hidden="true" tabindex="-1"></a><span class="in">## Восстановление архива</span></span>
+<span id="cb8-45"><a href="#cb8-45" aria-hidden="true" tabindex="-1"></a><span class="in">Предложите проверку повреждённого архива при наличии резервных данных.</span></span>
 <span id="cb8-46"><a href="#cb8-46" aria-hidden="true" tabindex="-1"></a><span class="in">:::</span></span>
 <span id="cb8-47"><a href="#cb8-47" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-48"><a href="#cb8-48" aria-hidden="true" tabindex="-1"></a><span class="in">::: {#exr-integrity-variant difficulty="intermediate" time="30" statement-visibility="restricted"}</span></span>
-<span id="cb8-49"><a href="#cb8-49" aria-hidden="true" tabindex="-1"></a><span class="in">## Проверка журнала</span></span>
-<span id="cb8-50"><a href="#cb8-50" aria-hidden="true" tabindex="-1"></a><span class="in">Какие изменения журнала можно обнаружить по сохранённым контрольным суммам?</span></span>
-<span id="cb8-51"><a href="#cb8-51" aria-hidden="true" tabindex="-1"></a><span class="in">:::</span></span>
-<span id="cb8-52"><a href="#cb8-52" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-53"><a href="#cb8-53" aria-hidden="true" tabindex="-1"></a><span class="in">::: {#sol-integrity-variant}</span></span>
-<span id="cb8-54"><a href="#cb8-54" aria-hidden="true" tabindex="-1"></a><span class="in">Можно обнаружить изменение тех данных, для которых сохранён доверенный эталон.</span></span>
+<span id="cb8-48"><a href="#cb8-48" aria-hidden="true" tabindex="-1"></a><span class="in">::: {#sol-repair}</span></span>
+<span id="cb8-49"><a href="#cb8-49" aria-hidden="true" tabindex="-1"></a><span class="in">Сравните доступные копии с доверенным эталоном и восстановите проверенную копию.</span></span>
+<span id="cb8-50"><a href="#cb8-50" aria-hidden="true" tabindex="-1"></a><span class="in">:::</span></span>
+<span id="cb8-51"><a href="#cb8-51" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-52"><a href="#cb8-52" aria-hidden="true" tabindex="-1"></a><span class="in">::: {#exr-integrity-variant difficulty="intermediate" time="30" statement-visibility="restricted"}</span></span>
+<span id="cb8-53"><a href="#cb8-53" aria-hidden="true" tabindex="-1"></a><span class="in">## Проверка журнала</span></span>
+<span id="cb8-54"><a href="#cb8-54" aria-hidden="true" tabindex="-1"></a><span class="in">Какие изменения журнала можно обнаружить по сохранённым контрольным суммам?</span></span>
 <span id="cb8-55"><a href="#cb8-55" aria-hidden="true" tabindex="-1"></a><span class="in">:::</span></span>
-<span id="cb8-56"><a href="#cb8-56" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb8-57"><a href="#cb8-57" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-58"><a href="#cb8-58" aria-hidden="true" tabindex="-1"></a>Student видит три открытых условия и решение checksum; restricted условие</span>
-<span id="cb8-59"><a href="#cb8-59" aria-hidden="true" tabindex="-1"></a>и остальные решения скрыты. Full видит все условия и решения.</span>
-<span id="cb8-60"><a href="#cb8-60" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-61"><a href="#cb8-61" aria-hidden="true" tabindex="-1"></a><span class="fu">## Лабораторная без stage {#lab-scenario}</span></span>
-<span id="cb8-62"><a href="#cb8-62" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-63"><a href="#cb8-63" aria-hidden="true" tabindex="-1"></a>Для лабораторной по программированию без разделения по месту выполнения</span>
-<span id="cb8-64"><a href="#cb8-64" aria-hidden="true" tabindex="-1"></a>создайте <span class="in">`works/lab.qmd`</span>:</span>
-<span id="cb8-65"><a href="#cb8-65" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-66"><a href="#cb8-66" aria-hidden="true" tabindex="-1"></a><span class="in">````qmd</span></span>
-<span id="cb8-67"><a href="#cb8-67" aria-hidden="true" tabindex="-1"></a><span class="in">---</span></span>
-<span id="cb8-68"><a href="#cb8-68" aria-hidden="true" tabindex="-1"></a><span class="in">assessment:</span></span>
-<span id="cb8-69"><a href="#cb8-69" aria-hidden="true" tabindex="-1"></a><span class="in">  id: checksum-lab</span></span>
-<span id="cb8-70"><a href="#cb8-70" aria-hidden="true" tabindex="-1"></a><span class="in">  kind: lab</span></span>
+<span id="cb8-56"><a href="#cb8-56" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-57"><a href="#cb8-57" aria-hidden="true" tabindex="-1"></a><span class="in">::: {#sol-integrity-variant}</span></span>
+<span id="cb8-58"><a href="#cb8-58" aria-hidden="true" tabindex="-1"></a><span class="in">Можно обнаружить изменение тех данных, для которых сохранён доверенный эталон.</span></span>
+<span id="cb8-59"><a href="#cb8-59" aria-hidden="true" tabindex="-1"></a><span class="in">:::</span></span>
+<span id="cb8-60"><a href="#cb8-60" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb8-61"><a href="#cb8-61" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-62"><a href="#cb8-62" aria-hidden="true" tabindex="-1"></a>Student видит три открытых условия и решение checksum; restricted условие</span>
+<span id="cb8-63"><a href="#cb8-63" aria-hidden="true" tabindex="-1"></a>и остальные решения скрыты. Full видит все условия и решения.</span>
+<span id="cb8-64"><a href="#cb8-64" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-65"><a href="#cb8-65" aria-hidden="true" tabindex="-1"></a><span class="fu">## Лабораторная без stage {#lab-scenario}</span></span>
+<span id="cb8-66"><a href="#cb8-66" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-67"><a href="#cb8-67" aria-hidden="true" tabindex="-1"></a>Для лабораторной по программированию без разделения по месту выполнения</span>
+<span id="cb8-68"><a href="#cb8-68" aria-hidden="true" tabindex="-1"></a>создайте <span class="in">`works/lab.qmd`</span>:</span>
+<span id="cb8-69"><a href="#cb8-69" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-70"><a href="#cb8-70" aria-hidden="true" tabindex="-1"></a><span class="in">````qmd</span></span>
 <span id="cb8-71"><a href="#cb8-71" aria-hidden="true" tabindex="-1"></a><span class="in">---</span></span>
-<span id="cb8-72"><a href="#cb8-72" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-73"><a href="#cb8-73" aria-hidden="true" tabindex="-1"></a><span class="in"># Лабораторная по контрольным суммам {#sec-checksum-lab}</span></span>
-<span id="cb8-74"><a href="#cb8-74" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-75"><a href="#cb8-75" aria-hidden="true" tabindex="-1"></a><span class="in">::: {course-role="deliverables"}</span></span>
-<span id="cb8-76"><a href="#cb8-76" aria-hidden="true" tabindex="-1"></a><span class="in">Сдайте программу сравнения сумм и объяснение выбранного алгоритма.</span></span>
-<span id="cb8-77"><a href="#cb8-77" aria-hidden="true" tabindex="-1"></a><span class="in">:::</span></span>
+<span id="cb8-72"><a href="#cb8-72" aria-hidden="true" tabindex="-1"></a><span class="in">assessment:</span></span>
+<span id="cb8-73"><a href="#cb8-73" aria-hidden="true" tabindex="-1"></a><span class="in">  id: checksum-lab</span></span>
+<span id="cb8-74"><a href="#cb8-74" aria-hidden="true" tabindex="-1"></a><span class="in">  kind: lab</span></span>
+<span id="cb8-75"><a href="#cb8-75" aria-hidden="true" tabindex="-1"></a><span class="in">---</span></span>
+<span id="cb8-76"><a href="#cb8-76" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-77"><a href="#cb8-77" aria-hidden="true" tabindex="-1"></a><span class="in"># Лабораторная по контрольным суммам {#sec-checksum-lab}</span></span>
 <span id="cb8-78"><a href="#cb8-78" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-79"><a href="#cb8-79" aria-hidden="true" tabindex="-1"></a><span class="in">::: {.task-items requirement="required" work-mode="pair"}</span></span>
-<span id="cb8-80"><a href="#cb8-80" aria-hidden="true" tabindex="-1"></a><span class="in">1. @exr-collision</span></span>
-<span id="cb8-81"><a href="#cb8-81" aria-hidden="true" tabindex="-1"></a><span class="in">2. [@exr-repair]{requirement="optional" work-mode="individual"}</span></span>
-<span id="cb8-82"><a href="#cb8-82" aria-hidden="true" tabindex="-1"></a><span class="in">:::</span></span>
-<span id="cb8-83"><a href="#cb8-83" aria-hidden="true" tabindex="-1"></a><span class="in">````</span></span>
-<span id="cb8-84"><a href="#cb8-84" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-85"><a href="#cb8-85" aria-hidden="true" tabindex="-1"></a>Stage может отсутствовать: скрытого <span class="in">`classroom`</span> нет. Вид <span class="in">`lab`</span> не задаёт</span>
-<span id="cb8-86"><a href="#cb8-86" aria-hidden="true" tabindex="-1"></a>платформу или оценку. Student/full показывают ссылки на оба открытых условия;</span>
-<span id="cb8-87"><a href="#cb8-87" aria-hidden="true" tabindex="-1"></a>доступ к решениям определяется банком. Экспорт содержит collision, repair и</span>
-<span id="cb8-88"><a href="#cb8-88" aria-hidden="true" tabindex="-1"></a>их поля ответа, но не внешнее описание сдачи.</span>
-<span id="cb8-89"><a href="#cb8-89" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-90"><a href="#cb8-90" aria-hidden="true" tabindex="-1"></a><span class="fu">## Семинар с тремя этапами {#seminar-scenario}</span></span>
-<span id="cb8-91"><a href="#cb8-91" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-92"><a href="#cb8-92" aria-hidden="true" tabindex="-1"></a>В <span class="in">`works/seminar.qmd`</span> используйте название и ID первого заголовка:</span>
-<span id="cb8-93"><a href="#cb8-93" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-94"><a href="#cb8-94" aria-hidden="true" tabindex="-1"></a><span class="in">````qmd</span></span>
-<span id="cb8-95"><a href="#cb8-95" aria-hidden="true" tabindex="-1"></a><span class="in">---</span></span>
-<span id="cb8-96"><a href="#cb8-96" aria-hidden="true" tabindex="-1"></a><span class="in">assessment:</span></span>
-<span id="cb8-97"><a href="#cb8-97" aria-hidden="true" tabindex="-1"></a><span class="in">  kind: seminar</span></span>
-<span id="cb8-98"><a href="#cb8-98" aria-hidden="true" tabindex="-1"></a><span class="in">  theory-time: 15</span></span>
-<span id="cb8-99"><a href="#cb8-99" aria-hidden="true" tabindex="-1"></a><span class="in">---</span></span>
-<span id="cb8-100"><a href="#cb8-100" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-101"><a href="#cb8-101" aria-hidden="true" tabindex="-1"></a><span class="in"># Семинар по целостности данных {#sec-integrity-seminar}</span></span>
-<span id="cb8-102"><a href="#cb8-102" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-103"><a href="#cb8-103" aria-hidden="true" tabindex="-1"></a><span class="in">## Разбор с преподавателем</span></span>
-<span id="cb8-104"><a href="#cb8-104" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-105"><a href="#cb8-105" aria-hidden="true" tabindex="-1"></a><span class="in">::: {.task-items stage="demonstration"}</span></span>
-<span id="cb8-106"><a href="#cb8-106" aria-hidden="true" tabindex="-1"></a><span class="in">1. @exr-checksum</span></span>
-<span id="cb8-107"><a href="#cb8-107" aria-hidden="true" tabindex="-1"></a><span class="in">:::</span></span>
-<span id="cb8-108"><a href="#cb8-108" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-109"><a href="#cb8-109" aria-hidden="true" tabindex="-1"></a><span class="in">## В аудитории</span></span>
-<span id="cb8-110"><a href="#cb8-110" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-111"><a href="#cb8-111" aria-hidden="true" tabindex="-1"></a><span class="in">::: {.task-items stage="classroom"}</span></span>
-<span id="cb8-112"><a href="#cb8-112" aria-hidden="true" tabindex="-1"></a><span class="in">1. [@exr-collision]{work-mode="pair"}</span></span>
-<span id="cb8-113"><a href="#cb8-113" aria-hidden="true" tabindex="-1"></a><span class="in">:::</span></span>
-<span id="cb8-114"><a href="#cb8-114" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-115"><a href="#cb8-115" aria-hidden="true" tabindex="-1"></a><span class="in">## После занятия</span></span>
-<span id="cb8-116"><a href="#cb8-116" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-117"><a href="#cb8-117" aria-hidden="true" tabindex="-1"></a><span class="in">::: {.task-items stage="homework"}</span></span>
-<span id="cb8-118"><a href="#cb8-118" aria-hidden="true" tabindex="-1"></a><span class="in">1. [@exr-repair]{requirement="optional" work-mode="group"}</span></span>
-<span id="cb8-119"><a href="#cb8-119" aria-hidden="true" tabindex="-1"></a><span class="in">:::</span></span>
-<span id="cb8-120"><a href="#cb8-120" aria-hidden="true" tabindex="-1"></a><span class="in">````</span></span>
+<span id="cb8-79"><a href="#cb8-79" aria-hidden="true" tabindex="-1"></a><span class="in">::: {course-role="deliverables"}</span></span>
+<span id="cb8-80"><a href="#cb8-80" aria-hidden="true" tabindex="-1"></a><span class="in">Сдайте программу сравнения сумм и объяснение выбранного алгоритма.</span></span>
+<span id="cb8-81"><a href="#cb8-81" aria-hidden="true" tabindex="-1"></a><span class="in">:::</span></span>
+<span id="cb8-82"><a href="#cb8-82" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-83"><a href="#cb8-83" aria-hidden="true" tabindex="-1"></a><span class="in">::: {.task-items requirement="required" work-mode="pair"}</span></span>
+<span id="cb8-84"><a href="#cb8-84" aria-hidden="true" tabindex="-1"></a><span class="in">1. @exr-collision</span></span>
+<span id="cb8-85"><a href="#cb8-85" aria-hidden="true" tabindex="-1"></a><span class="in">2. [@exr-repair]{requirement="optional" work-mode="individual"}</span></span>
+<span id="cb8-86"><a href="#cb8-86" aria-hidden="true" tabindex="-1"></a><span class="in">:::</span></span>
+<span id="cb8-87"><a href="#cb8-87" aria-hidden="true" tabindex="-1"></a><span class="in">````</span></span>
+<span id="cb8-88"><a href="#cb8-88" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-89"><a href="#cb8-89" aria-hidden="true" tabindex="-1"></a>Stage может отсутствовать: скрытого <span class="in">`classroom`</span> нет. Вид <span class="in">`lab`</span> не задаёт</span>
+<span id="cb8-90"><a href="#cb8-90" aria-hidden="true" tabindex="-1"></a>платформу или оценку. Student/full показывают ссылки на оба открытых условия;</span>
+<span id="cb8-91"><a href="#cb8-91" aria-hidden="true" tabindex="-1"></a>доступ к решениям определяется банком. Экспорт содержит collision, repair и</span>
+<span id="cb8-92"><a href="#cb8-92" aria-hidden="true" tabindex="-1"></a>их поля ответа. Body v2 сохраняет публичное описание сдачи отдельно в</span>
+<span id="cb8-93"><a href="#cb8-93" aria-hidden="true" tabindex="-1"></a><span class="in">`works[].introduction`</span>; оно не становится частью условия каждой задачи.</span>
+<span id="cb8-94"><a href="#cb8-94" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-95"><a href="#cb8-95" aria-hidden="true" tabindex="-1"></a><span class="fu">## Семинар с тремя этапами {#seminar-scenario}</span></span>
+<span id="cb8-96"><a href="#cb8-96" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-97"><a href="#cb8-97" aria-hidden="true" tabindex="-1"></a>В <span class="in">`works/seminar.qmd`</span> используйте название и ID первого заголовка:</span>
+<span id="cb8-98"><a href="#cb8-98" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-99"><a href="#cb8-99" aria-hidden="true" tabindex="-1"></a><span class="in">````qmd</span></span>
+<span id="cb8-100"><a href="#cb8-100" aria-hidden="true" tabindex="-1"></a><span class="in">---</span></span>
+<span id="cb8-101"><a href="#cb8-101" aria-hidden="true" tabindex="-1"></a><span class="in">assessment:</span></span>
+<span id="cb8-102"><a href="#cb8-102" aria-hidden="true" tabindex="-1"></a><span class="in">  kind: seminar</span></span>
+<span id="cb8-103"><a href="#cb8-103" aria-hidden="true" tabindex="-1"></a><span class="in">  theory-time: 15</span></span>
+<span id="cb8-104"><a href="#cb8-104" aria-hidden="true" tabindex="-1"></a><span class="in">---</span></span>
+<span id="cb8-105"><a href="#cb8-105" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-106"><a href="#cb8-106" aria-hidden="true" tabindex="-1"></a><span class="in"># Семинар по целостности данных {#sec-integrity-seminar}</span></span>
+<span id="cb8-107"><a href="#cb8-107" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-108"><a href="#cb8-108" aria-hidden="true" tabindex="-1"></a><span class="in">## Разбор с преподавателем</span></span>
+<span id="cb8-109"><a href="#cb8-109" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-110"><a href="#cb8-110" aria-hidden="true" tabindex="-1"></a><span class="in">::: {.task-items stage="demonstration"}</span></span>
+<span id="cb8-111"><a href="#cb8-111" aria-hidden="true" tabindex="-1"></a><span class="in">1. @exr-checksum</span></span>
+<span id="cb8-112"><a href="#cb8-112" aria-hidden="true" tabindex="-1"></a><span class="in">:::</span></span>
+<span id="cb8-113"><a href="#cb8-113" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-114"><a href="#cb8-114" aria-hidden="true" tabindex="-1"></a><span class="in">## В аудитории</span></span>
+<span id="cb8-115"><a href="#cb8-115" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-116"><a href="#cb8-116" aria-hidden="true" tabindex="-1"></a><span class="in">::: {.task-items stage="classroom"}</span></span>
+<span id="cb8-117"><a href="#cb8-117" aria-hidden="true" tabindex="-1"></a><span class="in">1. [@exr-collision]{work-mode="pair"}</span></span>
+<span id="cb8-118"><a href="#cb8-118" aria-hidden="true" tabindex="-1"></a><span class="in">:::</span></span>
+<span id="cb8-119"><a href="#cb8-119" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-120"><a href="#cb8-120" aria-hidden="true" tabindex="-1"></a><span class="in">## После занятия</span></span>
 <span id="cb8-121"><a href="#cb8-121" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-122"><a href="#cb8-122" aria-hidden="true" tabindex="-1"></a>ID работы здесь <span class="in">`sec-integrity-seminar`</span>; вместо него можно явно задать</span>
-<span id="cb8-123"><a href="#cb8-123" aria-hidden="true" tabindex="-1"></a><span class="in">`assessment.id: integrity-seminar`</span> или использовать существующий <span class="in">`chapter-id`</span>.</span>
-<span id="cb8-124"><a href="#cb8-124" aria-hidden="true" tabindex="-1"></a>Несколько списков объединяются в порядке документа: checksum, collision, repair.</span>
-<span id="cb8-125"><a href="#cb8-125" aria-hidden="true" tabindex="-1"></a>Заголовки — штатный способ описать последовательность занятия.</span>
+<span id="cb8-122"><a href="#cb8-122" aria-hidden="true" tabindex="-1"></a><span class="in">::: {.task-items stage="homework"}</span></span>
+<span id="cb8-123"><a href="#cb8-123" aria-hidden="true" tabindex="-1"></a><span class="in">1. [@exr-repair]{requirement="optional" work-mode="group"}</span></span>
+<span id="cb8-124"><a href="#cb8-124" aria-hidden="true" tabindex="-1"></a><span class="in">:::</span></span>
+<span id="cb8-125"><a href="#cb8-125" aria-hidden="true" tabindex="-1"></a><span class="in">````</span></span>
 <span id="cb8-126"><a href="#cb8-126" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-127"><a href="#cb8-127" aria-hidden="true" tabindex="-1"></a>На <span class="in">`.task-items`</span> задаются общие <span class="in">`requirement="required|optional"`</span> и</span>
-<span id="cb8-128"><a href="#cb8-128" aria-hidden="true" tabindex="-1"></a><span class="in">`work-mode="individual|pair|group"`</span>; Span конкретной ссылки может их переопределить.</span>
-<span id="cb8-129"><a href="#cb8-129" aria-hidden="true" tabindex="-1"></a>Приоритет: Span → <span class="in">`.task-items`</span> → required/individual. В лабораторной выше</span>
-<span id="cb8-130"><a href="#cb8-130" aria-hidden="true" tabindex="-1"></a>collision наследует required/pair, repair переопределяет оба поля на</span>
-<span id="cb8-131"><a href="#cb8-131" aria-hidden="true" tabindex="-1"></a>optional/individual. Это свойства назначения, а не самого упражнения.</span>
-<span id="cb8-132"><a href="#cb8-132" aria-hidden="true" tabindex="-1"></a>Stage задаётся только блоку списка, может отсутствовать и не выводится из заголовка;</span>
-<span id="cb8-133"><a href="#cb8-133" aria-hidden="true" tabindex="-1"></a>скрытого classroom нет. <span class="in">`[@exr-collision]{stage="classroom"}`</span> отклоняется как</span>
-<span id="cb8-134"><a href="#cb8-134" aria-hidden="true" tabindex="-1"></a>ошибочное размещение stage на Span.</span>
-<span id="cb8-135"><a href="#cb8-135" aria-hidden="true" tabindex="-1"></a>Каждый пункт содержит одну местную ссылку. Повтор задачи в пределах одной</span>
-<span id="cb8-136"><a href="#cb8-136" aria-hidden="true" tabindex="-1"></a>работы отклоняется; в разных работах её можно назначать снова.</span>
-<span id="cb8-137"><a href="#cb8-137" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-138"><a href="#cb8-138" aria-hidden="true" tabindex="-1"></a>Для demonstration обязательны три факта банка: открытое условие, роль</span>
-<span id="cb8-139"><a href="#cb8-139" aria-hidden="true" tabindex="-1"></a><span class="in">`demonstration`</span> и фактическое публичное решение. Удаление любого из них</span>
-<span id="cb8-140"><a href="#cb8-140" aria-hidden="true" tabindex="-1"></a>делает первое назначение ошибкой. Stage не открывает закрытое решение. Проверяется фактическая публичная</span>
-<span id="cb8-141"><a href="#cb8-141" aria-hidden="true" tabindex="-1"></a>проекция текущей операции: решение, видимое в прежнем HTML, может отсутствовать</span>
-<span id="cb8-142"><a href="#cb8-142" aria-hidden="true" tabindex="-1"></a>в исходном JSON из-за when-format/when-meta. Для экспортируемого разбора</span>
-<span id="cb8-143"><a href="#cb8-143" aria-hidden="true" tabindex="-1"></a>используйте <span class="co">[</span><span class="ot">переносимый контейнер решения</span><span class="co">](solutions.qmd#solution-native-witness)</span>.</span>
-<span id="cb8-144"><a href="#cb8-144" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-145"><a href="#cb8-145" aria-hidden="true" tabindex="-1"></a>Student/full показывают состав семинара; student видит публичный разбор checksum.</span>
-<span id="cb8-146"><a href="#cb8-146" aria-hidden="true" tabindex="-1"></a>Экспорт содержит три условия в том же порядке, без внешних заголовков этапов</span>
-<span id="cb8-147"><a href="#cb8-147" aria-hidden="true" tabindex="-1"></a>и без решений. Внутренний заголовок самой задачи сохраняется.</span>
-<span id="cb8-148"><a href="#cb8-148" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-149"><a href="#cb8-149" aria-hidden="true" tabindex="-1"></a><span class="fu">## Практическая на распечатках рядом с lab {#practical-scenario}</span></span>
-<span id="cb8-150"><a href="#cb8-150" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-151"><a href="#cb8-151" aria-hidden="true" tabindex="-1"></a>Это отдельный QMD <span class="in">`works/practical.qmd`</span> с собственным видом работы:</span>
-<span id="cb8-152"><a href="#cb8-152" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-153"><a href="#cb8-153" aria-hidden="true" tabindex="-1"></a><span class="in">````qmd</span></span>
-<span id="cb8-154"><a href="#cb8-154" aria-hidden="true" tabindex="-1"></a><span class="in">---</span></span>
-<span id="cb8-155"><a href="#cb8-155" aria-hidden="true" tabindex="-1"></a><span class="in">assessment:</span></span>
-<span id="cb8-156"><a href="#cb8-156" aria-hidden="true" tabindex="-1"></a><span class="in">  id: integrity-practical</span></span>
-<span id="cb8-157"><a href="#cb8-157" aria-hidden="true" tabindex="-1"></a><span class="in">  kind: practical</span></span>
-<span id="cb8-158"><a href="#cb8-158" aria-hidden="true" tabindex="-1"></a><span class="in">---</span></span>
-<span id="cb8-159"><a href="#cb8-159" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-160"><a href="#cb8-160" aria-hidden="true" tabindex="-1"></a><span class="in"># Практическая работа на распечатках {#sec-integrity-practical}</span></span>
-<span id="cb8-161"><a href="#cb8-161" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-162"><a href="#cb8-162" aria-hidden="true" tabindex="-1"></a><span class="in">::: {.assessment-preview}</span></span>
-<span id="cb8-163"><a href="#cb8-163" aria-hidden="true" tabindex="-1"></a><span class="in">Работа проводится в аудитории. Перед занятием изучите разбор @exr-checksum.</span></span>
-<span id="cb8-164"><a href="#cb8-164" aria-hidden="true" tabindex="-1"></a><span class="in">Понадобится объяснить причины, а не только записать итоговый ответ.</span></span>
-<span id="cb8-165"><a href="#cb8-165" aria-hidden="true" tabindex="-1"></a><span class="in">:::</span></span>
-<span id="cb8-166"><a href="#cb8-166" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-167"><a href="#cb8-167" aria-hidden="true" tabindex="-1"></a><span class="in">::: {.task-items stage="classroom"}</span></span>
-<span id="cb8-168"><a href="#cb8-168" aria-hidden="true" tabindex="-1"></a><span class="in">1. @exr-integrity-variant</span></span>
-<span id="cb8-169"><a href="#cb8-169" aria-hidden="true" tabindex="-1"></a><span class="in">:::</span></span>
-<span id="cb8-170"><a href="#cb8-170" aria-hidden="true" tabindex="-1"></a><span class="in">````</span></span>
-<span id="cb8-171"><a href="#cb8-171" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-172"><a href="#cb8-172" aria-hidden="true" tabindex="-1"></a>В <span class="in">`practical`</span> назначаются только restricted задачи. Student показывает название</span>
-<span id="cb8-173"><a href="#cb8-173" aria-hidden="true" tabindex="-1"></a>и preview без закрытой ссылки назначения; full также позволяет перейти к полному</span>
-<span id="cb8-174"><a href="#cb8-174" aria-hidden="true" tabindex="-1"></a>условию и решению. Выбранный participant-экспорт выдаёт только integrity-variant</span>
-<span id="cb8-175"><a href="#cb8-175" aria-hidden="true" tabindex="-1"></a>с полем ответа. Открытый разбор, preview и его ресурсы в раздатку не включаются.</span>
-<span id="cb8-176"><a href="#cb8-176" aria-hidden="true" tabindex="-1"></a>PDF — способ выдачи, а <span class="in">`practical`</span> — вид работы.</span>
+<span id="cb8-127"><a href="#cb8-127" aria-hidden="true" tabindex="-1"></a>ID работы здесь <span class="in">`sec-integrity-seminar`</span>; вместо него можно явно задать</span>
+<span id="cb8-128"><a href="#cb8-128" aria-hidden="true" tabindex="-1"></a><span class="in">`assessment.id: integrity-seminar`</span> или использовать существующий <span class="in">`chapter-id`</span>.</span>
+<span id="cb8-129"><a href="#cb8-129" aria-hidden="true" tabindex="-1"></a>Несколько списков объединяются в порядке документа: checksum, collision, repair.</span>
+<span id="cb8-130"><a href="#cb8-130" aria-hidden="true" tabindex="-1"></a>Заголовки — штатный способ описать последовательность занятия.</span>
+<span id="cb8-131"><a href="#cb8-131" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-132"><a href="#cb8-132" aria-hidden="true" tabindex="-1"></a>На <span class="in">`.task-items`</span> задаются общие <span class="in">`requirement="required|optional"`</span> и</span>
+<span id="cb8-133"><a href="#cb8-133" aria-hidden="true" tabindex="-1"></a><span class="in">`work-mode="individual|pair|group"`</span>; Span конкретной ссылки может их переопределить.</span>
+<span id="cb8-134"><a href="#cb8-134" aria-hidden="true" tabindex="-1"></a>Приоритет: Span → <span class="in">`.task-items`</span> → required/individual. В лабораторной выше</span>
+<span id="cb8-135"><a href="#cb8-135" aria-hidden="true" tabindex="-1"></a>collision наследует required/pair, repair переопределяет оба поля на</span>
+<span id="cb8-136"><a href="#cb8-136" aria-hidden="true" tabindex="-1"></a>optional/individual. Это свойства назначения, а не самого упражнения.</span>
+<span id="cb8-137"><a href="#cb8-137" aria-hidden="true" tabindex="-1"></a>Stage задаётся только блоку списка, может отсутствовать и не выводится из заголовка;</span>
+<span id="cb8-138"><a href="#cb8-138" aria-hidden="true" tabindex="-1"></a>скрытого classroom нет. <span class="in">`[@exr-collision]{stage="classroom"}`</span> отклоняется как</span>
+<span id="cb8-139"><a href="#cb8-139" aria-hidden="true" tabindex="-1"></a>ошибочное размещение stage на Span.</span>
+<span id="cb8-140"><a href="#cb8-140" aria-hidden="true" tabindex="-1"></a>Каждый пункт содержит одну местную ссылку. Повтор задачи в пределах одной</span>
+<span id="cb8-141"><a href="#cb8-141" aria-hidden="true" tabindex="-1"></a>работы отклоняется; в разных работах её можно назначать снова.</span>
+<span id="cb8-142"><a href="#cb8-142" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-143"><a href="#cb8-143" aria-hidden="true" tabindex="-1"></a>Для demonstration обязательны три факта банка: открытое условие, роль</span>
+<span id="cb8-144"><a href="#cb8-144" aria-hidden="true" tabindex="-1"></a><span class="in">`demonstration`</span> и фактическое публичное решение. Удаление любого из них</span>
+<span id="cb8-145"><a href="#cb8-145" aria-hidden="true" tabindex="-1"></a>делает первое назначение ошибкой. Stage не открывает закрытое решение. Проверяется фактическая публичная</span>
+<span id="cb8-146"><a href="#cb8-146" aria-hidden="true" tabindex="-1"></a>проекция текущей операции: решение, видимое в прежнем HTML, может отсутствовать</span>
+<span id="cb8-147"><a href="#cb8-147" aria-hidden="true" tabindex="-1"></a>в исходном JSON из-за when-format/when-meta. Для экспортируемого разбора</span>
+<span id="cb8-148"><a href="#cb8-148" aria-hidden="true" tabindex="-1"></a>используйте <span class="co">[</span><span class="ot">переносимый контейнер решения</span><span class="co">](solutions.qmd#solution-native-witness)</span>.</span>
+<span id="cb8-149"><a href="#cb8-149" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-150"><a href="#cb8-150" aria-hidden="true" tabindex="-1"></a>Student/full показывают состав семинара; student видит публичный разбор checksum.</span>
+<span id="cb8-151"><a href="#cb8-151" aria-hidden="true" tabindex="-1"></a>Экспорт содержит три условия в том же порядке, без решений. Публичное введение</span>
+<span id="cb8-152"><a href="#cb8-152" aria-hidden="true" tabindex="-1"></a>и заголовки этапов принадлежат <span class="in">`works[].introduction`</span>, состав назначений —</span>
+<span id="cb8-153"><a href="#cb8-153" aria-hidden="true" tabindex="-1"></a><span class="in">`works[].slots`</span>. Внутренний заголовок самой задачи сохраняется.</span>
+<span id="cb8-154"><a href="#cb8-154" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-155"><a href="#cb8-155" aria-hidden="true" tabindex="-1"></a><span class="fu">## Практическая на распечатках рядом с lab {#practical-scenario}</span></span>
+<span id="cb8-156"><a href="#cb8-156" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-157"><a href="#cb8-157" aria-hidden="true" tabindex="-1"></a>Это отдельный QMD <span class="in">`works/practical.qmd`</span> с собственным видом работы:</span>
+<span id="cb8-158"><a href="#cb8-158" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-159"><a href="#cb8-159" aria-hidden="true" tabindex="-1"></a><span class="in">````qmd</span></span>
+<span id="cb8-160"><a href="#cb8-160" aria-hidden="true" tabindex="-1"></a><span class="in">---</span></span>
+<span id="cb8-161"><a href="#cb8-161" aria-hidden="true" tabindex="-1"></a><span class="in">assessment:</span></span>
+<span id="cb8-162"><a href="#cb8-162" aria-hidden="true" tabindex="-1"></a><span class="in">  id: integrity-practical</span></span>
+<span id="cb8-163"><a href="#cb8-163" aria-hidden="true" tabindex="-1"></a><span class="in">  kind: practical</span></span>
+<span id="cb8-164"><a href="#cb8-164" aria-hidden="true" tabindex="-1"></a><span class="in">---</span></span>
+<span id="cb8-165"><a href="#cb8-165" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-166"><a href="#cb8-166" aria-hidden="true" tabindex="-1"></a><span class="in"># Практическая работа на распечатках {#sec-integrity-practical}</span></span>
+<span id="cb8-167"><a href="#cb8-167" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-168"><a href="#cb8-168" aria-hidden="true" tabindex="-1"></a><span class="in">::: {.assessment-preview}</span></span>
+<span id="cb8-169"><a href="#cb8-169" aria-hidden="true" tabindex="-1"></a><span class="in">Работа проводится в аудитории. Перед занятием изучите разбор @exr-checksum.</span></span>
+<span id="cb8-170"><a href="#cb8-170" aria-hidden="true" tabindex="-1"></a><span class="in">Понадобится объяснить причины, а не только записать итоговый ответ.</span></span>
+<span id="cb8-171"><a href="#cb8-171" aria-hidden="true" tabindex="-1"></a><span class="in">:::</span></span>
+<span id="cb8-172"><a href="#cb8-172" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-173"><a href="#cb8-173" aria-hidden="true" tabindex="-1"></a><span class="in">::: {.task-items stage="classroom"}</span></span>
+<span id="cb8-174"><a href="#cb8-174" aria-hidden="true" tabindex="-1"></a><span class="in">1. @exr-integrity-variant</span></span>
+<span id="cb8-175"><a href="#cb8-175" aria-hidden="true" tabindex="-1"></a><span class="in">:::</span></span>
+<span id="cb8-176"><a href="#cb8-176" aria-hidden="true" tabindex="-1"></a><span class="in">````</span></span>
 <span id="cb8-177"><a href="#cb8-177" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-178"><a href="#cb8-178" aria-hidden="true" tabindex="-1"></a><span class="fu">## Контрольная и экзамен {#test-scenario}</span></span>
-<span id="cb8-179"><a href="#cb8-179" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-180"><a href="#cb8-180" aria-hidden="true" tabindex="-1"></a>В <span class="in">`works/test.qmd`</span>:</span>
-<span id="cb8-181"><a href="#cb8-181" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-182"><a href="#cb8-182" aria-hidden="true" tabindex="-1"></a><span class="in">````qmd</span></span>
-<span id="cb8-183"><a href="#cb8-183" aria-hidden="true" tabindex="-1"></a><span class="in">---</span></span>
-<span id="cb8-184"><a href="#cb8-184" aria-hidden="true" tabindex="-1"></a><span class="in">assessment:</span></span>
-<span id="cb8-185"><a href="#cb8-185" aria-hidden="true" tabindex="-1"></a><span class="in">  id: integrity-test</span></span>
-<span id="cb8-186"><a href="#cb8-186" aria-hidden="true" tabindex="-1"></a><span class="in">  kind: test</span></span>
-<span id="cb8-187"><a href="#cb8-187" aria-hidden="true" tabindex="-1"></a><span class="in">---</span></span>
-<span id="cb8-188"><a href="#cb8-188" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-189"><a href="#cb8-189" aria-hidden="true" tabindex="-1"></a><span class="in"># Контрольная по целостности данных {#sec-integrity-test}</span></span>
-<span id="cb8-190"><a href="#cb8-190" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-191"><a href="#cb8-191" aria-hidden="true" tabindex="-1"></a><span class="in">::: {.assessment-preview}</span></span>
-<span id="cb8-192"><a href="#cb8-192" aria-hidden="true" tabindex="-1"></a><span class="in">Проверяются выбор метода и понимание его ограничений.</span></span>
-<span id="cb8-193"><a href="#cb8-193" aria-hidden="true" tabindex="-1"></a><span class="in">Образец рассуждения: @exr-checksum.</span></span>
-<span id="cb8-194"><a href="#cb8-194" aria-hidden="true" tabindex="-1"></a><span class="in">:::</span></span>
-<span id="cb8-195"><a href="#cb8-195" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-196"><a href="#cb8-196" aria-hidden="true" tabindex="-1"></a><span class="in">::: {.task-items}</span></span>
-<span id="cb8-197"><a href="#cb8-197" aria-hidden="true" tabindex="-1"></a><span class="in">1. @exr-integrity-variant</span></span>
-<span id="cb8-198"><a href="#cb8-198" aria-hidden="true" tabindex="-1"></a><span class="in">:::</span></span>
-<span id="cb8-199"><a href="#cb8-199" aria-hidden="true" tabindex="-1"></a><span class="in">````</span></span>
-<span id="cb8-200"><a href="#cb8-200" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-201"><a href="#cb8-201" aria-hidden="true" tabindex="-1"></a>Экзамен тоже использует <span class="in">`kind: test`</span>. В test разрешены только restricted</span>
-<span id="cb8-202"><a href="#cb8-202" aria-hidden="true" tabindex="-1"></a>назначения; публичные примеры идут обычными ссылками в preview.</span>
-<span id="cb8-203"><a href="#cb8-203" aria-hidden="true" tabindex="-1"></a>Student/full и экспорт ведут себя как в practical. <span class="in">`.assessment-preview`</span></span>
-<span id="cb8-204"><a href="#cb8-204" aria-hidden="true" tabindex="-1"></a>виден на обеих версиях сайта и полностью исключён из экспорта; он не назначает</span>
-<span id="cb8-205"><a href="#cb8-205" aria-hidden="true" tabindex="-1"></a>задачи и не меняет политику банка. Отдельного профиля для preview нет.</span>
+<span id="cb8-178"><a href="#cb8-178" aria-hidden="true" tabindex="-1"></a>В <span class="in">`practical`</span> назначаются только restricted задачи. Student показывает название</span>
+<span id="cb8-179"><a href="#cb8-179" aria-hidden="true" tabindex="-1"></a>и preview без закрытой ссылки назначения; full также позволяет перейти к полному</span>
+<span id="cb8-180"><a href="#cb8-180" aria-hidden="true" tabindex="-1"></a>условию и решению. Выбранный participant-экспорт выдаёт только integrity-variant</span>
+<span id="cb8-181"><a href="#cb8-181" aria-hidden="true" tabindex="-1"></a>с полем ответа. Открытый разбор, preview и его ресурсы в раздатку не включаются.</span>
+<span id="cb8-182"><a href="#cb8-182" aria-hidden="true" tabindex="-1"></a>PDF — способ выдачи, а <span class="in">`practical`</span> — вид работы.</span>
+<span id="cb8-183"><a href="#cb8-183" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-184"><a href="#cb8-184" aria-hidden="true" tabindex="-1"></a><span class="fu">## Контрольная и экзамен {#test-scenario}</span></span>
+<span id="cb8-185"><a href="#cb8-185" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-186"><a href="#cb8-186" aria-hidden="true" tabindex="-1"></a>В <span class="in">`works/test.qmd`</span>:</span>
+<span id="cb8-187"><a href="#cb8-187" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-188"><a href="#cb8-188" aria-hidden="true" tabindex="-1"></a><span class="in">````qmd</span></span>
+<span id="cb8-189"><a href="#cb8-189" aria-hidden="true" tabindex="-1"></a><span class="in">---</span></span>
+<span id="cb8-190"><a href="#cb8-190" aria-hidden="true" tabindex="-1"></a><span class="in">assessment:</span></span>
+<span id="cb8-191"><a href="#cb8-191" aria-hidden="true" tabindex="-1"></a><span class="in">  id: integrity-test</span></span>
+<span id="cb8-192"><a href="#cb8-192" aria-hidden="true" tabindex="-1"></a><span class="in">  kind: test</span></span>
+<span id="cb8-193"><a href="#cb8-193" aria-hidden="true" tabindex="-1"></a><span class="in">---</span></span>
+<span id="cb8-194"><a href="#cb8-194" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-195"><a href="#cb8-195" aria-hidden="true" tabindex="-1"></a><span class="in"># Контрольная по целостности данных {#sec-integrity-test}</span></span>
+<span id="cb8-196"><a href="#cb8-196" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-197"><a href="#cb8-197" aria-hidden="true" tabindex="-1"></a><span class="in">::: {.assessment-preview}</span></span>
+<span id="cb8-198"><a href="#cb8-198" aria-hidden="true" tabindex="-1"></a><span class="in">Проверяются выбор метода и понимание его ограничений.</span></span>
+<span id="cb8-199"><a href="#cb8-199" aria-hidden="true" tabindex="-1"></a><span class="in">Образец рассуждения: @exr-checksum.</span></span>
+<span id="cb8-200"><a href="#cb8-200" aria-hidden="true" tabindex="-1"></a><span class="in">:::</span></span>
+<span id="cb8-201"><a href="#cb8-201" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-202"><a href="#cb8-202" aria-hidden="true" tabindex="-1"></a><span class="in">::: {.task-items}</span></span>
+<span id="cb8-203"><a href="#cb8-203" aria-hidden="true" tabindex="-1"></a><span class="in">1. @exr-integrity-variant</span></span>
+<span id="cb8-204"><a href="#cb8-204" aria-hidden="true" tabindex="-1"></a><span class="in">:::</span></span>
+<span id="cb8-205"><a href="#cb8-205" aria-hidden="true" tabindex="-1"></a><span class="in">````</span></span>
 <span id="cb8-206"><a href="#cb8-206" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-207"><a href="#cb8-207" aria-hidden="true" tabindex="-1"></a><span class="fu">## Прочитайте четыре итога времени {#assessment-time}</span></span>
-<span id="cb8-208"><a href="#cb8-208" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-209"><a href="#cb8-209" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Итог семинара <span class="pp">|</span> Расчёт <span class="pp">|</span> Минуты <span class="pp">|</span></span>
-<span id="cb8-210"><a href="#cb8-210" aria-hidden="true" tabindex="-1"></a><span class="pp">| ---</span> <span class="pp">| ---</span> <span class="pp">| ---</span> <span class="pp">|</span></span>
-<span id="cb8-211"><a href="#cb8-211" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Задачи required <span class="pp">|</span> checksum + collision <span class="pp">|</span> 35 <span class="pp">|</span></span>
-<span id="cb8-212"><a href="#cb8-212" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Задачи all <span class="pp">|</span> checksum + collision + repair <span class="pp">|</span> 75 <span class="pp">|</span></span>
-<span id="cb8-213"><a href="#cb8-213" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Занятие required <span class="pp">|</span> задачи required + теория <span class="pp">|</span> 50 <span class="pp">|</span></span>
-<span id="cb8-214"><a href="#cb8-214" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Занятие all <span class="pp">|</span> задачи all + теория <span class="pp">|</span> 90 <span class="pp">|</span></span>
-<span id="cb8-215"><a href="#cb8-215" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-216"><a href="#cb8-216" aria-hidden="true" tabindex="-1"></a><span class="in">`assessment.theory-time: 15`</span> показывается отдельно и добавляется один раз к</span>
-<span id="cb8-217"><a href="#cb8-217" aria-hidden="true" tabindex="-1"></a>каждому итогу занятия. Это время теории вне уже учтённых задач.</span>
-<span id="cb8-218"><a href="#cb8-218" aria-hidden="true" tabindex="-1"></a>Допустимо положительное конечное число, например <span class="in">`theory-time: 7.5`</span>;</span>
-<span id="cb8-219"><a href="#cb8-219" aria-hidden="true" tabindex="-1"></a>тогда два итога семинара будут 42.5 и 82.5. Собственное time задачи остаётся</span>
-<span id="cb8-220"><a href="#cb8-220" aria-hidden="true" tabindex="-1"></a>целым. Demonstration включается в суммы; pair/group их не масштабируют.</span>
-<span id="cb8-221"><a href="#cb8-221" aria-hidden="true" tabindex="-1"></a>Обычная ссылка в preview не включает время примера автоматически.</span>
-<span id="cb8-222"><a href="#cb8-222" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-223"><a href="#cb8-223" aria-hidden="true" tabindex="-1"></a>Полный render/экспорт проверяет состав по полной **текущей** модели.</span>
-<span id="cb8-224"><a href="#cb8-224" aria-hidden="true" tabindex="-1"></a>Частичный render или preview может пропустить недоступный итог либо показать</span>
-<span id="cb8-225"><a href="#cb8-225" aria-hidden="true" tabindex="-1"></a><span class="in">`??`</span>. Это повод проверить полный текущий запуск. Частичная сумма, ноль или</span>
-<span id="cb8-226"><a href="#cb8-226" aria-hidden="true" tabindex="-1"></a>старый sidecar не заменяют полный итог; дополнительный полный render ради</span>
-<span id="cb8-227"><a href="#cb8-227" aria-hidden="true" tabindex="-1"></a>preview не выполняется.</span>
+<span id="cb8-207"><a href="#cb8-207" aria-hidden="true" tabindex="-1"></a>Экзамен тоже использует <span class="in">`kind: test`</span>. В test разрешены только restricted</span>
+<span id="cb8-208"><a href="#cb8-208" aria-hidden="true" tabindex="-1"></a>назначения; публичные примеры идут обычными ссылками в preview.</span>
+<span id="cb8-209"><a href="#cb8-209" aria-hidden="true" tabindex="-1"></a>Student/full и экспорт ведут себя как в practical. <span class="in">`.assessment-preview`</span></span>
+<span id="cb8-210"><a href="#cb8-210" aria-hidden="true" tabindex="-1"></a>виден на обеих версиях сайта и полностью исключён из экспорта; он не назначает</span>
+<span id="cb8-211"><a href="#cb8-211" aria-hidden="true" tabindex="-1"></a>задачи и не меняет политику банка. Отдельного профиля для preview нет.</span>
+<span id="cb8-212"><a href="#cb8-212" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-213"><a href="#cb8-213" aria-hidden="true" tabindex="-1"></a><span class="fu">## Прочитайте четыре итога времени {#assessment-time}</span></span>
+<span id="cb8-214"><a href="#cb8-214" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-215"><a href="#cb8-215" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Итог семинара <span class="pp">|</span> Расчёт <span class="pp">|</span> Минуты <span class="pp">|</span></span>
+<span id="cb8-216"><a href="#cb8-216" aria-hidden="true" tabindex="-1"></a><span class="pp">| ---</span> <span class="pp">| ---</span> <span class="pp">| ---</span> <span class="pp">|</span></span>
+<span id="cb8-217"><a href="#cb8-217" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Задачи required <span class="pp">|</span> checksum + collision <span class="pp">|</span> 35 <span class="pp">|</span></span>
+<span id="cb8-218"><a href="#cb8-218" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Задачи all <span class="pp">|</span> checksum + collision + repair <span class="pp">|</span> 75 <span class="pp">|</span></span>
+<span id="cb8-219"><a href="#cb8-219" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Занятие required <span class="pp">|</span> задачи required + теория <span class="pp">|</span> 50 <span class="pp">|</span></span>
+<span id="cb8-220"><a href="#cb8-220" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Занятие all <span class="pp">|</span> задачи all + теория <span class="pp">|</span> 90 <span class="pp">|</span></span>
+<span id="cb8-221"><a href="#cb8-221" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-222"><a href="#cb8-222" aria-hidden="true" tabindex="-1"></a><span class="in">`assessment.theory-time: 15`</span> показывается отдельно и добавляется один раз к</span>
+<span id="cb8-223"><a href="#cb8-223" aria-hidden="true" tabindex="-1"></a>каждому итогу занятия. Это время теории вне уже учтённых задач.</span>
+<span id="cb8-224"><a href="#cb8-224" aria-hidden="true" tabindex="-1"></a>Допустимо положительное конечное число, например <span class="in">`theory-time: 7.5`</span>;</span>
+<span id="cb8-225"><a href="#cb8-225" aria-hidden="true" tabindex="-1"></a>тогда два итога семинара будут 42.5 и 82.5. Собственное time задачи остаётся</span>
+<span id="cb8-226"><a href="#cb8-226" aria-hidden="true" tabindex="-1"></a>целым. Demonstration включается в суммы; pair/group их не масштабируют.</span>
+<span id="cb8-227"><a href="#cb8-227" aria-hidden="true" tabindex="-1"></a>Обычная ссылка в preview не включает время примера автоматически.</span>
 <span id="cb8-228"><a href="#cb8-228" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-229"><a href="#cb8-229" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">Экспорт</span><span class="co">](export.qmd)</span> поясняет разделение participant и teacher пакетов.</span>
-<span id="cb8-230"><a href="#cb8-230" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-231"><a href="#cb8-231" aria-hidden="true" tabindex="-1"></a><span class="fu">## Свяжите защиту с постановкой</span></span>
-<span id="cb8-232"><a href="#cb8-232" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-233"><a href="#cb8-233" aria-hidden="true" tabindex="-1"></a><span class="in">```yaml</span></span>
-<span id="cb8-234"><a href="#cb8-234" aria-hidden="true" tabindex="-1"></a><span class="fu">assessment</span><span class="kw">:</span></span>
-<span id="cb8-235"><a href="#cb8-235" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">kind</span><span class="kw">:</span><span class="at"> test</span></span>
-<span id="cb8-236"><a href="#cb8-236" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">related-exercise</span><span class="kw">:</span><span class="at"> exr-essay-integrity</span></span>
-<span id="cb8-237"><a href="#cb8-237" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb8-229"><a href="#cb8-229" aria-hidden="true" tabindex="-1"></a>Полный render/экспорт проверяет состав по полной **текущей** модели.</span>
+<span id="cb8-230"><a href="#cb8-230" aria-hidden="true" tabindex="-1"></a>Частичный render или preview может пропустить недоступный итог либо показать</span>
+<span id="cb8-231"><a href="#cb8-231" aria-hidden="true" tabindex="-1"></a><span class="in">`??`</span>. Это повод проверить полный текущий запуск. Частичная сумма, ноль или</span>
+<span id="cb8-232"><a href="#cb8-232" aria-hidden="true" tabindex="-1"></a>старый sidecar не заменяют полный итог; дополнительный полный render ради</span>
+<span id="cb8-233"><a href="#cb8-233" aria-hidden="true" tabindex="-1"></a>preview не выполняется.</span>
+<span id="cb8-234"><a href="#cb8-234" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-235"><a href="#cb8-235" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">Экспорт</span><span class="co">](export.qmd)</span> поясняет разделение participant и teacher пакетов.</span>
+<span id="cb8-236"><a href="#cb8-236" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-237"><a href="#cb8-237" aria-hidden="true" tabindex="-1"></a><span class="fu">## Свяжите защиту с постановкой</span></span>
 <span id="cb8-238"><a href="#cb8-238" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-239"><a href="#cb8-239" aria-hidden="true" tabindex="-1"></a>Related exercise должен существовать как конкретная manual independent-study</span>
-<span id="cb8-240"><a href="#cb8-240" aria-hidden="true" tabindex="-1"></a>постановка. Presentation выводит связанную тему; ручную дублирующую ссылку не</span>
-<span id="cb8-241"><a href="#cb8-241" aria-hidden="true" tabindex="-1"></a>добавляйте. <span class="in">`.task-items`</span> сохраняет порядок трёх проверяемых заданий, required</span>
-<span id="cb8-242"><a href="#cb8-242" aria-hidden="true" tabindex="-1"></a>и individual по умолчанию. При policy pass-at-least2 fully completed считаются</span>
-<span id="cb8-243"><a href="#cb8-243" aria-hidden="true" tabindex="-1"></a>два required вопроса; partial points не заменяют завершённый вопрос.</span>
-<span id="cb8-244"><a href="#cb8-244" aria-hidden="true" tabindex="-1"></a>Способ выбора, approval и доступ определяется server Gateway отдельно от body.</span></code></pre></div><button title="Скопировать текст" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
+<span id="cb8-239"><a href="#cb8-239" aria-hidden="true" tabindex="-1"></a><span class="in">```yaml</span></span>
+<span id="cb8-240"><a href="#cb8-240" aria-hidden="true" tabindex="-1"></a><span class="fu">assessment</span><span class="kw">:</span></span>
+<span id="cb8-241"><a href="#cb8-241" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">kind</span><span class="kw">:</span><span class="at"> test</span></span>
+<span id="cb8-242"><a href="#cb8-242" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">related-exercise</span><span class="kw">:</span><span class="at"> exr-essay-integrity</span></span>
+<span id="cb8-243"><a href="#cb8-243" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb8-244"><a href="#cb8-244" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-245"><a href="#cb8-245" aria-hidden="true" tabindex="-1"></a>Related exercise должен существовать как конкретная manual independent-study</span>
+<span id="cb8-246"><a href="#cb8-246" aria-hidden="true" tabindex="-1"></a>постановка. Presentation выводит связанную тему; ручную дублирующую ссылку не</span>
+<span id="cb8-247"><a href="#cb8-247" aria-hidden="true" tabindex="-1"></a>добавляйте. <span class="in">`.task-items`</span> сохраняет порядок трёх проверяемых заданий, required</span>
+<span id="cb8-248"><a href="#cb8-248" aria-hidden="true" tabindex="-1"></a>и individual по умолчанию. При policy pass-at-least2 fully completed считаются</span>
+<span id="cb8-249"><a href="#cb8-249" aria-hidden="true" tabindex="-1"></a>два required вопроса; partial points не заменяют завершённый вопрос.</span>
+<span id="cb8-250"><a href="#cb8-250" aria-hidden="true" tabindex="-1"></a>Способ выбора, approval и доступ определяется server Gateway отдельно от body.</span></code></pre></div><button title="Скопировать текст" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 
