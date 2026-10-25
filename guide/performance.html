@@ -435,14 +435,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><code>quarto-course-perf</code> измеряет рендер существующего Quarto-проекта: время, CPU, пиковую память и доступные операции расширений. Обычный запуск принимает привычные параметры Quarto и сохраняет отдельный отчёт. Для первого измерения не нужен JSON эксперимента.</p>
 <section id="установите-команду" class="level2">
 <h2 class="anchored" data-anchor-id="установите-команду">Установите команду</h2>
-<p>В Arch Linux используйте <a href="https://github.com/Afonenko-Course-Tools/quarto-course-performance/blob/v2.0.0/docs/arch-package.md">инструкцию Performance 2.0.0</a> и материалы <a href="https://github.com/Afonenko-Course-Tools/quarto-course-performance/releases/tag/v2.0.0">выпуска 2.0.0</a>. Пакет <code>quarto-course-perf</code> использует установленный Quarto, отдельный Deno, GNU time и <code>setsid</code>. Подготовленные npm-зависимости входят в пакет. Локальная инструкция после установки находится в <code>/usr/share/doc/quarto-course-perf/arch-package.md</code>.</p>
+<p>В Arch Linux используйте готовый рецепт из <a href="https://github.com/Afonenko-Course-Tools/quarto-course-perf-arch">quarto-course-perf-arch</a>. Сначала установите <code>base-devel</code>, <code>git</code> и настоящий пакет Quarto, предоставляющий <code>quarto</code> в базе pacman. Одного <code>quarto</code> в <code>PATH</code> недостаточно; <code>makepkg</code> не устанавливает зависимости из AUR. Затем выполните обычным пользователем:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> clone https://github.com/Afonenko-Course-Tools/quarto-course-perf-arch.git</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> quarto-course-perf-arch</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="ex">makepkg</span> <span class="at">-si</span></span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Пакет использует установленный Quarto, отдельный Deno, GNU time и <code>setsid</code>. <code>makepkg</code> подготавливает npm-зависимости; генерировать рецепт вручную не нужно. Для обновления в том же клоне выполните <code>git pull --ff-only</code> и повторите <code>makepkg -si</code>. Подробности установки, обновления и удаления находятся в README репозитория упаковки.</p>
+<p>Файл <code>/usr/share/doc/quarto-course-perf/arch-package.md</code>, поставляемый с приложением 2.0.0, сохраняет историческую инструкцию и может описывать прежний способ установки. Материалы <a href="https://github.com/Afonenko-Course-Tools/quarto-course-performance/releases/tag/v2.0.0">выпуска 2.0.0</a> не заменяются; актуальный маршрут поддерживается в репозитории упаковки.</p>
 </section>
 <section id="измерьте-свою-сборку" class="level2">
 <h2 class="anchored" data-anchor-id="измерьте-свою-сборку">Измерьте свою сборку</h2>
 <p>Перейдите в каталог, из которого обычно запускаете Quarto:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">quarto-course-perf</span> render <span class="at">--profile</span> student</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">quarto-course-perf</span> render <span class="at">--profile</span> student</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Профиль <code>student</code> выбирайте, если он определён в вашем курсе. Допустимы также собственные профили, путь к документу или самостоятельному вложенному проекту и обычный <code>--to</code>. Например, для существующей презентации:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">quarto-course-perf</span> render <span class="at">--perf-mode</span> cpu slides/index.qmd <span class="at">--profile</span> student <span class="at">--to</span> revealjs</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">quarto-course-perf</span> render <span class="at">--perf-mode</span> cpu slides/index.qmd <span class="at">--profile</span> student <span class="at">--to</span> revealjs</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <p><code>--perf-mode</code> и <code>--perf-output</code> ставятся перед первым аргументом Quarto. Сборка выводит свои обычные сообщения, затем Performance печатает wall/CPU/peak RSS, статус и путь результата. По умолчанию это <code>.quarto/course-perf/runs/&lt;run-id&gt;</code> выбранного проекта. Откройте находящийся там <code>report.md</code>.</p>
 <table class="caption-top table">
 <colgroup>
@@ -476,7 +481,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </table>
 <p>Нативный код завершения, пригодность данных <code>dataValid</code> и полнота покрытия <code>quality.coverageComplete</code> имеют разный смысл. Успешный рендер не доказывает наблюдение всех операций; простой запуск сохраняет неполное покрытие. Пиковая память находится в <code>run.json.outcome.peakRssKiB</code>.</p>
 <p>Штатная очистка <code>.quarto</code> может удалить прежнюю историю. Для долгого хранения задайте внешний каталог, отделённый от <code>output-dir</code> и публикуемых ресурсов:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">quarto-course-perf</span> render <span class="at">--perf-output</span> ../measurements <span class="at">--profile</span> student</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">quarto-course-perf</span> render <span class="at">--perf-output</span> ../measurements <span class="at">--profile</span> student</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Текущий запуск собирает материалы через внешний временный каталог и сохраняет их после рендера. Если финальная запись не удалась, сообщение показывает оставшееся временное место.</p>
 </section>
 <section id="прочитайте-отчёт" class="level2">
@@ -964,85 +969,99 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       </a>
   </div>
 </nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Исходный код</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> Измерение рендера</span></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="in">`quarto-course-perf`</span> измеряет рендер существующего Quarto-проекта: время, CPU, пиковую память и</span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>доступные операции расширений. Обычный запуск принимает привычные параметры Quarto и сохраняет</span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>отдельный отчёт. Для первого измерения не нужен JSON эксперимента.</span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="fu">## Установите команду</span></span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>В Arch Linux используйте</span>
-<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">инструкцию Performance 2.0.0</span><span class="co">](https://github.com/Afonenko-Course-Tools/quarto-course-performance/blob/v2.0.0/docs/arch-package.md)</span></span>
-<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>и материалы</span>
-<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">выпуска 2.0.0</span><span class="co">](https://github.com/Afonenko-Course-Tools/quarto-course-performance/releases/tag/v2.0.0)</span>.</span>
-<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>Пакет <span class="in">`quarto-course-perf`</span> использует установленный Quarto, отдельный Deno, GNU time и <span class="in">`setsid`</span>.</span>
-<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>Подготовленные npm-зависимости входят в пакет. Локальная инструкция после установки находится в</span>
-<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a><span class="in">`/usr/share/doc/quarto-course-perf/arch-package.md`</span>.</span>
-<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a><span class="fu">## Измерьте свою сборку</span></span>
-<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>Перейдите в каталог, из которого обычно запускаете Quarto:</span>
-<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a><span class="in">```sh</span></span>
-<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a><span class="ex">quarto-course-perf</span> render <span class="at">--profile</span> student</span>
-<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a>Профиль <span class="in">`student`</span> выбирайте, если он определён в вашем курсе. Допустимы также собственные профили,</span>
-<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a>путь к документу или самостоятельному вложенному проекту и обычный <span class="in">`--to`</span>. Например, для</span>
-<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a>существующей презентации:</span>
-<span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-31"><a href="#cb4-31" aria-hidden="true" tabindex="-1"></a><span class="in">```sh</span></span>
-<span id="cb4-32"><a href="#cb4-32" aria-hidden="true" tabindex="-1"></a><span class="ex">quarto-course-perf</span> render <span class="at">--perf-mode</span> cpu slides/index.qmd <span class="at">--profile</span> student <span class="at">--to</span> revealjs</span>
-<span id="cb4-33"><a href="#cb4-33" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb4-34"><a href="#cb4-34" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-35"><a href="#cb4-35" aria-hidden="true" tabindex="-1"></a><span class="in">`--perf-mode`</span> и <span class="in">`--perf-output`</span> ставятся перед первым аргументом Quarto. Сборка выводит свои обычные</span>
-<span id="cb4-36"><a href="#cb4-36" aria-hidden="true" tabindex="-1"></a>сообщения, затем Performance печатает wall/CPU/peak RSS, статус и путь результата. По умолчанию</span>
-<span id="cb4-37"><a href="#cb4-37" aria-hidden="true" tabindex="-1"></a>это <span class="in">`.quarto/course-perf/runs/&lt;run-id&gt;`</span> выбранного проекта. Откройте находящийся там <span class="in">`report.md`</span>.</span>
-<span id="cb4-38"><a href="#cb4-38" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-39"><a href="#cb4-39" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Режим <span class="pp">|</span> Для чего нужен <span class="pp">|</span></span>
-<span id="cb4-40"><a href="#cb4-40" aria-hidden="true" tabindex="-1"></a><span class="pp">| ---</span> <span class="pp">| ---</span> <span class="pp">|</span></span>
-<span id="cb4-41"><a href="#cb4-41" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`off`</span>, по умолчанию <span class="pp">|</span> Внешние время, CPU и память обычной сборки <span class="pp">|</span></span>
-<span id="cb4-42"><a href="#cb4-42" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`summary`</span> <span class="pp">|</span> Доступные ручные операции и счётчики расширений <span class="pp">|</span></span>
-<span id="cb4-43"><a href="#cb4-43" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`cpu`</span> <span class="pp">|</span> Дополнительно V8 CPU-профили процессов Deno <span class="pp">|</span></span>
-<span id="cb4-44"><a href="#cb4-44" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`trace`</span> через отдельный эксперимент <span class="pp">|</span> Подробное исследование выбранных функций в изолированной копии <span class="pp">|</span></span>
-<span id="cb4-45"><a href="#cb4-45" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-46"><a href="#cb4-46" aria-hidden="true" tabindex="-1"></a>Нативный код завершения, пригодность данных <span class="in">`dataValid`</span> и полнота покрытия</span>
-<span id="cb4-47"><a href="#cb4-47" aria-hidden="true" tabindex="-1"></a><span class="in">`quality.coverageComplete`</span> имеют разный смысл. Успешный рендер не доказывает наблюдение всех</span>
-<span id="cb4-48"><a href="#cb4-48" aria-hidden="true" tabindex="-1"></a>операций; простой запуск сохраняет неполное покрытие. Пиковая память находится в</span>
-<span id="cb4-49"><a href="#cb4-49" aria-hidden="true" tabindex="-1"></a><span class="in">`run.json.outcome.peakRssKiB`</span>.</span>
-<span id="cb4-50"><a href="#cb4-50" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-51"><a href="#cb4-51" aria-hidden="true" tabindex="-1"></a>Штатная очистка <span class="in">`.quarto`</span> может удалить прежнюю историю. Для долгого хранения задайте внешний</span>
-<span id="cb4-52"><a href="#cb4-52" aria-hidden="true" tabindex="-1"></a>каталог, отделённый от <span class="in">`output-dir`</span> и публикуемых ресурсов:</span>
-<span id="cb4-53"><a href="#cb4-53" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-54"><a href="#cb4-54" aria-hidden="true" tabindex="-1"></a><span class="in">```sh</span></span>
-<span id="cb4-55"><a href="#cb4-55" aria-hidden="true" tabindex="-1"></a><span class="ex">quarto-course-perf</span> render <span class="at">--perf-output</span> ../measurements <span class="at">--profile</span> student</span>
-<span id="cb4-56"><a href="#cb4-56" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb4-57"><a href="#cb4-57" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-58"><a href="#cb4-58" aria-hidden="true" tabindex="-1"></a>Текущий запуск собирает материалы через внешний временный каталог и сохраняет их после рендера.</span>
-<span id="cb4-59"><a href="#cb4-59" aria-hidden="true" tabindex="-1"></a>Если финальная запись не удалась, сообщение показывает оставшееся временное место.</span>
-<span id="cb4-60"><a href="#cb4-60" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-61"><a href="#cb4-61" aria-hidden="true" tabindex="-1"></a><span class="fu">## Прочитайте отчёт</span></span>
-<span id="cb4-62"><a href="#cb4-62" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-63"><a href="#cb4-63" aria-hidden="true" tabindex="-1"></a>Ссылки из <span class="in">`report.md`</span> ведут к реальным файлам запуска. Perfetto показывает интервалы и</span>
-<span id="cb4-64"><a href="#cb4-64" aria-hidden="true" tabindex="-1"></a>подтверждённые связи, Speedscope — записанные V8 CPU-профили. Lua CPU, TS wall и некалиброванные</span>
-<span id="cb4-65"><a href="#cb4-65" aria-hidden="true" tabindex="-1"></a>локальные часы анализируются раздельно. Сумма вложенных интервалов не равна времени сборки.</span>
-<span id="cb4-66"><a href="#cb4-66" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-67"><a href="#cb4-67" aria-hidden="true" tabindex="-1"></a>Подробный веб-справочник закреплён на Performance 2.0.0:</span>
-<span id="cb4-68"><a href="#cb4-68" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-69"><a href="#cb4-69" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="co">[</span><span class="ot">Диагностика, сохранение результатов и ограничения</span><span class="co">](https://github.com/Afonenko-Course-Tools/quarto-course-performance/blob/v2.0.0/docs/diagnostics.md)</span>.</span>
-<span id="cb4-70"><a href="#cb4-70" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="co">[</span><span class="ot">Открытие Perfetto и Speedscope</span><span class="co">](https://github.com/Afonenko-Course-Tools/quarto-course-performance/blob/v2.0.0/docs/visualization.md)</span>.</span>
-<span id="cb4-71"><a href="#cb4-71" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="co">[</span><span class="ot">Изолированный trace, замена пакетов и парное сравнение</span><span class="co">](https://github.com/Afonenko-Course-Tools/quarto-course-performance/blob/v2.0.0/docs/experiments.md)</span>.</span>
-<span id="cb4-72"><a href="#cb4-72" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="co">[</span><span class="ot">Переход с 1.0.0 и чтение исторических результатов</span><span class="co">](https://github.com/Afonenko-Course-Tools/quarto-course-performance/blob/v2.0.0/docs/migration.md)</span>.</span>
-<span id="cb4-73"><a href="#cb4-73" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="co">[</span><span class="ot">Машинные форматы</span><span class="co">](https://github.com/Afonenko-Course-Tools/quarto-course-performance/blob/v2.0.0/docs/general-use-formats.md)</span>.</span>
-<span id="cb4-74"><a href="#cb4-74" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-75"><a href="#cb4-75" aria-hidden="true" tabindex="-1"></a>Состав расширений задаётся самим курсом и его штатной установкой. Реестр Performance объединяет</span>
-<span id="cb4-76"><a href="#cb4-76" aria-hidden="true" tabindex="-1"></a>ручную разметку восьми владельцев: Core/Presentation/Navigation, Publisher, QRC, Download, PrairieLearn,</span>
-<span id="cb4-77"><a href="#cb4-77" aria-hidden="true" tabindex="-1"></a>Print, Moodle и Cloud. <span class="co">[</span><span class="ot">Реестр и границы ответственности</span><span class="co">](https://github.com/Afonenko-Course-Tools/quarto-course-performance/blob/v2.0.0/docs/development.md#владельцы-и-ручная-разметка)</span></span>
-<span id="cb4-78"><a href="#cb4-78" aria-hidden="true" tabindex="-1"></a>не заменяют <span class="co">[</span><span class="ot">версии и контракты расширений</span><span class="co">](specifications.qmd)</span>. Наличие Cloud в реестре не</span>
-<span id="cb4-79"><a href="#cb4-79" aria-hidden="true" tabindex="-1"></a>является свидетельством проверки Cloud VM в Java-матрице Performance.</span></code></pre></div><button title="Скопировать текст" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> Измерение рендера</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="in">`quarto-course-perf`</span> измеряет рендер существующего Quarto-проекта: время, CPU, пиковую память и</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>доступные операции расширений. Обычный запуск принимает привычные параметры Quarto и сохраняет</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>отдельный отчёт. Для первого измерения не нужен JSON эксперимента.</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="fu">## Установите команду</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>В Arch Linux используйте готовый рецепт из</span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">quarto-course-perf-arch</span><span class="co">](https://github.com/Afonenko-Course-Tools/quarto-course-perf-arch)</span>.</span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>Сначала установите <span class="in">`base-devel`</span>, <span class="in">`git`</span> и настоящий пакет Quarto, предоставляющий <span class="in">`quarto`</span> в базе</span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>pacman. Одного <span class="in">`quarto`</span> в <span class="in">`PATH`</span> недостаточно; <span class="in">`makepkg`</span> не устанавливает зависимости из AUR.</span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>Затем выполните обычным пользователем:</span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a><span class="in">```sh</span></span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> clone https://github.com/Afonenko-Course-Tools/quarto-course-perf-arch.git</span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> quarto-course-perf-arch</span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a><span class="ex">makepkg</span> <span class="at">-si</span></span>
+<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a>Пакет использует установленный Quarto, отдельный Deno, GNU time и <span class="in">`setsid`</span>. <span class="in">`makepkg`</span> подготавливает</span>
+<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a>npm-зависимости; генерировать рецепт вручную не нужно. Для обновления в том же клоне выполните</span>
+<span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a><span class="in">`git pull --ff-only`</span> и повторите <span class="in">`makepkg -si`</span>. Подробности установки, обновления и удаления</span>
+<span id="cb5-26"><a href="#cb5-26" aria-hidden="true" tabindex="-1"></a>находятся в README репозитория упаковки.</span>
+<span id="cb5-27"><a href="#cb5-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-28"><a href="#cb5-28" aria-hidden="true" tabindex="-1"></a>Файл <span class="in">`/usr/share/doc/quarto-course-perf/arch-package.md`</span>, поставляемый с приложением 2.0.0,</span>
+<span id="cb5-29"><a href="#cb5-29" aria-hidden="true" tabindex="-1"></a>сохраняет историческую инструкцию и может описывать прежний способ установки. Материалы</span>
+<span id="cb5-30"><a href="#cb5-30" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">выпуска 2.0.0</span><span class="co">](https://github.com/Afonenko-Course-Tools/quarto-course-performance/releases/tag/v2.0.0)</span></span>
+<span id="cb5-31"><a href="#cb5-31" aria-hidden="true" tabindex="-1"></a>не заменяются; актуальный маршрут поддерживается в репозитории упаковки.</span>
+<span id="cb5-32"><a href="#cb5-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-33"><a href="#cb5-33" aria-hidden="true" tabindex="-1"></a><span class="fu">## Измерьте свою сборку</span></span>
+<span id="cb5-34"><a href="#cb5-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-35"><a href="#cb5-35" aria-hidden="true" tabindex="-1"></a>Перейдите в каталог, из которого обычно запускаете Quarto:</span>
+<span id="cb5-36"><a href="#cb5-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-37"><a href="#cb5-37" aria-hidden="true" tabindex="-1"></a><span class="in">```sh</span></span>
+<span id="cb5-38"><a href="#cb5-38" aria-hidden="true" tabindex="-1"></a><span class="ex">quarto-course-perf</span> render <span class="at">--profile</span> student</span>
+<span id="cb5-39"><a href="#cb5-39" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb5-40"><a href="#cb5-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-41"><a href="#cb5-41" aria-hidden="true" tabindex="-1"></a>Профиль <span class="in">`student`</span> выбирайте, если он определён в вашем курсе. Допустимы также собственные профили,</span>
+<span id="cb5-42"><a href="#cb5-42" aria-hidden="true" tabindex="-1"></a>путь к документу или самостоятельному вложенному проекту и обычный <span class="in">`--to`</span>. Например, для</span>
+<span id="cb5-43"><a href="#cb5-43" aria-hidden="true" tabindex="-1"></a>существующей презентации:</span>
+<span id="cb5-44"><a href="#cb5-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-45"><a href="#cb5-45" aria-hidden="true" tabindex="-1"></a><span class="in">```sh</span></span>
+<span id="cb5-46"><a href="#cb5-46" aria-hidden="true" tabindex="-1"></a><span class="ex">quarto-course-perf</span> render <span class="at">--perf-mode</span> cpu slides/index.qmd <span class="at">--profile</span> student <span class="at">--to</span> revealjs</span>
+<span id="cb5-47"><a href="#cb5-47" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb5-48"><a href="#cb5-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-49"><a href="#cb5-49" aria-hidden="true" tabindex="-1"></a><span class="in">`--perf-mode`</span> и <span class="in">`--perf-output`</span> ставятся перед первым аргументом Quarto. Сборка выводит свои обычные</span>
+<span id="cb5-50"><a href="#cb5-50" aria-hidden="true" tabindex="-1"></a>сообщения, затем Performance печатает wall/CPU/peak RSS, статус и путь результата. По умолчанию</span>
+<span id="cb5-51"><a href="#cb5-51" aria-hidden="true" tabindex="-1"></a>это <span class="in">`.quarto/course-perf/runs/&lt;run-id&gt;`</span> выбранного проекта. Откройте находящийся там <span class="in">`report.md`</span>.</span>
+<span id="cb5-52"><a href="#cb5-52" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-53"><a href="#cb5-53" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Режим <span class="pp">|</span> Для чего нужен <span class="pp">|</span></span>
+<span id="cb5-54"><a href="#cb5-54" aria-hidden="true" tabindex="-1"></a><span class="pp">| ---</span> <span class="pp">| ---</span> <span class="pp">|</span></span>
+<span id="cb5-55"><a href="#cb5-55" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`off`</span>, по умолчанию <span class="pp">|</span> Внешние время, CPU и память обычной сборки <span class="pp">|</span></span>
+<span id="cb5-56"><a href="#cb5-56" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`summary`</span> <span class="pp">|</span> Доступные ручные операции и счётчики расширений <span class="pp">|</span></span>
+<span id="cb5-57"><a href="#cb5-57" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`cpu`</span> <span class="pp">|</span> Дополнительно V8 CPU-профили процессов Deno <span class="pp">|</span></span>
+<span id="cb5-58"><a href="#cb5-58" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`trace`</span> через отдельный эксперимент <span class="pp">|</span> Подробное исследование выбранных функций в изолированной копии <span class="pp">|</span></span>
+<span id="cb5-59"><a href="#cb5-59" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-60"><a href="#cb5-60" aria-hidden="true" tabindex="-1"></a>Нативный код завершения, пригодность данных <span class="in">`dataValid`</span> и полнота покрытия</span>
+<span id="cb5-61"><a href="#cb5-61" aria-hidden="true" tabindex="-1"></a><span class="in">`quality.coverageComplete`</span> имеют разный смысл. Успешный рендер не доказывает наблюдение всех</span>
+<span id="cb5-62"><a href="#cb5-62" aria-hidden="true" tabindex="-1"></a>операций; простой запуск сохраняет неполное покрытие. Пиковая память находится в</span>
+<span id="cb5-63"><a href="#cb5-63" aria-hidden="true" tabindex="-1"></a><span class="in">`run.json.outcome.peakRssKiB`</span>.</span>
+<span id="cb5-64"><a href="#cb5-64" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-65"><a href="#cb5-65" aria-hidden="true" tabindex="-1"></a>Штатная очистка <span class="in">`.quarto`</span> может удалить прежнюю историю. Для долгого хранения задайте внешний</span>
+<span id="cb5-66"><a href="#cb5-66" aria-hidden="true" tabindex="-1"></a>каталог, отделённый от <span class="in">`output-dir`</span> и публикуемых ресурсов:</span>
+<span id="cb5-67"><a href="#cb5-67" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-68"><a href="#cb5-68" aria-hidden="true" tabindex="-1"></a><span class="in">```sh</span></span>
+<span id="cb5-69"><a href="#cb5-69" aria-hidden="true" tabindex="-1"></a><span class="ex">quarto-course-perf</span> render <span class="at">--perf-output</span> ../measurements <span class="at">--profile</span> student</span>
+<span id="cb5-70"><a href="#cb5-70" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb5-71"><a href="#cb5-71" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-72"><a href="#cb5-72" aria-hidden="true" tabindex="-1"></a>Текущий запуск собирает материалы через внешний временный каталог и сохраняет их после рендера.</span>
+<span id="cb5-73"><a href="#cb5-73" aria-hidden="true" tabindex="-1"></a>Если финальная запись не удалась, сообщение показывает оставшееся временное место.</span>
+<span id="cb5-74"><a href="#cb5-74" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-75"><a href="#cb5-75" aria-hidden="true" tabindex="-1"></a><span class="fu">## Прочитайте отчёт</span></span>
+<span id="cb5-76"><a href="#cb5-76" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-77"><a href="#cb5-77" aria-hidden="true" tabindex="-1"></a>Ссылки из <span class="in">`report.md`</span> ведут к реальным файлам запуска. Perfetto показывает интервалы и</span>
+<span id="cb5-78"><a href="#cb5-78" aria-hidden="true" tabindex="-1"></a>подтверждённые связи, Speedscope — записанные V8 CPU-профили. Lua CPU, TS wall и некалиброванные</span>
+<span id="cb5-79"><a href="#cb5-79" aria-hidden="true" tabindex="-1"></a>локальные часы анализируются раздельно. Сумма вложенных интервалов не равна времени сборки.</span>
+<span id="cb5-80"><a href="#cb5-80" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-81"><a href="#cb5-81" aria-hidden="true" tabindex="-1"></a>Подробный веб-справочник закреплён на Performance 2.0.0:</span>
+<span id="cb5-82"><a href="#cb5-82" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-83"><a href="#cb5-83" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="co">[</span><span class="ot">Диагностика, сохранение результатов и ограничения</span><span class="co">](https://github.com/Afonenko-Course-Tools/quarto-course-performance/blob/v2.0.0/docs/diagnostics.md)</span>.</span>
+<span id="cb5-84"><a href="#cb5-84" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="co">[</span><span class="ot">Открытие Perfetto и Speedscope</span><span class="co">](https://github.com/Afonenko-Course-Tools/quarto-course-performance/blob/v2.0.0/docs/visualization.md)</span>.</span>
+<span id="cb5-85"><a href="#cb5-85" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="co">[</span><span class="ot">Изолированный trace, замена пакетов и парное сравнение</span><span class="co">](https://github.com/Afonenko-Course-Tools/quarto-course-performance/blob/v2.0.0/docs/experiments.md)</span>.</span>
+<span id="cb5-86"><a href="#cb5-86" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="co">[</span><span class="ot">Переход с 1.0.0 и чтение исторических результатов</span><span class="co">](https://github.com/Afonenko-Course-Tools/quarto-course-performance/blob/v2.0.0/docs/migration.md)</span>.</span>
+<span id="cb5-87"><a href="#cb5-87" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="co">[</span><span class="ot">Машинные форматы</span><span class="co">](https://github.com/Afonenko-Course-Tools/quarto-course-performance/blob/v2.0.0/docs/general-use-formats.md)</span>.</span>
+<span id="cb5-88"><a href="#cb5-88" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-89"><a href="#cb5-89" aria-hidden="true" tabindex="-1"></a>Состав расширений задаётся самим курсом и его штатной установкой. Реестр Performance объединяет</span>
+<span id="cb5-90"><a href="#cb5-90" aria-hidden="true" tabindex="-1"></a>ручную разметку восьми владельцев: Core/Presentation/Navigation, Publisher, QRC, Download, PrairieLearn,</span>
+<span id="cb5-91"><a href="#cb5-91" aria-hidden="true" tabindex="-1"></a>Print, Moodle и Cloud. <span class="co">[</span><span class="ot">Реестр и границы ответственности</span><span class="co">](https://github.com/Afonenko-Course-Tools/quarto-course-performance/blob/v2.0.0/docs/development.md#владельцы-и-ручная-разметка)</span></span>
+<span id="cb5-92"><a href="#cb5-92" aria-hidden="true" tabindex="-1"></a>не заменяют <span class="co">[</span><span class="ot">версии и контракты расширений</span><span class="co">](specifications.qmd)</span>. Наличие Cloud в реестре не</span>
+<span id="cb5-93"><a href="#cb5-93" aria-hidden="true" tabindex="-1"></a>является свидетельством проверки Cloud VM в Java-матрице Performance.</span></code></pre></div><button title="Скопировать текст" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 

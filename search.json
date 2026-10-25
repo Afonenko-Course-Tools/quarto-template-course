@@ -939,7 +939,7 @@
     "href": "guide/performance.html#установите-команду",
     "title": "Измерение рендера",
     "section": "Установите команду",
-    "text": "Установите команду\nВ Arch Linux используйте инструкцию Performance 2.0.0 и материалы выпуска 2.0.0. Пакет quarto-course-perf использует установленный Quarto, отдельный Deno, GNU time и setsid. Подготовленные npm-зависимости входят в пакет. Локальная инструкция после установки находится в /usr/share/doc/quarto-course-perf/arch-package.md.",
+    "text": "Установите команду\nВ Arch Linux используйте готовый рецепт из quarto-course-perf-arch. Сначала установите base-devel, git и настоящий пакет Quarto, предоставляющий quarto в базе pacman. Одного quarto в PATH недостаточно; makepkg не устанавливает зависимости из AUR. Затем выполните обычным пользователем:\ngit clone https://github.com/Afonenko-Course-Tools/quarto-course-perf-arch.git\ncd quarto-course-perf-arch\nmakepkg -si\nПакет использует установленный Quarto, отдельный Deno, GNU time и setsid. makepkg подготавливает npm-зависимости; генерировать рецепт вручную не нужно. Для обновления в том же клоне выполните git pull --ff-only и повторите makepkg -si. Подробности установки, обновления и удаления находятся в README репозитория упаковки.\nФайл /usr/share/doc/quarto-course-perf/arch-package.md, поставляемый с приложением 2.0.0, сохраняет историческую инструкцию и может описывать прежний способ установки. Материалы выпуска 2.0.0 не заменяются; актуальный маршрут поддерживается в репозитории упаковки.",
     "crumbs": [
       "Руководство",
       "Измерение рендера"
