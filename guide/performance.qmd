@@ -91,3 +91,12 @@ quarto-course-perf render --perf-output ../measurements --profile student
 Print, Moodle и Cloud. [Реестр и границы ответственности](https://github.com/Afonenko-Course-Tools/quarto-course-performance/blob/v2.0.0/docs/development.md#владельцы-и-ручная-разметка)
 не заменяют [версии и контракты расширений](specifications.qmd). Наличие Cloud в реестре не
 является свидетельством проверки Cloud VM в Java-матрице Performance.
+
+## Проверка обновления Cybersecurity
+
+[Отчёт по Core 8.2.8 и Cybersecurity](https://github.com/Afonenko-Course-Tools/quarto-course-performance/blob/main/docs/releases/2026-10-25-core-8.2.8-cybersecurity.md)
+собирает точные версии пакетов, проверки JSON-экспорта, условия измерений и
+визуализации. Полный курс, отдельные подпроекты и одна презентация рассматриваются
+отдельно. Для повторяемых серий `off` используются отдельный прогрев и три
+измеряемых запуска; одиночные `summary`/`cpu` наблюдения не оценивают накладные расходы.
+Пригодность данных и полнота наблюдения операций проверяются раздельно.
