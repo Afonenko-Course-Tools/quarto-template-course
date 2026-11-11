@@ -59,9 +59,13 @@ quarto add Afonenko-Course-Tools/quarto-course@v9.4.0 --no-prompt
 ```
 
 Команда помещает компоненты в `_extensions/Afonenko-Course-Tools/`.
-Установка делает их доступными; нужное поведение включается в конфигурации:
+Установка делает их доступными; добавьте hooks в существующий `project`
+и подключите фильтры в конфигурации:
 
 ```yaml
+project:
+  pre-render: _extensions/Afonenko-Course-Tools/course-core/entrypoints/pre.ts
+  post-render: _extensions/Afonenko-Course-Tools/course-core/entrypoints/post.ts
 filters: [course-core, course-presentation]
 ```
 

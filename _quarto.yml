@@ -1,6 +1,8 @@
 project:
   type: website
   output-dir: _site
+  pre-render: _extensions/Afonenko-Course-Tools/course-core/entrypoints/pre.ts
+  post-render: _extensions/Afonenko-Course-Tools/course-core/entrypoints/post.ts
   render:
   - index.qmd
   - guide/*.qmd

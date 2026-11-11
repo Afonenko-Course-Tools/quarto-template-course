@@ -96,6 +96,9 @@ if (!docsOnly && !demoOnly) for (const group of groups) {
   // Ready producer trees are opaque resources: private grader files and source
   // attachments must survive even when no HTML page links to each one.
   function checkCopied(directory) {
+    const copied=path.join(site,path.relative(process.cwd(),directory));
+    assert.deepEqual(fs.readdirSync(copied).sort(), fs.readdirSync(directory).sort(),
+      'Prepared demo composition changed: '+directory);
     for (const entry of fs.readdirSync(directory,{withFileTypes:true})) {
       const source=path.join(directory,entry.name);
       if (entry.isDirectory()) checkCopied(source);
