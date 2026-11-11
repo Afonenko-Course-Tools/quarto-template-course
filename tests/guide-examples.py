@@ -5,7 +5,7 @@ Default: verify the installed pinned extension. During unreleased preparation,
 No producer ready tree is generated or changed by this test.
 """
 from pathlib import Path
-import argparse, json, os, re, shutil, subprocess, tempfile
+import argparse, json, os, re, shutil, subprocess, tempfile, unittest
 
 parser=argparse.ArgumentParser()
 parser.add_argument('--core-source',type=Path)
@@ -86,6 +86,28 @@ try:
     for identity,minutes in [('exr-checksum',10),('exr-collision',25),('exr-repair',40)]:
         opening=re.search(r'<div[^>]*id="'+identity+r'"[^>]*>',full).group()
         assert f'data-course-time="{minutes}"' in opening
+    # Действующий HTML-контракт: https://github.com/Afonenko-Course-Tools/quarto-course/issues/81
+    # После исправления unexpected success требует снять expectedFailure.
+    class KnownCoreHTMLFailures(unittest.TestCase):
+        @unittest.expectedFailure
+        def test_assessment_time_summary(self):
+            expected='Задачи: обязательные 35 мин; все 75 мин. Теория: 15 мин. Занятие: обязательные 50 мин; все 90 мин.'
+            for view in ['student','full']:
+                self.assertIn(expected, (root/f'_book-{view}/works/seminar.html').read_text())
+
+        @unittest.expectedFailure
+        def test_inherited_exercise_defaults(self):
+            opening=re.search(r'<div[^>]*id="exr-inherited-estimate"[^>]*>',defaults_html)
+            self.assertIsNotNone(opening)
+            for attribute in ['data-course-difficulty="introductory"',
+                              'data-course-time="90"',
+                              'data-statement-visibility="open"']:
+                self.assertIn(attribute, opening.group())
+
+    result=unittest.TextTestRunner(verbosity=2).run(
+        unittest.defaultTestLoader.loadTestsFromTestCase(KnownCoreHTMLFailures))
+    if not result.wasSuccessful():
+        raise SystemExit(1)
     print('PASS literal guide native student/full book, roles, four work scenarios, five answer forms, authored time metadata and explicit defaults')
 finally:
     shutil.rmtree(root)
