@@ -2,45 +2,35 @@
 title: Экспорт выбранной работы
 ---
 
-Экспорт получает назначения одной работы из полной исходной книги банка.
-Публикация full HTML для него не требуется. Назначения и restricted
-выдача определены [контрактом владельца Body](specifications.qmd#candidate-contracts).
-Эта страница описывает подготовленный Body v2 и новые публичные метаданные;
-финальные install pins согласуются отдельно. Сохранённые ready-примеры имеют
-собственные исторические версии и не пересобираются при чтении руководства.
+Экспорт выбранной работы выполняет адаптер курса через публичную native
+операцию Core. Сохранённые ready-примеры имеют собственные исторические версии
+и не пересобираются при чтении руководства.
 
 ## Выберите корень, книгу и работу {#selected-source-export}
 
 В [сценарии руководства](model.qmd) логический корень объявляет
 `course.id: integrity-course`; native book находится в `task`, задачи включены
 явным `exercise-bank`, работа имеет `assessment.id: checksum-lab`.
-Из **корня курса** выполните команду по фактически установленному пути Core:
+Сначала установите совместимый адаптер и настройте его штатный export-маршрут.
+Для PrairieLearn это [полная native-поставка](#prairielearn-export).
 
-```sh
-quarto run task/_extensions/Afonenko-Course-Tools/course-core/entrypoints/export.ts --book task --work checksum-lab --output _generated/checksum.json
-```
+Core не предоставляет отдельного generic JSON export CLI. Его публичный
+[договор native операции](https://github.com/Afonenko-Course-Tools/quarto-course/blob/main/docs/native-operation-ts.md)
+и [выдачи выбранной работы](https://github.com/Afonenko-Course-Tools/quarto-course/blob/main/docs/native-assignment-ts.md)
+описывает `withNativeCaptureScope`, проверку выпуска и `assignmentDelivery`.
+При чтении выберите тег фактически установленного Core.
 
-`--book .` подходит, если корень сам является книгой банка.
-Функциональные варианты выбираются отдельно: `--profile java,review`.
-CLI требует одну книгу, одну работу и путь `.json`; student/full не передаются.
-
-Публичный native source input включает задачи и работы выбранного проекта,
-в том числе QMD вне опубликованных chapters. Вложенные самостоятельные
-проекты с собственным `_quarto.yml` не входят. Quarto выполняет include,
-вычисления, shortcodes и функциональные профили; дополнительного Markdown
-парсера или предварительного full HTML нет. Неназначенная задача может
-не поддерживаться выбранным адаптером.
-
-Внутренний JSON pass использует `--fail-if-warnings=false`: native
-предупреждение по междокументной ссылке само по себе не меняет exit 0 на отказ.
-После прохода Core проверяет актуальную модель, выбор и возможности Body.
-Публичные renders сохраняют свою строгую конфигурацию.
+Quarto выполняет include, вычисления, shortcodes и выбранные профили.
+Адаптер выбирает работу, проверяет совместимость, закрытые роли и ресурсы.
+Публикация full HTML для выдачи участнику не требуется; обычный HTML-рендер
+сам по себе не создаёт экспортный пакет.
 
 ## Прочитайте состав пакета {#body-contract}
 
-Создаются `_generated/checksum.json` для преподавательского потребителя и
-соседний `_generated/checksum.public.json` для участника. Исключите `_generated`
-из веб-ресурсов. Schema — `course-body-package-v2`.
+Публичная выдача выбранной работы содержит participant Body с форматом
+`course-body-package-v2`. Имена файлов и сохранение результата определяет
+адаптер; Core не создаёт пару teacher/public JSON отдельной CLI-командой.
+Служебные результаты исключайте из веб-ресурсов.
 
 | Поле | Смысл |
 | --- | --- |
@@ -50,7 +40,7 @@ CLI требует одну книгу, одну работу и путь `.json
 | `statementVisibility: open|restricted` | Публикация условия на сайте |
 | `purpose?`, `hasPublicSolution` | Факты текущего native прохода для проверки demonstration назначения |
 | `answerType`, `condition`, `publicAnswer` | Тип ответа, выбранное условие и публичные поля |
-| teacher `closedKey`, `solution`, `gradingNotes` | Отдельные закрытые поля |
+| `closedKey`, `solution`, `gradingNotes` | Закрытые данные; в participant Body отсутствуют |
 | work `slots`, `theoryTime?` | Порядок позиций, кандидаты, свойства назначения и время теории |
 | work `title`, `introduction?` | Название и публичное введение работы в AST |
 
@@ -70,7 +60,7 @@ CLI требует одну книгу, одну работу и путь `.json
 канонического заголовка; для native PrairieLearn оно обязательно и не заменяется ID.
 Отсутствующие авторские difficulty/time не выдумываются.
 Обычная ссылка на разбор не выбирает его. Demonstration stage требует решения,
-сохранившегося в публичной native проекции этого JSON-прохода; доступность в
+сохранившегося в публичной native проекции текущей native операции; доступность в
 ранее собранном HTML не подставляется. [Переносимая форма](solutions.qmd#solution-native-witness)
 не ставит when-format/when-meta на контейнер решения. QRC предоставляет адрес ссылки,
 без импорта чужого тела.
@@ -97,9 +87,9 @@ source/service ресурсов сохраняются. Не переимено�
 Перед запуском проверьте поддержку Body v2 в выбранном выпуске Print.
 Исторический ready PDF подтверждает только собственные producer pins.
 
-```sh
-quarto run _extensions/Afonenko-Course-Tools/course-print/entrypoints/export.ts _generated/checksum.public.json integrity-course/checksum-lab _generated/paper
-```
+Способ получения participant пакета и точную команду Print выберите
+по [контракту установленного Print](https://github.com/Afonenko-Course-Tools/quarto-course-print).
+Core не создаёт для него промежуточный JSON отдельной командой.
 
 Print создаёт **PDF** через Pandoc/Typst из Quarto. Необязательный четвёртый
 аргумент — JSON оформления заголовка. В practical/test пакет содержит
@@ -119,9 +109,9 @@ restricted назначения; публичный разбор из preview в
 {"defaultGrade": 1, "shuffle": false}
 ```
 
-```sh
-quarto run _extensions/Afonenko-Course-Tools/course-moodle/entrypoints/export.ts _generated/checksum.json binding.json _generated/questions.xml
-```
+Входной преподавательский пакет и команду преобразования выберите по
+[контракту установленного Moodle](https://github.com/Afonenko-Course-Tools/quarto-course-moodle).
+Прежний generic teacher JSON CLI Core больше не поставляется.
 
 Manual становится essay; single-choice получает teacher ключ и доли 100/0.
 `defaultGrade` — положительное конечное число, `shuffle` — boolean.
@@ -218,13 +208,10 @@ instance, assessments, questions и delivery manifest. Runtime registry разр
 в private источниках; в native вопрос поставляются только выбранные student
 inputs, trusted grading assets и явный descriptor. Обычный HTML не запускает Java.
 
-Exporter 5.0.0 опубликован. Коммит исходников Platform и digest образов закреплены,
-но source tag, анонимное получение образов и приёмка точного Java PR head ещё
-ожидаются. Команда показывает API выпущенного exporter и не подтверждает эти этапы.
-Следуйте [матрице версий](specifications.qmd) и устанавливайте целые опубликованные
-пакеты после final pins. Native schema/CLI успех, actual import и Moodle результат
-проверяются отдельно. Старые ready Java/Gradle assets каталога сохраняют свой
-исторический контракт и не служат примером этого full-export маршрута.
+Совместимость Core, адаптера и runtime проверяется по установленным пакетам
+и контрактам владельцев. Native schema/CLI успех, actual import и Moodle
+результат проверяются отдельно. Старые ready Java/Gradle assets каталога
+сохраняют свой исторический контракт.
 
 ## Cloud остаётся моделью действий {#cloud-model}
 

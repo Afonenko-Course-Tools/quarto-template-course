@@ -94,11 +94,12 @@ Stage может отсутствовать: скрытого `classroom` нет
 
 ## Семинар с тремя этапами {#seminar-scenario}
 
-В `works/seminar.qmd` используйте название и ID первого заголовка:
+В `works/seminar.qmd` задайте явный ID работы:
 
 ````qmd
 ---
 assessment:
+  id: integrity-seminar
   kind: seminar
   theory-time: 15
 ---
@@ -124,8 +125,8 @@ assessment:
 :::
 ````
 
-ID работы здесь `sec-integrity-seminar`; вместо него можно явно задать
-`assessment.id: integrity-seminar` или использовать существующий `chapter-id`.
+ID работы здесь `integrity-seminar`; `sec-integrity-seminar` остаётся
+нативным якорем заголовка.
 Несколько списков объединяются в порядке документа: checksum, collision, repair.
 Заголовки — штатный способ описать последовательность занятия.
 

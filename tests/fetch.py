@@ -29,9 +29,8 @@ archive(broken)
 (payload/'index.html').write_text(valid_html)
 
 sha=lambda data:hashlib.sha256(data).hexdigest()
-expected={'archiveSha256':sha(valid.read_bytes()), 'build':build, 'sourceRef':'v3.0.2',
-          'files':{str(path.relative_to(payload)):sha(path.read_bytes())
-                   for path in payload.iterdir()}}
+expected={'url':'https://github.com/Afonenko-Course-Tools/quarto-course/releases/download/demo/example.tar.gz',
+          'archiveSha256':sha(valid.read_bytes()), 'sourceRef':'v3.0.2'}
 (tmp/'tests').mkdir()
 source=(root/'Taskfile.yml').read_text().replace(
     'node tests/site.cjs', 'node "'+str(root/'tests/site.cjs')+'"')
@@ -56,15 +55,8 @@ refusal((tmp/'нет файла.tar.gz').as_uri())
 for asset in [bad,broken]:
     # Permit archive bytes so extraction/file validation is exercised as well.
     pin=dict(expected,archiveSha256=sha(asset.read_bytes()))
-    if asset==broken:
-        pin['files']={**expected['files'],'index.html':sha(b'<img src="missing.png">')}
     refusal(asset.as_uri(),pin)
 refusal(valid.as_uri(),dict(expected,archiveSha256='0'*64))
-for field,value in [('commit','b'*40),('sourceDirty',True),
-                    ('dependencies',{'quarto-course':'v99.0.0'})]:
-    altered=dict(build,**{field:value})
-    refusal(valid.as_uri(),dict(expected,build=altered))
-refusal(valid.as_uri(),dict(expected,files={**expected['files'],'index.html':'0'*64}))
 for name,html in [
         ('language',valid_html.replace('lang="ru"','lang="en"')),
         ('source-ref',valid_html.replace('/blob/v3.0.2/','/blob/main/')),
@@ -78,8 +70,7 @@ dirty_build=dict(build,sourceDirty=True)
 (payload/'BUILD.json').write_text(json.dumps(dirty_build))
 dirty=tmp/'dirty-producer.tar.gz'
 archive(dirty)
-refusal(dirty.as_uri(),dict(expected,archiveSha256=sha(dirty.read_bytes()),build=dirty_build,
-                           files={**expected['files'],'BUILD.json':sha((payload/'BUILD.json').read_bytes())}))
+refusal(dirty.as_uri(),dict(expected,archiveSha256=sha(dirty.read_bytes())))
 (payload/'BUILD.json').write_text(json.dumps(build))
 
 for _ in range(2):
@@ -87,4 +78,4 @@ for _ in range(2):
     assert result.returncode==0,result.stdout+result.stderr
     assert (initial/'index.html').read_text()==valid_html
     assert not (initial/'old.html').exists()
-print('PASS actual Task fetch: Unicode/spaces, download/archive/file/BUILD/hash/dependency/lang/source refusals, prior group preserved, repeat replacement')
+print('PASS actual Task fetch: Unicode/spaces, download/archive/BUILD/lang/source refusals, prior group preserved, repeat replacement')

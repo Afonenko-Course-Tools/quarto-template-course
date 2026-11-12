@@ -15,12 +15,12 @@ quarto add Afonenko-Course-Tools/quarto-course-cloud@v3.0.0 --no-prompt
 
 ```sh
 quarto render --profile full --fail-if-warnings
-quarto run _extensions/Afonenko-Course-Tools/course-core/entrypoints/check.ts . full
 ```
 
-Рендер создаёт HTML и факты документов. Вторая команда проверяет связи всего
-проекта, включая назначения и объявленные VM, и записывает модель
-`_generated/course-spec/course.json`.
+Рендер создаёт HTML и текущую native операцию Core. Полную проверку правил
+Cloud выполняет совместимый адаптер по собственному контракту. Прежний
+Core `check.ts` и JSON-модель больше не являются публичным маршрутом;
+историческая ready-группа Cloud сохраняет прежний набор инструментов.
 
 ```yaml
 course:
